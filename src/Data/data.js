@@ -4,8 +4,8 @@ const cities = [
     'population': 1275406,
     'area': 496.21,
     'altitude': 399,
-    'latitude': 14.417828,
-    'longtitude': 50.087106,
+    'longtitude': 14.417828,
+    'latitude': 50.087106,
     'region': 'Praha'
   },
   {
@@ -13,8 +13,8 @@ const cities = [
     'population': 379466,
     'area': 230.18,
     'altitude': 497,
-    'latitude': 16.606085,
-    'longtitude': 49.193816,
+    'longtitude': 16.606085,
+    'latitude': 49.193816,
     'region': 'Jihomoravský'
   },
   {
@@ -22,8 +22,8 @@ const cities = [
     'population': 279791,
     'area': 214.23,
     'altitude': 334,
-    'latitude': 18.291581,
-    'longtitude': 49.841743,
+    'longtitude': 18.291581,
+    'latitude': 49.841743,
     'region': 'Jihomoravský'
   },
 ];

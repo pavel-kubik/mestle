@@ -1,0 +1,41 @@
+.differences {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-start;
+}
+
+.guess {
+  flex: 0 0 auto;
+  border-radius: 50%;
+  width: 6vw;
+  height: 6vw;
+  margin: 0.5vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.guess.green {
+  background-color: #0a0;
+  border: 1px solid #080;
+  color: white;
+}
+
+.guess.orange {
+  background-color: #fa0;
+  border: 1px solid #a80;
+  color: white;
+}
+
+.guess.red {
+  background-color: #a00;
+  border: 1px solid #800;
+  color: white;
+}
+
+.guess.blue {
+  background-color: #00a;
+  border: 1px solid #008;
+  color: white;
+}

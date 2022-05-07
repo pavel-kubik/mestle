@@ -1,7 +1,44 @@
+#root {
+  height: 100vh;
+}
+
+.app {
+  width: 80%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header {
+  font-size: larger;
+  border-bottom: 1px solid black;
+  text-align: center;
+  flex: 0 0 0;
+}
+
+.body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+}
+
+.guess-box {
+  border-top: 1px solid black;
+  flex: 0 0 0;
+}
+
+.guess-city {
+  text-align: center;
+  font-weight: bold;
+}
+
 .differences {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: space-start;
+  justify-content: center;
 }
 
 .guess {
@@ -38,4 +75,10 @@
   background-color: #00a;
   border: 1px solid #008;
   color: white;
+}
+
+.guess-box {
+  padding: 10px 0;
+  text-align: center;
+  font-weight: bold;
 }

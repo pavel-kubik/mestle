@@ -83,8 +83,9 @@ function App() {
   const handleGuess = () => {
     const guessedCity = cities.find(c => c.name.toUpperCase() === cityPart.toUpperCase());
     if (guessedCity && !guesses.includes(guessedCity)) {
-      setGuesses([...guesses, guessedCity]);
       setCityPart('');
+      setFilteredCities([]);
+      setGuesses([...guesses, guessedCity]);
     }
   }
 
@@ -121,38 +122,50 @@ function App() {
   }
 
   return (
-    <div className="App">
-      {
-        guesses.length > 0 &&
-        <>
-          {guesses.map((g, idx) => 
-            <>
-              <div key={idx}>
-                <div>{idx+1}. {g.name}</div>
-                <div className="differences">
-                  <div className={`guess district ${regionComparator(g, targetCity)}`}>{g.region}</div>
-                  <div className={`guess population ${populationComparator(g, targetCity)}`}>{g.population}</div>
-                  <div className={`guess area ${areaComparator(g, targetCity)}`}>{g.area}</div>
-                  <div className={`guess altitude ${altitudeComparator(g, targetCity)}`}>{g.altitude}</div>
-                  <div className={'guess direction blue'}>{countDirection(g, targetCity)}</div>
+    <div className='app'>
+      <div className='header'>Městle</div>
+      <div className='body'>
+        <div className="differences">
+          <div className="guess">Kraj</div>
+          <div className="guess">Populace</div>
+          <div className="guess">Rozloha</div>
+          <div className="guess">Nadmořská výška</div>
+          <div className="guess">Poloha</div>
+        </div>
+        {
+          guesses.length > 0 &&
+          <>
+            {guesses.map((g, idx) =>
+              <>
+                <div key={idx}>
+                  <div className='guess-city'>{idx+1}. {g.name}</div>
+                  <div className='differences'>
+                    <div className={`guess district ${regionComparator(g, targetCity)}`}>{g.region}</div>
+                    <div className={`guess population ${populationComparator(g, targetCity)}`}>{g.population}</div>
+                    <div className={`guess area ${areaComparator(g, targetCity)}`}>{g.area}</div>
+                    <div className={`guess altitude ${altitudeComparator(g, targetCity)}`}>{g.altitude}</div>
+                    <div className={'guess direction blue'}>{countDirection(g, targetCity)}</div>
+                  </div>
                 </div>
-              </div>
-            </>
-            )}
-        </>
-      }
-      <input value={cityPart} placeholder='Napiš a vyber město' onChange={event => handleChangeCityPart(event.target.value)}/>
-      {
-        filteredCities.length > 0 && 
-        <>
-          <div>Vyber:
-            {
-              filteredCities.map(c =><div key={c.name} onClick={() => setCityPart(c.name)}>{c.name}</div>)
-            }
-          </div>
-        </>
-      }
-      <div onClick={() => handleGuess()}>Hádej</div>
+              </>
+              )}
+          </>
+        }
+      </div>
+      <div className='guess-box'>
+        <input value={cityPart} placeholder='Napiš a vyber město' onChange={event => handleChangeCityPart(event.target.value)}/>
+        {
+          filteredCities.length > 0 &&
+          <>
+            <div>Vyber:
+              {
+                filteredCities.map(c =><div key={c.name} onClick={() => setCityPart(c.name)}>{c.name}</div>)
+              }
+            </div>
+          </>
+        }
+        <div onClick={() => handleGuess()}>Hádej</div>
+      </div>
     </div>
   );
 }

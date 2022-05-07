@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import cities from './Data/data.js';
 
+import background from './img/background.svg';
+
 function App() {
 
   const [cityPart, setCityPart] = useState('');
@@ -125,6 +127,7 @@ function App() {
     <div className='app'>
       <div className='header'>Městle</div>
       <div className='body'>
+        <div className='body-background' style={{ backgroundImage: `url(${background})`}}></div>
         <div className="differences">
           <div className="guess">Kraj</div>
           <div className="guess">Populace</div>

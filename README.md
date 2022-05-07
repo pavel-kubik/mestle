@@ -1,8 +1,3 @@
-# TODOs
-
-## Deploy to github pages
-https://github.com/gitname/react-gh-pages
-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

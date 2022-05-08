@@ -100,6 +100,11 @@ function App() {
     }
   }
 
+  const handleSelectCity = (cityName) => {
+    setCityPart(cityName);
+    setFilteredCities([]);
+  }
+
   const regionComparator = (city1, city2) => {
     // TODO return orange for neigbour regions
     if (city1.region === city2.region) {
@@ -169,9 +174,9 @@ function App() {
         {
           filteredCities.length > 0 &&
           <>
-            <div>Vyber:
+            <div className='city-list'>
               {
-                filteredCities.map(c =><div key={c.name} onClick={() => setCityPart(c.name)}>{c.name}</div>)
+                filteredCities.map(c =><div key={c.name} onClick={() => handleSelectCity(c.name)}>{c.name}</div>)
               }
             </div>
           </>

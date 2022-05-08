@@ -91,9 +91,26 @@
 }
 
 .guess-box {
+  position: relative;
   padding: 10px 0;
   text-align: center;
   font-weight: bold;
+}
+
+.city-list {
+  position: absolute;
+  border: 1px solid black;
+  bottom: 80px;
+  width: 200px;
+  background-color: white;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.city-list > div {
+  padding: 5px;
 }
 
 @media screen and (min-width: 500px) {

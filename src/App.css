@@ -42,14 +42,14 @@
 }
 
 .guess-city {
-  text-align: center;
+  text-align: left;
   font-weight: bold;
 }
 
 .differences {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
   opacity: .99;
   max-width: 800px;
 }

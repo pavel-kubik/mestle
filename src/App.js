@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import './App.css';
 import cities from './Data/data.js';
-import { countDirection } from './Util/util';
+import { countDirection, getRandCity } from './Util/util';
 
 import background from './img/background.svg';
 
@@ -18,24 +18,7 @@ function App() {
   const [guesses, setGuesses] = useState([]);
 
   useEffect(() => {
-    const random = (seed) => {
-      var x = Math.sin(seed) * 10000;
-      return x - Math.floor(x);
-    }
-
-    const getSeedFromDate = () => {
-      const dayNumber = Math.floor(Date.now() / 1000 / 24 / 60 / 60);
-      console.log("Seed from day is " + dayNumber);
-      return dayNumber;
-    }
-
-    const getRandCity = () => {
-      const city = cities[Math.floor(cities.length * random(getSeedFromDate()))];
-      console.log("Target city is " + city.name);
-      return city;
-    }
-
-    setTargetCity(getRandCity());
+    setTargetCity(getRandCity(cities));
   }, []);
 
   const handleChangeCityPart = (cityPart) => {

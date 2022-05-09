@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import './App.css';
 import cities from './Data/data.js';
-import { countDirection, getRandCity } from './Util/util';
+import { ARROW_DOWN, ARROW_UP, countDirection, getRandCity } from './Util/util';
 
 import background from './img/background.svg';
 
@@ -83,6 +83,16 @@ function App() {
     }
   }
 
+  const valueComparator = (number1, number2) => {
+    if (number1 > number2) {
+      return ARROW_DOWN;
+    } else if (number1 < number2) {
+      return ARROW_UP;
+    } else {
+      return "";
+    }
+  }
+
   return (
     <div className='app'>
       <div className='header'>Městle</div>
@@ -104,9 +114,18 @@ function App() {
                   <div className='guess-city'>{idx+1}. {g.name}</div>
                   <div className='differences'>
                     <div className={`guess district ${regionComparator(g, targetCity)}`}>{g.region}</div>
-                    <div className={`guess population ${populationComparator(g, targetCity)}`}>{g.population}</div>
-                    <div className={`guess area ${areaComparator(g, targetCity)}`}>{g.area}</div>
-                    <div className={`guess altitude ${altitudeComparator(g, targetCity)}`}>{g.altitude}</div>
+                    <div className={`guess population ${populationComparator(g, targetCity)}`}>
+                      {g.population}
+                      {valueComparator(g.population, targetCity.population)}
+                    </div>
+                    <div className={`guess area ${areaComparator(g, targetCity)}`}>
+                      {g.area}
+                      {valueComparator(g.area, targetCity.area)}
+                    </div>
+                    <div className={`guess altitude ${altitudeComparator(g, targetCity)}`}>
+                      {g.altitude}
+                      {valueComparator(g.altitude, targetCity.altitude)}
+                    </div>
                     <div className={'guess direction blue'}>{countDirection(g, targetCity)}</div>
                   </div>
                 </div>

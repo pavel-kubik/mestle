@@ -52,3 +52,6 @@ export const getRandCity = (cities) => {
   console.log("Target city is " + city.name);
   return city;
 }
+
+export const ARROW_UP = '\u2191';
+export const ARROW_DOWN = '\u2193';

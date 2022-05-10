@@ -71,6 +71,10 @@
   text-align: center;
 }
 
+.guess.district {
+  font-size: small;
+}
+
 .guess.green {
   background-color: #0a0;
   border: 1px solid #080;
@@ -105,13 +109,15 @@
 .city-list {
   position: absolute;
   border: 1px solid black;
-  bottom: 135px;
+  bottom: 145px;  /* TODO make better */
   width: 200px;
   background-color: white;
   left: 0;
   right: 0;
   margin-left: auto;
   margin-right: auto;
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 .city-list > div {
@@ -129,7 +135,7 @@
   background-color: #00a;
   color: white;
   padding: 10px;
-  margin-top: 10px;
+  margin: 10px 0;
   left: 0;
   right: 0;
   margin-left: auto;
@@ -137,18 +143,32 @@
   width: 200px;
 }
 
-.big.button.enabled {
+.button.enabled {
   border: 1px solid green;
   background-color: #0a0;
   cursor: pointer;
 }
 
-.big.button.disabled {
+.button.disabled {
   border: 1px solid grey;
   background-color: #aaa;
   cursor: default;
 }
 
+.congratulation {
+  font-size: x-large;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  background-color: silver;
+  border-radius: 20px;
+}
+
+.notification {
+  font-size: small;
+  color: darkred;
+}
 
 @media screen and (min-width: 500px) {
   .app {

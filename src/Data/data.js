@@ -654,7 +654,7 @@ const cities = [
       'altitude': '368',
       'longitude': '16.770593',
       'latitude': '49.509433',
-      'region': 'Jihomoravský'
+      'region': 'Středočeský'
    },
    {
       'name': 'Svitavy',

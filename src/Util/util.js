@@ -3,6 +3,10 @@ export const countDirection = (city1, city2) => {
   const latitudeDiff = city2.latitude - city1.latitude; // NS
   const longitudeDiff = city2.longitude - city1.longitude; // EW
 
+  if (latitudeDiff === 0 && longitudeDiff === 0) {
+    return 'X'
+  }
+
   const latLongRatio = Math.abs(latitudeDiff)/Math.abs(longitudeDiff);
   if (latLongRatio > ratio) {
     // simple direction - NS
@@ -41,7 +45,7 @@ const random = (seed) => {
   return x - Math.floor(x);
 }
 
-const getSeedFromDate = () => {
+export const getSeedFromDate = () => {
   const dayNumber = Math.floor(Date.now() / 1000 / 24 / 60 / 60);
   console.log("Seed from day is " + dayNumber);
   return dayNumber;
@@ -55,3 +59,5 @@ export const getRandCity = (cities) => {
 
 export const ARROW_UP = '\u2191';
 export const ARROW_DOWN = '\u2193';
+export const GREEN_CIRCLE = '\uD83D\uDFE2';
+export const WHITE_CIRCLE = '\u26AA';

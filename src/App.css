@@ -41,6 +41,10 @@
   flex: 0 0 0;
 }
 
+.guess-box input {
+  font-size: x-large;
+}
+
 .guess-city {
   text-align: left;
   font-weight: bold;
@@ -64,6 +68,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .guess.green {
@@ -100,7 +105,7 @@
 .city-list {
   position: absolute;
   border: 1px solid black;
-  bottom: 80px;
+  bottom: 135px;
   width: 200px;
   background-color: white;
   left: 0;
@@ -112,6 +117,38 @@
 .city-list > div {
   padding: 5px;
 }
+
+.button {
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.big.button {
+  font-size: xx-large;
+  border: 1px solid blue;
+  background-color: #00a;
+  color: white;
+  padding: 10px;
+  margin-top: 10px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+}
+
+.big.button.enabled {
+  border: 1px solid green;
+  background-color: #0a0;
+  cursor: pointer;
+}
+
+.big.button.disabled {
+  border: 1px solid grey;
+  background-color: #aaa;
+  cursor: default;
+}
+
 
 @media screen and (min-width: 500px) {
   .app {

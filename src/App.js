@@ -10,6 +10,7 @@ function App() {
 
   const [cityPart, setCityPart] = useState('');
   const [filteredCities, setFilteredCities] = useState([]);
+  const [guessEnabled, setGuessEnabled] = useState(false);
 
   // generated from current date and cities list
   const [targetCity, setTargetCity] = useState('');
@@ -20,6 +21,15 @@ function App() {
   useEffect(() => {
     setTargetCity(getRandCity(cities));
   }, []);
+
+  useEffect(() => {
+    const guessedCity = cities.find(c => c.name.toUpperCase() === cityPart.toUpperCase());
+    if (guessedCity && !guesses.includes(guessedCity)) {
+      setGuessEnabled(true);
+    } else {
+      setGuessEnabled(false);
+    }
+  }, [cityPart]);
 
   const handleChangeCityPart = (cityPart) => {
     setCityPart(cityPart);
@@ -146,7 +156,7 @@ function App() {
             </div>
           </>
         }
-        <div onClick={() => handleGuess()}>Hádej</div>
+        <div className={`big button ${guessEnabled ? 'enabled' : 'disabled'}`} onClick={() => handleGuess()}>Hádej</div>
       </div>
     </div>
   );

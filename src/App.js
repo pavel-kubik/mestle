@@ -138,7 +138,7 @@ function App() {
     navigator.clipboard.writeText(
       `Day #${getSeedFromDate() - dateOfPublish}\n` +
       shareResults +
-      'https://pavel-kubik.github.io/mestle');
+      'https://mestle.cz');
     setShared(true);
   }
 

@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 
 import './App.css';
 import cities from './Data/data.js';
-import { ARROW_DOWN, ARROW_UP, countDirection, getRandCity, getSeedFromDate, GREEN_CIRCLE, WHITE_CIRCLE } from './Util/util';
+import { altitudeComparator, areaComparator, districtComparator, getRandCity, getSeedFromDate, GREEN_CIRCLE, populationComparator, regionComparator, WHITE_CIRCLE } from './Util/util';
 
 import background from './img/background.svg';
+import Guess from './Guess/guess';
 
 function App() {
 
@@ -33,7 +34,7 @@ function App() {
     } else {
       setGuessEnabled(false);
     }
-  }, [cityPart]);
+  }, [cityPart, guesses]);
 
   const handleChangeCityPart = (cityPart) => {
     setCityPart(cityPart);
@@ -55,7 +56,6 @@ function App() {
       setGuesses([...guesses, guessedCity]);
       if (guessedCity.name === targetCity.name) {
         // end of game
-        console.log("EOG");
         setEog(true);
       }
     }
@@ -64,61 +64,6 @@ function App() {
   const handleSelectCity = (cityName) => {
     setCityPart(cityName);
     setFilteredCities([]);
-  }
-
-  const regionComparator = (city1, city2) => {
-    // TODO return orange for neigbour regions
-    if (city1.region === city2.region) {
-      return 'green';
-    } else {
-      return 'red';
-    }
-  }
-
-  const populationComparator = (city1, city2) => {
-    return numberComparator(city1.population, city2.population);
-  }
-
-  const areaComparator = (city1, city2) => {
-    return numberComparator(city1.area, city2.area);
-  }
-
-  const altitudeComparator = (city1, city2) => {
-    return numberComparator(city1.altitude, city2.altitude);
-  }
-
-  const districtComparator = (city1, city2) => {
-    return countDirection(city1, city2) === 'X' ? 'green' : 'blue';
-  }
-
-  const numberComparator = (number1, number2) => {
-    const numberDiffRatio = Math.abs(number1 - number2)/Math.max(number1, number2);
-    if (numberDiffRatio < 0.1) {
-      return 'green';
-    } else if (numberDiffRatio < 0.2) {
-      return 'orange';
-    } else {
-      return 'red';
-    }
-  }
-
-  const valueComparator = (number1, number2) => {
-    if (number2 > number1) {
-      return ARROW_DOWN;
-    } else if (number2 < number1) {
-      return ARROW_UP;
-    } else {
-      return "";
-    }
-  }
-
-  const regionFilter = (region) => {
-    switch (region) {
-      case "Jihomoravský": return "Jiho- moravský";
-      case "Moravskoslezský": return "Moravsko- slezský";
-      case "Královéhradecký": return "Králové- hradecký";
-      default: return region;
-    }
   }
 
   const handleShare = () => {
@@ -136,7 +81,7 @@ function App() {
         .reduce((out, i) => out += i + ' ', '')
     ).reduce((out, line) => out += line + '\n', '');
     navigator.clipboard.writeText(
-      `Day #${getSeedFromDate() - dateOfPublish}\n` +
+      `Městle den #${getSeedFromDate() - dateOfPublish}\n` +
       shareResults +
       'https://mestle.cz');
     setShared(true);
@@ -157,31 +102,7 @@ function App() {
         {
           guesses.length > 0 &&
           <>
-            {guesses.map((g, idx) =>
-              <>
-                <div key={idx}>
-                  <div className='guess-city'>{idx+1}. {g.name}</div>
-                  <div className='differences'>
-                    <div className={`guess district ${regionComparator(g, targetCity)}`}>{regionFilter(g.region)}</div>
-                    <div className={`guess population ${populationComparator(g, targetCity)}`}>
-                      {g.population}
-                      {valueComparator(g.population, targetCity.population)}
-                    </div>
-                    <div className={`guess area ${areaComparator(g, targetCity)}`}>
-                      {g.area}
-                      {valueComparator(g.area, targetCity.area)}
-                    </div>
-                    <div className={`guess altitude ${altitudeComparator(g, targetCity)}`}>
-                      {g.altitude}
-                      {valueComparator(g.altitude, targetCity.altitude)}
-                    </div>
-                    <div className={`guess direction ${districtComparator(g, targetCity)}`}>
-                      {countDirection(g, targetCity)}
-                    </div>
-                  </div>
-                </div>
-              </>
-              )}
+            {guesses.map((g, idx) => <Guess key={idx} idx={idx} guessedCity={g} targetCity={targetCity}/> )}
           </>
         }
       </div>
@@ -211,7 +132,6 @@ function App() {
             <div className="notification">Výsledek zkopírován do schránky.</div>
           }
           <div>Gralulace!!!</div>
-          <div>{targetCity.name}</div>
         </div>
       }
     </div>

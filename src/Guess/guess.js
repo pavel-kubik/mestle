@@ -1,12 +1,13 @@
-import { altitudeComparator, areaComparator, ARROW_DOWN, ARROW_UP, countDirection, districtComparator, populationComparator, regionComparator } from "../Util/util";
+import { altitudeComparator, areaComparator, ARROW_COMPASS, ARROW_DOWN, ARROW_UP, countDirection, CROSS, districtComparator, LESS_ARROW, MORE_ARROW, populationComparator, regionComparator } from "../Util/util";
+import compass90 from '../img/compass90.png';
 
 const Guess = ({idx, guessedCity, targetCity}) => {
 
   const valueComparator = (number1, number2) => {
     if (number1 > number2) {
-      return ARROW_DOWN;
+      return <div className="less-guess">{LESS_ARROW}</div>;
     } else if (number1 < number2) {
-      return ARROW_UP;
+      return <div className="more-guess">{MORE_ARROW}</div>;
     } else {
       return "";
     }
@@ -28,20 +29,24 @@ const Guess = ({idx, guessedCity, targetCity}) => {
         <div className={`guess district ${regionComparator(guessedCity, targetCity)}`}>
           {regionFilter(guessedCity.region)}
         </div>
-        <div className={`guess population ${populationComparator(guessedCity, targetCity)}`}>
-          {guessedCity.population}&nbsp;
+        <div
+          className={`guess population ${populationComparator(guessedCity, targetCity)}`}>
+          {guessedCity.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
           {valueComparator(guessedCity.population, targetCity.population)}
         </div>
         <div className={`guess area ${areaComparator(guessedCity, targetCity)}`}>
-          {guessedCity.area}&nbsp;
+          {Math.trunc(guessedCity.area)} km²
           {valueComparator(guessedCity.area, targetCity.area)}
         </div>
         <div className={`guess altitude ${altitudeComparator(guessedCity, targetCity)}`}>
-          {guessedCity.altitude}&nbsp;
+          {guessedCity.altitude} m.n.m.
           {valueComparator(guessedCity.altitude, targetCity.altitude)}
         </div>
-        <div className={`guess direction ${districtComparator(guessedCity, targetCity)}`}>
-          {countDirection(guessedCity, targetCity)}
+        <div
+          className={`guess direction`}
+          style={{ backgroundImage: `url(${compass90})`}}
+        >
+          <div className={`guess direction compass ${countDirection(guessedCity, targetCity)}`}>{countDirection(guessedCity, targetCity) === 'X' ? CROSS : ARROW_COMPASS}</div>
         </div>
       </div>
     </div>

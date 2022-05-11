@@ -5,6 +5,7 @@ import cities from './Data/data.js';
 import { altitudeComparator, areaComparator, districtComparator, getRandCity, getSeedFromDate, GREEN_CIRCLE, populationComparator, regionComparator, WHITE_CIRCLE } from './Util/util';
 
 import background from './img/background.svg';
+
 import Guess from './Guess/guess';
 
 function App() {

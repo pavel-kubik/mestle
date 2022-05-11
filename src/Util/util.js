@@ -97,3 +97,7 @@ export const ARROW_UP = '\u2191';
 export const ARROW_DOWN = '\u2193';
 export const GREEN_CIRCLE = '\uD83D\uDFE2';
 export const WHITE_CIRCLE = '\u26AA';
+export const ARROW_COMPASS = '\u27A4';
+export const CROSS = '📌';
+export const LESS_ARROW = '\u25BC';
+export const MORE_ARROW = '\u25B2';

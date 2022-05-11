@@ -71,7 +71,11 @@
   text-align: center;
 }
 
-.guess.district {
+.differences.title .guess {
+  font-size: medium;
+}
+
+.guess {
   font-size: small;
 }
 
@@ -170,9 +174,15 @@
   color: darkred;
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 550px) {
   .app {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
+  }
+
+  .guess {
+    width: 90px;
+    height: 90px;
+    font-size: medium;
   }
 }

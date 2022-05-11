@@ -92,7 +92,7 @@ function App() {
       <div className='header'>Městle</div>
       <div className='body'>
         <div className='body-background' style={{ backgroundImage: `url(${background})`}}></div>
-        <div className="differences">
+        <div className="differences title">
           <div className="guess">Kraj</div>
           <div className="guess">Populace</div>
           <div className="guess">Rozloha</div>

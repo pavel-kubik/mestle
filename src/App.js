@@ -48,25 +48,14 @@ function App() {
     return [];
   }
 
-  const setGuesses = (guesses) => {
+  const setGuesses = (guesses, eog) => {
     const allHistory = Object.assign({}, history);
     const todaySeed = getSeedFromDate();
-    if (!allHistory[todaySeed]) {
-      allHistory[todaySeed] = { eog: false };
+    allHistory[todaySeed] = {
+      guesses: guesses,
+      eog: eog,
     }
-    allHistory[todaySeed].guesses = guesses;
-    setHistory(allHistory);
-  }
-
-  const setEog = (eog) => {
-    const allHistory = Object.assign({}, history);
-    const todaySeed = getSeedFromDate();
-    if (allHistory[todaySeed]) {
-      allHistory[todaySeed].eog = eog;
-    } else {
-      allHistory[todaySeed] = { eog: eog};
-    }
-    setHistory(allHistory);
+   setHistory(allHistory);
   }
 
   const getEog = () => {
@@ -103,11 +92,7 @@ function App() {
     if (guessedCity && !getGuesses().includes(guessedCity)) {
       setCityPart('');
       setFilteredCities([]);
-      setGuesses([...getGuesses(), guessedCity]);
-      if (guessedCity.name === targetCity.name) {
-        // end of game
-        setEog(true);
-      }
+      setGuesses([...getGuesses(), guessedCity], guessedCity.name === targetCity.name);
     }
   }
 
@@ -185,7 +170,7 @@ function App() {
             shared &&
             <div className="notification">Výsledek zkopírován do schránky.</div>
           }
-          <div>Gralulace!!! Další město můžete hádat zítra.</div>
+          <div>Gratulace! Další město můžeš hádat zítra.</div>
         </div>
       }
     </div>

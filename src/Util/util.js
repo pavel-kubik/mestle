@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 export const countDirection = (city1, city2) => {
   const ratio = 3;
   const latitudeDiff = city2.latitude - city1.latitude; // NS
@@ -91,6 +93,19 @@ export const numberComparator = (number1, number2) => {
   } else {
     return 'red';
   }
+}
+
+export const useStickyState = (defaultValue, key) => {
+  const [value, setValue] = useState(() => {
+    const stickyValue = window.localStorage.getItem(key);
+    return stickyValue !== null
+      ? JSON.parse(stickyValue)
+      : defaultValue;
+  });
+  useEffect(() => {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+  return [value, setValue];
 }
 
 export const ARROW_UP = '\u2191';

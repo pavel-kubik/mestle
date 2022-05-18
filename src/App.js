@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import './App.css';
 import cities from './Data/data.js';
-import { altitudeComparator, areaComparator, districtComparator, getRandCity, getSeedFromDate, GREEN_CIRCLE, populationComparator, regionComparator, useStickyState, WHITE_CIRCLE } from './Util/util';
+import { altitudeComparator, areaComparator, districtComparator, getEog, getGuesses, getRandCity, getScore, getSeedFromDate, GREEN_CIRCLE, populationComparator, regionComparator, setGuesses, useStickyState, WHITE_CIRCLE } from './Util/util';
 
 import background from './img/background.svg';
 
@@ -27,60 +27,21 @@ function App() {
     setTargetCity(getRandCity(cities));
   }, []);
 
-  const getScore = () => {
-    return Object
-      .keys(history)
-      .map(day => history[day].eog)
-      .filter(eog => eog)
-      .length;
-  }
-
-  const getCurrentData = () => {
-    const todaySeed = getSeedFromDate();
-    return history[todaySeed];
-  }
-
-  const getGuesses = () => {
-    const history = getCurrentData();
-    if (history && history.guesses) {
-      return history.guesses;
-    }
-    return [];
-  }
-
-  const setGuesses = (guesses, eog) => {
-    const allHistory = Object.assign({}, history);
-    const todaySeed = getSeedFromDate();
-    allHistory[todaySeed] = {
-      guesses: guesses,
-      eog: eog,
-    }
-   setHistory(allHistory);
-  }
-
-  const getEog = () => {
-    const history = getCurrentData();
-    if (history && history.eog) {
-      return history.eog;
-    }
-    return false;
-  }
-
   useEffect(() => {
     const guessedCity = cities.find(c => c.name.toUpperCase() === cityPart.toUpperCase());
-    if (guessedCity && !getGuesses().includes(guessedCity)) {
+    if (guessedCity && !getGuesses(history).includes(guessedCity)) {
       setGuessEnabled(true);
     } else {
       setGuessEnabled(false);
     }
-  }, [cityPart, getGuesses]);
+  }, [cityPart, history]);
 
   const handleChangeCityPart = (cityPart) => {
     setCityPart(cityPart);
     if (cityPart.length >= 2) {
       setFilteredCities(
         cities
-          .filter(c => !getGuesses().includes(c))
+          .filter(c => !getGuesses(history).includes(c))
           .filter(c => c.name.toUpperCase().includes(cityPart.toUpperCase())));
     } else {
       setFilteredCities([]);
@@ -89,10 +50,10 @@ function App() {
 
   const handleGuess = () => {
     const guessedCity = cities.find(c => c.name.toUpperCase() === cityPart.toUpperCase());
-    if (guessedCity && !getGuesses().includes(guessedCity)) {
+    if (guessedCity && !getGuesses(history).includes(guessedCity)) {
       setCityPart('');
       setFilteredCities([]);
-      setGuesses([...getGuesses(), guessedCity], guessedCity.name === targetCity.name);
+      setGuesses(history, [...getGuesses(history), guessedCity], guessedCity.name === targetCity.name, setHistory);
     }
   }
 
@@ -102,7 +63,7 @@ function App() {
   }
 
   const handleShare = () => {
-    const shareResults = getGuesses().map(guess =>
+    const shareResults = getGuesses(history).map(guess =>
       [
         regionComparator(guess, targetCity),
         populationComparator(guess, targetCity),
@@ -125,7 +86,7 @@ function App() {
   return (
     <div className='app'>
       <div className='header'>
-        <div>Skóre: {getScore()}</div>
+        <div>Skóre: {getScore(history)}</div>
         <div>Městle</div>
         <div>{new Date().toLocaleDateString("cz-CS")}</div>
       </div>
@@ -139,14 +100,14 @@ function App() {
           <div className="guess">Poloha</div>
         </div>
         {
-          getGuesses().length > 0 &&
+          getGuesses(history).length > 0 &&
           <>
-            {getGuesses().map((g, idx) => <Guess key={idx} idx={idx} guessedCity={g} targetCity={targetCity}/> )}
+            {getGuesses(history).map((g, idx) => <Guess key={idx} idx={idx} guessedCity={g} targetCity={targetCity}/> )}
           </>
         }
       </div>
       {
-        !getEog() &&
+        !getEog(history) &&
         <div className='guess-box'>
           <input value={cityPart} placeholder='Napiš a vyber město' onChange={event => handleChangeCityPart(event.target.value)}/>
           {
@@ -163,7 +124,7 @@ function App() {
         </div>
       }
       {
-        getEog() &&  // TODO show city sign
+        getEog(history) &&  // TODO show city sign
         <div className="congratulation">
           <div className='big button enabled' onClick={() => {handleShare()}}>Sdílej</div>
           {

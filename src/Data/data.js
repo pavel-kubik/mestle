@@ -83,7 +83,7 @@ const cities = [
    {
       'name': 'Pardubice',
       'population': 88520,
-      'area': 82.655[2],
+      'area': 82.655,
       'altitude': 220,
       'longitude': 15.778958,
       'latitude': 50.039049,
@@ -1100,7 +1100,7 @@ const cities = [
    {
       'name': 'Jeseník',
       'population': 10658,
-      'area': 38.23[2],
+      'area': 38.23,
       'altitude': 432,
       'longitude': 17.204593,
       'latitude': 50.229370,
@@ -2045,7 +2045,7 @@ const cities = [
    {
       'name': 'Třebechovice pod Orebem',
       'population': 5706,
-      'area': 21.01[2],
+      'area': 21.01,
       'altitude': 243,
       'longitude': 15.992231,
       'latitude': 50.200969,
@@ -3199,9 +3199,9 @@ const cities = [
       'population': 3550,
       'area': 12.78,
       'altitude': 449,
-      'longitude': 13.837261,
-      'latitude': 49.642789,
-      'region': 'Středočeský'
+      'longitude': 13.582254,
+      'latitude': 49.486162,
+      'region': 'Plzeňský'
    },
    {
       'name': 'Velké Opatovice',

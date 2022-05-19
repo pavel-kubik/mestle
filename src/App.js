@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import './App.css';
 import cities from './Data/data.js';
-import { altitudeComparator, areaComparator, districtComparator, getEog, getGuesses, getRandCity, getScore, getSeedFromDate, GREEN_CIRCLE, populationComparator, regionComparator, setGuesses, useStickyState, WHITE_CIRCLE } from './Util/util';
+import { altitudeComparator, areaComparator, districtComparator, getEog, getGuesses, getRandCity, getScore, getSeedFromDate, GREEN_CIRCLE, ORANGE_CIRCLE, populationComparator, regionComparator, setGuesses, useStickyState, WHITE_CIRCLE } from './Util/util';
 
 import background from './img/background.svg';
 
@@ -73,7 +73,14 @@ function App() {
       ]
     ).map(guess =>
       guess
-        .map(item => item === "green" ? GREEN_CIRCLE : WHITE_CIRCLE)
+        .map(item => {
+          switch(item) {
+            case "green": return GREEN_CIRCLE;
+            case "orange": return ORANGE_CIRCLE;
+            default:
+              return WHITE_CIRCLE;
+          }
+        })
         .reduce((out, i) => out += i + ' ', '')
     ).reduce((out, line) => out += line + '\n', '');
     navigator.clipboard.writeText(

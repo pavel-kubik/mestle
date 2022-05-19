@@ -59,10 +59,35 @@ export const getRandCity = (cities) => {
   return city;
 }
 
+export const neigbourRegion = (region1, region2) => {
+  const neigbours = {
+    'Hl. m. Praha': ['Středočeský'],
+    'Středočeský': ['Hl. m. Praha', 'Ústecký', 'Liberecký', 'Královéhradecký', 'Pardubický', 'Vysočina', 'Jihočeský', 'Plzeňský'],
+    'Jihočeský': ['Plzeňský', 'Středočeský', 'Vysočina', 'Jihomoravský'],
+    'Plzeňský': ['Karlovarský', 'Ústecký', 'Středočeský', 'Jihočeský'],
+    'Karlovarský': ['Ústecký', 'Plzeňský'],
+    'Ústecký': ['Karlovarský', 'Plzeňský', 'Středočeský', 'Liberecký'],
+    'Liberecký': ['Ústecký', 'Středočeský', 'Královéhradecký'],
+    'Královéhradecký': ['Liberecký', 'Středočeský', 'Pardubický'],
+    'Pardubický': ['Olomoucký', 'Jihomoravský', 'Vysočina', 'Středočeský', 'Liberecký'],
+    'Vysočina': ['Jihočeský', 'Středočeský', 'Pardubický', 'Jihomoravský'],
+    'Jihomoravský': ['Jihočeský', 'Vysočina', 'Pardubický', 'Olomoucký', 'Zlínský'],
+    'Olomoucký': ['Pardubický', 'Jihomoravský', 'Moravskoslezský', 'Zlínský'],
+    'Moravskoslezský': ['Olomoucký', 'Zlínský'],
+    'Zlínský': ['Jihomoravský', 'Olomoucký', 'Moravskoslezský'],
+  };
+  if (!neigbours[region1]) {
+    console.warn('Region ' + region1 + ' not found.')
+  }
+  return neigbours[region1] && neigbours[region1].includes(region2);
+}
+
 export const regionComparator = (city1, city2) => {
   // TODO return orange for neigbour regions
   if (city1.region === city2.region) {
     return 'green';
+  } else if (neigbourRegion (city1.region, city2.region)) {
+    return 'orange';
   } else {
     return 'red';
   }
@@ -151,6 +176,7 @@ export const getEog = (history) => {
 export const ARROW_UP = '\u2191';
 export const ARROW_DOWN = '\u2193';
 export const GREEN_CIRCLE = '\uD83D\uDFE2';
+export const ORANGE_CIRCLE = '\uD83D\uDFE0';
 export const WHITE_CIRCLE = '\u26AA';
 export const ARROW_COMPASS = '\u27A4';
 export const CROSS = '📌';

@@ -1,4 +1,5 @@
 import { countDirection, getSeedFromDate, neigbourRegion } from './util';
+import { cities } from '../Data/data';
 
 test('test direction', () => {
   expect(countDirection({latitude: -1, longtitude: 0}, {latitude: 1, longtitude: .3})).toBe('NW');

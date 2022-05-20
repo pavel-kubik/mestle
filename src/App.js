@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 
 import './App.css';
-import cities from './Data/data.js';
-import { altitudeComparator, areaComparator, districtComparator, getEog, getGuesses, getRandCity, getScore, getSeedFromDate, GREEN_CIRCLE, ORANGE_CIRCLE, populationComparator, regionComparator, setGuesses, useStickyState, WHITE_CIRCLE } from './Util/util';
-
 import background from './img/background.svg';
 
+import cities from './Data/data.js';
 import Guess from './Guess/guess';
+import { altitudeComparator, areaComparator, districtComparator, GREEN_CIRCLE, ORANGE_CIRCLE, populationComparator, regionComparator, useStickyState, WHITE_CIRCLE } from './Util/util';
+import { getRandCity, getSeedFromDate, random } from './Rand/rand';
+import { getEog, getGuesses, getScore, setGuesses } from './History/history';
 
 function App() {
 

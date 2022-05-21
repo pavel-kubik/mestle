@@ -4,8 +4,8 @@ const cities = [
       'population': 1275406,
       'area': 496,
       'altitude': 399,
-      'longitude': 14.417828,
-      'latitude': 50.087106,
+      'longitude': 14.421388888889,
+      'latitude': 50.0875,
       'region': 'Hl. m. Praha'
    },
    {
@@ -13,8 +13,8 @@ const cities = [
       'population': 379466,
       'area': 230.18,
       'altitude': 497,
-      'longitude': 16.606085,
-      'latitude': 49.193816,
+      'longitude': 16.608333333333,
+      'latitude': 49.195277777778,
       'region': 'Jihomoravský'
    },
    {
@@ -22,8 +22,8 @@ const cities = [
       'population': 279791,
       'area': 214.23,
       'altitude': 334,
-      'longitude': 18.291581,
-      'latitude': 49.841743,
+      'longitude': 18.2925,
+      'latitude': 49.835555555556,
       'region': 'Moravskoslezský'
    },
    {
@@ -31,8 +31,8 @@ const cities = [
       'population': 168733,
       'area': 137.65,
       'altitude': 452,
-      'longitude': 13.377767,
-      'latitude': 49.748147,
+      'longitude': 13.3825,
+      'latitude': 49.741388888889,
       'region': 'Plzeňský'
    },
    {
@@ -40,8 +40,8 @@ const cities = [
       'population': 102951,
       'area': 106.09,
       'altitude': 374,
-      'longitude': 15.058251,
-      'latitude': 50.769002,
+      'longitude': 15.0584492,
+      'latitude': 50.7699972,
       'region': 'Liberecký'
    },
    {
@@ -49,8 +49,8 @@ const cities = [
       'population': 99496,
       'area': 103.33,
       'altitude': 219,
-      'longitude': 17.251466,
-      'latitude': 49.593699,
+      'longitude': 17.250833333333,
+      'latitude': 49.593888888889,
       'region': 'Olomoucký'
    },
    {
@@ -58,8 +58,8 @@ const cities = [
       'population': 93426,
       'area': 55.71,
       'altitude': 381,
-      'longitude': 14.474390,
-      'latitude': 48.973841,
+      'longitude': 14.474722222222,
+      'latitude': 48.974722222222,
       'region': 'Jihočeský'
    },
    {
@@ -67,8 +67,8 @@ const cities = [
       'population': 90596,
       'area': 105.69,
       'altitude': 235,
-      'longitude': 15.837246,
-      'latitude': 50.212330,
+      'longitude': 15.831944444444,
+      'latitude': 50.209166666667,
       'region': 'Královéhradecký'
    },
    {
@@ -76,8 +76,8 @@ const cities = [
       'population': 90378,
       'area': 93.97,
       'altitude': 218,
-      'longitude': 14.036975,
-      'latitude': 50.660316,
+      'longitude': 14.041666666667,
+      'latitude': 50.659166666667,
       'region': 'Ústecký'
    },
    {
@@ -85,8 +85,8 @@ const cities = [
       'population': 88520,
       'area': 82.655,
       'altitude': 220,
-      'longitude': 15.778958,
-      'latitude': 50.039049,
+      'longitude': 15.77916,
+      'latitude': 50.03861,
       'region': 'Pardubický'
    },
    {
@@ -94,17 +94,17 @@ const cities = [
       'population': 72973,
       'area': 102.83,
       'altitude': 230,
-      'longitude': 17.665842,
-      'latitude': 49.226624,
-      'region': 'Olomoucký'
+      'longitude': 17.666944444444,
+      'latitude': 49.233055555556,
+      'region': 'Zlínský'
    },
    {
       'name': 'Havířov',
       'population': 69084,
       'area': 32.08,
       'altitude': 239,
-      'longitude': 18.422702,
-      'latitude': 49.783083,
+      'longitude': 18.422777777778,
+      'latitude': 49.777777777778,
       'region': 'Moravskoslezský'
    },
    {
@@ -112,17 +112,17 @@ const cities = [
       'population': 66903,
       'area': 36.97,
       'altitude': 381,
-      'longitude': 14.102998,
-      'latitude': 50.147821,
+      'longitude': 14.105277777778,
+      'latitude': 50.143055555556,
       'region': 'Středočeský'
    },
    {
-      'name': 'Most (město)',
+      'name': 'Most',
       'population': 62866,
       'area': 86.94,
       'altitude': 233,
-      'longitude': 13.640524,
-      'latitude': 50.502867,
+      'longitude': 13.636666666667,
+      'latitude': 50.503055555556,
       'region': 'Ústecký'
    },
    {
@@ -130,8 +130,8 @@ const cities = [
       'population': 54840,
       'area': 90.57,
       'altitude': 257,
-      'longitude': 17.902510,
-      'latitude': 49.938873,
+      'longitude': 17.904444444444,
+      'latitude': 49.938055555556,
       'region': 'Moravskoslezský'
    },
    {
@@ -139,17 +139,17 @@ const cities = [
       'population': 53899,
       'area': 51.56,
       'altitude': 291,
-      'longitude': 18.350637,
-      'latitude': 49.685506,
-      'region': '#NENÍ_K_DISPOZICI'
+      'longitude': 18.353611111111,
+      'latitude': 49.688055555556,
+      'region': 'Moravskoslezský'
    },
    {
       'name': 'Jihlava',
       'population': 50108,
       'area': 87.86,
       'altitude': 525,
-      'longitude': 15.591191,
-      'latitude': 49.396014,
+      'longitude': 15.590555555556,
+      'latitude': 49.400277777778,
       'region': 'Vysočina'
    },
    {
@@ -157,8 +157,8 @@ const cities = [
       'population': 49881,
       'area': 57.52,
       'altitude': 221,
-      'longitude': 18.542995,
-      'latitude': 49.853942,
+      'longitude': 18.542777777778,
+      'latitude': 49.854166666667,
       'region': 'Moravskoslezský'
    },
    {
@@ -166,8 +166,8 @@ const cities = [
       'population': 48766,
       'area': 23.78,
       'altitude': 399,
-      'longitude': 13.824423,
-      'latitude': 50.641389,
+      'longitude': 13.816666666667,
+      'latitude': 50.633333333333,
       'region': 'Ústecký'
    },
    {
@@ -175,8 +175,8 @@ const cities = [
       'population': 47029,
       'area': 117.70,
       'altitude': 135,
-      'longitude': 14.195645,
-      'latitude': 50.773765,
+      'longitude': 14.196111111111,
+      'latitude': 50.773611111111,
       'region': 'Ústecký'
    },
    {
@@ -184,8 +184,8 @@ const cities = [
       'population': 46263,
       'area': 29.25,
       'altitude': 330,
-      'longitude': 13.410816,
-      'latitude': 50.462475,
+      'longitude': 13.411111111111,
+      'latitude': 50.462777777778,
       'region': 'Ústecký'
    },
    {
@@ -193,8 +193,8 @@ const cities = [
       'population': 45500,
       'area': 59.10,
       'altitude': 447,
-      'longitude': 12.865922,
-      'latitude': 50.228046,
+      'longitude': 12.8725,
+      'latitude': 50.230555555556,
       'region': 'Karlovarský'
    },
    {
@@ -202,8 +202,8 @@ const cities = [
       'population': 44588,
       'area': 31.38,
       'altitude': 475,
-      'longitude': 15.171279,
-      'latitude': 50.724523,
+      'longitude': 15.17,
+      'latitude': 50.727777777778,
       'region': 'Liberecký'
    },
    {
@@ -211,8 +211,8 @@ const cities = [
       'population': 43055,
       'area': 39.04,
       'altitude': 223,
-      'longitude': 17.109298,
-      'latitude': 49.471944,
+      'longitude': 17.110555555556,
+      'latitude': 49.472222222222,
       'region': 'Olomoucký'
    },
    {
@@ -220,8 +220,8 @@ const cities = [
       'population': 41868,
       'area': 28.90,
       'altitude': 235,
-      'longitude': 14.903544,
-      'latitude': 50.412332,
+      'longitude': 14.906388888889,
+      'latitude': 50.4125,
       'region': 'Středočeský'
    },
    {
@@ -229,8 +229,8 @@ const cities = [
       'population': 41404,
       'area': 58.45,
       'altitude': 210,
-      'longitude': 17.446161,
-      'latitude': 49.453653,
+      'longitude': 17.451111111111,
+      'latitude': 49.455555555556,
       'region': 'Olomoucký'
    },
    {
@@ -238,8 +238,8 @@ const cities = [
       'population': 36740,
       'area': 66.10,
       'altitude': 258,
-      'longitude': 14.537930,
-      'latitude': 50.686590,
+      'longitude': 14.53774710235,
+      'latitude': 50.68558429129,
       'region': 'Liberecký'
    },
    {
@@ -247,8 +247,8 @@ const cities = [
       'population': 34415,
       'area': 57.59,
       'altitude': 405,
-      'longitude': 15.878082,
-      'latitude': 49.215584,
+      'longitude': 15.881675935311,
+      'latitude': 49.214967400263,
       'region': 'Vysočina'
    },
    {
@@ -256,17 +256,17 @@ const cities = [
       'population': 34222,
       'area': 85.37,
       'altitude': 306,
-      'longitude': 18.672753,
-      'latitude': 49.677715,
-      'region': '#NENÍ_K_DISPOZICI'
+      'longitude': 18.670814768494,
+      'latitude': 49.677609314509,
+      'region': 'Moravskoslezský'
    },
    {
       'name': 'Tábor',
       'population': 33410,
       'area': 62.22,
       'altitude': 437,
-      'longitude': 14.657882,
-      'latitude': 49.414129,
+      'longitude': 14.657835974031,
+      'latitude': 49.414485338494,
       'region': 'Jihočeský'
    },
    {
@@ -274,8 +274,8 @@ const cities = [
       'population': 33370,
       'area': 65.90,
       'altitude': 290,
-      'longitude': 16.048628,
-      'latitude': 48.855449,
+      'longitude': 16.048796054219,
+      'latitude': 48.855540667876,
       'region': 'Jihomoravský'
    },
    {
@@ -283,8 +283,8 @@ const cities = [
       'population': 32046,
       'area': 34.99,
       'altitude': 220,
-      'longitude': 15.201039,
-      'latitude': 50.028746,
+      'longitude': 15.200633745928,
+      'latitude': 50.028193990808,
       'region': 'Středočeský'
    },
    {
@@ -292,8 +292,8 @@ const cities = [
       'population': 31651,
       'area': 36.10,
       'altitude': 502,
-      'longitude': 14.010561,
-      'latitude': 49.689200,
+      'longitude': 14.010474512485,
+      'latitude': 49.68996461067,
       'region': 'Středočeský'
    },
    {
@@ -301,17 +301,17 @@ const cities = [
       'population': 30420,
       'area': 96.36,
       'altitude': 459,
-      'longitude': 12.371099,
-      'latitude': 50.079044,
+      'longitude': 12.373995588434,
+      'latitude': 50.079759165169,
       'region': 'Karlovarský'
    },
    {
-      'name': 'Písek (město)',
+      'name': 'Písek',
       'population': 29814,
       'area': 63.23,
       'altitude': 378,
-      'longitude': 14.147326,
-      'latitude': 49.308782,
+      'longitude': 14.147530601921,
+      'latitude': 49.30888068684,
       'region': 'Jihočeský'
    },
    {
@@ -319,8 +319,8 @@ const cities = [
       'population': 29430,
       'area': 103.32,
       'altitude': 414,
-      'longitude': 15.916048,
-      'latitude': 50.561696,
+      'longitude': 15.912798547953,
+      'latitude': 50.561045737535,
       'region': 'Královéhradecký'
    },
    {
@@ -328,8 +328,8 @@ const cities = [
       'population': 28206,
       'area': 24.67,
       'altitude': 282,
-      'longitude': 18.426842,
-      'latitude': 49.871854,
+      'longitude': 18.43015544552,
+      'latitude': 49.845247990058,
       'region': 'Moravskoslezský'
    },
    {
@@ -337,26 +337,26 @@ const cities = [
       'population': 27838,
       'area': 50.98,
       'altitude': 201,
-      'longitude': 17.392929,
-      'latitude': 49.297851,
-      'region': 'Olomoucký'
+      'longitude': 17.393134863736,
+      'latitude': 49.297859972783,
+      'region': 'Zlínský'
    },
    {
       'name': 'Vsetín',
       'population': 25226,
       'area': 57.61,
       'altitude': 348,
-      'longitude': 17.993587,
-      'latitude': 49.338041,
-      'region': 'Olomoucký'
+      'longitude': 17.996209032744,
+      'latitude': 49.338702987886,
+      'region': 'Zlínský'
    },
    {
       'name': 'Šumperk',
       'population': 24910,
       'area': 27.88,
       'altitude': 330,
-      'longitude': 16.970455,
-      'latitude': 49.965324,
+      'longitude': 16.9706654352,
+      'latitude': 49.965299915762,
       'region': 'Olomoucký'
    },
    {
@@ -364,17 +364,17 @@ const cities = [
       'population': 24430,
       'area': 21.26,
       'altitude': 179,
-      'longitude': 17.460571,
-      'latitude': 49.067927,
-      'region': 'Olomoucký'
+      'longitude': 17.459691353499,
+      'latitude': 49.069757549526,
+      'region': 'Zlínský'
    },
    {
       'name': 'Břeclav',
       'population': 23943,
       'area': 77.19,
       'altitude': 158,
-      'longitude': 16.880729,
-      'latitude': 48.758960,
+      'longitude': 16.882020775128,
+      'latitude': 48.758991122507,
       'region': 'Jihomoravský'
    },
    {
@@ -382,8 +382,8 @@ const cities = [
       'population': 23828,
       'area': 63.31,
       'altitude': 167,
-      'longitude': 17.128363,
-      'latitude': 48.848320,
+      'longitude': 17.132439069118,
+      'latitude': 48.848950584361,
       'region': 'Jihomoravský'
    },
    {
@@ -391,8 +391,8 @@ const cities = [
       'population': 23468,
       'area': 33.79,
       'altitude': 270,
-      'longitude': 18.625598,
-      'latitude': 49.746341,
+      'longitude': 18.62617038595,
+      'latitude': 49.746110801139,
       'region': 'Moravskoslezský'
    },
    {
@@ -400,8 +400,8 @@ const cities = [
       'population': 22950,
       'area': 17.99,
       'altitude': 300,
-      'longitude': 14.131442,
-      'latitude': 50.533538,
+      'longitude': 14.131899491403,
+      'latitude': 50.53355947692,
       'region': 'Ústecký'
    },
    {
@@ -409,8 +409,8 @@ const cities = [
       'population': 22879,
       'area': 64.93,
       'altitude': 422,
-      'longitude': 15.578583,
-      'latitude': 49.606578,
+      'longitude': 15.580727658514,
+      'latitude': 49.607899638305,
       'region': 'Vysočina'
    },
    {
@@ -418,17 +418,17 @@ const cities = [
       'population': 22813,
       'area': 36.52,
       'altitude': 284,
-      'longitude': 18.010388,
-      'latitude': 49.594369,
-      'region': '#ODKAZ!'
+      'longitude': 18.010308756103,
+      'latitude': 49.594368444158,
+      'region': 'Moravskoslezský'
    },
    {
       'name': 'Chrudim',
       'population': 22773,
       'area': 33.21,
       'altitude': 240,
-      'longitude': 15.795575,
-      'latitude': 49.951092,
+      'longitude': 15.795635790875,
+      'latitude': 49.951136279202,
       'region': 'Pardubický'
    },
    {
@@ -436,8 +436,8 @@ const cities = [
       'population': 22665,
       'area': 44.29,
       'altitude': 316,
-      'longitude': 17.701973,
-      'latitude': 50.090522,
+      'longitude': 17.703908920138,
+      'latitude': 50.089666916291,
       'region': 'Moravskoslezský'
    },
    {
@@ -445,8 +445,8 @@ const cities = [
       'population': 22482,
       'area': 40.714,
       'altitude': 338,
-      'longitude': 13.611726,
-      'latitude': 50.598837,
+      'longitude': 13.611212988257,
+      'latitude': 50.60077979319,
       'region': 'Ústecký'
    },
    {
@@ -454,8 +454,8 @@ const cities = [
       'population': 22214,
       'area': 34.67,
       'altitude': 393,
-      'longitude': 13.901639,
-      'latitude': 49.261221,
+      'longitude': 13.902396874574,
+      'latitude': 49.261497897079,
       'region': 'Jihočeský'
    },
    {
@@ -463,8 +463,8 @@ const cities = [
       'population': 22097,
       'area': 22.92,
       'altitude': 401,
-      'longitude': 12.643671,
-      'latitude': 50.179547,
+      'longitude': 12.640181474439,
+      'latitude': 50.181415762132,
       'region': 'Karlovarský'
    },
    {
@@ -472,17 +472,17 @@ const cities = [
       'population': 21883,
       'area': 35.44,
       'altitude': 294,
-      'longitude': 17.970583,
-      'latitude': 49.471163,
-      'region': 'Olomoucký'
+      'longitude': 17.97115355859,
+      'latitude': 49.471799519597,
+      'region': 'Zlínský'
    },
    {
       'name': 'Klatovy',
       'population': 21587,
       'area': 80.85,
       'altitude': 405,
-      'longitude': 13.292941,
-      'latitude': 49.394639,
+      'longitude': 13.29508891337,
+      'latitude': 49.395625338265,
       'region': 'Plzeňský'
    },
    {
@@ -490,17 +490,17 @@ const cities = [
       'population': 21395,
       'area': 27.49,
       'altitude': 320,
-      'longitude': 18.147160,
-      'latitude': 49.597824,
-      'region': '#ODKAZ!'
+      'longitude': 18.144833283338,
+      'latitude': 49.599461028116,
+      'region': 'Moravskoslezský'
    },
    {
       'name': 'Jindřichův Hradec',
       'population': 20774,
       'area': 74.29,
       'altitude': 475,
-      'longitude': 15.001932,
-      'latitude': 49.147091,
+      'longitude': 15.003024549245,
+      'latitude': 49.144110393651,
       'region': 'Jihočeský'
    },
    {
@@ -508,8 +508,8 @@ const cities = [
       'population': 20450,
       'area': 33.07,
       'altitude': 254,
-      'longitude': 15.269119,
-      'latitude': 49.948394,
+      'longitude': 15.268225887967,
+      'latitude': 49.948444972662,
       'region': 'Středočeský'
    },
    {
@@ -517,8 +517,8 @@ const cities = [
       'population': 20450,
       'area': 31.03,
       'altitude': 198,
-      'longitude': 18.358100,
-      'latitude': 49.904000,
+      'longitude': 18.357595239984,
+      'latitude': 49.90408983288,
       'region': 'Moravskoslezský'
    },
    {
@@ -526,8 +526,8 @@ const cities = [
       'population': 20338,
       'area': 37.06,
       'altitude': 580,
-      'longitude': 15.936123,
-      'latitude': 49.564997,
+      'longitude': 15.939278339801,
+      'latitude': 49.562675487861,
       'region': 'Vysočina'
    },
    {
@@ -535,8 +535,8 @@ const cities = [
       'population': 20187,
       'area': 50.46,
       'altitude': 254,
-      'longitude': 16.998987,
-      'latitude': 49.277268,
+      'longitude': 16.998993221633,
+      'latitude': 49.277487239217,
       'region': 'Jihomoravský'
    },
    {
@@ -544,8 +544,8 @@ const cities = [
       'population': 19984,
       'area': 31.25,
       'altitude': 235,
-      'longitude': 14.074581,
-      'latitude': 49.964297,
+      'longitude': 14.072061165906,
+      'latitude': 49.963908175611,
       'region': 'Středočeský'
    },
    {
@@ -553,8 +553,8 @@ const cities = [
       'population': 19715,
       'area': 44.97,
       'altitude': 276,
-      'longitude': 16.643754,
-      'latitude': 49.363493,
+      'longitude': 16.643174766744,
+      'latitude': 49.363160582771,
       'region': 'Jihomoravský'
    },
    {
@@ -562,8 +562,8 @@ const cities = [
       'population': 19472,
       'area': 24.96,
       'altitude': 215,
-      'longitude': 14.474946,
-      'latitude': 50.352412,
+      'longitude': 14.474193495734,
+      'latitude': 50.35057067972,
       'region': 'Středočeský'
    },
    {
@@ -571,8 +571,8 @@ const cities = [
       'population': 19220,
       'area': 33.34,
       'altitude': 347,
-      'longitude': 16.163860,
-      'latitude': 50.416326,
+      'longitude': 16.16297400854,
+      'latitude': 50.416738226612,
       'region': 'Královéhradecký'
    },
    {
@@ -580,8 +580,8 @@ const cities = [
       'population': 18945,
       'area': 17.01,
       'altitude': 305,
-      'longitude': 13.447754,
-      'latitude': 50.500469,
+      'longitude': 13.447786301898,
+      'latitude': 50.499890572913,
       'region': 'Ústecký'
    },
    {
@@ -589,8 +589,8 @@ const cities = [
       'population': 18755,
       'area': 22.65,
       'altitude': 169,
-      'longitude': 14.658605,
-      'latitude': 50.186129,
+      'longitude': 14.663332953497,
+      'latitude': 50.187160680032,
       'region': 'Středočeský'
    },
    {
@@ -598,8 +598,8 @@ const cities = [
       'population': 18570,
       'area': 42.68,
       'altitude': 233,
-      'longitude': 13.544224,
-      'latitude': 50.330030,
+      'longitude': 13.545859487384,
+      'latitude': 50.327264913574,
       'region': 'Ústecký'
    },
    {
@@ -607,8 +607,8 @@ const cities = [
       'population': 18189,
       'area': 21.9,
       'altitude': 274,
-      'longitude': 14.308121,
-      'latitude': 50.242399,
+      'longitude': 14.311574668457,
+      'latitude': 50.241148972524,
       'region': 'Středočeský'
    },
    {
@@ -616,8 +616,8 @@ const cities = [
       'population': 17760,
       'area': 24.14,
       'altitude': 185,
-      'longitude': 13.796309,
-      'latitude': 50.357773,
+      'longitude': 13.796762432686,
+      'latitude': 50.357078457688,
       'region': 'Ústecký'
    },
    {
@@ -625,8 +625,8 @@ const cities = [
       'population': 17628,
       'area': 65.62,
       'altitude': 300,
-      'longitude': 13.270113,
-      'latitude': 50.376561,
+      'longitude': 13.271397346217,
+      'latitude': 50.37608553522,
       'region': 'Ústecký'
    },
    {
@@ -634,8 +634,8 @@ const cities = [
       'population': 17495,
       'area': 49.78,
       'altitude': 250,
-      'longitude': 17.734740,
-      'latitude': 49.550097,
+      'longitude': 17.734723291716,
+      'latitude': 49.547963974257,
       'region': 'Olomoucký'
    },
    {
@@ -643,26 +643,26 @@ const cities = [
       'population': 17183,
       'area': 19.63,
       'altitude': 190,
-      'longitude': 17.535427,
-      'latitude': 49.208235,
-      'region': 'Olomoucký'
+      'longitude': 17.530780558281,
+      'latitude': 49.209921755941,
+      'region': 'Zlínský'
    },
    {
       'name': 'Benešov',
       'population': 16448,
       'area': 46.87,
       'altitude': 368,
-      'longitude': 16.770593,
-      'latitude': 49.509433,
-      'region': 'Jihomoravský'
+      'longitude': 14.687020558215,
+      'latitude': 49.781695568859,
+      'region': 'Středočeský'
    },
    {
       'name': 'Svitavy',
       'population': 16261,
       'area': 31.33,
       'altitude': 435,
-      'longitude': 16.462234,
-      'latitude': 49.757041,
+      'longitude': 16.468338539525,
+      'latitude': 49.755965917692,
       'region': 'Pardubický'
    },
    {
@@ -670,17 +670,17 @@ const cities = [
       'population': 16206,
       'area': 52.06,
       'altitude': 251,
-      'longitude': 17.647382,
-      'latitude': 49.024922,
-      'region': 'Olomoucký'
+      'longitude': 17.647153295745,
+      'latitude': 49.025133430958,
+      'region': 'Zlínský'
    },
    {
       'name': 'Říčany',
       'population': 16182,
       'area': 25.81,
       'altitude': 341,
-      'longitude': 14.654269,
-      'latitude': 49.991675,
+      'longitude': 14.654334421235,
+      'latitude': 49.991746433504,
       'region': 'Středočeský'
    },
    {
@@ -688,17 +688,17 @@ const cities = [
       'population': 16077,
       'area': 39.48,
       'altitude': 378,
-      'longitude': 18.142681,
-      'latitude': 49.457597,
-      'region': 'Olomoucký'
+      'longitude': 18.143045316957,
+      'latitude': 49.45851736056,
+      'region': 'Zlínský'
    },
    {
       'name': 'Jičín',
       'population': 15871,
       'area': 25.86,
       'altitude': 287,
-      'longitude': 15.354214,
-      'latitude': 50.437103,
+      'longitude': 15.351713997933,
+      'latitude': 50.437279002171,
       'region': 'Královéhradecký'
    },
    {
@@ -706,8 +706,8 @@ const cities = [
       'population': 15862,
       'area': 35.12,
       'altitude': 234,
-      'longitude': 14.086936,
-      'latitude': 50.231447,
+      'longitude': 14.087014267434,
+      'latitude': 50.230541170014,
       'region': 'Středočeský'
    },
    {
@@ -715,8 +715,8 @@ const cities = [
       'population': 15831,
       'area': 20.00,
       'altitude': 162,
-      'longitude': 14.520586,
-      'latitude': 50.255485,
+      'longitude': 14.517675172798,
+      'latitude': 50.259331649996,
       'region': 'Středočeský'
    },
    {
@@ -724,8 +724,8 @@ const cities = [
       'population': 15822,
       'area': 50.41,
       'altitude': 398,
-      'longitude': 12.950275,
-      'latitude': 50.306284,
+      'longitude': 12.939153516476,
+      'latitude': 50.306035004821,
       'region': 'Karlovarský'
    },
    {
@@ -733,8 +733,8 @@ const cities = [
       'population': 15755,
       'area': 95.28,
       'altitude': 494,
-      'longitude': 15.223219,
-      'latitude': 49.431432,
+      'longitude': 15.223389364189,
+      'latitude': 49.431396763393,
       'region': 'Vysočina'
    },
    {
@@ -742,8 +742,8 @@ const cities = [
       'population': 15523,
       'area': 29.34,
       'altitude': 547,
-      'longitude': 17.471606,
-      'latitude': 49.993414,
+      'longitude': 17.464759014801,
+      'latitude': 49.988449251745,
       'region': 'Moravskoslezský'
    },
    {
@@ -751,8 +751,8 @@ const cities = [
       'population': 15170,
       'area': 35.84,
       'altitude': 298,
-      'longitude': 15.814692,
-      'latitude': 50.431704,
+      'longitude': 15.814108741637,
+      'latitude': 50.431763800828,
       'region': 'Královéhradecký'
    },
    {
@@ -760,8 +760,8 @@ const cities = [
       'population': 15142,
       'area': 18.5,
       'altitude': 322,
-      'longitude': 13.728805,
-      'latitude': 50.104266,
+      'longitude': 13.733472751214,
+      'latitude': 50.103792787995,
       'region': 'Středočeský'
    },
    {
@@ -769,8 +769,8 @@ const cities = [
       'population': 15062,
       'area': 41.01,
       'altitude': 375,
-      'longitude': 16.447367,
-      'latitude': 49.902154,
+      'longitude': 16.447334999548,
+      'latitude': 49.90191270808,
       'region': 'Pardubický'
    },
    {
@@ -778,8 +778,8 @@ const cities = [
       'population': 14780,
       'area': 20.59,
       'altitude': 193,
-      'longitude': 15.040725,
-      'latitude': 50.186130,
+      'longitude': 15.041747256066,
+      'latitude': 50.186115487846,
       'region': 'Středočeský'
    },
    {
@@ -787,17 +787,17 @@ const cities = [
       'population': 14738,
       'area': 26.23,
       'altitude': 332,
-      'longitude': 14.619955,
-      'latitude': 50.911343,
+      'longitude': 14.618353683386,
+      'latitude': 50.911612411446,
       'region': 'Ústecký'
    },
    {
-      'name': 'Bílina (město)',
+      'name': 'Bílina',
       'population': 14420,
       'area': 32.50,
       'altitude': 207,
-      'longitude': 13.774288,
-      'latitude': 50.548917,
+      'longitude': 13.775445246997,
+      'latitude': 50.548631074934,
       'region': 'Ústecký'
    },
    {
@@ -805,8 +805,8 @@ const cities = [
       'population': 14317,
       'area': 33.68,
       'altitude': 185,
-      'longitude': 15.116628,
-      'latitude': 50.142715,
+      'longitude': 15.118884780406,
+      'latitude': 50.142477809038,
       'region': 'Středočeský'
    },
    {
@@ -814,8 +814,8 @@ const cities = [
       'population': 14190,
       'area': 53.79,
       'altitude': 320,
-      'longitude': 13.171331,
-      'latitude': 50.384539,
+      'longitude': 13.171368113331,
+      'latitude': 50.384556821405,
       'region': 'Ústecký'
    },
    {
@@ -823,8 +823,8 @@ const cities = [
       'population': 14174,
       'area': 22.71,
       'altitude': 260,
-      'longitude': 15.157294,
-      'latitude': 50.586675,
+      'longitude': 15.156899388718,
+      'latitude': 50.587341607858,
       'region': 'Liberecký'
    },
    {
@@ -832,8 +832,8 @@ const cities = [
       'population': 13936,
       'area': 36.37,
       'altitude': 340,
-      'longitude': 16.393491,
-      'latitude': 49.973982,
+      'longitude': 16.393670305445,
+      'latitude': 49.973904297163,
       'region': 'Pardubický'
    },
    {
@@ -841,8 +841,8 @@ const cities = [
       'population': 13826,
       'area': 30.67,
       'altitude': 362,
-      'longitude': 13.595553,
-      'latitude': 49.742199,
+      'longitude': 13.594638741285,
+      'latitude': 49.742793661264,
       'region': 'Plzeňský'
    },
    {
@@ -850,8 +850,8 @@ const cities = [
       'population': 13562,
       'area': 21.14,
       'altitude': 241,
-      'longitude': 18.1946831,
-      'latitude': 49.8940948,
+      'longitude': 18.19200490075,
+      'latitude': 49.897939786775,
       'region': 'Moravskoslezský'
    },
    {
@@ -859,8 +859,8 @@ const cities = [
       'population': 13281,
       'area': 34.59,
       'altitude': 285,
-      'longitude': 16.872292,
-      'latitude': 49.882134,
+      'longitude': 16.872280013113,
+      'latitude': 49.882620486561,
       'region': 'Olomoucký'
    },
    {
@@ -868,8 +868,8 @@ const cities = [
       'population': 13144,
       'area': 48.79,
       'altitude': 268,
-      'longitude': 17.299825,
-      'latitude': 49.731502,
+      'longitude': 17.298931346408,
+      'latitude': 49.73045283333,
       'region': 'Olomoucký'
    },
    {
@@ -877,8 +877,8 @@ const cities = [
       'population': 12683,
       'area': 14.26,
       'altitude': 418,
-      'longitude': 12.749282,
-      'latitude': 50.238756,
+      'longitude': 12.753403883747,
+      'latitude': 50.241450598051,
       'region': 'Karlovarský'
    },
    {
@@ -886,8 +886,8 @@ const cities = [
       'population': 12538,
       'area': 40.84,
       'altitude': 483,
-      'longitude': 12.631338,
-      'latitude': 49.795134,
+      'longitude': 12.633709213451,
+      'latitude': 49.795398066933,
       'region': 'Plzeňský'
    },
    {
@@ -895,8 +895,8 @@ const cities = [
       'population': 12506,
       'area': 16.67,
       'altitude': 195,
-      'longitude': 14.260109,
-      'latitude': 50.423808,
+      'longitude': 14.261840817268,
+      'latitude': 50.425361080625,
       'region': 'Ústecký'
    },
    {
@@ -904,8 +904,8 @@ const cities = [
       'population': 12483,
       'area': 55.86,
       'altitude': 666,
-      'longitude': 12.190264,
-      'latitude': 50.222290,
+      'longitude': 12.195074300926,
+      'latitude': 50.223996008844,
       'region': 'Karlovarský'
    },
    {
@@ -913,8 +913,8 @@ const cities = [
       'population': 12461,
       'area': 22.16,
       'altitude': 492,
-      'longitude': 14.315238,
-      'latitude': 48.810981,
+      'longitude': 14.31520771066,
+      'latitude': 48.810990441614,
       'region': 'Jihočeský'
    },
    {
@@ -922,8 +922,8 @@ const cities = [
       'population': 12460,
       'area': 28.34,
       'altitude': 221,
-      'longitude': 14.888632,
-      'latitude': 50.225961,
+      'longitude': 14.888710216255,
+      'latitude': 50.226024627414,
       'region': 'Středočeský'
    },
    {
@@ -931,8 +931,8 @@ const cities = [
       'population': 12365,
       'area': 46.61,
       'altitude': 300,
-      'longitude': 13.872912,
-      'latitude': 50.682436,
+      'longitude': 13.858256809864,
+      'latitude': 50.684576839145,
       'region': 'Ústecký'
    },
    {
@@ -940,8 +940,8 @@ const cities = [
       'population': 12260,
       'area': 23.95,
       'altitude': 254,
-      'longitude': 15.919488,
-      'latitude': 50.355245,
+      'longitude': 15.921447438363,
+      'latitude': 50.356235289292,
       'region': 'Královéhradecký'
    },
    {
@@ -949,8 +949,8 @@ const cities = [
       'population': 12237,
       'area': 51.79,
       'altitude': 578,
-      'longitude': 12.701922,
-      'latitude': 49.975718,
+      'longitude': 12.701249703911,
+      'latitude': 49.964703891769,
       'region': 'Karlovarský'
    },
    {
@@ -958,8 +958,8 @@ const cities = [
       'population': 12008,
       'area': 15.88,
       'altitude': 184,
-      'longitude': 14.750140,
-      'latitude': 50.163341,
+      'longitude': 14.750119929994,
+      'latitude': 50.160451211747,
       'region': 'Středočeský'
    },
    {
@@ -967,8 +967,8 @@ const cities = [
       'population': 12007,
       'area': 42.03,
       'altitude': 284,
-      'longitude': 16.161823,
-      'latitude': 49.953400,
+      'longitude': 16.161752006464,
+      'latitude': 49.953240035812,
       'region': 'Pardubický'
    },
    {
@@ -976,8 +976,8 @@ const cities = [
       'population': 11968,
       'area': 27.65,
       'altitude': 477,
-      'longitude': 15.609046,
-      'latitude': 50.627047,
+      'longitude': 15.609473689336,
+      'latitude': 50.627013945049,
       'region': 'Královéhradecký'
    },
    {
@@ -985,8 +985,8 @@ const cities = [
       'population': 11661,
       'area': 27.82,
       'altitude': 381,
-      'longitude': 16.661485,
-      'latitude': 49.487195,
+      'longitude': 16.660002080035,
+      'latitude': 49.487537313637,
       'region': 'Jihomoravský'
    },
    {
@@ -994,8 +994,8 @@ const cities = [
       'population': 11458,
       'area': 19.44,
       'altitude': 365,
-      'longitude': 14.556700,
-      'latitude': 50.759998,
+      'longitude': 14.555662165889,
+      'latitude': 50.757681178047,
       'region': 'Liberecký'
    },
    {
@@ -1003,17 +1003,17 @@ const cities = [
       'population': 11426,
       'area': 33.95,
       'altitude': 232,
-      'longitude': 17.581312,
-      'latitude': 49.331171,
-      'region': 'Olomoucký'
+      'longitude': 17.578340885825,
+      'latitude': 49.333314366496,
+      'region': 'Zlínský'
    },
    {
       'name': 'Vlašim',
       'population': 11357,
       'area': 41.42,
       'altitude': 365,
-      'longitude': 14.897248,
-      'latitude': 49.703522,
+      'longitude': 14.898853788831,
+      'latitude': 49.706391051684,
       'region': 'Středočeský'
    },
    {
@@ -1021,8 +1021,8 @@ const cities = [
       'population': 11325,
       'area': 40.66,
       'altitude': 425,
-      'longitude': 16.011921,
-      'latitude': 49.355375,
+      'longitude': 16.01226875669,
+      'latitude': 49.355258131562,
       'region': 'Vysočina'
    },
    {
@@ -1030,8 +1030,8 @@ const cities = [
       'population': 11066,
       'area': 48.28,
       'altitude': 248,
-      'longitude': 17.121528,
-      'latitude': 49.770774,
+      'longitude': 17.121482256516,
+      'latitude': 49.770928637031,
       'region': 'Olomoucký'
    },
    {
@@ -1039,17 +1039,17 @@ const cities = [
       'population': 10849,
       'area': 29.88,
       'altitude': 192,
-      'longitude': 15.881553,
-      'latitude': 49.443444,
-      'region': 'Vysočina'
+      'longitude': 17.122531686075,
+      'latitude': 49.010193088478,
+      'region': 'Jihomoravský'
    },
    {
       'name': 'Kuřim',
       'population': 10847,
       'area': 17.20,
       'altitude': 286,
-      'longitude': 16.529299,
-      'latitude': 49.309095,
+      'longitude': 16.53146211908,
+      'latitude': 49.298546446655,
       'region': 'Jihomoravský'
    },
    {
@@ -1057,8 +1057,8 @@ const cities = [
       'population': 10749,
       'area': 24.62,
       'altitude': 428,
-      'longitude': 12.930250,
-      'latitude': 49.440098,
+      'longitude': 12.929798039263,
+      'latitude': 49.440605680467,
       'region': 'Plzeňský'
    },
    {
@@ -1066,8 +1066,8 @@ const cities = [
       'population': 10741,
       'area': 51.51,
       'altitude': 527,
-      'longitude': 15.360415,
-      'latitude': 49.540948,
+      'longitude': 15.359357331212,
+      'latitude': 49.541577778709,
       'region': 'Vysočina'
    },
    {
@@ -1075,8 +1075,8 @@ const cities = [
       'population': 10717,
       'area': 34.99,
       'altitude': 320,
-      'longitude': 16.275451,
-      'latitude': 50.160799,
+      'longitude': 16.274954757842,
+      'latitude': 50.162870787815,
       'region': 'Královéhradecký'
    },
    {
@@ -1084,8 +1084,8 @@ const cities = [
       'population': 10679,
       'area': 24.72,
       'altitude': 387,
-      'longitude': 14.553360,
-      'latitude': 50.954736,
+      'longitude': 14.55711013781,
+      'latitude': 50.951576367344,
       'region': 'Ústecký'
    },
    {
@@ -1093,17 +1093,17 @@ const cities = [
       'population': 10662,
       'area': 45.65,
       'altitude': 472,
-      'longitude': 17.452223,
-      'latitude': 49.122247,
-      'region': 'Olomoucký'
+      'longitude': 13.520207848015,
+      'latitude': 49.231161465796,
+      'region': 'Plzeňský'
    },
    {
       'name': 'Jeseník',
       'population': 10658,
       'area': 38.23,
       'altitude': 432,
-      'longitude': 17.204593,
-      'latitude': 50.229370,
+      'longitude': 17.204714793832,
+      'latitude': 50.22937984562,
       'region': 'Olomoucký'
    },
    {
@@ -1111,8 +1111,8 @@ const cities = [
       'population': 10588,
       'area': 38.92,
       'altitude': 561,
-      'longitude': 13.997274,
-      'latitude': 49.012819,
+      'longitude': 13.997533003713,
+      'latitude': 49.013013368826,
       'region': 'Jihočeský'
    },
    {
@@ -1120,8 +1120,8 @@ const cities = [
       'population': 10577,
       'area': 35.45,
       'altitude': 176,
-      'longitude': 17.380033,
-      'latitude': 48.952155,
+      'longitude': 17.37648237967,
+      'latitude': 48.953642955201,
       'region': 'Jihomoravský'
    },
    {
@@ -1129,17 +1129,17 @@ const cities = [
       'population': 10569,
       'area': 11.43,
       'altitude': 401,
-      'longitude': 18.211638,
-      'latitude': 49.547079,
-      'region': '#ODKAZ!'
+      'longitude': 18.210809609836,
+      'latitude': 49.548334550378,
+      'region': 'Moravskoslezský'
    },
    {
       'name': 'Čáslav',
       'population': 10128,
       'area': 26.46,
       'altitude': 231,
-      'longitude': 15.389718,
-      'latitude': 49.910992,
+      'longitude': 15.389777063866,
+      'latitude': 49.911045008568,
       'region': 'Středočeský'
    },
    {
@@ -1147,8 +1147,8 @@ const cities = [
       'population': 9995,
       'area': 15.26,
       'altitude': 240,
-      'longitude': 14.034453,
-      'latitude': 49.949807,
+      'longitude': 14.034516923849,
+      'latitude': 49.949891666533,
       'region': 'Středočeský'
    },
    {
@@ -1156,8 +1156,8 @@ const cities = [
       'population': 9914,
       'area': 33.44,
       'altitude': 330,
-      'longitude': 16.310523,
-      'latitude': 49.872033,
+      'longitude': 16.310576465877,
+      'latitude': 49.872064383156,
       'region': 'Pardubický'
    },
    {
@@ -1165,8 +1165,8 @@ const cities = [
       'population': 9829,
       'area': 61.13,
       'altitude': 594,
-      'longitude': 16.072717,
-      'latitude': 49.560663,
+      'longitude': 16.074220542261,
+      'latitude': 49.561481877592,
       'region': 'Vysočina'
    },
    {
@@ -1174,17 +1174,17 @@ const cities = [
       'population': 9796,
       'area': 21.91,
       'altitude': 357,
-      'longitude': 18.359665,
-      'latitude': 49.592804,
-      'region': '#NENÍ_K_DISPOZICI'
+      'longitude': 18.359696643447,
+      'latitude': 49.592787662664,
+      'region': 'Moravskoslezský'
    },
    {
       'name': 'Jesenice (okres Praha-západ)',
       'population': 9777,
       'area': 17.54,
       'altitude': 358,
-      'longitude': 14.513496,
-      'latitude': 49.968143,
+      'longitude': 14.513559856752,
+      'latitude': 49.96821662742,
       'region': 'Středočeský'
    },
    {
@@ -1192,8 +1192,8 @@ const cities = [
       'population': 9737,
       'area': 47.65,
       'altitude': 210,
-      'longitude': 16.377518,
-      'latitude': 49.101446,
+      'longitude': 16.377529198529,
+      'latitude': 49.101477851144,
       'region': 'Jihomoravský'
    },
    {
@@ -1201,8 +1201,8 @@ const cities = [
       'population': 9732,
       'area': 33.67,
       'altitude': 183,
-      'longitude': 14.832812,
-      'latitude': 50.201432,
+      'longitude': 14.832888718706,
+      'latitude': 50.201496776686,
       'region': 'Středočeský'
    },
    {
@@ -1210,8 +1210,8 @@ const cities = [
       'population': 9656,
       'area': 42.05,
       'altitude': 360,
-      'longitude': 16.664014,
-      'latitude': 49.757393,
+      'longitude': 16.664303989895,
+      'latitude': 49.757953873208,
       'region': 'Pardubický'
    },
    {
@@ -1219,8 +1219,8 @@ const cities = [
       'population': 9567,
       'area': 46.40,
       'altitude': 233,
-      'longitude': 17.076149,
-      'latitude': 49.701211,
+      'longitude': 17.076190647983,
+      'latitude': 49.701225181872,
       'region': 'Olomoucký'
    },
    {
@@ -1228,17 +1228,17 @@ const cities = [
       'population': 9416,
       'area': 24.27,
       'altitude': 580,
-      'longitude': 17.579143,
-      'latitude': 49.494542,
-      'region': 'Olomoucký'
+      'longitude': 15.907605681006,
+      'latitude': 49.762172981864,
+      'region': 'Pardubický'
    },
    {
       'name': 'Lanškroun',
       'population': 9326,
       'area': 20.65,
       'altitude': 373,
-      'longitude': 16.611899,
-      'latitude': 49.912168,
+      'longitude': 16.611954510979,
+      'latitude': 49.912192261266,
       'region': 'Pardubický'
    },
    {
@@ -1246,8 +1246,8 @@ const cities = [
       'population': 9315,
       'area': 30.47,
       'altitude': 212,
-      'longitude': 15.560307,
-      'latitude': 50.039849,
+      'longitude': 15.560373291128,
+      'latitude': 50.039897141756,
       'region': 'Pardubický'
    },
    {
@@ -1255,17 +1255,17 @@ const cities = [
       'population': 9277,
       'area': 30.92,
       'altitude': 239,
-      'longitude': 18.054904,
-      'latitude': 49.714716,
-      'region': '#ODKAZ!'
+      'longitude': 18.078565781992,
+      'latitude': 49.723408972599,
+      'region': 'Moravskoslezský'
    },
    {
       'name': 'Tišnov',
       'population': 9164,
       'area': 17.12,
       'altitude': 256,
-      'longitude': 16.424380,
-      'latitude': 49.348719,
+      'longitude': 16.424404904279,
+      'latitude': 49.348749330424,
       'region': 'Jihomoravský'
    },
    {
@@ -1273,8 +1273,8 @@ const cities = [
       'population': 9132,
       'area': 23.13,
       'altitude': 332,
-      'longitude': 16.151466,
-      'latitude': 50.344566,
+      'longitude': 16.151547223496,
+      'latitude': 50.344598880803,
       'region': 'Královéhradecký'
    },
    {
@@ -1282,8 +1282,8 @@ const cities = [
       'population': 9103,
       'area': 46.20,
       'altitude': 267,
-      'longitude': 16.919462,
-      'latitude': 49.776984,
+      'longitude': 16.919508491038,
+      'latitude': 49.777001590952,
       'region': 'Olomoucký'
    },
    {
@@ -1291,8 +1291,8 @@ const cities = [
       'population': 8995,
       'area': 54.05,
       'altitude': 515,
-      'longitude': 15.670182,
-      'latitude': 49.720719,
+      'longitude': 15.67022905709,
+      'latitude': 49.720765680333,
       'region': 'Vysočina'
    },
    {
@@ -1300,8 +1300,8 @@ const cities = [
       'population': 8857,
       'area': 28.68,
       'altitude': 427,
-      'longitude': 15.515032,
-      'latitude': 50.494495,
+      'longitude': 15.515123613971,
+      'latitude': 50.494542634207,
       'region': 'Královéhradecký'
    },
    {
@@ -1309,8 +1309,8 @@ const cities = [
       'population': 8777,
       'area': 14.47,
       'altitude': 341,
-      'longitude': 14.258562,
-      'latitude': 50.081576,
+      'longitude': 14.258633351605,
+      'latitude': 50.081655150002,
       'region': 'Středočeský'
    },
    {
@@ -1318,8 +1318,8 @@ const cities = [
       'population': 8711,
       'area': 34.32,
       'altitude': 240,
-      'longitude': 14.971335,
-      'latitude': 50.527206,
+      'longitude': 14.971430407266,
+      'latitude': 50.527266026167,
       'region': 'Středočeský'
    },
    {
@@ -1327,8 +1327,8 @@ const cities = [
       'population': 8710,
       'area': 33.12,
       'altitude': 555,
-      'longitude': 16.265434,
-      'latitude': 49.714647,
+      'longitude': 16.265478874053,
+      'latitude': 49.714679390589,
       'region': 'Pardubický'
    },
    {
@@ -1336,8 +1336,8 @@ const cities = [
       'population': 8707,
       'area': 53.42,
       'altitude': 371,
-      'longitude': 14.167167,
-      'latitude': 49.781134,
+      'longitude': 14.16722087166,
+      'latitude': 49.781215974594,
       'region': 'Středočeský'
    },
    {
@@ -1345,8 +1345,8 @@ const cities = [
       'population': 8611,
       'area': 8.13,
       'altitude': 237,
-      'longitude': 14.397604,
-      'latitude': 50.158414,
+      'longitude': 14.397679313408,
+      'latitude': 50.158489314828,
       'region': 'Středočeský'
    },
    {
@@ -1354,8 +1354,8 @@ const cities = [
       'population': 8605,
       'area': 11.89,
       'altitude': 151,
-      'longitude': 14.051030,
-      'latitude': 50.515039,
+      'longitude': 14.051126534986,
+      'latitude': 50.515121498998,
       'region': 'Ústecký'
    },
    {
@@ -1363,8 +1363,8 @@ const cities = [
       'population': 8589,
       'area': 15.41,
       'altitude': 201,
-      'longitude': 13.746208,
-      'latitude': 50.603766,
+      'longitude': 13.746310094927,
+      'latitude': 50.603854793198,
       'region': 'Ústecký'
    },
    {
@@ -1372,8 +1372,8 @@ const cities = [
       'population': 8477,
       'area': 21.69,
       'altitude': 290,
-      'longitude': 16.223026,
-      'latitude': 50.001606,
+      'longitude': 16.223087674169,
+      'latitude': 50.00163914968,
       'region': 'Pardubický'
    },
    {
@@ -1381,8 +1381,8 @@ const cities = [
       'population': 8438,
       'area': 53.90,
       'altitude': 155,
-      'longitude': 14.374212,
-      'latitude': 50.452985,
+      'longitude': 14.374304629682,
+      'latitude': 50.453059775481,
       'region': 'Ústecký'
    },
    {
@@ -1390,26 +1390,26 @@ const cities = [
       'population': 8297,
       'area': 22.15,
       'altitude': 278,
-      'longitude': 18.144987,
-      'latitude': 49.640938,
-      'region': '#ODKAZ!'
+      'longitude': 18.145022037352,
+      'latitude': 49.640926771377,
+      'region': 'Moravskoslezský'
    },
    {
       'name': 'Hořice',
       'population': 8274,
       'area': 21.43,
       'altitude': 311,
-      'longitude': 15.185398,
-      'latitude': 49.599261,
-      'region': 'Vysočina'
+      'longitude': 15.631918228938,
+      'latitude': 50.366136740505,
+      'region': 'Královéhradecký'
    },
    {
       'name': 'Červený Kostelec',
       'population': 8229,
       'area': 24.07,
       'altitude': 414,
-      'longitude': 16.092894,
-      'latitude': 50.476264,
+      'longitude': 16.092983802099,
+      'latitude': 50.476298276375,
       'region': 'Královéhradecký'
    },
    {
@@ -1417,8 +1417,8 @@ const cities = [
       'population': 8120,
       'area': 16.31,
       'altitude': 340,
-      'longitude': 15.335521,
-      'latitude': 50.601906,
+      'longitude': 15.33561979968,
+      'latitude': 50.601957959876,
       'region': 'Liberecký'
    },
    {
@@ -1426,8 +1426,8 @@ const cities = [
       'population': 8092,
       'area': 98.31,
       'altitude': 434,
-      'longitude': 14.770650,
-      'latitude': 49.003639,
+      'longitude': 14.770659141428,
+      'latitude': 49.003709466138,
       'region': 'Jihočeský'
    },
    {
@@ -1435,8 +1435,8 @@ const cities = [
       'population': 8033,
       'area': 42.29,
       'altitude': 461,
-      'longitude': 14.360005,
-      'latitude': 49.450893,
+      'longitude': 14.36004017878,
+      'latitude': 49.450972060646,
       'region': 'Jihočeský'
    },
    {
@@ -1444,17 +1444,17 @@ const cities = [
       'population': 7984,
       'area': 26.81,
       'altitude': 315,
-      'longitude': 17.674012,
-      'latitude': 49.399238,
-      'region': 'Olomoucký'
+      'longitude': 17.674035465156,
+      'latitude': 49.399238981974,
+      'region': 'Zlínský'
    },
    {
       'name': 'Rýmařov',
       'population': 7969,
       'area': 60.73,
       'altitude': 590,
-      'longitude': 17.271767,
-      'latitude': 49.931830,
+      'longitude': 17.271821662136,
+      'latitude': 49.931838496043,
       'region': 'Moravskoslezský'
    },
    {
@@ -1462,8 +1462,8 @@ const cities = [
       'population': 7835,
       'area': 53.07,
       'altitude': 535,
-      'longitude': 16.261467,
-      'latitude': 49.522947,
+      'longitude': 16.261501207469,
+      'latitude': 49.522980589139,
       'region': 'Vysočina'
    },
    {
@@ -1471,8 +1471,8 @@ const cities = [
       'population': 7826,
       'area': 30.62,
       'altitude': 233,
-      'longitude': 17.586308,
-      'latitude': 49.527547,
+      'longitude': 17.58633834226,
+      'latitude': 49.527549239447,
       'region': 'Olomoucký'
    },
    {
@@ -1480,8 +1480,8 @@ const cities = [
       'population': 7805,
       'area': 33.85,
       'altitude': 389,
-      'longitude': 13.788833,
-      'latitude': 50.681034,
+      'longitude': 13.788939045017,
+      'latitude': 50.681121671443,
       'region': 'Ústecký'
    },
    {
@@ -1489,8 +1489,8 @@ const cities = [
       'population': 7804,
       'area': 43.02,
       'altitude': 365,
-      'longitude': 14.420567,
-      'latitude': 49.223397,
+      'longitude': 14.420589996012,
+      'latitude': 49.223475602317,
       'region': 'Jihočeský'
    },
    {
@@ -1498,8 +1498,8 @@ const cities = [
       'population': 7704,
       'area': 48.55,
       'altitude': 255,
-      'longitude': 14.844547,
-      'latitude': 50.852791,
+      'longitude': 14.844661931528,
+      'latitude': 50.85285295319,
       'region': 'Liberecký'
    },
    {
@@ -1507,17 +1507,17 @@ const cities = [
       'population': 7640,
       'area': 14.65,
       'altitude': 230,
-      'longitude': 14.111209,
-      'latitude': 50.314669,
-      'region': 'Středočeský'
+      'longitude': 16.727325855884,
+      'latitude': 49.168653859874,
+      'region': 'Jihomoravský'
    },
    {
       'name': 'Rychvald',
       'population': 7614,
       'area': 17.02,
       'altitude': 220,
-      'longitude': 18.376261,
-      'latitude': 49.866254,
+      'longitude': 18.376307429057,
+      'latitude': 49.86623590309,
       'region': 'Moravskoslezský'
    },
    {
@@ -1525,8 +1525,8 @@ const cities = [
       'population': 7608,
       'area': 52.27,
       'altitude': 568,
-      'longitude': 12.729356,
-      'latitude': 50.322418,
+      'longitude': 12.729443668258,
+      'latitude': 50.322532483831,
       'region': 'Karlovarský'
    },
    {
@@ -1534,8 +1534,8 @@ const cities = [
       'population': 7430,
       'area': 47.8,
       'altitude': 399,
-      'longitude': 13.004092,
-      'latitude': 49.752938,
+      'longitude': 13.004146255782,
+      'latitude': 49.753048391098,
       'region': 'Plzeňský'
    },
    {
@@ -1543,17 +1543,17 @@ const cities = [
       'population': 7427,
       'area': 45.32,
       'altitude': 242,
-      'longitude': 13.721597,
-      'latitude': 50.687607,
-      'region': 'Ústecký'
+      'longitude': 16.637789181722,
+      'latitude': 48.805586996193,
+      'region': 'Jihomoravský'
    },
    {
       'name': 'Benátky nad Jizerou',
       'population': 7410,
       'area': 35.51,
       'altitude': 225,
-      'longitude': 14.823432,
-      'latitude': 50.290853,
+      'longitude': 14.823513539563,
+      'latitude': 50.290918373612,
       'region': 'Středočeský'
    },
    {
@@ -1561,8 +1561,8 @@ const cities = [
       'population': 7396,
       'area': 12.63,
       'altitude': 265,
-      'longitude': 18.389405,
-      'latitude': 49.830999,
+      'longitude': 18.389449339429,
+      'latitude': 49.830981416104,
       'region': 'Moravskoslezský'
    },
    {
@@ -1570,8 +1570,8 @@ const cities = [
       'population': 7380,
       'area': 31.61,
       'altitude': 295,
-      'longitude': 15.079741,
-      'latitude': 50.921395,
+      'longitude': 15.079858729413,
+      'latitude': 50.921451823669,
       'region': 'Liberecký'
    },
    {
@@ -1579,17 +1579,17 @@ const cities = [
       'population': 7341,
       'area': 38.89,
       'altitude': 243,
-      'longitude': 18.015811,
-      'latitude': 49.756389,
-      'region': '#ODKAZ!'
+      'longitude': 18.015853348325,
+      'latitude': 49.756380390942,
+      'region': 'Moravskoslezský'
    },
    {
       'name': 'Černošice',
       'population': 7329,
       'area': 9.06,
       'altitude': 211,
-      'longitude': 14.319794,
-      'latitude': 49.960081,
+      'longitude': 14.319858494702,
+      'latitude': 49.960158615227,
       'region': 'Středočeský'
    },
    {
@@ -1597,26 +1597,26 @@ const cities = [
       'population': 7276,
       'area': 14.11,
       'altitude': 250,
-      'longitude': 18.310147,
-      'latitude': 49.769953,
-      'region': '#NENÍ_K_DISPOZICI'
+      'longitude': 18.310188493649,
+      'latitude': 49.769937353857,
+      'region': 'Moravskoslezský'
    },
    {
       'name': 'Odry',
       'population': 7274,
       'area': 74.05,
       'altitude': 303,
-      'longitude': 17.830842,
-      'latitude': 49.662551,
-      'region': '#ODKAZ!'
+      'longitude': 17.830879019923,
+      'latitude': 49.66254664793,
+      'region': 'Moravskoslezský'
    },
    {
       'name': 'Vimperk',
       'population': 7255,
       'area': 80.04,
       'altitude': 694,
-      'longitude': 13.774257,
-      'latitude': 49.052434,
+      'longitude': 13.774271666134,
+      'latitude': 49.052527919987,
       'region': 'Jihočeský'
    },
    {
@@ -1624,8 +1624,8 @@ const cities = [
       'population': 7167,
       'area': 37.13,
       'altitude': 465,
-      'longitude': 15.808644,
-      'latitude': 49.052090,
+      'longitude': 15.808653302577,
+      'latitude': 49.05213602726,
       'region': 'Vysočina'
    },
    {
@@ -1633,17 +1633,17 @@ const cities = [
       'population': 7145,
       'area': 22.27,
       'altitude': 395,
-      'longitude': 12.606690,
-      'latitude': 49.889366,
-      'region': 'Plzeňský'
+      'longitude': 16.331904763502,
+      'latitude': 50.585690135728,
+      'region': 'Královéhradecký'
    },
    {
       'name': 'Dačice',
       'population': 7142,
       'area': 66.96,
       'altitude': 477,
-      'longitude': 15.437267,
-      'latitude': 49.081544,
+      'longitude': 15.437278856602,
+      'latitude': 49.081598679718,
       'region': 'Jihočeský'
    },
    {
@@ -1651,17 +1651,17 @@ const cities = [
       'population': 7074,
       'area': 19.83,
       'altitude': 200,
-      'longitude': 17.511944,
-      'latitude': 49.171559,
-      'region': 'Olomoucký'
+      'longitude': 17.51195508558,
+      'latitude': 49.171564523809,
+      'region': 'Zlínský'
    },
    {
       'name': 'Český Brod',
       'population': 7071,
       'area': 19.70,
       'altitude': 219,
-      'longitude': 14.860812,
-      'latitude': 50.074203,
+      'longitude': 14.860881470778,
+      'latitude': 50.074267480539,
       'region': 'Středočeský'
    },
    {
@@ -1669,8 +1669,8 @@ const cities = [
       'population': 7035,
       'area': 10.97,
       'altitude': 253,
-      'longitude': 14.730804,
-      'latitude': 50.073944,
+      'longitude': 14.73087395138,
+      'latitude': 50.074011899968,
       'region': 'Středočeský'
    },
    {
@@ -1678,8 +1678,8 @@ const cities = [
       'population': 7018,
       'area': 8.44,
       'altitude': 399,
-      'longitude': 14.684805,
-      'latitude': 49.385187,
+      'longitude': 14.684835568625,
+      'latitude': 49.385258670607,
       'region': 'Jihočeský'
    },
    {
@@ -1687,8 +1687,8 @@ const cities = [
       'population': 6992,
       'area': 14.95,
       'altitude': 211,
-      'longitude': 16.876492,
-      'latitude': 49.153255,
+      'longitude': 16.876504369244,
+      'latitude': 49.153275386094,
       'region': 'Jihomoravský'
    },
    {
@@ -1696,8 +1696,8 @@ const cities = [
       'population': 6984,
       'area': 40.85,
       'altitude': 537,
-      'longitude': 14.496276,
-      'latitude': 48.738487,
+      'longitude': 14.496272135395,
+      'latitude': 48.738564836975,
       'region': 'Jihočeský'
    },
    {
@@ -1705,8 +1705,8 @@ const cities = [
       'population': 6982,
       'area': 35.27,
       'altitude': 235,
-      'longitude': 15.490821,
-      'latitude': 50.241503,
+      'longitude': 15.490898003773,
+      'latitude': 50.241552543371,
       'region': 'Královéhradecký'
    },
    {
@@ -1714,8 +1714,8 @@ const cities = [
       'population': 6891,
       'area': 22.79,
       'altitude': 336,
-      'longitude': 13.211849,
-      'latitude': 49.711455,
+      'longitude': 13.211901020269,
+      'latitude': 49.711560287657,
       'region': 'Plzeňský'
    },
    {
@@ -1723,8 +1723,8 @@ const cities = [
       'population': 6882,
       'area': 9.55,
       'altitude': 385,
-      'longitude': 13.902681,
-      'latitude': 49.835973,
+      'longitude': 13.902738643216,
+      'latitude': 49.836060857067,
       'region': 'Středočeský'
    },
    {
@@ -1732,8 +1732,8 @@ const cities = [
       'population': 6848,
       'area': 36.34,
       'altitude': 398,
-      'longitude': 14.175129,
-      'latitude': 49.147892,
+      'longitude': 14.175148006577,
+      'latitude': 49.147976092242,
       'region': 'Jihočeský'
    },
    {
@@ -1741,8 +1741,8 @@ const cities = [
       'population': 6830,
       'area': 20.00,
       'altitude': 405,
-      'longitude': 14.718615,
-      'latitude': 49.259935,
+      'longitude': 14.71863867571,
+      'latitude': 49.260006346187,
       'region': 'Jihočeský'
    },
    {
@@ -1750,8 +1750,8 @@ const cities = [
       'population': 6799,
       'area': 36.47,
       'altitude': 321,
-      'longitude': 14.426639,
-      'latitude': 49.660573,
+      'longitude': 14.426685295646,
+      'latitude': 49.660649523688,
       'region': 'Středočeský'
    },
    {
@@ -1759,8 +1759,8 @@ const cities = [
       'population': 6669,
       'area': 51.01,
       'altitude': 330,
-      'longitude': 16.573573,
-      'latitude': 49.547091,
+      'longitude': 16.573608242859,
+      'latitude': 49.547116840883,
       'region': 'Jihomoravský'
    },
    {
@@ -1768,8 +1768,8 @@ const cities = [
       'population': 6645,
       'area': 25.41,
       'altitude': 345,
-      'longitude': 13.333499,
-      'latitude': 49.572982,
+      'longitude': 13.333542808445,
+      'latitude': 49.573084901444,
       'region': 'Plzeňský'
    },
    {
@@ -1777,26 +1777,26 @@ const cities = [
       'population': 6601,
       'area': 19.37,
       'altitude': 233,
-      'longitude': 18.004720,
-      'latitude': 49.932034,
-      'region': '#ODKAZ!'
+      'longitude': 18.004772215608,
+      'latitude': 49.932024489233,
+      'region': 'Moravskoslezský'
    },
    {
       'name': 'Staré Město (okres Uherské Hradiště)',
       'population': 6552,
       'area': 20.83,
       'altitude': 205,
-      'longitude': 17.433379,
-      'latitude': 49.075150,
-      'region': 'Olomoucký'
+      'longitude': 17.433385613484,
+      'latitude': 49.075157294006,
+      'region': 'Zlínský'
    },
    {
       'name': 'Holice',
       'population': 6542,
       'area': 19.65,
       'altitude': 244,
-      'longitude': 15.985900,
-      'latitude': 50.066012,
+      'longitude': 15.985965854452,
+      'latitude': 50.066050453806,
       'region': 'Pardubický'
    },
    {
@@ -1804,8 +1804,8 @@ const cities = [
       'population': 6537,
       'area': 81.33,
       'altitude': 514,
-      'longitude': 12.517468,
-      'latitude': 50.323723,
+      'longitude': 12.517556147716,
+      'latitude': 50.323842588747,
       'region': 'Karlovarský'
    },
    {
@@ -1813,17 +1813,17 @@ const cities = [
       'population': 6533,
       'area': 32.12,
       'altitude': 191,
-      'longitude': 17.463739,
-      'latitude': 49.316894,
-      'region': 'Olomoucký'
+      'longitude': 17.463758712343,
+      'latitude': 49.316900046515,
+      'region': 'Zlínský'
    },
    {
       'name': 'Dobruška',
       'population': 6518,
       'area': 34.44,
       'altitude': 287,
-      'longitude': 16.160013,
-      'latitude': 50.292014,
+      'longitude': 16.160091697745,
+      'latitude': 50.292047387909,
       'region': 'Královéhradecký'
    },
    {
@@ -1831,8 +1831,8 @@ const cities = [
       'population': 6510,
       'area': 31.18,
       'altitude': 230,
-      'longitude': 17.001906,
-      'latitude': 49.148956,
+      'longitude': 17.001917706954,
+      'latitude': 49.148973571179,
       'region': 'Jihomoravský'
    },
    {
@@ -1840,26 +1840,26 @@ const cities = [
       'population': 6477,
       'area': 16.63,
       'altitude': 255,
-      'longitude': 18.376065,
-      'latitude': 49.793152,
-      'region': '#NENÍ_K_DISPOZICI'
+      'longitude': 18.376108072077,
+      'latitude': 49.793134259402,
+      'region': 'Moravskoslezský'
    },
    {
       'name': 'Rosice',
       'population': 6466,
       'area': 12.74,
       'altitude': 326,
-      'longitude': 15.951272,
-      'latitude': 49.922261,
-      'region': 'Pardubický'
+      'longitude': 16.387885945617,
+      'latitude': 49.1823520088,
+      'region': 'Jihomoravský'
    },
    {
       'name': 'Letohrad',
       'population': 6377,
       'area': 23.55,
       'altitude': 372,
-      'longitude': 16.498785,
-      'latitude': 50.035802,
+      'longitude': 16.498848119659,
+      'latitude': 50.035827763428,
       'region': 'Pardubický'
    },
    {
@@ -1867,8 +1867,8 @@ const cities = [
       'population': 6371,
       'area': 43.6,
       'altitude': 440,
-      'longitude': 13.881759,
-      'latitude': 49.424887,
+      'longitude': 13.881793989077,
+      'latitude': 49.424977027305,
       'region': 'Jihočeský'
    },
    {
@@ -1876,8 +1876,8 @@ const cities = [
       'population': 6361,
       'area': 15.48,
       'altitude': 280,
-      'longitude': 14.724736,
-      'latitude': 50.658689,
+      'longitude': 14.724839569219,
+      'latitude': 50.658755425527,
       'region': 'Liberecký'
    },
    {
@@ -1885,8 +1885,8 @@ const cities = [
       'population': 6335,
       'area': 42.08,
       'altitude': 400,
-      'longitude': 15.403934,
-      'latitude': 49.668009,
+      'longitude': 15.403979061829,
+      'latitude': 49.668062440319,
       'region': 'Vysočina'
    },
    {
@@ -1894,8 +1894,8 @@ const cities = [
       'population': 6317,
       'area': 29.57,
       'altitude': 407,
-      'longitude': 14.697336,
-      'latitude': 49.184297,
+      'longitude': 14.697355580068,
+      'latitude': 49.184368900539,
       'region': 'Jihočeský'
    },
    {
@@ -1903,8 +1903,8 @@ const cities = [
       'population': 6260,
       'area': 27.46,
       'altitude': 295,
-      'longitude': 14.968836,
-      'latitude': 50.816926,
+      'longitude': 14.968948444345,
+      'latitude': 50.81698593906,
       'region': 'Liberecký'
    },
    {
@@ -1912,8 +1912,8 @@ const cities = [
       'population': 6248,
       'area': 60.15,
       'altitude': 331,
-      'longitude': 13.411917,
-      'latitude': 50.229368,
+      'longitude': 13.411998129955,
+      'latitude': 50.229466858401,
       'region': 'Ústecký'
    },
    {
@@ -1921,8 +1921,8 @@ const cities = [
       'population': 6231,
       'area': 22.58,
       'altitude': 200,
-      'longitude': 17.090042,
-      'latitude': 48.916939,
+      'longitude': 17.090040442473,
+      'latitude': 48.916955312083,
       'region': 'Jihomoravský'
    },
    {
@@ -1930,17 +1930,17 @@ const cities = [
       'population': 6227,
       'area': 33.66,
       'altitude': 380,
-      'longitude': 17.873488,
-      'latitude': 49.087987,
-      'region': 'Olomoucký'
+      'longitude': 17.873493344939,
+      'latitude': 49.087983788408,
+      'region': 'Zlínský'
    },
    {
       'name': 'Odolena Voda',
       'population': 6163,
       'area': 11.24,
       'altitude': 248,
-      'longitude': 14.410781,
-      'latitude': 50.233412,
+      'longitude': 14.410860235991,
+      'latitude': 50.233487444448,
       'region': 'Středočeský'
    },
    {
@@ -1948,17 +1948,17 @@ const cities = [
       'population': 6128,
       'area': 35.32,
       'altitude': 352,
-      'longitude': 16.285292,
-      'latitude': 50.322125,
-      'region': 'Královéhradecký'
+      'longitude': 13.293116667157,
+      'latitude': 49.654927628789,
+      'region': 'Plzeňský'
    },
    {
       'name': 'Kostelec nad Orlicí',
       'population': 6090,
       'area': 26.20,
       'altitude': 273,
-      'longitude': 16.213185,
-      'latitude': 50.122668,
+      'longitude': 16.213254179601,
+      'latitude': 50.122700875844,
       'region': 'Královéhradecký'
    },
    {
@@ -1966,8 +1966,8 @@ const cities = [
       'population': 6060,
       'area': 26.50,
       'altitude': 385,
-      'longitude': 14.261758,
-      'latitude': 49.866497,
+      'longitude': 14.261816920552,
+      'latitude': 49.866576610398,
       'region': 'Středočeský'
    },
    {
@@ -1975,8 +1975,8 @@ const cities = [
       'population': 6032,
       'area': 22.04,
       'altitude': 364,
-      'longitude': 16.182304,
-      'latitude': 50.479685,
+      'longitude': 16.182393097246,
+      'latitude': 50.47971690936,
       'region': 'Královéhradecký'
    },
    {
@@ -1984,8 +1984,8 @@ const cities = [
       'population': 6001,
       'area': 52.46,
       'altitude': 253,
-      'longitude': 16.077697,
-      'latitude': 50.151364,
+      'longitude': 16.077768029523,
+      'latitude': 50.151400055455,
       'region': 'Královéhradecký'
    },
    {
@@ -1993,8 +1993,8 @@ const cities = [
       'population': 5998,
       'area': 24.53,
       'altitude': 215,
-      'longitude': 16.737621,
-      'latitude': 48.940848,
+      'longitude': 16.73762221643,
+      'latitude': 48.940871942774,
       'region': 'Jihomoravský'
    },
    {
@@ -2002,8 +2002,8 @@ const cities = [
       'population': 5958,
       'area': 12.45,
       'altitude': 455,
-      'longitude': 15.305853,
-      'latitude': 50.737354,
+      'longitude': 15.305960246529,
+      'latitude': 50.737406262188,
       'region': 'Liberecký'
    },
    {
@@ -2011,8 +2011,8 @@ const cities = [
       'population': 5918,
       'area': 16.91,
       'altitude': 420,
-      'longitude': 16.467380,
-      'latitude': 50.086014,
+      'longitude': 16.467445454592,
+      'latitude': 50.086040466117,
       'region': 'Pardubický'
    },
    {
@@ -2020,8 +2020,8 @@ const cities = [
       'population': 5883,
       'area': 22.52,
       'altitude': 305,
-      'longitude': 15.254077,
-      'latitude': 50.642741,
+      'longitude': 15.254178818148,
+      'latitude': 50.642794278444,
       'region': 'Liberecký'
    },
    {
@@ -2029,8 +2029,8 @@ const cities = [
       'population': 5837,
       'area': 31.09,
       'altitude': 200,
-      'longitude': 17.302067,
-      'latitude': 49.351794,
+      'longitude': 17.302089031356,
+      'latitude': 49.351803869882,
       'region': 'Olomoucký'
    },
    {
@@ -2038,8 +2038,8 @@ const cities = [
       'population': 5721,
       'area': 47.47,
       'altitude': 340,
-      'longitude': 14.452585,
-      'latitude': 51.003688,
+      'longitude': 14.452709270766,
+      'latitude': 51.003759354628,
       'region': 'Ústecký'
    },
    {
@@ -2047,8 +2047,8 @@ const cities = [
       'population': 5706,
       'area': 21.01,
       'altitude': 243,
-      'longitude': 15.992231,
-      'latitude': 50.200969,
+      'longitude': 15.9923048313,
+      'latitude': 50.201006677785,
       'region': 'Královéhradecký'
    },
    {
@@ -2056,8 +2056,8 @@ const cities = [
       'population': 5667,
       'area': 25.75,
       'altitude': 281,
-      'longitude': 14.589834,
-      'latitude': 49.833477,
+      'longitude': 14.589890530837,
+      'latitude': 49.833548574825,
       'region': 'Středočeský'
    },
    {
@@ -2065,8 +2065,8 @@ const cities = [
       'population': 5648,
       'area': 23.05,
       'altitude': 241,
-      'longitude': 16.882146,
-      'latitude': 49.201282,
+      'longitude': 16.882160941908,
+      'latitude': 49.201302411488,
       'region': 'Jihomoravský'
    },
    {
@@ -2074,8 +2074,8 @@ const cities = [
       'population': 5625,
       'area': 46.99,
       'altitude': 545,
-      'longitude': 15.482114,
-      'latitude': 49.290918,
+      'longitude': 15.482137396507,
+      'latitude': 49.29097119215,
       'region': 'Vysočina'
    },
    {
@@ -2083,8 +2083,8 @@ const cities = [
       'population': 5606,
       'area': 49.56,
       'altitude': 255,
-      'longitude': 16.311694,
-      'latitude': 49.048932,
+      'longitude': 16.311702605794,
+      'latitude': 49.048965931678,
       'region': 'Jihomoravský'
    },
    {
@@ -2092,17 +2092,17 @@ const cities = [
       'population': 5593,
       'area': 55.06,
       'altitude': 480,
-      'longitude': 17.749410,
-      'latitude': 49.774452,
-      'region': '#ODKAZ!'
+      'longitude': 17.749454126304,
+      'latitude': 49.774449841863,
+      'region': 'Moravskoslezský'
    },
    {
       'name': 'Nové Strašecí',
       'population': 5573,
       'area': 13.32,
       'altitude': 470,
-      'longitude': 13.900428,
-      'latitude': 50.152718,
+      'longitude': 13.900503723787,
+      'latitude': 50.152805461272,
       'region': 'Středočeský'
    },
    {
@@ -2110,8 +2110,8 @@ const cities = [
       'population': 5561,
       'area': 21.44,
       'altitude': 223,
-      'longitude': 15.460262,
-      'latitude': 50.154404,
+      'longitude': 15.460334603393,
+      'latitude': 50.154454367424,
       'region': 'Královéhradecký'
    },
    {
@@ -2119,8 +2119,8 @@ const cities = [
       'population': 5486,
       'area': 25.57,
       'altitude': 478,
-      'longitude': 15.373410,
-      'latitude': 50.530626,
+      'longitude': 15.373504846757,
+      'latitude': 50.53067653642,
       'region': 'Liberecký'
    },
    {
@@ -2128,17 +2128,17 @@ const cities = [
       'population': 5484,
       'area': 68.49,
       'altitude': 320,
-      'longitude': 17.903193,
-      'latitude': 49.712377,
-      'region': '#ODKAZ!'
+      'longitude': 17.903232874658,
+      'latitude': 49.712371239231,
+      'region': 'Moravskoslezský'
    },
    {
       'name': 'Úpice',
       'population': 5468,
       'area': 15.31,
       'altitude': 352,
-      'longitude': 16.016067,
-      'latitude': 50.512375,
+      'longitude': 16.016159265275,
+      'latitude': 50.512410991863,
       'region': 'Královéhradecký'
    },
    {
@@ -2146,44 +2146,44 @@ const cities = [
       'population': 5457,
       'area': 56.27,
       'altitude': 330,
-      'longitude': 18.023095,
-      'latitude': 49.090878,
-      'region': 'Olomoucký'
+      'longitude': 18.023099545168,
+      'latitude': 49.090871365095,
+      'region': 'Zlínský'
    },
    {
       'name': 'Kunovice',
       'population': 5452,
       'area': 28.55,
       'altitude': 198,
-      'longitude': 17.809882,
-      'latitude': 49.444245,
-      'region': 'Olomoucký'
+      'longitude': 17.470110150223,
+      'latitude': 49.044995756546,
+      'region': 'Zlínský'
    },
    {
       'name': 'Zubří',
       'population': 5450,
       'area': 28.39,
       'altitude': 378,
-      'longitude': 16.123687,
-      'latitude': 49.571109,
-      'region': 'Vysočina'
+      'longitude': 18.092510514603,
+      'latitude': 49.466018567307,
+      'region': 'Zlínský'
    },
    {
       'name': 'Hradec nad Moravicí',
       'population': 5434,
       'area': 43.96,
       'altitude': 277,
-      'longitude': 17.875817,
-      'latitude': 49.871011,
-      'region': '#ODKAZ!'
+      'longitude': 17.875865633487,
+      'latitude': 49.871004700938,
+      'region': 'Moravskoslezský'
    },
    {
       'name': 'Strážnice (okres Hodonín)',
       'population': 5390,
       'area': 31.41,
       'altitude': 177,
-      'longitude': 17.316803,
-      'latitude': 48.901019,
+      'longitude': 17.316799472243,
+      'latitude': 48.901029956488,
       'region': 'Jihomoravský'
    },
    {
@@ -2191,8 +2191,8 @@ const cities = [
       'population': 5353,
       'area': 91.11,
       'altitude': 394,
-      'longitude': 14.431786,
-      'latitude': 49.051047,
+      'longitude': 14.434283204502,
+      'latitude': 49.052328810727,
       'region': 'Jihočeský'
    },
    {
@@ -2200,8 +2200,8 @@ const cities = [
       'population': 5352,
       'area': 13.86,
       'altitude': 451,
-      'longitude': 15.506529,
-      'latitude': 50.608897,
+      'longitude': 15.506628032335,
+      'latitude': 50.608944916275,
       'region': 'Liberecký'
    },
    {
@@ -2209,8 +2209,8 @@ const cities = [
       'population': 5348,
       'area': 9.54,
       'altitude': 448,
-      'longitude': 13.963451,
-      'latitude': 50.146307,
+      'longitude': 13.96352591847,
+      'latitude': 50.146392291736,
       'region': 'Středočeský'
    },
    {
@@ -2218,26 +2218,26 @@ const cities = [
       'population': 5312,
       'area': 43.05,
       'altitude': 181,
-      'longitude': 17.537845,
-      'latitude': 49.176566,
-      'region': 'Olomoucký'
+      'longitude': 16.524457138925,
+      'latitude': 48.981217409611,
+      'region': 'Jihomoravský'
    },
    {
       'name': 'Jablunkov',
       'population': 5284,
       'area': 10.39,
       'altitude': 386,
-      'longitude': 18.764583,
-      'latitude': 49.576717,
-      'region': '#NENÍ_K_DISPOZICI'
+      'longitude': 18.764611504976,
+      'latitude': 49.576691347506,
+      'region': 'Moravskoslezský'
    },
    {
       'name': 'Planá',
       'population': 5278,
       'area': 62.47,
       'altitude': 506,
-      'longitude': 12.743783,
-      'latitude': 49.868156,
+      'longitude': 12.743844417597,
+      'latitude': 49.86827193037,
       'region': 'Plzeňský'
    },
    {
@@ -2245,8 +2245,8 @@ const cities = [
       'population': 5263,
       'area': 10.05,
       'altitude': 204,
-      'longitude': 16.614412,
-      'latitude': 49.127891,
+      'longitude': 16.61442392832,
+      'latitude': 49.127917307254,
       'region': 'Jihomoravský'
    },
    {
@@ -2254,8 +2254,8 @@ const cities = [
       'population': 5208,
       'area': 36.87,
       'altitude': 558,
-      'longitude': 12.807581,
-      'latitude': 50.138632,
+      'longitude': 12.807657708289,
+      'latitude': 50.138745037063,
       'region': 'Karlovarský'
    },
    {
@@ -2263,8 +2263,8 @@ const cities = [
       'population': 5204,
       'area': 18.37,
       'altitude': 343,
-      'longitude': 13.473502,
-      'latitude': 49.697678,
+      'longitude': 13.473552493178,
+      'latitude': 49.697776983968,
       'region': 'Plzeňský'
    },
    {
@@ -2272,8 +2272,8 @@ const cities = [
       'population': 5187,
       'area': 52.78,
       'altitude': 458,
-      'longitude': 14.639240,
-      'latitude': 48.842315,
+      'longitude': 14.639241403372,
+      'latitude': 48.842389190234,
       'region': 'Jihočeský'
    },
    {
@@ -2281,8 +2281,8 @@ const cities = [
       'population': 5187,
       'area': 25.76,
       'altitude': 442,
-      'longitude': 12.351739,
-      'latitude': 50.120331,
+      'longitude': 12.35181521379,
+      'latitude': 50.120455065226,
       'region': 'Karlovarský'
    },
    {
@@ -2290,8 +2290,8 @@ const cities = [
       'population': 5167,
       'area': 47.30,
       'altitude': 476,
-      'longitude': 16.225853,
-      'latitude': 49.288627,
+      'longitude': 16.225874100039,
+      'latitude': 49.28866258252,
       'region': 'Vysočina'
    },
    {
@@ -2299,8 +2299,8 @@ const cities = [
       'population': 5147,
       'area': 37.77,
       'altitude': 490,
-      'longitude': 15.718810,
-      'latitude': 49.486998,
+      'longitude': 15.718844195485,
+      'latitude': 49.48704494622,
       'region': 'Vysočina'
    },
    {
@@ -2308,8 +2308,8 @@ const cities = [
       'population': 5140,
       'area': 24.86,
       'altitude': 514,
-      'longitude': 15.452753,
-      'latitude': 49.184176,
+      'longitude': 15.452771068011,
+      'latitude': 49.184229941699,
       'region': 'Vysočina'
    },
    {
@@ -2317,8 +2317,8 @@ const cities = [
       'population': 5113,
       'area': 43.04,
       'altitude': 427,
-      'longitude': 13.701002,
-      'latitude': 49.320687,
+      'longitude': 13.701031041622,
+      'latitude': 49.320781810531,
       'region': 'Plzeňský'
    },
    {
@@ -2326,8 +2326,8 @@ const cities = [
       'population': 5090,
       'area': 8.20,
       'altitude': 378,
-      'longitude': 14.234346,
-      'latitude': 50.035025,
+      'longitude': 14.234414258821,
+      'latitude': 50.035104791874,
       'region': 'Středočeský'
    },
    {
@@ -2335,8 +2335,8 @@ const cities = [
       'population': 5088,
       'area': 28.74,
       'altitude': 455,
-      'longitude': 13.039676,
-      'latitude': 49.390768,
+      'longitude': 13.03971039702,
+      'latitude': 49.390878184146,
       'region': 'Plzeňský'
    },
    {
@@ -2344,17 +2344,17 @@ const cities = [
       'population': 5081,
       'area': 74.95,
       'altitude': 266,
-      'longitude': 14.047821,
-      'latitude': 50.118998,
-      'region': 'Středočeský'
+      'longitude': 14.65562316455,
+      'latitude': 50.564781686941,
+      'region': 'Liberecký'
    },
    {
       'name': 'Holýšov',
       'population': 5075,
       'area': 29.32,
       'altitude': 357,
-      'longitude': 13.101293,
-      'latitude': 49.593612,
+      'longitude': 13.101338813306,
+      'latitude': 49.593719918694,
       'region': 'Plzeňský'
    },
    {
@@ -2362,8 +2362,8 @@ const cities = [
       'population': 5062,
       'area': 36.56,
       'altitude': 276,
-      'longitude': 14.103835,
-      'latitude': 50.760821,
+      'longitude': 14.103945726726,
+      'latitude': 50.760901305653,
       'region': 'Ústecký'
    },
    {
@@ -2371,8 +2371,8 @@ const cities = [
       'population': 5053,
       'area': 18.12,
       'altitude': 348,
-      'longitude': 13.394994,
-      'latitude': 49.815838,
+      'longitude': 13.395051407159,
+      'latitude': 49.815938878371,
       'region': 'Plzeňský'
    },
    {
@@ -2380,8 +2380,8 @@ const cities = [
       'population': 5028,
       'area': 38.77,
       'altitude': 301,
-      'longitude': 14.417672,
-      'latitude': 50.797805,
+      'longitude': 14.417784557033,
+      'latitude': 50.797877961013,
       'region': 'Ústecký'
    },
    {
@@ -2389,8 +2389,8 @@ const cities = [
       'population': 5022,
       'area': 35.40,
       'altitude': 410,
-      'longitude': 15.996549,
-      'latitude': 49.843469,
+      'longitude': 15.996602726521,
+      'latitude': 49.843507732223,
       'region': 'Pardubický'
    },
    {
@@ -2398,8 +2398,8 @@ const cities = [
       'population': 4967,
       'area': 27.01,
       'altitude': 224,
-      'longitude': 14.941488,
-      'latitude': 50.482306,
+      'longitude': 14.941580683763,
+      'latitude': 50.48236715403,
       'region': 'Středočeský'
    },
    {
@@ -2407,17 +2407,17 @@ const cities = [
       'population': 4955,
       'area': 33.00,
       'altitude': 253,
-      'longitude': 17.757473,
-      'latitude': 49.099823,
-      'region': 'Olomoucký'
+      'longitude': 17.757479338017,
+      'latitude': 49.0998226346,
+      'region': 'Zlínský'
    },
    {
       'name': 'Česká Skalice',
       'population': 4945,
       'area': 17.36,
       'altitude': 284,
-      'longitude': 16.042762,
-      'latitude': 50.394670,
+      'longitude': 16.042847327524,
+      'latitude': 50.394705559401,
       'region': 'Královéhradecký'
    },
    {
@@ -2425,8 +2425,8 @@ const cities = [
       'population': 4919,
       'area': 16.25,
       'altitude': 381,
-      'longitude': 14.493328,
-      'latitude': 49.895447,
+      'longitude': 14.493387704233,
+      'latitude': 49.895520876972,
       'region': 'Středočeský'
    },
    {
@@ -2434,8 +2434,8 @@ const cities = [
       'population': 4876,
       'area': 21.29,
       'altitude': 406,
-      'longitude': 14.468099,
-      'latitude': 49.295232,
+      'longitude': 14.468125123251,
+      'latitude': 49.295309165146,
       'region': 'Jihočeský'
    },
    {
@@ -2443,8 +2443,8 @@ const cities = [
       'population': 4839,
       'area': 71.31,
       'altitude': 376,
-      'longitude': 12.944049,
-      'latitude': 49.529648,
+      'longitude': 12.944091023187,
+      'latitude': 49.529759792748,
       'region': 'Plzeňský'
    },
    {
@@ -2452,8 +2452,8 @@ const cities = [
       'population': 4839,
       'area': 68.91,
       'altitude': 545,
-      'longitude': 17.383157,
-      'latitude': 50.120952,
+      'longitude': 17.383221772378,
+      'latitude': 50.120957199296,
       'region': 'Moravskoslezský'
    },
    {
@@ -2461,17 +2461,17 @@ const cities = [
       'population': 4839,
       'area': 26.95,
       'altitude': 405,
-      'longitude': 18.007600,
-      'latitude': 49.140637,
-      'region': 'Olomoucký'
+      'longitude': 18.007607874482,
+      'latitude': 49.140630604127,
+      'region': 'Zlínský'
    },
    {
       'name': 'Unhošť',
       'population': 4827,
       'area': 17.42,
       'altitude': 387,
-      'longitude': 14.130074,
-      'latitude': 50.085352,
+      'longitude': 14.130145953268,
+      'latitude': 50.085433861082,
       'region': 'Středočeský'
    },
    {
@@ -2479,17 +2479,17 @@ const cities = [
       'population': 4809,
       'area': 28.57,
       'altitude': 296,
-      'longitude': 17.854545,
-      'latitude': 49.222872,
-      'region': 'Olomoucký'
+      'longitude': 17.854557978828,
+      'latitude': 49.222868373919,
+      'region': 'Zlínský'
    },
    {
       'name': 'Ledeč nad Sázavou',
       'population': 4808,
       'area': 17.01,
       'altitude': 353,
-      'longitude': 15.277723,
-      'latitude': 49.695168,
+      'longitude': 15.277769503404,
+      'latitude': 49.695224253124,
       'region': 'Vysočina'
    },
    {
@@ -2497,8 +2497,8 @@ const cities = [
       'population': 4806,
       'area': 31.53,
       'altitude': 452,
-      'longitude': 13.143533,
-      'latitude': 49.293870,
+      'longitude': 13.143560977643,
+      'latitude': 49.293977787852,
       'region': 'Plzeňský'
    },
    {
@@ -2506,8 +2506,8 @@ const cities = [
       'population': 4771,
       'area': 10.76,
       'altitude': 194,
-      'longitude': 15.031510,
-      'latitude': 50.090797,
+      'longitude': 15.030238635087,
+      'latitude': 50.090487305541,
       'region': 'Středočeský'
    },
    {
@@ -2515,8 +2515,8 @@ const cities = [
       'population': 4755,
       'area': 11.39,
       'altitude': 243,
-      'longitude': 14.929998,
-      'latitude': 50.438500,
+      'longitude': 14.930087921482,
+      'latitude': 50.438562010198,
       'region': 'Středočeský'
    },
    {
@@ -2524,17 +2524,17 @@ const cities = [
       'population': 4749,
       'area': 19,
       'altitude': 195,
-      'longitude': 17.364510,
-      'latitude': 49.356442,
-      'region': 'Olomoucký'
+      'longitude': 17.364532053366,
+      'latitude': 49.356449955938,
+      'region': 'Zlínský'
    },
    {
       'name': 'Oslavany',
       'population': 4746,
       'area': 18.71,
       'altitude': 230,
-      'longitude': 16.336529,
-      'latitude': 49.123347,
+      'longitude': 16.336541091101,
+      'latitude': 49.123380208518,
       'region': 'Jihomoravský'
    },
    {
@@ -2542,8 +2542,8 @@ const cities = [
       'population': 4723,
       'area': 18.62,
       'altitude': 365,
-      'longitude': 16.158486,
-      'latitude': 49.207264,
+      'longitude': 16.158503502674,
+      'latitude': 49.207301366068,
       'region': 'Vysočina'
    },
    {
@@ -2551,8 +2551,8 @@ const cities = [
       'population': 4721,
       'area': 14.34,
       'altitude': 280,
-      'longitude': 15.664924,
-      'latitude': 49.947071,
+      'longitude': 15.664983771248,
+      'latitude': 49.947117687117,
       'region': 'Pardubický'
    },
    {
@@ -2560,8 +2560,8 @@ const cities = [
       'population': 4714,
       'area': 63.21,
       'altitude': 301,
-      'longitude': 14.804182,
-      'latitude': 50.501213,
+      'longitude': 14.804180555556,
+      'latitude': 50.501213888889,
       'region': 'Středočeský'
    },
    {
@@ -2569,8 +2569,8 @@ const cities = [
       'population': 4709,
       'area': 16.37,
       'altitude': 344,
-      'longitude': 15.106059,
-      'latitude': 49.740104,
+      'longitude': 15.106108919976,
+      'latitude': 49.740164158514,
       'region': 'Středočeský'
    },
    {
@@ -2578,8 +2578,8 @@ const cities = [
       'population': 4687,
       'area': 61.45,
       'altitude': 383,
-      'longitude': 14.217175,
-      'latitude': 49.199486,
+      'longitude': 14.21719630313,
+      'latitude': 49.199569401436,
       'region': 'Jihočeský'
    },
    {
@@ -2587,8 +2587,8 @@ const cities = [
       'population': 4687,
       'area': 21.39,
       'altitude': 484,
-      'longitude': 12.550536,
-      'latitude': 50.182966,
+      'longitude': 12.550615081668,
+      'latitude': 50.183085358271,
       'region': 'Karlovarský'
    },
    {
@@ -2596,8 +2596,8 @@ const cities = [
       'population': 4686,
       'area': 14.36,
       'altitude': 512,
-      'longitude': 13.598699,
-      'latitude': 50.621154,
+      'longitude': 13.598802095006,
+      'latitude': 50.621246387357,
       'region': 'Ústecký'
    },
    {
@@ -2605,8 +2605,8 @@ const cities = [
       'population': 4644,
       'area': 46.49,
       'altitude': 193,
-      'longitude': 13.702908,
-      'latitude': 50.359789,
+      'longitude': 13.702996227431,
+      'latitude': 50.359880648319,
       'region': 'Ústecký'
    },
    {
@@ -2614,8 +2614,8 @@ const cities = [
       'population': 4604,
       'area': 35.86,
       'altitude': 615,
-      'longitude': 15.001679,
-      'latitude': 49.470763,
+      'longitude': 15.001713769033,
+      'latitude': 49.470826885963,
       'region': 'Vysočina'
    },
    {
@@ -2623,8 +2623,8 @@ const cities = [
       'population': 4596,
       'area': 42.37,
       'altitude': 307,
-      'longitude': 13.685855,
-      'latitude': 50.622711,
+      'longitude': 13.68595786877,
+      'latitude': 50.622801284893,
       'region': 'Ústecký'
    },
    {
@@ -2632,8 +2632,8 @@ const cities = [
       'population': 4590,
       'area': 23.31,
       'altitude': 431,
-      'longitude': 12.530270,
-      'latitude': 50.118926,
+      'longitude': 12.530346195097,
+      'latitude': 50.119045820294,
       'region': 'Karlovarský'
    },
    {
@@ -2641,8 +2641,8 @@ const cities = [
       'population': 4530,
       'area': 21.03,
       'altitude': 320,
-      'longitude': 16.290675,
-      'latitude': 50.117560,
+      'longitude': 16.290742760724,
+      'latitude': 50.117591352648,
       'region': 'Královéhradecký'
    },
    {
@@ -2650,8 +2650,8 @@ const cities = [
       'population': 4513,
       'area': 44.40,
       'altitude': 183,
-      'longitude': 17.210996,
-      'latitude': 48.975230,
+      'longitude': 17.21099802362,
+      'latitude': 48.975242894127,
       'region': 'Jihomoravský'
    },
    {
@@ -2659,8 +2659,8 @@ const cities = [
       'population': 4508,
       'area': 93.55,
       'altitude': 505,
-      'longitude': 14.608379,
-      'latitude': 49.015970,
+      'longitude': 14.6083897669,
+      'latitude': 49.01604452487,
       'region': 'Jihočeský'
    },
    {
@@ -2668,8 +2668,8 @@ const cities = [
       'population': 4495,
       'area': 36.42,
       'altitude': 483,
-      'longitude': 14.638085,
-      'latitude': 49.640127,
+      'longitude': 14.63813032544,
+      'latitude': 49.640199066405,
       'region': 'Středočeský'
    },
    {
@@ -2677,8 +2677,8 @@ const cities = [
       'population': 4479,
       'area': 45.09,
       'altitude': 357,
-      'longitude': 14.632975,
-      'latitude': 50.776678,
+      'longitude': 14.633085701023,
+      'latitude': 50.776745075033,
       'region': 'Liberecký'
    },
    {
@@ -2686,17 +2686,17 @@ const cities = [
       'population': 4469,
       'area': 14.64,
       'altitude': 252,
-      'longitude': 18.125853,
-      'latitude': 49.788094,
-      'region': '#NENÍ_K_DISPOZICI'
+      'longitude': 18.125896003286,
+      'latitude': 49.788082173192,
+      'region': 'Moravskoslezský'
    },
    {
       'name': 'Bystřice (okres Benešov)',
       'population': 4456,
       'area': 63.36,
       'altitude': 365,
-      'longitude': 14.667401,
-      'latitude': 49.732133,
+      'longitude': 14.667451342381,
+      'latitude': 49.732203439291,
       'region': 'Středočeský'
    },
    {
@@ -2704,17 +2704,17 @@ const cities = [
       'population': 4429,
       'area': 3.78,
       'altitude': 258,
-      'longitude': 15.408913,
-      'latitude': 49.857817,
-      'region': 'Středočeský'
+      'longitude': 16.658570650287,
+      'latitude': 49.30052629923,
+      'region': 'Jihomoravský'
    },
    {
       'name': 'Bor (okres Tachov)',
       'population': 4403,
       'area': 116.49,
       'altitude': 472,
-      'longitude': 12.775164,
-      'latitude': 49.711595,
+      'longitude': 12.775216037849,
+      'latitude': 49.711710233218,
       'region': 'Plzeňský'
    },
    {
@@ -2722,17 +2722,17 @@ const cities = [
       'population': 4310,
       'area': 41.87,
       'altitude': 272,
-      'longitude': 17.814872,
-      'latitude': 49.038646,
-      'region': 'Olomoucký'
+      'longitude': 17.814875213239,
+      'latitude': 49.038644054761,
+      'region': 'Zlínský'
    },
    {
       'name': 'Bzenec',
       'population': 4303,
       'area': 40.34,
       'altitude': 183,
-      'longitude': 17.266852,
-      'latitude': 48.973364,
+      'longitude': 17.266852936959,
+      'latitude': 48.97337624906,
       'region': 'Jihomoravský'
    },
    {
@@ -2740,8 +2740,8 @@ const cities = [
       'population': 4296,
       'area': 21.42,
       'altitude': 395,
-      'longitude': 14.701474,
-      'latitude': 49.354438,
+      'longitude': 14.701502824093,
+      'latitude': 49.354509187053,
       'region': 'Jihočeský'
    },
    {
@@ -2749,8 +2749,8 @@ const cities = [
       'population': 4265,
       'area': 8.07,
       'altitude': 351,
-      'longitude': 15.723336,
-      'latitude': 50.540664,
+      'longitude': 15.723429505909,
+      'latitude': 50.540706652015,
       'region': 'Královéhradecký'
    },
    {
@@ -2758,17 +2758,17 @@ const cities = [
       'population': 4249,
       'area': 28.39,
       'altitude': 222,
-      'longitude': 17.526679,
-      'latitude': 48.988121,
-      'region': 'Olomoucký'
+      'longitude': 17.526680219708,
+      'latitude': 48.988126434505,
+      'region': 'Zlínský'
    },
    {
       'name': 'Chlumec (okres Ústí nad Labem)',
       'population': 4237,
       'area': 12.87,
       'altitude': 235,
-      'longitude': 13.939638,
-      'latitude': 50.699720,
+      'longitude': 13.939745543971,
+      'latitude': 50.699804397398,
       'region': 'Ústecký'
    },
    {
@@ -2776,8 +2776,8 @@ const cities = [
       'population': 4203,
       'area': 53.01,
       'altitude': 519,
-      'longitude': 13.864301,
-      'latitude': 49.601956,
+      'longitude': 13.864345146533,
+      'latitude': 49.602046222311,
       'region': 'Středočeský'
    },
    {
@@ -2785,17 +2785,17 @@ const cities = [
       'population': 4178,
       'area': 26.53,
       'altitude': 178,
-      'longitude': 17.389845,
-      'latitude': 48.985559,
-      'region': 'Olomoucký'
+      'longitude': 17.389845788707,
+      'latitude': 48.985567674246,
+      'region': 'Zlínský'
    },
    {
       'name': 'Kostelec nad Labem',
       'population': 4156,
       'area': 15.55,
       'altitude': 172,
-      'longitude': 14.585520,
-      'latitude': 50.226533,
+      'longitude': 14.585598774844,
+      'latitude': 50.226603627713,
       'region': 'Středočeský'
    },
    {
@@ -2803,17 +2803,17 @@ const cities = [
       'population': 4149,
       'area': 10.27,
       'altitude': 265,
-      'longitude': 18.222096,
-      'latitude': 49.700098,
-      'region': '#NENÍ_K_DISPOZICI'
+      'longitude': 18.22213385715,
+      'latitude': 49.700084988917,
+      'region': 'Moravskoslezský'
    },
    {
       'name': 'Borovany',
       'population': 4137,
       'area': 42.33,
       'altitude': 522,
-      'longitude': 14.392464,
-      'latitude': 49.342995,
+      'longitude': 14.642272395582,
+      'latitude': 48.898675230282,
       'region': 'Jihočeský'
    },
    {
@@ -2821,8 +2821,8 @@ const cities = [
       'population': 4125,
       'area': 13.53,
       'altitude': 418,
-      'longitude': 12.784217,
-      'latitude': 50.270917,
+      'longitude': 12.784301710647,
+      'latitude': 50.271030375945,
       'region': 'Karlovarský'
    },
    {
@@ -2830,8 +2830,8 @@ const cities = [
       'population': 4114,
       'area': 28.96,
       'altitude': 387,
-      'longitude': 13.540092,
-      'latitude': 49.582196,
+      'longitude': 13.540135487589,
+      'latitude': 49.582293810018,
       'region': 'Plzeňský'
    },
    {
@@ -2839,8 +2839,8 @@ const cities = [
       'population': 4102,
       'area': 15.61,
       'altitude': 268,
-      'longitude': 15.813769,
-      'latitude': 49.921097,
+      'longitude': 15.813826736565,
+      'latitude': 49.921139960832,
       'region': 'Pardubický'
    },
    {
@@ -2848,8 +2848,8 @@ const cities = [
       'population': 4091,
       'area': 14.55,
       'altitude': 367,
-      'longitude': 13.355579,
-      'latitude': 49.840122,
+      'longitude': 13.355637956593,
+      'latitude': 49.840223429507,
       'region': 'Plzeňský'
    },
    {
@@ -2857,8 +2857,8 @@ const cities = [
       'population': 4062,
       'area': 22.15,
       'altitude': 225,
-      'longitude': 15.852698,
-      'latitude': 50.066507,
+      'longitude': 15.852764757724,
+      'latitude': 50.066548727454,
       'region': 'Pardubický'
    },
    {
@@ -2866,8 +2866,8 @@ const cities = [
       'population': 4047,
       'area': 13.81,
       'altitude': 268,
-      'longitude': 13.977466,
-      'latitude': 49.912073,
+      'longitude': 13.977528115162,
+      'latitude': 49.912159387482,
       'region': 'Středočeský'
    },
    {
@@ -2875,8 +2875,8 @@ const cities = [
       'population': 4032,
       'area': 51.37,
       'altitude': 422,
-      'longitude': 15.893306,
-      'latitude': 49.094083,
+      'longitude': 15.893317828738,
+      'latitude': 49.094127133927,
       'region': 'Vysočina'
    },
    {
@@ -2884,8 +2884,8 @@ const cities = [
       'population': 4002,
       'area': 52.78,
       'altitude': 550,
-      'longitude': 16.760541,
-      'latitude': 50.083842,
+      'longitude': 16.760606276532,
+      'latitude': 50.083862294469,
       'region': 'Pardubický'
    },
    {
@@ -2893,8 +2893,8 @@ const cities = [
       'population': 3964,
       'area': 8.32,
       'altitude': 361,
-      'longitude': 14.709069,
-      'latitude': 49.936016,
+      'longitude': 14.709130720987,
+      'latitude': 49.936084569575,
       'region': 'Středočeský'
    },
    {
@@ -2902,8 +2902,8 @@ const cities = [
       'population': 3961,
       'area': 24.41,
       'altitude': 441,
-      'longitude': 16.233504,
-      'latitude': 50.536871,
+      'longitude': 16.233596891027,
+      'latitude': 50.536901799794,
       'region': 'Královéhradecký'
    },
    {
@@ -2911,8 +2911,8 @@ const cities = [
       'population': 3958,
       'area': 32.49,
       'altitude': 470,
-      'longitude': 15.569936,
-      'latitude': 49.018986,
+      'longitude': 15.569944859592,
+      'latitude': 49.019037310782,
       'region': 'Vysočina'
    },
    {
@@ -2920,17 +2920,17 @@ const cities = [
       'population': 3957,
       'area': 35.32,
       'altitude': 475,
-      'longitude': 16.168585,
-      'latitude': 50.373646,
-      'region': 'Královéhradecký'
+      'longitude': 15.738585389384,
+      'latitude': 49.576885241921,
+      'region': 'Vysočina'
    },
    {
       'name': 'Rajhrad',
       'population': 3956,
       'area': 9.49,
       'altitude': 190,
-      'longitude': 16.603877,
-      'latitude': 49.090212,
+      'longitude': 16.603886389526,
+      'latitude': 49.090238953107,
       'region': 'Jihomoravský'
    },
    {
@@ -2938,17 +2938,17 @@ const cities = [
       'population': 3939,
       'area': 14.81,
       'altitude': 231,
-      'longitude': 18.108352,
-      'latitude': 49.921014,
-      'region': '#ODKAZ!'
+      'longitude': 18.108402450994,
+      'latitude': 49.921002273849,
+      'region': 'Moravskoslezský'
    },
    {
       'name': 'Kamenický Šenov',
       'population': 3923,
       'area': 10.47,
       'altitude': 525,
-      'longitude': 14.472868,
-      'latitude': 50.773590,
+      'longitude': 14.472978263424,
+      'latitude': 50.773661412598,
       'region': 'Liberecký'
    },
    {
@@ -2956,17 +2956,17 @@ const cities = [
       'population': 3830,
       'area': 11.80,
       'altitude': 256,
-      'longitude': 18.290369,
-      'latitude': 49.731788,
-      'region': '#NENÍ_K_DISPOZICI'
+      'longitude': 18.290408503542,
+      'latitude': 49.73177254678,
+      'region': 'Moravskoslezský'
    },
    {
       'name': 'Velké Bílovice',
       'population': 3818,
       'area': 25.73,
       'altitude': 176,
-      'longitude': 16.892274,
-      'latitude': 48.849290,
+      'longitude': 16.892269350624,
+      'latitude': 48.849310717964,
       'region': 'Jihomoravský'
    },
    {
@@ -2974,8 +2974,8 @@ const cities = [
       'population': 3796,
       'area': 13.24,
       'altitude': 548,
-      'longitude': 14.462517,
-      'latitude': 48.829486,
+      'longitude': 14.462517439026,
+      'latitude': 48.829564866244,
       'region': 'Jihočeský'
    },
    {
@@ -2983,8 +2983,8 @@ const cities = [
       'population': 3773,
       'area': 17.70,
       'altitude': 391,
-      'longitude': 14.859218,
-      'latitude': 49.994036,
+      'longitude': 14.859282652392,
+      'latitude': 49.994100705528,
       'region': 'Středočeský'
    },
    {
@@ -2992,8 +2992,8 @@ const cities = [
       'population': 3761,
       'area': 74.13,
       'altitude': 515,
-      'longitude': 15.676419,
-      'latitude': 49.306947,
+      'longitude': 15.676443374626,
+      'latitude': 49.30699470864,
       'region': 'Vysočina'
    },
    {
@@ -3001,8 +3001,8 @@ const cities = [
       'population': 3758,
       'area': 27.71,
       'altitude': 465,
-      'longitude': 14.286161,
-      'latitude': 48.774248,
+      'longitude': 14.286158877573,
+      'latitude': 48.774330573721,
       'region': 'Jihočeský'
    },
    {
@@ -3010,8 +3010,8 @@ const cities = [
       'population': 3756,
       'area': 21.58,
       'altitude': 310,
-      'longitude': 14.801017,
-      'latitude': 50.702802,
+      'longitude': 14.801123326758,
+      'latitude': 50.702865967816,
       'region': 'Liberecký'
    },
    {
@@ -3019,8 +3019,8 @@ const cities = [
       'population': 3754,
       'area': 14.81,
       'altitude': 585,
-      'longitude': 15.246394,
-      'latitude': 50.738201,
+      'longitude': 15.246500406797,
+      'latitude': 50.738254442679,
       'region': 'Liberecký'
    },
    {
@@ -3028,17 +3028,17 @@ const cities = [
       'population': 3729,
       'area': 24.17,
       'altitude': 271,
-      'longitude': 17.683463,
-      'latitude': 49.285205,
-      'region': 'Olomoucký'
+      'longitude': 17.683480007889,
+      'latitude': 49.285206066577,
+      'region': 'Zlínský'
    },
    {
       'name': 'Volary',
       'population': 3712,
       'area': 107.51,
       'altitude': 760,
-      'longitude': 13.886575,
-      'latitude': 48.908811,
+      'longitude': 13.88658107426,
+      'latitude': 48.908902782981,
       'region': 'Jihočeský'
    },
    {
@@ -3046,8 +3046,8 @@ const cities = [
       'population': 3703,
       'area': 7.61,
       'altitude': 322,
-      'longitude': 14.188974,
-      'latitude': 50.155940,
+      'longitude': 14.189049604516,
+      'latitude': 50.156020273004,
       'region': 'Středočeský'
    },
    {
@@ -3055,8 +3055,8 @@ const cities = [
       'population': 3702,
       'area': 20.41,
       'altitude': 456,
-      'longitude': 14.896737,
-      'latitude': 49.871644,
+      'longitude': 14.896794718867,
+      'latitude': 49.871708476008,
       'region': 'Středočeský'
    },
    {
@@ -3064,8 +3064,8 @@ const cities = [
       'population': 3685,
       'area': 57.87,
       'altitude': 315,
-      'longitude': 14.760522,
-      'latitude': 50.765280,
+      'longitude': 14.76063179631,
+      'latitude': 50.765345012501,
       'region': 'Liberecký'
    },
    {
@@ -3073,8 +3073,8 @@ const cities = [
       'population': 3684,
       'area': 6.01,
       'altitude': 348,
-      'longitude': 16.805675,
-      'latitude': 49.131323,
+      'longitude': 16.34952542846,
+      'latitude': 49.155276849127,
       'region': 'Jihomoravský'
    },
    {
@@ -3082,8 +3082,8 @@ const cities = [
       'population': 3679,
       'area': 5.93,
       'altitude': 190,
-      'longitude': 16.618807,
-      'latitude': 49.039525,
+      'longitude': 16.618813305226,
+      'latitude': 49.039551985985,
       'region': 'Jihomoravský'
    },
    {
@@ -3091,8 +3091,8 @@ const cities = [
       'population': 3672,
       'area': 15.67,
       'altitude': 295,
-      'longitude': 16.639019,
-      'latitude': 49.410942,
+      'longitude': 16.639046717886,
+      'latitude': 49.410967423017,
       'region': 'Jihomoravský'
    },
    {
@@ -3100,8 +3100,8 @@ const cities = [
       'population': 3663,
       'area': 28.93,
       'altitude': 465,
-      'longitude': 15.229429,
-      'latitude': 50.924911,
+      'longitude': 15.22954639252,
+      'latitude': 50.924963588909,
       'region': 'Liberecký'
    },
    {
@@ -3109,8 +3109,8 @@ const cities = [
       'population': 3655,
       'area': 16.8,
       'altitude': 294,
-      'longitude': 13.657289,
-      'latitude': 50.593278,
+      'longitude': 13.657390363555,
+      'latitude': 50.59336916511,
       'region': 'Ústecký'
    },
    {
@@ -3118,8 +3118,8 @@ const cities = [
       'population': 3651,
       'area': 10.92,
       'altitude': 205,
-      'longitude': 14.274695,
-      'latitude': 49.927494,
+      'longitude': 14.27475687167,
+      'latitude': 49.927572663242,
       'region': 'Středočeský'
    },
    {
@@ -3127,8 +3127,8 @@ const cities = [
       'population': 3634,
       'area': 31.54,
       'altitude': 563,
-      'longitude': 15.075189,
-      'latitude': 49.303034,
+      'longitude': 15.075214609068,
+      'latitude': 49.303096203439,
       'region': 'Vysočina'
    },
    {
@@ -3136,8 +3136,8 @@ const cities = [
       'population': 3625,
       'area': 28.39,
       'altitude': 291,
-      'longitude': 15.582691,
-      'latitude': 50.428745,
+      'longitude': 15.582779302884,
+      'latitude': 50.42879172604,
       'region': 'Královéhradecký'
    },
    {
@@ -3145,8 +3145,8 @@ const cities = [
       'population': 3620,
       'area': 85.93,
       'altitude': 397,
-      'longitude': 17.396018,
-      'latitude': 50.263799,
+      'longitude': 17.396090652009,
+      'latitude': 50.263803148531,
       'region': 'Olomoucký'
    },
    {
@@ -3154,8 +3154,8 @@ const cities = [
       'population': 3608,
       'area': 54.83,
       'altitude': 164,
-      'longitude': 16.966948,
-      'latitude': 48.724434,
+      'longitude': 16.966936264446,
+      'latitude': 48.724453275107,
       'region': 'Jihomoravský'
    },
    {
@@ -3163,8 +3163,8 @@ const cities = [
       'population': 3601,
       'area': 10.16,
       'altitude': 265,
-      'longitude': 14.411481,
-      'latitude': 50.175988,
+      'longitude': 14.411557378691,
+      'latitude': 50.176063401893,
       'region': 'Středočeský'
    },
    {
@@ -3172,8 +3172,8 @@ const cities = [
       'population': 3584,
       'area': 10.14,
       'altitude': 218,
-      'longitude': 14.235893,
-      'latitude': 49.913948,
+      'longitude': 14.235955055448,
+      'latitude': 49.914028256057,
       'region': 'Středočeský'
    },
    {
@@ -3181,8 +3181,8 @@ const cities = [
       'population': 3582,
       'area': 98.53,
       'altitude': 612,
-      'longitude': 12.985057,
-      'latitude': 50.060495,
+      'longitude': 12.985129225835,
+      'latitude': 50.060603889316,
       'region': 'Karlovarský'
    },
    {
@@ -3190,8 +3190,8 @@ const cities = [
       'population': 3573,
       'area': 9.77,
       'altitude': 210,
-      'longitude': 14.312388,
-      'latitude': 50.741589,
+      'longitude': 14.312497327553,
+      'latitude': 50.741663932519,
       'region': 'Ústecký'
    },
    {
@@ -3199,8 +3199,8 @@ const cities = [
       'population': 3550,
       'area': 12.78,
       'altitude': 449,
-      'longitude': 13.582254,
-      'latitude': 49.486162,
+      'longitude': 13.582292906584,
+      'latitude': 49.486259587175,
       'region': 'Plzeňský'
    },
    {
@@ -3208,8 +3208,8 @@ const cities = [
       'population': 3536,
       'area': 25.93,
       'altitude': 376,
-      'longitude': 16.679468,
-      'latitude': 49.612372,
+      'longitude': 16.679506811325,
+      'latitude': 49.612395778444,
       'region': 'Jihomoravský'
    },
    {
@@ -3217,8 +3217,8 @@ const cities = [
       'population': 3531,
       'area': 20.04,
       'altitude': 337,
-      'longitude': 13.164736,
-      'latitude': 49.639089,
+      'longitude': 13.16478397126,
+      'latitude': 49.639196063817,
       'region': 'Plzeňský'
    },
    {
@@ -3226,8 +3226,8 @@ const cities = [
       'population': 3527,
       'area': 63.58,
       'altitude': 454,
-      'longitude': 14.876957,
-      'latitude': 48.893333,
+      'longitude': 14.876960231353,
+      'latitude': 48.893401070196,
       'region': 'Jihočeský'
    },
    {
@@ -3235,8 +3235,8 @@ const cities = [
       'population': 3516,
       'area': 9.22,
       'altitude': 290,
-      'longitude': 17.363975,
-      'latitude': 49.594228,
+      'longitude': 17.36401034063,
+      'latitude': 49.594235374559,
       'region': 'Olomoucký'
    },
    {
@@ -3244,8 +3244,8 @@ const cities = [
       'population': 3512,
       'area': 26.84,
       'altitude': 232,
-      'longitude': 17.220412,
-      'latitude': 49.684039,
+      'longitude': 17.220452338219,
+      'latitude': 49.684048986897,
       'region': 'Olomoucký'
    },
    {
@@ -3253,17 +3253,17 @@ const cities = [
       'population': 3511,
       'area': 19.47,
       'altitude': 462,
-      'longitude': 17.662774,
-      'latitude': 49.186432,
-      'region': 'Olomoucký'
+      'longitude': 13.950670501077,
+      'latitude': 49.557721273425,
+      'region': 'Středočeský'
    },
    {
       'name': 'Dobrovice',
       'population': 3496,
       'area': 24.64,
       'altitude': 247,
-      'longitude': 14.962332,
-      'latitude': 50.369327,
+      'longitude': 14.962418289957,
+      'latitude': 50.369388230822,
       'region': 'Středočeský'
    },
    {
@@ -3271,8 +3271,8 @@ const cities = [
       'population': 3495,
       'area': 14.21,
       'altitude': 375,
-      'longitude': 14.366134,
-      'latitude': 49.066083,
+      'longitude': 14.366147357098,
+      'latitude': 49.066163345125,
       'region': 'Jihočeský'
    },
    ];

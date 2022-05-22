@@ -42,23 +42,6 @@ export const countDirection = (city1, city2) => {
   }
 }
 
-const random = (seed) => {
-  var x = Math.sin(seed) * 10000;
-  return x - Math.floor(x);
-}
-
-export const getSeedFromDate = () => {
-  const dayNumber = Math.floor(Date.now() / 1000 / 24 / 60 / 60);
-  //console.log("Seed from day is " + dayNumber);
-  return dayNumber;
-}
-
-export const getRandCity = (cities) => {
-  const city = cities[Math.floor(cities.length * random(getSeedFromDate()))];
-  //console.log("Target city is " + city.name);
-  return city;
-}
-
 export const neigbourRegion = (region1, region2) => {
   const neigbours = {
     'Hl. m. Praha': ['Středočeský'],
@@ -133,46 +116,6 @@ export const useStickyState = (defaultValue, key) => {
   return [value, setValue];
 }
 
-export const getScore = (history) => {
-  return Object
-    .keys(history)
-    .map(day => history[day].eog)
-    .filter(eog => eog)
-    .length;
-}
-
-export const getCurrentData = (history) => {
-  const todaySeed = getSeedFromDate();
-  return history[todaySeed];
-}
-
-export const getGuesses = (history) => {
-  const today = getCurrentData(history);
-  if (today && today.guesses) {
-    return today.guesses;
-  }
-  return [];
-}
-
-export const setGuesses = (history, guesses, eog, setHistory) => {
-  // TODO set state with function
-  const allHistory = Object.assign({}, history);
-  const todaySeed = getSeedFromDate();
-  allHistory[todaySeed] = {
-    guesses: guesses,
-    eog: eog,
-  }
- setHistory(allHistory);
-}
-
-export const getEog = (history) => {
-  const today = getCurrentData(history);
-  if (today && today.eog) {
-    return today.eog;
-  }
-  return false;
-}
-
 export const ARROW_UP = '\u2191';
 export const ARROW_DOWN = '\u2193';
 export const GREEN_CIRCLE = '\uD83D\uDFE2';
@@ -182,3 +125,5 @@ export const ARROW_COMPASS = '\u27A4';
 export const CROSS = '📌';
 export const LESS_ARROW = '\u25BC';
 export const MORE_ARROW = '\u25B2';
+
+export const dateOfPublish = 19127;

@@ -33,6 +33,7 @@ const generateOldRandomNumbersFromPreviousGenerator = (seed, max) => {
   }
   return history;
 }
+let cache = {};
 
 const generateHistory = (seed, max) => {
   const history = new Set();
@@ -43,13 +44,17 @@ const generateHistory = (seed, max) => {
 }
 
 const randomPreferSmallUnique = (seed, max) => {
+  if (seed in cache) {
+    return cache[seed];
+  }
   let history = generateOldRandomNumbersFromPreviousGenerator(seed, max);
   history = new Set([...history, ...generateHistory(seed, max)]);
   let number = randomPreferSmall(seed, max);
   let collision = 0;
   while (history.has(number)) {
-    number = randomPreferSmallUnique(-seed-collision++, max);
+    number = randomPreferSmall(-seed-collision++, max);
   }
+  cache[seed] = number;
   return number;
 }
 

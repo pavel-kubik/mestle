@@ -1,5 +1,5 @@
 import { exportedForTesting, getSeedFromDate } from "./rand";
-const { dateOfSwitchToRandomPreferSmallUnique, random, randomSimple, randomPreferSmall,  MEMORY } = exportedForTesting;
+const { dateOfSwitchToRandomPreferSmallUnique, random, randomSimple, randomPreferSmall, randomPreferSmallUnique, MEMORY } = exportedForTesting;
 
 test('test unique random number generator', () => {
   const SIZE = 100;
@@ -13,6 +13,19 @@ test('test unique random number generator', () => {
     expect(history.has(number)).toBe(false);
     history.add(number);
   }
+});
+
+test('test unique random number generator memory', () => {
+  const SIZE = 100;
+  const history = [];
+  for (let i = 0; i < 300; i++) {
+    const number = randomPreferSmallUnique(dateOfSwitchToRandomPreferSmallUnique + i, SIZE);
+    for (let j = Math.max(0, history.length - MEMORY); j < history.length; j++) {
+      expect(history[j]).not.toBe(number);
+    }
+    history.push(number);
+  }
+  expect(true).toBe(true);
 });
 
 test('test small number generator', () => {

@@ -5,13 +5,11 @@ import background from './img/background.svg';
 
 import cities from './Data/data.js';
 import Guess from './Guess/guess';
-import { altitudeComparator, areaComparator, districtComparator, GREEN_CIRCLE, ORANGE_CIRCLE, populationComparator, regionComparator, useStickyState, WHITE_CIRCLE } from './Util/util';
-import { getRandCity, getSeedFromDate, random } from './Rand/rand';
+import { altitudeComparator, areaComparator, dateOfPublish, districtComparator, GREEN_CIRCLE, ORANGE_CIRCLE, populationComparator, regionComparator, useStickyState, WHITE_CIRCLE } from './Util/util';
+import { getRandCity, getSeedFromDate } from './Rand/rand';
 import { getEog, getGuesses, getScore, setGuesses } from './History/history';
 
 function App() {
-
-  const dateOfPublish = 19127;
 
   const [cityPart, setCityPart] = useState('');
   const [filteredCities, setFilteredCities] = useState([]);

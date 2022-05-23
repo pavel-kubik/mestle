@@ -125,3 +125,5 @@ export const ARROW_COMPASS = '\u27A4';
 export const CROSS = '📌';
 export const LESS_ARROW = '\u25BC';
 export const MORE_ARROW = '\u25B2';
+
+export const dateOfPublish = 19127;

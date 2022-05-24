@@ -6,7 +6,7 @@ import background from './img/background.svg';
 import cities from './Data/data.js';
 import Guess from './Guess/guess';
 import { altitudeComparator, areaComparator, dateOfPublish, districtComparator, GREEN_CIRCLE, ORANGE_CIRCLE, populationComparator, regionComparator, useStickyState, WHITE_CIRCLE } from './Util/util';
-import { getRandCity, getSeedFromDate } from './Rand/rand';
+import { calculateTimeLeft, getRandCity, getSeedFromDate } from './Rand/rand';
 import { getEog, getGuesses, getScore, setGuesses } from './History/history';
 
 function App() {
@@ -15,44 +15,69 @@ function App() {
   const [filteredCities, setFilteredCities] = useState([]);
   const [guessEnabled, setGuessEnabled] = useState(false);
   const [shared, setShared] = useState(false);
+  const [timeLeft, setTimeLeft] = useState('');
 
   // generated from current date and cities list
-  const [targetCity, setTargetCity] = useState('');
+  const [todaySeed, setTodaySeed] = useState(null);
 
   // permanent
   const [history, setHistory] = useStickyState({}, 'mestle_history');
 
   useEffect(() => {
-    setTargetCity(getRandCity(cities));
+    const todaySeed = getSeedFromDate(new Date());
+    //console.log("Today seed " + todaySeed + " => " + getRandCity(cities, todaySeed).name);
+    setTodaySeed(todaySeed);
   }, []);
 
   useEffect(() => {
-    const guessedCity = cities.find(c => c.name.toUpperCase() === cityPart.toUpperCase());
-    if (guessedCity && !getGuesses(history).includes(guessedCity)) {
+    const guessedCity = cities.find(c => c.name.toUpperCase() === cityPart.toUpperCase().trim());
+    if (guessedCity && !getGuesses(history, todaySeed).includes(guessedCity)) {
       setGuessEnabled(true);
     } else {
       setGuessEnabled(false);
     }
-  }, [cityPart, history]);
+  }, [cityPart, history, todaySeed]);
+
+  useEffect(() => {
+    if (getEog(history, todaySeed)) {
+      setTimeLeft(calculateTimeLeft(todaySeed));
+      const timer = setInterval(() => {
+        setTimeLeft(calculateTimeLeft(todaySeed));
+      }, 1000);
+      return () => clearInterval(timer);
+    }
+  }, [history, todaySeed]);
 
   const handleChangeCityPart = (cityPart) => {
+    if (getSeedFromDate(new Date()) !== todaySeed) {
+      window.location.reload();
+    }
     setCityPart(cityPart);
     if (cityPart.length >= 2) {
       setFilteredCities(
         cities
-          .filter(c => !getGuesses(history).includes(c))
-          .filter(c => c.name.toUpperCase().includes(cityPart.toUpperCase())));
+          .filter(c => !getGuesses(history, todaySeed).includes(c))
+          .filter(c => c.name.toUpperCase().includes(cityPart.toUpperCase().trim())));
     } else {
       setFilteredCities([]);
     }
   }
 
   const handleGuess = () => {
-    const guessedCity = cities.find(c => c.name.toUpperCase() === cityPart.toUpperCase());
-    if (guessedCity && !getGuesses(history).includes(guessedCity)) {
+    if (getSeedFromDate(new Date()) !== todaySeed) {
+      window.location.reload();
+    }
+    const guessedCity = cities.find(c => c.name.toUpperCase() === cityPart.toUpperCase().trim());
+    if (guessedCity && !getGuesses(history, todaySeed).includes(guessedCity)) {
       setCityPart('');
       setFilteredCities([]);
-      setGuesses(history, [...getGuesses(history), guessedCity], guessedCity.name === targetCity.name, setHistory);
+      const eog = guessedCity.name === getRandCity(cities, todaySeed).name;
+      setGuesses(
+        history,
+        [...getGuesses(history, todaySeed), guessedCity],
+        eog,
+        setHistory,
+        todaySeed);
     }
   }
 
@@ -62,7 +87,8 @@ function App() {
   }
 
   const handleShare = () => {
-    const shareResults = getGuesses(history).map(guess =>
+    const targetCity = getRandCity(cities, todaySeed);
+    const shareResults = getGuesses(history, todaySeed).map(guess =>
       [
         regionComparator(guess, targetCity),
         populationComparator(guess, targetCity),
@@ -83,7 +109,7 @@ function App() {
         .reduce((out, i) => out += i + ' ', '')
     ).reduce((out, line) => out += line + '\n', '');
     navigator.clipboard.writeText(
-      `Městle den #${getSeedFromDate() - dateOfPublish}\n` +
+      `Městle den #${todaySeed - dateOfPublish}\n` +
       shareResults +
       'https://mestle.cz');
     setShared(true);
@@ -106,14 +132,14 @@ function App() {
           <div className="guess">Poloha</div>
         </div>
         {
-          getGuesses(history).length > 0 &&
+          getGuesses(history, todaySeed).length > 0 &&
           <>
-            {getGuesses(history).map((g, idx) => <Guess key={idx} idx={idx} guessedCity={g} targetCity={targetCity}/> )}
+            {getGuesses(history, todaySeed).map((g, idx) => <Guess key={idx} idx={idx} guessedCity={g} targetCity={getRandCity(cities, todaySeed)}/> )}
           </>
         }
       </div>
       {
-        !getEog(history) &&
+        !getEog(history, todaySeed) &&
         <div className='guess-box'>
           <input value={cityPart} placeholder='Napiš a vyber město' onChange={event => handleChangeCityPart(event.target.value)}/>
           {
@@ -130,14 +156,14 @@ function App() {
         </div>
       }
       {
-        getEog(history) &&  // TODO show city sign
+        getEog(history, todaySeed) &&  // TODO show city sign
         <div className="congratulation">
           <div className='big button enabled' onClick={() => {handleShare()}}>Sdílej</div>
           {
             shared &&
             <div className="notification">Výsledek zkopírován do schránky.</div>
           }
-          <div>Gratulace! Další město můžeš hádat zítra.</div>
+          <div>Gratulace! Další město můžeš hádat za {timeLeft}.</div>
         </div>
       }
     </div>

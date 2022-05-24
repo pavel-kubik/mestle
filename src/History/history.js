@@ -1,5 +1,3 @@
-import { getSeedFromDate } from "../Rand/rand";
-
 export const getScore = (history) => {
   return Object
     .keys(history)
@@ -8,23 +6,21 @@ export const getScore = (history) => {
     .length;
 }
 
-export const getCurrentData = (history) => {
-  const todaySeed = getSeedFromDate();
+const getCurrentData = (history, todaySeed) => {
   return history[todaySeed];
 }
 
-export const getGuesses = (history) => {
-  const today = getCurrentData(history);
+export const getGuesses = (history, todaySeed) => {
+  const today = getCurrentData(history, todaySeed);
   if (today && today.guesses) {
     return today.guesses;
   }
   return [];
 }
 
-export const setGuesses = (history, guesses, eog, setHistory) => {
+export const setGuesses = (history, guesses, eog, setHistory, todaySeed) => {
   // TODO set state with function
   const allHistory = Object.assign({}, history);
-  const todaySeed = getSeedFromDate();
   allHistory[todaySeed] = {
     guesses: guesses,
     eog: eog,
@@ -32,8 +28,8 @@ export const setGuesses = (history, guesses, eog, setHistory) => {
  setHistory(allHistory);
 }
 
-export const getEog = (history) => {
-  const today = getCurrentData(history);
+export const getEog = (history, todaySeed) => {
+  const today = getCurrentData(history, todaySeed);
   if (today && today.eog) {
     return today.eog;
   }

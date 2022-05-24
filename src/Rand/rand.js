@@ -59,15 +59,26 @@ const randomPreferSmallUnique = (seed, max) => {
   return number;
 }
 
-export const getSeedFromDate = () => {
-  const dayNumber = Math.floor(Date.now() / 1000 / 24 / 60 / 60);
-  //console.log("Seed from day is " + dayNumber);
+export const getSeedFromDate = (time) => {
+  const dayNumber = Math.floor(time / 1000 / 24 / 60 / 60);
   return dayNumber;
 }
 
-export const getRandCity = (cities) => {
-  const city = cities[random(getSeedFromDate(), cities.length)];
-  //console.log("Target city is " + city.name);
+export const calculateTimeLeft = (todaySeed) => {
+  const now = new Date();
+  const tomorrow = (todaySeed + 1) * 1000 * 24 * 60 * 60;
+  let diffSec = Math.floor((tomorrow - now) / 1000);
+  //TODO refresh on < 0
+  const hoursLeft = Math.floor(diffSec / 3600);
+  diffSec -= hoursLeft * 3600;
+  const minutesLeft = Math.floor(diffSec / 60);
+  diffSec -= minutesLeft*60;
+  const secondsLeft = diffSec;
+  return ('0' + hoursLeft).slice(-2) + ":" + ('0' + minutesLeft).slice(-2) + ":" + ('0' + secondsLeft).slice(-2);
+}
+
+export const getRandCity = (cities, seed) => {
+  const city = cities[random(seed, cities.length)];
   return city;
 }
 

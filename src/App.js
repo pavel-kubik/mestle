@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import background from './img/background.svg';
 
+import preval from 'preval.macro'
+
 import cities from './Data/data.js';
 import Guess from './Guess/guess';
 import { altitudeComparator, areaComparator, dateOfPublish, districtComparator, GREEN_CIRCLE, ORANGE_CIRCLE, populationComparator, regionComparator, useStickyState, WHITE_CIRCLE } from './Util/util';
@@ -10,6 +12,8 @@ import { calculateTimeLeft, getRandCity, getSeedFromDate } from './Rand/rand';
 import { getEog, getGuesses, getScore, setGuesses } from './History/history';
 
 function App() {
+
+  const dateTimeStamp = preval`module.exports = new Date().toLocaleString();`
 
   const bottom = useRef(null);
 
@@ -170,6 +174,7 @@ function App() {
           <div>Gratulace! Další město můžeš hádat za {timeLeft}.</div>
         </div>
       }
+      <div className="build-time">Build {dateTimeStamp}</div>
     </div>
   );
 }

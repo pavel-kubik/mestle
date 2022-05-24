@@ -254,6 +254,13 @@
   margin-bottom: 20px;
 }
 
+.build-time {
+  color: silver;
+  z-index: 0;
+  font-size: xx-small;
+  text-align: right;
+}
+
 .notification {
   font-size: small;
   color: darkred;

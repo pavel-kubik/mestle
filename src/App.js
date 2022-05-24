@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import './App.css';
 import background from './img/background.svg';
@@ -10,6 +10,8 @@ import { calculateTimeLeft, getRandCity, getSeedFromDate } from './Rand/rand';
 import { getEog, getGuesses, getScore, setGuesses } from './History/history';
 
 function App() {
+
+  const bottom = useRef(null);
 
   const [cityPart, setCityPart] = useState('');
   const [filteredCities, setFilteredCities] = useState([]);
@@ -79,6 +81,7 @@ function App() {
         setHistory,
         todaySeed);
     }
+    setTimeout(() => bottom.current.scrollIntoView({ behavior: "smooth" }), 100);
   }
 
   const handleSelectCity = (cityName) => {
@@ -137,6 +140,7 @@ function App() {
             {getGuesses(history, todaySeed).map((g, idx) => <Guess key={idx} idx={idx} guessedCity={g} targetCity={getRandCity(cities, todaySeed)}/> )}
           </>
         }
+        <div ref={bottom}>&nbsp;</div>
       </div>
       {
         !getEog(history, todaySeed) &&

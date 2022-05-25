@@ -116,6 +116,10 @@ export const useStickyState = (defaultValue, key) => {
   return [value, setValue];
 }
 
+export const normalize = (a) => {
+  return a.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+}
+
 export const ARROW_UP = '\u2191';
 export const ARROW_DOWN = '\u2193';
 export const GREEN_CIRCLE = '\uD83D\uDFE2';

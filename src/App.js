@@ -7,7 +7,7 @@ import preval from 'preval.macro'
 
 import cities from './Data/data.js';
 import Guess from './Guess/guess';
-import { altitudeComparator, areaComparator, dateOfPublish, districtComparator, GREEN_CIRCLE, ORANGE_CIRCLE, populationComparator, regionComparator, useStickyState, WHITE_CIRCLE } from './Util/util';
+import { altitudeComparator, areaComparator, dateOfPublish, districtComparator, GREEN_CIRCLE, normalize, ORANGE_CIRCLE, populationComparator, regionComparator, useStickyState, WHITE_CIRCLE } from './Util/util';
 import { calculateTimeLeft, getRandCity, getSeedFromDate } from './Rand/rand';
 import { getEog, getGuesses, getScore, setGuesses } from './History/history';
 
@@ -36,7 +36,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const guessedCity = cities.find(c => c.name.toUpperCase() === cityPart.toUpperCase().trim());
+    const guessedCity = cities.find(c => normalize(c.name) === normalize(cityPart.trim()));
     if (guessedCity && !getGuesses(history, todaySeed).includes(guessedCity)) {
       setGuessEnabled(true);
     } else {
@@ -60,10 +60,12 @@ function App() {
     }
     setCityPart(cityPart);
     if (cityPart.length >= 2) {
-      setFilteredCities(
-        cities
-          .filter(c => !getGuesses(history, todaySeed).includes(c))
-          .filter(c => c.name.toUpperCase().includes(cityPart.toUpperCase().trim())));
+      const filteredCities = cities.filter(c => !getGuesses(history, todaySeed).includes(c));
+      const matchedCities = new Set(
+        [...filteredCities.filter(c => normalize(c.name).startsWith(normalize(cityPart.trim()))),
+          ...filteredCities.filter(c => normalize(c.name).includes(normalize(cityPart.trim())))]
+      );
+      setFilteredCities([...matchedCities]);
     } else {
       setFilteredCities([]);
     }
@@ -73,7 +75,7 @@ function App() {
     if (getSeedFromDate(new Date()) !== todaySeed) {
       window.location.reload();
     }
-    const guessedCity = cities.find(c => c.name.toUpperCase() === cityPart.toUpperCase().trim());
+    const guessedCity = cities.find(c => normalize(c.name) === normalize(cityPart.trim()));
     if (guessedCity && !getGuesses(history, todaySeed).includes(guessedCity)) {
       setCityPart('');
       setFilteredCities([]);

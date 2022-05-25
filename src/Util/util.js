@@ -117,7 +117,33 @@ export const useStickyState = (defaultValue, key) => {
 }
 
 export const normalize = (a) => {
-  return a.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+  return a
+    .replace(/[0-9]/g, function(x) {
+      switch(x) {
+        case "2":
+        case "0":
+          return "e";
+        case "3":
+          return "s";
+        case "4":
+          return "c";
+        case "5":
+          return "r";
+        case "6":
+          return "z";
+        case "7":
+          return "y";
+        case "8":
+          return "a";
+        case "9":
+          return "i";
+        default:
+          return x;
+      }
+    })
+    .toUpperCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, "");
 }
 
 export const ARROW_UP = '\u2191';

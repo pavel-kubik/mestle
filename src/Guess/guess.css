@@ -13,19 +13,19 @@ div.tippy-box {
 }
 
 .tippy-box[data-theme~='orange'] {
-  background-color: orange;
+  background-color: #a80;
   color: white;
 }
 
 .tippy-box[data-theme~='orange'] > .tippy-arrow {
-  color: orange;
+  color: #a80;
 }
 
 .tippy-box[data-theme~='red'] {
-  background-color: #a00;
+  background-color: #800;
   color: white;
 }
 
 .tippy-box[data-theme~='red'] > .tippy-arrow {
-  color: #a00;
+  color: #800;
 }

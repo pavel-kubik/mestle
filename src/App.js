@@ -143,7 +143,17 @@ function App() {
         {
           getGuesses(history, todaySeed).length > 0 &&
           <>
-            {getGuesses(history, todaySeed).map((g, idx) => <Guess key={idx} idx={idx} guessedCity={g} targetCity={getRandCity(cities, todaySeed)}/> )}
+            {
+              getGuesses(history, todaySeed).map((g, idx, array) => 
+                <Guess
+                  key={idx}
+                  idx={idx} guessedCity={g}
+                  targetCity={getRandCity(cities, todaySeed)}
+                  isLast={idx === array.length - 1}
+                  isEog={getEog(history, todaySeed)}
+                />
+              )
+            }
           </>
         }
         <div ref={bottom}>&nbsp;</div>

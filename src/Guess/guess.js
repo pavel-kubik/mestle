@@ -1,7 +1,12 @@
+import './guess.css'
+
 import { altitudeComparator, areaComparator, ARROW_COMPASS, ARROW_DOWN, ARROW_UP, countDirection, CROSS, districtComparator, LESS_ARROW, MORE_ARROW, populationComparator, regionComparator } from "../Util/util";
 import compass90 from '../img/compass90.png';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css'; // optional
 
-const Guess = ({idx, guessedCity, targetCity}) => {
+
+const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
 
   const valueComparator = (number1, number2) => {
     if (number1 > number2) {
@@ -22,32 +27,127 @@ const Guess = ({idx, guessedCity, targetCity}) => {
     }
   }
 
+  const regionGuess = regionComparator(guessedCity, targetCity);
+  const populationGuess = populationComparator(guessedCity, targetCity);
+  const populationDiff = () => {
+    if (guessedCity.population < targetCity.population) {
+      return "více";
+    } else if (guessedCity.population > targetCity.population) {
+      return "méně";
+    } else {
+      return "stejně";
+    }
+  }
+  const areaGuess = areaComparator(guessedCity, targetCity);
+  const areaDiff = () => {
+    if (guessedCity.area < targetCity.area) {
+      return "větší";
+    } else if (guessedCity.area > targetCity.area) {
+      return "menší";
+    } else {
+      return "stejnou";
+    }
+  }
+  const altitudeGuess = altitudeComparator(guessedCity, targetCity);
+  const altitudeDiff = () => {
+    if (guessedCity.altitude < targetCity.altitude) {
+      return "větší";
+    } else if (guessedCity.altitude > targetCity.altitude) {
+      return "menší";
+    } else {
+      return "stejnou";
+    }
+  }
+  const directionGuess = countDirection(guessedCity, targetCity);
+  const directionDiff = (directionGuess) => {
+    switch(directionGuess) {
+      case 'N': return "sever";
+      case 'NE': return "severo-východ";
+      case 'E': return "východ";
+      case 'SE': return "jiho-východ";
+      case 'S': return "jih";
+      case 'SW': return "severo-západ";
+      case 'W': return "západ";
+      case 'NW': return "severo-západ";
+      default: return "stejném místě";
+    }
+  }
+
   return (
     <div>
       <div className='guess-city'>{idx+1}. {guessedCity.name}</div>
-      <div className='differences'>
-        <div className={`guess district ${regionComparator(guessedCity, targetCity)}`}>
-          {regionFilter(guessedCity.region)}
-        </div>
-        <div
-          className={`guess population ${populationComparator(guessedCity, targetCity)}`}>
-          {guessedCity.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
-          {valueComparator(guessedCity.population, targetCity.population)}
-        </div>
-        <div className={`guess area ${areaComparator(guessedCity, targetCity)}`}>
-          {Math.trunc(guessedCity.area)} km²
-          {valueComparator(guessedCity.area, targetCity.area)}
-        </div>
-        <div className={`guess altitude ${altitudeComparator(guessedCity, targetCity)}`}>
-          {guessedCity.altitude} m.n.m.
-          {valueComparator(guessedCity.altitude, targetCity.altitude)}
-        </div>
-        <div
-          className={`guess direction`}
-          style={{ backgroundImage: `url(${compass90})`}}
-        >
-          <div className={`guess direction compass ${countDirection(guessedCity, targetCity)}`}>{countDirection(guessedCity, targetCity) === 'X' ? CROSS : ARROW_COMPASS}</div>
-        </div>
+      <div className={`differences ${isLast? "last" : ""}`}>
+        <Tippy placement="bottom"
+               content={regionGuess === 'green' ? "Hádané město je ve stejném okrese." :
+                        regionGuess === 'orange' ? "Hádané město je v sousedním okrese." :
+                        "Hádané město je v jiném okrese."}
+               theme={regionGuess}
+               zIndex={9}
+               disabled={!isLast || isEog}
+               visible={true}
+               maxWidth="70px"
+               >
+          <div className={`guess district ${regionGuess}`}>
+            {regionFilter(guessedCity.region)}
+          </div>
+        </Tippy>
+        <Tippy placement="bottom"
+               content={`Hádané město má ${populationGuess !== 'red' ? "o trochu" : ""} ${populationDiff()} obyvatel.`}
+               theme={populationGuess}
+               zIndex={9}
+               disabled={!isLast || isEog}
+               visible={true}
+               maxWidth="70px"
+               >
+          <div
+            className={`guess population ${populationGuess}`}>
+            {guessedCity.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+            {valueComparator(guessedCity.population, targetCity.population)}
+          </div>
+        </Tippy>
+        <Tippy placement="bottom"
+               content={`Hádané město má ${areaGuess !== 'red' ? "o trochu" : ""} ${areaDiff()} rozlohu.`}
+               theme={areaGuess}
+               zIndex={9}
+               disabled={!isLast || isEog}
+               visible={true}
+               maxWidth="70px"
+               >
+          <div className={`guess area ${areaGuess}`}>
+            {Math.trunc(guessedCity.area)} km²
+            {valueComparator(guessedCity.area, targetCity.area)}
+          </div>
+        </Tippy>
+        <Tippy placement="bottom"
+               content={`Hádané město má ${altitudeGuess !== 'red' ? "o trochu" : ""} ${altitudeDiff()} nadmořskou výšku.`}
+               theme={altitudeGuess}
+               zIndex={9}
+               disabled={!isLast || isEog}
+               visible={true}
+               maxWidth="70px"
+               >
+          <div className={`guess altitude ${altitudeGuess}`}>
+            {guessedCity.altitude} m.n.m.
+            {valueComparator(guessedCity.altitude, targetCity.altitude)}
+          </div>
+        </Tippy>
+        <Tippy placement="bottom"
+               content={`Hádané město je na ${directionDiff(directionGuess)}.`}
+               theme={directionGuess === 'X' ? "green" : "red"}
+               zIndex={9}
+               disabled={!isLast || isEog}
+               visible={true}
+               maxWidth="70px"
+               >
+          <div
+            className={`guess direction`}
+            style={{ backgroundImage: `url(${compass90})`}}
+          >
+            <div className={`guess direction compass ${directionGuess}`}>
+              {directionGuess === 'X' ? CROSS : ARROW_COMPASS}
+            </div>
+          </div>
+        </Tippy>
       </div>
     </div>
   );

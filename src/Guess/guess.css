@@ -1,0 +1,31 @@
+div.tippy-box {
+  opacity: 1;
+  font-size: x-small;
+}
+
+.tippy-box[data-theme~='green'] {
+  background-color: green;
+  color: white;
+}
+
+.tippy-box[data-theme~='green'] > .tippy-arrow {
+  color: green;
+}
+
+.tippy-box[data-theme~='orange'] {
+  background-color: orange;
+  color: white;
+}
+
+.tippy-box[data-theme~='orange'] > .tippy-arrow {
+  color: orange;
+}
+
+.tippy-box[data-theme~='red'] {
+  background-color: #a00;
+  color: white;
+}
+
+.tippy-box[data-theme~='red'] > .tippy-arrow {
+  color: #a00;
+}

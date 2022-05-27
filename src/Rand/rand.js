@@ -68,7 +68,10 @@ export const calculateTimeLeft = (todaySeed) => {
   const now = new Date();
   const tomorrow = (todaySeed + 1) * 1000 * 24 * 60 * 60;
   let diffSec = Math.floor((tomorrow - now) / 1000);
-  //TODO refresh on < 0
+  // refresh on next day
+  if (diffSec < 0) {
+    window.location.reload();
+  }
   const hoursLeft = Math.floor(diffSec / 3600);
   diffSec -= hoursLeft * 3600;
   const minutesLeft = Math.floor(diffSec / 60);

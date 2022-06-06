@@ -78,9 +78,9 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
       <div className='guess-city'>{idx+1}. {guessedCity.name}</div>
       <div className={`differences ${isLast? "last" : ""}`}>
         <Tippy placement="bottom"
-               content={regionGuess === 'green' ? "Hádané město je ve stejném okrese." :
-                        regionGuess === 'orange' ? "Hádané město je v sousedním okrese." :
-                        "Hádané město je v jiném okrese."}
+               content={regionGuess === 'green' ? "Hádané město je ve stejném kraji." :
+                        regionGuess === 'orange' ? "Hádané město je v sousedním kraji." :
+                        "Hádané město je v jiném kraji."}
                theme={regionGuess}
                zIndex={9}
                disabled={!isLast || isEog}

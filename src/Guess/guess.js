@@ -66,7 +66,7 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
       case 'E': return "východ";
       case 'SE': return "jiho-východ";
       case 'S': return "jih";
-      case 'SW': return "severo-západ";
+      case 'SW': return "jiho-západ";
       case 'W': return "západ";
       case 'NW': return "severo-západ";
       default: return "stejném místě";

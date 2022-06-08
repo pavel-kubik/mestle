@@ -10,6 +10,18 @@ import Guess from './Guess/guess';
 import { altitudeComparator, areaComparator, dateOfPublish, districtComparator, GREEN_CIRCLE, normalize, ORANGE_CIRCLE, populationComparator, regionComparator, useStickyState, WHITE_CIRCLE } from './Util/util';
 import { calculateTimeLeft, getRandCity, getSeedFromDate } from './Rand/rand';
 import { getEog, getGuesses, getScore, setGuesses } from './History/history';
+import Tippy from '@tippyjs/react';
+import styled from "styled-components";
+import { useSpring, animated } from "react-spring";
+
+const Box = styled(animated.div)`
+  background: orange;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  max-width: 270px;
+  font-size: x-large;
+`;
 
 function App() {
 
@@ -28,6 +40,28 @@ function App() {
 
   // permanent
   const [history, setHistory] = useStickyState({}, 'mestle_history');
+
+  // animation start tippy
+  const config = { tension: 300, friction: 15 };
+  const initialStyles = { opacity: 0, transform: "scale(0.5)" };
+  const [props, setSpring] = useSpring(() => initialStyles);
+  function onMount() {
+    setSpring({
+      delay: 3000,
+      opacity: 1,
+      transform: "scale(1)",
+      onRest: () => {},
+      config,
+    });
+  }
+
+  function onHide({ unmount }) {
+    setSpring({
+      ...initialStyles,
+      onRest: unmount,
+      config: { ...config, clamp: true }
+    });
+  }
 
   useEffect(() => {
     const todaySeed = getSeedFromDate(new Date());
@@ -161,7 +195,23 @@ function App() {
       {
         !getEog(history, todaySeed) &&
         <div className='guess-box'>
-          <input value={cityPart} placeholder='Napiš a vyber město' onChange={event => handleChangeCityPart(event.target.value)}/>
+          <Tippy
+            render={attrs => (
+              <Box style={props} {...attrs}>
+                Začni náhodným městem a pak zlepšuj odhad.
+              </Box>
+            )}
+            placement="top"
+            theme="orange"
+            zIndex={11}
+            disabled={getGuesses(history, todaySeed).length > 0 || cityPart !== ''}
+            visible={true}
+            animation={true}
+            onMount={onMount}
+            onHide={onHide}
+          >
+            <input value={cityPart} placeholder='Uhádni dněšní město' onChange={event => handleChangeCityPart(event.target.value)}/>
+          </Tippy>
           {
             filteredCities.length > 0 &&
             <>

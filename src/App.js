@@ -1,16 +1,28 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
-import './App.css';
-import background from './img/background.svg';
+import "./App.css";
+import background from "./img/background.svg";
 
-import preval from 'preval.macro'
+import preval from "preval.macro";
 
-import cities from './Data/data.js';
-import Guess from './Guess/guess';
-import { altitudeComparator, areaComparator, dateOfPublish, districtComparator, GREEN_CIRCLE, normalize, ORANGE_CIRCLE, populationComparator, regionComparator, useStickyState, WHITE_CIRCLE } from './Util/util';
-import { calculateTimeLeft, getRandCity, getSeedFromDate } from './Rand/rand';
-import { getEog, getGuesses, getScore, setGuesses } from './History/history';
-import Tippy from '@tippyjs/react';
+import cities from "./Data/data.js";
+import Guess from "./Guess/guess";
+import {
+  altitudeComparator,
+  areaComparator,
+  dateOfPublish,
+  districtComparator,
+  GREEN_CIRCLE,
+  normalize,
+  ORANGE_CIRCLE,
+  populationComparator,
+  regionComparator,
+  useStickyState,
+  WHITE_CIRCLE,
+} from "./Util/util";
+import { calculateTimeLeft, getRandCity, getSeedFromDate } from "./Rand/rand";
+import { getEog, getGuesses, getScore, setGuesses } from "./History/history";
+import Tippy from "@tippyjs/react";
 import styled from "styled-components";
 import { useSpring, animated } from "react-spring";
 
@@ -24,22 +36,21 @@ const Box = styled(animated.div)`
 `;
 
 function App() {
-
-  const dateTimeStamp = preval`module.exports = new Date().toLocaleString();`
+  const dateTimeStamp = preval`module.exports = new Date().toLocaleString();`;
 
   const bottom = useRef(null);
 
-  const [cityPart, setCityPart] = useState('');
+  const [cityPart, setCityPart] = useState("");
   const [filteredCities, setFilteredCities] = useState([]);
   const [guessEnabled, setGuessEnabled] = useState(false);
   const [shared, setShared] = useState(false);
-  const [timeLeft, setTimeLeft] = useState('');
+  const [timeLeft, setTimeLeft] = useState("");
 
   // generated from current date and cities list
   const [todaySeed, setTodaySeed] = useState(null);
 
   // permanent
-  const [history, setHistory] = useStickyState({}, 'mestle_history');
+  const [history, setHistory] = useStickyState({}, "mestle_history");
 
   // animation start tippy
   const config = { tension: 300, friction: 15 };
@@ -59,7 +70,7 @@ function App() {
     setSpring({
       ...initialStyles,
       onRest: unmount,
-      config: { ...config, clamp: true }
+      config: { ...config, clamp: true },
     });
   }
 
@@ -70,7 +81,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const guessedCity = cities.find(c => normalize(c.name) === normalize(cityPart.trim()));
+    const guessedCity = cities.find(
+      (c) => normalize(c.name) === normalize(cityPart.trim())
+    );
     if (guessedCity && !getGuesses(history, todaySeed).includes(guessedCity)) {
       setGuessEnabled(true);
     } else {
@@ -94,24 +107,32 @@ function App() {
     }
     setCityPart(cityPart);
     if (cityPart.length >= 2) {
-      const filteredCities = cities.filter(c => !getGuesses(history, todaySeed).includes(c));
-      const matchedCities = new Set(
-        [...filteredCities.filter(c => normalize(c.name).startsWith(normalize(cityPart.trim()))),
-          ...filteredCities.filter(c => normalize(c.name).includes(normalize(cityPart.trim())))]
+      const filteredCities = cities.filter(
+        (c) => !getGuesses(history, todaySeed).includes(c)
       );
+      const matchedCities = new Set([
+        ...filteredCities.filter((c) =>
+          normalize(c.name).startsWith(normalize(cityPart.trim()))
+        ),
+        ...filteredCities.filter((c) =>
+          normalize(c.name).includes(normalize(cityPart.trim()))
+        ),
+      ]);
       setFilteredCities([...matchedCities]);
     } else {
       setFilteredCities([]);
     }
-  }
+  };
 
   const handleGuess = () => {
     if (getSeedFromDate(new Date()) !== todaySeed) {
       window.location.reload();
     }
-    const guessedCity = cities.find(c => normalize(c.name) === normalize(cityPart.trim()));
+    const guessedCity = cities.find(
+      (c) => normalize(c.name) === normalize(cityPart.trim())
+    );
     if (guessedCity && !getGuesses(history, todaySeed).includes(guessedCity)) {
-      setCityPart('');
+      setCityPart("");
       setFilteredCities([]);
       const eog = guessedCity.name === getRandCity(cities, todaySeed).name;
       setGuesses(
@@ -119,54 +140,65 @@ function App() {
         [...getGuesses(history, todaySeed), guessedCity],
         eog,
         setHistory,
-        todaySeed);
+        todaySeed
+      );
     }
-    setTimeout(() => bottom.current.scrollIntoView({ behavior: "smooth" }), 100);
-  }
+    setTimeout(
+      () => bottom.current.scrollIntoView({ behavior: "smooth" }),
+      100
+    );
+  };
 
   const handleSelectCity = (cityName) => {
     setCityPart(cityName);
     setFilteredCities([]);
-  }
+  };
 
   const handleShare = () => {
     const targetCity = getRandCity(cities, todaySeed);
-    const shareResults = getGuesses(history, todaySeed).map(guess =>
-      [
+    const shareResults = getGuesses(history, todaySeed)
+      .map((guess) => [
         regionComparator(guess, targetCity),
         populationComparator(guess, targetCity),
         areaComparator(guess, targetCity),
         altitudeComparator(guess, targetCity),
-        districtComparator(guess, targetCity)
-      ]
-    ).map(guess =>
-      guess
-        .map(item => {
-          switch(item) {
-            case "green": return GREEN_CIRCLE;
-            case "orange": return ORANGE_CIRCLE;
-            default:
-              return WHITE_CIRCLE;
-          }
-        })
-        .reduce((out, i) => out += i + ' ', '')
-    ).reduce((out, line) => out += line + '\n', '');
+        districtComparator(guess, targetCity),
+      ])
+      .map((guess) =>
+        guess
+          .map((item) => {
+            switch (item) {
+              case "green":
+                return GREEN_CIRCLE;
+              case "orange":
+                return ORANGE_CIRCLE;
+              default:
+                return WHITE_CIRCLE;
+            }
+          })
+          .reduce((out, i) => (out += i + " "), "")
+      )
+      .reduce((out, line) => (out += line + "\n"), "");
     navigator.clipboard.writeText(
       `Městle den #${todaySeed - dateOfPublish}\n` +
-      shareResults +
-      'https://mestle.cz');
+        shareResults +
+        "https://mestle.cz"
+    );
     setShared(true);
-  }
+  };
 
   return (
-    <div className='app'>
-      <div className='header'>
+    <div className="app">
+      <div className="header">
         <div>Skóre: {getScore(history)}</div>
         <div>Městle</div>
         <div>{new Date().toLocaleDateString("cz-CS")}</div>
       </div>
-      <div className='body'>
-        <div className='body-background' style={{ backgroundImage: `url(${background})`}}></div>
+      <div className="body">
+        <div
+          className="body-background"
+          style={{ backgroundImage: `url(${background})` }}
+        ></div>
         <div className="differences title">
           <div className="guess">Kraj</div>
           <div className="guess">Populace</div>
@@ -174,29 +206,26 @@ function App() {
           <div className="guess">Nadmořská výška</div>
           <div className="guess">Poloha</div>
         </div>
-        {
-          getGuesses(history, todaySeed).length > 0 &&
+        {getGuesses(history, todaySeed).length > 0 && (
           <>
-            {
-              getGuesses(history, todaySeed).map((g, idx, array) => 
-                <Guess
-                  key={idx}
-                  idx={idx} guessedCity={g}
-                  targetCity={getRandCity(cities, todaySeed)}
-                  isLast={idx === array.length - 1}
-                  isEog={getEog(history, todaySeed)}
-                />
-              )
-            }
+            {getGuesses(history, todaySeed).map((g, idx, array) => (
+              <Guess
+                key={idx}
+                idx={idx}
+                guessedCity={g}
+                targetCity={getRandCity(cities, todaySeed)}
+                isLast={idx === array.length - 1}
+                isEog={getEog(history, todaySeed)}
+              />
+            ))}
           </>
-        }
+        )}
         <div ref={bottom}>&nbsp;</div>
       </div>
-      {
-        !getEog(history, todaySeed) &&
-        <div className='guess-box'>
+      {!getEog(history, todaySeed) && (
+        <div className="guess-box">
           <Tippy
-            render={attrs => (
+            render={(attrs) => (
               <Box style={props} {...attrs}>
                 Začni náhodným městem a pak zlepšuj odhad.
               </Box>
@@ -204,38 +233,55 @@ function App() {
             placement="top"
             theme="orange"
             zIndex={11}
-            disabled={getGuesses(history, todaySeed).length > 0 || cityPart !== ''}
+            disabled={
+              getGuesses(history, todaySeed).length > 0 || cityPart !== ""
+            }
             visible={true}
             animation={true}
             onMount={onMount}
             onHide={onHide}
           >
-            <input value={cityPart} placeholder='Uhádni dněšní město' onChange={event => handleChangeCityPart(event.target.value)}/>
+            <input
+              value={cityPart}
+              placeholder="Uhádni dněšní město"
+              onChange={(event) => handleChangeCityPart(event.target.value)}
+            />
           </Tippy>
-          {
-            filteredCities.length > 0 &&
+          {filteredCities.length > 0 && (
             <>
-              <div className='city-list'>
-                {
-                  filteredCities.map(c =><div key={c.name} onClick={() => handleSelectCity(c.name)}>{c.name}</div>)
-                }
+              <div className="city-list">
+                {filteredCities.map((c) => (
+                  <div key={c.name} onClick={() => handleSelectCity(c.name)}>
+                    {c.name}
+                  </div>
+                ))}
               </div>
             </>
-          }
-          <div className={`big button ${guessEnabled ? 'enabled' : 'disabled'}`} onClick={() => handleGuess()}>Hádej</div>
+          )}
+          <div
+            className={`big button ${guessEnabled ? "enabled" : "disabled"}`}
+            onClick={() => handleGuess()}
+          >
+            Hádej
+          </div>
         </div>
-      }
-      {
-        getEog(history, todaySeed) &&  // TODO show city sign
+      )}
+      {getEog(history, todaySeed) && ( // TODO show city sign
         <div className="congratulation">
-          <div className='big button enabled' onClick={() => {handleShare()}}>Sdílej</div>
-          {
-            shared &&
+          <div
+            className="big button enabled"
+            onClick={() => {
+              handleShare();
+            }}
+          >
+            Sdílej
+          </div>
+          {shared && (
             <div className="notification">Výsledek zkopírován do schránky.</div>
-          }
+          )}
           <div>Gratulace! Další město můžeš hádat za {timeLeft}.</div>
         </div>
-      }
+      )}
       <div className="build-time">Build {dateTimeStamp}</div>
     </div>
   );

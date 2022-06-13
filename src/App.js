@@ -25,6 +25,7 @@ import { getEog, getGuesses, getScore, setGuesses } from "./History/history";
 import Tippy from "@tippyjs/react";
 import styled from "styled-components";
 import { useSpring, animated } from "react-spring";
+import CitySelector from "./components/CitySelector";
 
 const Box = styled(animated.div)`
   background: orange;
@@ -224,6 +225,13 @@ function App() {
       </div>
       {!getEog(history, todaySeed) && (
         <div className="guess-box">
+          {filteredCities.length > 0 && (
+            <CitySelector
+              options={filteredCities}
+              selectedOption={cityPart}
+              setSelectedOption={(option) => handleSelectCity(option)}
+            />
+          )}
           <Tippy
             render={(attrs) => (
               <Box style={props} {...attrs}>
@@ -247,17 +255,6 @@ function App() {
               onChange={(event) => handleChangeCityPart(event.target.value)}
             />
           </Tippy>
-          {filteredCities.length > 0 && (
-            <>
-              <div className="city-list">
-                {filteredCities.map((c) => (
-                  <div key={c.name} onClick={() => handleSelectCity(c.name)}>
-                    {c.name}
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
           <div
             className={`big button ${guessEnabled ? "enabled" : "disabled"}`}
             onClick={() => handleGuess()}

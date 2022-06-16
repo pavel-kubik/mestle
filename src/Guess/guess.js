@@ -1,6 +1,6 @@
 import './guess.css'
 
-import { altitudeComparator, areaComparator, ARROW_COMPASS, ARROW_DOWN, ARROW_UP, countDirection, CROSS, districtComparator, LESS_ARROW, MORE_ARROW, populationComparator, regionComparator } from "../Util/util";
+import { altitudeComparator, areaComparator, ARROW_COMPASS, countDirection, CROSS, LESS_ARROW, MORE_ARROW, populationComparator, regionComparator } from "../Util/util";
 import compass90 from '../img/compass90.png';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional

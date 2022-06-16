@@ -15,6 +15,7 @@ const StyledSelect = styled.select`
 
   border: 1px solid black;
   width: 250px;
+  max-height: 200px;
   -webkit-appearance: none;
 `;
 

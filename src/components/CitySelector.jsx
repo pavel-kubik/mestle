@@ -73,6 +73,7 @@ const CitySelector = ({
           {name}
         </StyledOption>
       ))}
+      <optgroup label=""></optgroup>
     </StyledSelect>
   );
 };

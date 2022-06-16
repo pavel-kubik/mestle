@@ -1,13 +1,12 @@
 import { useCallback, useState } from "react";
 import styled from "styled-components";
 
-const NUMBER_OF_VISIBLE_OPTIONS = 5;
-
-const StyledSelect = styled.select`
+const StyledSelect = styled.div`
   position: absolute;
   left: 0;
   right: 0;
   bottom: 145px; /* TODO make better */
+  overflow-y: auto;
 
   // Center horizontally
   margin-left: auto;
@@ -16,13 +15,9 @@ const StyledSelect = styled.select`
   border: 1px solid black;
   width: 250px;
   max-height: 200px;
-  height: 100%;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
 `;
 
-const StyledOption = styled.option`
+const StyledOption = styled.div`
   text-align: center;
   font-weight: bold;
   padding: 5px;
@@ -62,7 +57,6 @@ const CitySelector = ({
   return (
     <StyledSelect
       name="cities"
-      size={NUMBER_OF_VISIBLE_OPTIONS}
       onChange={handleChange}
       onKeyUp={handleKeyUp}
       onClick={handleClick}

@@ -251,7 +251,7 @@ function App() {
           >
             <input
               value={cityPart}
-              placeholder="Uhádni dněšní město"
+              placeholder="Uhádni dnešní město"
               onChange={(event) => handleChangeCityPart(event.target.value)}
             />
           </Tippy>

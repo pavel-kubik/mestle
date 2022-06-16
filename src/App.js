@@ -210,7 +210,11 @@ function App() {
             onMount={onMount}
             onHide={onHide}
           >
-            <input value={cityPart} placeholder='Uhádni dněšní město' onChange={event => handleChangeCityPart(event.target.value)}/>
+            <input
+              value={cityPart}
+              placeholder="Uhádni dnešní město"
+              onChange={(event) => handleChangeCityPart(event.target.value)}
+            />
           </Tippy>
           {
             filteredCities.length > 0 &&

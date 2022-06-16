@@ -18,6 +18,8 @@ const StyledSelect = styled.select`
   max-height: 200px;
   height: 100%;
   -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 `;
 
 const StyledOption = styled.option`

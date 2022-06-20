@@ -178,7 +178,7 @@ function App() {
     <div className='app'>
       <div className='header'>
         <div>Skóre: {getScore(history)}</div>
-        <div onClick={() => switchToBeta()}>Městle {isBeta() ? <i style={{color: 'red'}}>beta</i> : ''}</div>
+        <div onClick={switchToBeta}>Městle {isBeta() ? <i style={{color: 'red'}}>beta</i> : ''}</div>
         <div>{new Date().toLocaleDateString("cz-CS")}</div>
       </div>
       <div className='body'>

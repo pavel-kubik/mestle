@@ -1,10 +1,12 @@
 import './guess.css'
 
-import { altitudeComparator, areaComparator, ARROW_COMPASS, countDirection, CROSS, LESS_ARROW, MORE_ARROW, populationComparator, regionComparator } from "../Util/util";
-import compass90 from '../img/compass90.png';
+import { altitudeComparator, countDirection, distanceComparator, getDistanceInKm, LESS_ARROW, MORE_ARROW, PEOPLES, populationComparator, regionComparator } from "../Util/util";
+import compass from '../img/compass_background.svg';
+import compassArrowRed from '../img/compass_arrow_red.svg';
+import compassArrowOrange from '../img/compass_arrow_orrange.svg';
+import compassPin from '../img/compass_pin.svg';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
-
 
 const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
 
@@ -23,6 +25,7 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
       case "Jihomoravský": return "Jiho- moravský";
       case "Moravskoslezský": return "Moravsko- slezský";
       case "Královéhradecký": return "Králové- hradecký";
+      case "Středočeský": return "Středo- český";
       default: return region;
     }
   }
@@ -38,16 +41,10 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
       return "stejně";
     }
   }
-  const areaGuess = areaComparator(guessedCity, targetCity);
-  const areaDiff = () => {
-    if (guessedCity.area < targetCity.area) {
-      return "větší";
-    } else if (guessedCity.area > targetCity.area) {
-      return "menší";
-    } else {
-      return "stejnou";
-    }
-  }
+
+  const distanceGuess = distanceComparator(guessedCity, targetCity);
+  const distanceDiff = getDistanceInKm(guessedCity, targetCity);
+
   const altitudeGuess = altitudeComparator(guessedCity, targetCity);
   const altitudeDiff = () => {
     if (guessedCity.altitude < targetCity.altitude) {
@@ -58,6 +55,7 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
       return "stejnou";
     }
   }
+
   const directionGuess = countDirection(guessedCity, targetCity);
   const directionDiff = (directionGuess) => {
     switch(directionGuess) {
@@ -101,21 +99,20 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
                >
           <div
             className={`guess population ${populationGuess}`}>
-            {guessedCity.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+            {`${guessedCity.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} ${PEOPLES}`}
             {valueComparator(guessedCity.population, targetCity.population)}
           </div>
         </Tippy>
         <Tippy placement="bottom"
-               content={`Hádané město má ${areaGuess !== 'red' ? "o trochu" : ""} ${areaDiff()} rozlohu.`}
-               theme={areaGuess}
+               content={`Hádané město je ${distanceDiff}\u00A0km daleko.`}
+               theme={distanceGuess}
                zIndex={9}
                disabled={!isLast || isEog}
                visible={true}
                maxWidth="70px"
                >
-          <div className={`guess area ${areaGuess}`}>
-            {Math.trunc(guessedCity.area)} km²
-            {valueComparator(guessedCity.area, targetCity.area)}
+          <div className={`guess area ${distanceGuess}`}>
+            {Math.trunc(distanceDiff)} km
           </div>
         </Tippy>
         <Tippy placement="bottom"
@@ -141,10 +138,21 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
                >
           <div
             className={`guess direction`}
-            style={{ backgroundImage: `url(${compass90})`}}
+            style={{
+              backgroundImage: `url(${compass})`,
+              backgroundRepeat: 'no-repeat'
+            }}
           >
-            <div className={`guess direction compass ${directionGuess}`}>
-              {directionGuess === 'X' ? CROSS : ARROW_COMPASS}
+            <div
+              className={`guess direction compass ${directionGuess}`}
+              style={{
+                backgroundImage: `url(${directionGuess === 'X' ?
+                  compassPin :
+                  distanceGuess === 'red' ? compassArrowRed : compassArrowOrange })`,
+                backgroundRepeat: 'no-repeat',
+                overflow: 'hidden'
+              }}
+            >
             </div>
           </div>
         </Tippy>

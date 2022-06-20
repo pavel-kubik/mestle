@@ -164,8 +164,9 @@ export const GREEN_CIRCLE = '\uD83D\uDFE2';
 export const ORANGE_CIRCLE = '\uD83D\uDFE0';
 export const WHITE_CIRCLE = '\u26AA';
 export const ARROW_COMPASS = '\u27A4';
-export const CROSS = '📌';
+export const CROSS = '\uD83D\uDCCC';
 export const LESS_ARROW = '\u25BC';
 export const MORE_ARROW = '\u25B2';
+export const PEOPLES = '\uD83D\uDC65';
 
 export const dateOfPublish = 19127;

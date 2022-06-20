@@ -1,6 +1,6 @@
 import './guess.css'
 
-import { altitudeComparator, ARROW_COMPASS, countDirection, CROSS, distanceComparator, getDistanceInKm, LESS_ARROW, MORE_ARROW, populationComparator, regionComparator } from "../Util/util";
+import { altitudeComparator, ARROW_COMPASS, countDirection, CROSS, distanceComparator, getDistanceInKm, LESS_ARROW, MORE_ARROW, PEOPLES, populationComparator, regionComparator } from "../Util/util";
 import compass90 from '../img/compass90.png';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
@@ -95,7 +95,7 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
                >
           <div
             className={`guess population ${populationGuess}`}>
-            {`${guessedCity.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} \uD83D\uDC65`}
+            {`${guessedCity.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} ${PEOPLES}`}
             {valueComparator(guessedCity.population, targetCity.population)}
           </div>
         </Tippy>

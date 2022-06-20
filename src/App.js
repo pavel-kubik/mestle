@@ -161,11 +161,24 @@ function App() {
     setShared(true);
   }
 
+  const isBeta = () => {
+    return document.cookie.split(';').some((item) => item.trim().startsWith('nf_ab='));
+  }
+
+  const switchToBeta = () => {
+    if (isBeta()) {
+      document.cookie = "nf_ab=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+    } else {
+      document.cookie = `nf_ab=develop;max-age=31536000`;
+    }
+    window.location.reload(true);
+  }
+
   return (
     <div className='app'>
       <div className='header'>
         <div>Skóre: {getScore(history)}</div>
-        <div>Městle</div>
+        <div onClick={() => switchToBeta()}>Městle {isBeta() ? <i style={{color: 'red'}}>beta</i> : ''}</div>
         <div>{new Date().toLocaleDateString("cz-CS")}</div>
       </div>
       <div className='body'>

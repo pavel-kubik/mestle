@@ -1,10 +1,9 @@
 import './guess.css'
 
-import { altitudeComparator, areaComparator, ARROW_COMPASS, countDirection, CROSS, LESS_ARROW, MORE_ARROW, populationComparator, regionComparator } from "../Util/util";
+import { altitudeComparator, ARROW_COMPASS, countDirection, CROSS, distanceComparator, getDistanceInKm, LESS_ARROW, MORE_ARROW, populationComparator, regionComparator } from "../Util/util";
 import compass90 from '../img/compass90.png';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
-
 
 const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
 
@@ -38,16 +37,10 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
       return "stejně";
     }
   }
-  const areaGuess = areaComparator(guessedCity, targetCity);
-  const areaDiff = () => {
-    if (guessedCity.area < targetCity.area) {
-      return "větší";
-    } else if (guessedCity.area > targetCity.area) {
-      return "menší";
-    } else {
-      return "stejnou";
-    }
-  }
+
+  const distanceGuess = distanceComparator(guessedCity, targetCity);
+  const distanceDiff = getDistanceInKm(guessedCity, targetCity);
+
   const altitudeGuess = altitudeComparator(guessedCity, targetCity);
   const altitudeDiff = () => {
     if (guessedCity.altitude < targetCity.altitude) {
@@ -58,6 +51,7 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
       return "stejnou";
     }
   }
+
   const directionGuess = countDirection(guessedCity, targetCity);
   const directionDiff = (directionGuess) => {
     switch(directionGuess) {
@@ -101,21 +95,20 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
                >
           <div
             className={`guess population ${populationGuess}`}>
-            {guessedCity.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+            {`${guessedCity.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} \uD83D\uDC65`}
             {valueComparator(guessedCity.population, targetCity.population)}
           </div>
         </Tippy>
         <Tippy placement="bottom"
-               content={`Hádané město má ${areaGuess !== 'red' ? "o trochu" : ""} ${areaDiff()} rozlohu.`}
-               theme={areaGuess}
+               content={`Hádané město je ${distanceDiff}\u00A0km daleko.`}
+               theme={distanceGuess}
                zIndex={9}
                disabled={!isLast || isEog}
                visible={true}
                maxWidth="70px"
                >
-          <div className={`guess area ${areaGuess}`}>
-            {Math.trunc(guessedCity.area)} km²
-            {valueComparator(guessedCity.area, targetCity.area)}
+          <div className={`guess area ${distanceGuess}`}>
+            {Math.trunc(distanceDiff)} km
           </div>
         </Tippy>
         <Tippy placement="bottom"

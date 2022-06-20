@@ -7,7 +7,7 @@ import preval from 'preval.macro'
 
 import cities from './Data/data.js';
 import Guess from './Guess/guess';
-import { altitudeComparator, areaComparator, dateOfPublish, districtComparator, GREEN_CIRCLE, normalize, ORANGE_CIRCLE, populationComparator, regionComparator, useStickyState, WHITE_CIRCLE } from './Util/util';
+import { altitudeComparator, dateOfPublish, distanceComparator, districtComparator, GREEN_CIRCLE, normalize, ORANGE_CIRCLE, populationComparator, regionComparator, useStickyState, WHITE_CIRCLE } from './Util/util';
 import { calculateTimeLeft, getRandCity, getSeedFromDate } from './Rand/rand';
 import { getEog, getGuesses, getScore, setGuesses } from './History/history';
 import Tippy from '@tippyjs/react';
@@ -138,7 +138,7 @@ function App() {
       [
         regionComparator(guess, targetCity),
         populationComparator(guess, targetCity),
-        areaComparator(guess, targetCity),
+        distanceComparator(guess, targetCity),
         altitudeComparator(guess, targetCity),
         districtComparator(guess, targetCity)
       ]
@@ -173,7 +173,7 @@ function App() {
         <div className="differences title">
           <div className="guess">Kraj</div>
           <div className="guess">Populace</div>
-          <div className="guess">Rozloha</div>
+          <div className="guess">Vzdálenost</div>
           <div className="guess">Nadmořská výška</div>
           <div className="guess">Poloha</div>
         </div>

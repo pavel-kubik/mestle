@@ -13,6 +13,7 @@ import { getEog, getGuesses, getScore, setGuesses } from './History/history';
 import Tippy from '@tippyjs/react';
 import styled from "styled-components";
 import { useSpring, animated } from "react-spring";
+import useVH from 'react-viewport-height';
 
 const Box = styled(animated.div)`
   background: orange;
@@ -24,6 +25,8 @@ const Box = styled(animated.div)`
 `;
 
 function App() {
+
+  useVH();
 
   const dateTimeStamp = preval`module.exports = new Date().toLocaleString();`
 

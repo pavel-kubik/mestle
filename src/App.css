@@ -1,11 +1,7 @@
-#root {
-  height: -webkit-fill-available;
-  height: 100vh;
-}
-
 .app {
+  min-height: calc(var(--vh, 1vh) * 100);
+  
   max-width: 800px;
-  height: 100%;
   margin: 0 10px;
 
   display: flex;

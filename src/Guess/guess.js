@@ -22,6 +22,7 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
       case "Jihomoravský": return "Jiho- moravský";
       case "Moravskoslezský": return "Moravsko- slezský";
       case "Královéhradecký": return "Králové- hradecký";
+      case "Středočeský": return "Středo- český";
       default: return region;
     }
   }

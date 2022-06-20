@@ -162,7 +162,7 @@ function App() {
   }
 
   const isBeta = () => {
-    return document.cookie.split(';').some((item) => item.trim().startsWith('nf_ab='));
+    return document.cookie.split(';').some((item) => item.trim().startsWith('nf_ab=develop'));
   }
 
   const switchToBeta = () => {

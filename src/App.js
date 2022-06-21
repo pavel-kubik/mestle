@@ -178,8 +178,12 @@ function App() {
     <div className='app'>
       <div className='header'>
         <div>Skóre: {getScore(history)}</div>
-        <div onClick={switchToBeta}>Městle {isBeta() ? <i style={{color: 'red'}}>beta</i> : ''}</div>
-        <div>{new Date().toLocaleDateString("cz-CS")}</div>
+        <div onClick={switchToBeta}>Městle {isBeta() ? <i style={{color: 'red'}}>beta </i> : ''}
+        <div className="debug">({new Date().toLocaleDateString("cz-CS")})</div>
+        </div>
+        <div>
+          <a href="https://twitter.com/MestleCz?ref_src=twsrc%5Etfw" className="twitter-follow-button" data-size="large" data-show-screen-name="false" data-show-count="false">Follow @MestleCz</a>
+        </div>
       </div>
       <div className="differences title">
           <div className="guess">Kraj</div>
@@ -187,7 +191,7 @@ function App() {
           <div className="guess">Vzdálenost</div>
           <div className="guess">Nadmořská výška</div>
           <div className="guess">Poloha</div>
-        </div>
+      </div>
       <div className='body'>
         <div className='body-background' style={{ backgroundImage: `url(${background})`}}></div>
         {
@@ -256,7 +260,7 @@ function App() {
           <div>Gratulace! Další město můžeš hádat za {timeLeft}.</div>
         </div>
       }
-      <div className="build-time">Build {dateTimeStamp}</div>
+      <div className="build-time debug">Build {dateTimeStamp}</div>
     </div>
   );
 }

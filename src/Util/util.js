@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getDistance } from 'geolib';
 
 export const countDirection = (city1, city2) => {
   const ratio = 3;
@@ -80,8 +81,19 @@ export const populationComparator = (city1, city2) => {
   return numberComparator(city1.population, city2.population);
 }
 
-export const areaComparator = (city1, city2) => {
-  return numberComparator(city1.area, city2.area);
+export const getDistanceInKm = (city1, city2) => {
+  return Math.round(getDistance(city1, city2)/1000);
+}
+
+export const distanceComparator = (city1, city2) => {
+  const dist = getDistanceInKm(city1, city2);
+  if (dist < 30) {
+    return 'green';
+  } else if (dist < 70) {
+    return 'orange';
+  } else {
+    return 'red';
+  }
 }
 
 export const altitudeComparator = (city1, city2) => {
@@ -151,9 +163,8 @@ export const ARROW_DOWN = '\u2193';
 export const GREEN_CIRCLE = '\uD83D\uDFE2';
 export const ORANGE_CIRCLE = '\uD83D\uDFE0';
 export const WHITE_CIRCLE = '\u26AA';
-export const ARROW_COMPASS = '\u27A4';
-export const CROSS = '📌';
 export const LESS_ARROW = '\u25BC';
 export const MORE_ARROW = '\u25B2';
+export const PEOPLES = '\uD83D\uDC65';
 
 export const dateOfPublish = 19127;

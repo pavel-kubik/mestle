@@ -7,7 +7,7 @@ import preval from 'preval.macro'
 
 import cities from './Data/data.js';
 import Guess from './Guess/guess';
-import { altitudeComparator, areaComparator, dateOfPublish, districtComparator, GREEN_CIRCLE, normalize, ORANGE_CIRCLE, populationComparator, regionComparator, useStickyState, WHITE_CIRCLE } from './Util/util';
+import { altitudeComparator, dateOfPublish, distanceComparator, districtComparator, GREEN_CIRCLE, normalize, ORANGE_CIRCLE, populationComparator, regionComparator, useStickyState, WHITE_CIRCLE } from './Util/util';
 import { calculateTimeLeft, getRandCity, getSeedFromDate } from './Rand/rand';
 import { getEog, getGuesses, getScore, setGuesses } from './History/history';
 import Tippy from '@tippyjs/react';
@@ -138,7 +138,7 @@ function App() {
       [
         regionComparator(guess, targetCity),
         populationComparator(guess, targetCity),
-        areaComparator(guess, targetCity),
+        distanceComparator(guess, targetCity),
         altitudeComparator(guess, targetCity),
         districtComparator(guess, targetCity)
       ]
@@ -157,7 +157,7 @@ function App() {
     navigator.clipboard.writeText(
       `Městle den #${todaySeed - dateOfPublish}\n` +
       shareResults +
-      'https://mestle.cz');
+      'https://mestle.cz\n\n#mestle');
     setShared(true);
   }
 
@@ -178,18 +178,22 @@ function App() {
     <div className='app'>
       <div className='header'>
         <div>Skóre: {getScore(history)}</div>
-        <div onClick={switchToBeta}>Městle {isBeta() ? <i style={{color: 'red'}}>beta</i> : ''}</div>
-        <div>{new Date().toLocaleDateString("cz-CS")}</div>
+        <div onClick={switchToBeta}>Městle {isBeta() ? <i style={{color: 'red'}}>beta </i> : ''}
+        <div className="debug">({new Date().toLocaleDateString("cz-CS")})</div>
+        </div>
+        <div>
+          <a href="https://twitter.com/MestleCz?ref_src=twsrc%5Etfw" className="twitter-follow-button" data-size="large" data-show-screen-name="false" data-show-count="false">TWFollow</a>
+        </div>
+      </div>
+      <div className="differences title">
+          <div className="guess">Kraj</div>
+          <div className="guess">Populace</div>
+          <div className="guess">Vzdálenost</div>
+          <div className="guess">Nadmořská výška</div>
+          <div className="guess">Poloha</div>
       </div>
       <div className='body'>
         <div className='body-background' style={{ backgroundImage: `url(${background})`}}></div>
-        <div className="differences title">
-          <div className="guess">Kraj</div>
-          <div className="guess">Populace</div>
-          <div className="guess">Rozloha</div>
-          <div className="guess">Nadmořská výška</div>
-          <div className="guess">Poloha</div>
-        </div>
         {
           getGuesses(history, todaySeed).length > 0 &&
           <>
@@ -242,13 +246,13 @@ function App() {
               </div>
             </>
           }
-          <div className={`big button ${guessEnabled ? 'enabled' : 'disabled'}`} onClick={() => handleGuess()}>Hádej</div>
+          <div className={`big button ${guessEnabled ? 'enabled' : 'disabled'}`} onClick={handleGuess}>Hádej</div>
         </div>
       }
       {
         getEog(history, todaySeed) &&  // TODO show city sign
         <div className="congratulation">
-          <div className='big button enabled' onClick={() => {handleShare()}}>Sdílej</div>
+          <div className='big button enabled' onClick={handleShare}>Sdílej</div>
           {
             shared &&
             <div className="notification">Výsledek zkopírován do schránky.</div>
@@ -256,7 +260,7 @@ function App() {
           <div>Gratulace! Další město můžeš hádat za {timeLeft}.</div>
         </div>
       }
-      <div className="build-time">Build {dateTimeStamp}</div>
+      <div className="build-time debug">Build {dateTimeStamp}</div>
     </div>
   );
 }

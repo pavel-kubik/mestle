@@ -3,7 +3,8 @@ import './guess.css'
 import { altitudeComparator, countDirection, distanceComparator, getDistanceInKm, LESS_ARROW, MORE_ARROW, PEOPLES, populationComparator, regionComparator } from "../Util/util";
 import compass from '../img/compass_background.svg';
 import compassArrowRed from '../img/compass_arrow_red.svg';
-import compassArrowOrange from '../img/compass_arrow_orrange.svg';
+import compassArrowOrange from '../img/compass_arrow_orange.svg';
+import compassArrowGreen from '../img/compass_arrow_green.svg';
 import compassPin from '../img/compass_pin.svg';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
@@ -146,10 +147,10 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
           >
             <div
               className={`guess direction compass ${directionGuess}`}
-              style={{
-                backgroundImage: `url(${directionGuess === 'X' ?
-                  compassPin :
-                  distanceGuess === 'red' ? compassArrowRed : compassArrowOrange })`,
+              style={{ backgroundImage: `url(${directionGuess === 'X' ? compassPin :
+                  distanceGuess === 'red' ? compassArrowRed : 
+                  distanceGuess === 'orange' ? compassArrowOrange :
+                  compassArrowGreen})`,
                 backgroundRepeat: 'no-repeat',
               }}
             >

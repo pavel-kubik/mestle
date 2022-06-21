@@ -182,7 +182,7 @@ function App() {
         <div className="debug">({new Date().toLocaleDateString("cz-CS")})</div>
         </div>
         <div>
-          <a href="https://twitter.com/MestleCz?ref_src=twsrc%5Etfw" className="twitter-follow-button" data-size="large" data-show-screen-name="false" data-show-count="false">Follow @MestleCz</a>
+          <a href="https://twitter.com/MestleCz?ref_src=twsrc%5Etfw" className="twitter-follow-button" data-size="large" data-show-screen-name="false" data-show-count="false">TWFollow</a>
         </div>
       </div>
       <div className="differences title">

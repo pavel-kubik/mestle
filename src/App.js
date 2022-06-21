@@ -157,7 +157,7 @@ function App() {
     navigator.clipboard.writeText(
       `Městle den #${todaySeed - dateOfPublish}\n` +
       shareResults +
-      'https://mestle.cz');
+      'https://mestle.cz\n\n#mestle');
     setShared(true);
   }
 
@@ -181,15 +181,15 @@ function App() {
         <div onClick={switchToBeta}>Městle {isBeta() ? <i style={{color: 'red'}}>beta</i> : ''}</div>
         <div>{new Date().toLocaleDateString("cz-CS")}</div>
       </div>
-      <div className='body'>
-        <div className='body-background' style={{ backgroundImage: `url(${background})`}}></div>
-        <div className="differences title">
+      <div className="differences title">
           <div className="guess">Kraj</div>
           <div className="guess">Populace</div>
           <div className="guess">Vzdálenost</div>
           <div className="guess">Nadmořská výška</div>
           <div className="guess">Poloha</div>
         </div>
+      <div className='body'>
+        <div className='body-background' style={{ backgroundImage: `url(${background})`}}></div>
         {
           getGuesses(history, todaySeed).length > 0 &&
           <>
@@ -242,13 +242,13 @@ function App() {
               </div>
             </>
           }
-          <div className={`big button ${guessEnabled ? 'enabled' : 'disabled'}`} onClick={() => handleGuess()}>Hádej</div>
+          <div className={`big button ${guessEnabled ? 'enabled' : 'disabled'}`} onClick={handleGuess}>Hádej</div>
         </div>
       }
       {
         getEog(history, todaySeed) &&  // TODO show city sign
         <div className="congratulation">
-          <div className='big button enabled' onClick={() => {handleShare()}}>Sdílej</div>
+          <div className='big button enabled' onClick={handleShare}>Sdílej</div>
           {
             shared &&
             <div className="notification">Výsledek zkopírován do schránky.</div>

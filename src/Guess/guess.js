@@ -140,7 +140,8 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
             className={`guess direction`}
             style={{
               backgroundImage: `url(${compass})`,
-              backgroundRepeat: 'no-repeat'
+              backgroundRepeat: 'no-repeat',
+              overflow: 'hidden'
             }}
           >
             <div
@@ -150,7 +151,6 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
                   compassPin :
                   distanceGuess === 'red' ? compassArrowRed : compassArrowOrange })`,
                 backgroundRepeat: 'no-repeat',
-                overflow: 'hidden'
               }}
             >
             </div>

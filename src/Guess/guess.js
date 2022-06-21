@@ -61,13 +61,13 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
   const directionDiff = (directionGuess) => {
     switch(directionGuess) {
       case 'N': return "sever";
-      case 'NE': return "severo-východ";
+      case 'NE': return "severo- východ";
       case 'E': return "východ";
-      case 'SE': return "jiho-východ";
+      case 'SE': return "jihovýchod";
       case 'S': return "jih";
-      case 'SW': return "jiho-západ";
+      case 'SW': return "jihozápad";
       case 'W': return "západ";
-      case 'NW': return "severo-západ";
+      case 'NW': return "severo- západ";
       default: return "stejném místě";
     }
   }

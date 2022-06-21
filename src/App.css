@@ -83,7 +83,8 @@
 }
 
 .differences.title .guess {
-  font-size: medium;
+  font-size: small;
+  margin: 0;
 }
 
 .guess {
@@ -252,6 +253,10 @@
   .app {
     width: 90%;
     margin: 0 auto;
+  }
+
+  .differences.title .guess {
+    font-size: medium;
   }
 
   .guess {

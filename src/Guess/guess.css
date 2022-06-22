@@ -29,3 +29,15 @@ div.tippy-box {
 .tippy-box[data-theme~='red'] > .tippy-arrow {
   color: #800;
 }
+
+.filter-green {
+  filter: invert(32%) sepia(90%) saturate(1756%) hue-rotate(96deg) brightness(103%) contrast(105%);
+}
+
+.filter-orange {
+  filter: invert(76%) sepia(33%) saturate(6082%) hue-rotate(0deg) brightness(104%) contrast(105%);
+}
+
+.filter-red {
+  filter: invert(8%) sepia(96%) saturate(7360%) hue-rotate(7deg) brightness(83%) contrast(113%);
+}

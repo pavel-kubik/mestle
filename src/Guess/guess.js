@@ -98,7 +98,7 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
                >
           <div
             className={`guess population ${populationGuess}`}>
-            {`${guessedCity.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} ${PEOPLES}`}
+            {`${guessedCity.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}`}
             {valueComparator(guessedCity.population, targetCity.population)}
           </div>
         </Tippy>

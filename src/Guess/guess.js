@@ -1,6 +1,6 @@
 import './guess.css'
 
-import { altitudeComparator, countDirection, distanceComparator, getDistanceInKm, LESS_ARROW, MORE_ARROW, PEOPLES, populationComparator, regionComparator } from "../Util/util";
+import { altitudeComparator, countDirection, distanceComparator, getDistanceInKm, LESS_ARROW, MORE_ARROW, populationComparator, regionComparator } from "../Util/util";
 import compass from '../img/compass_background.svg';
 import compassArrow from '../img/compass_arrow.svg';
 import compassPin from '../img/compass_pin.svg';

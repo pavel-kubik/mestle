@@ -144,7 +144,7 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
             }}
           >
             <div
-              className={`guess direction compass ${directionGuess} filter-${distanceGuess}`}
+              className={`guess direction compass ${directionGuess} ${directionGuess !== 'X' ? 'filter-' + distanceGuess : ''}`}
               style={{ backgroundImage: `url(${directionGuess === 'X' ? compassPin : compassArrow})`,
                 backgroundRepeat: 'no-repeat',
               }}

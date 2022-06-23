@@ -263,7 +263,7 @@ function App() {
           <Tippy
             content={getResult()}
             allowHTML={true}
-            placement='right'
+            placement='auto'
             visible={true}
           >
             <div className='big button enabled' onClick={handleShare}>Zkopíruj výsledek</div>

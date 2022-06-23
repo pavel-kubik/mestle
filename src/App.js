@@ -14,6 +14,7 @@ import Tippy from '@tippyjs/react';
 import styled from "styled-components";
 import { useSpring, animated } from "react-spring";
 import useVH from 'react-viewport-height';
+import { TwitterFollowButton } from 'react-twitter-embed';
 
 const Box = styled(animated.div)`
   background: orange;
@@ -132,32 +133,35 @@ function App() {
     setFilteredCities([]);
   }
 
-  const handleShare = () => {
+  const getResult = () => {
     const targetCity = getRandCity(cities, todaySeed);
-    const shareResults = getGuesses(history, todaySeed).map(guess =>
-      [
-        regionComparator(guess, targetCity),
-        populationComparator(guess, targetCity),
-        distanceComparator(guess, targetCity),
-        altitudeComparator(guess, targetCity),
-        districtComparator(guess, targetCity)
-      ]
-    ).map(guess =>
-      guess
-        .map(item => {
-          switch(item) {
-            case "green": return GREEN_CIRCLE;
-            case "orange": return ORANGE_CIRCLE;
-            default:
-              return WHITE_CIRCLE;
-          }
-        })
-        .reduce((out, i) => out += i + ' ', '')
-    ).reduce((out, line) => out += line + '\n', '');
-    navigator.clipboard.writeText(
-      `Městle den #${todaySeed - dateOfPublish}\n` +
-      shareResults +
-      'https://mestle.cz\n\n#mestle');
+    return `Městle den #${todaySeed - dateOfPublish}\n` +
+      getGuesses(history, todaySeed).map(guess =>
+        [
+          regionComparator(guess, targetCity),
+          populationComparator(guess, targetCity),
+          distanceComparator(guess, targetCity),
+          altitudeComparator(guess, targetCity),
+          districtComparator(guess, targetCity)
+        ]
+      ).map(guess =>
+        guess
+          .map(item => {
+            switch(item) {
+              case "green": return GREEN_CIRCLE;
+              case "orange": return ORANGE_CIRCLE;
+              default:
+                return WHITE_CIRCLE;
+            }
+          })
+          .reduce((out, i) => out += i + ' ', '')
+      ).reduce((out, line) => out += line + '\n', '') +
+      'https://mestle.cz\n\n#mestle';
+  }
+
+  const handleShare = () => {
+    const shareResults = getResult();
+    navigator.clipboard.writeText(shareResults);
     setShared(true);
   }
 
@@ -181,9 +185,13 @@ function App() {
         <div onClick={switchToBeta}>Městle {isBeta() ? <i style={{color: 'red'}}>beta </i> : ''}
         <div className="debug">({new Date().toLocaleDateString("cz-CS")})</div>
         </div>
-        <div>
-          <a href="https://twitter.com/MestleCz?ref_src=twsrc%5Etfw" className="twitter-follow-button" data-size="large" data-show-screen-name="false" data-show-count="false">TWFollow</a>
-        </div>
+        <TwitterFollowButton
+          options={{
+            showScreenName: 'false',
+            showCount: 'false',
+            size: 'large'
+          }}
+          screenName={'MestleCz'}/>
       </div>
       <div className="differences title">
           <div className="guess">Kraj</div>
@@ -252,7 +260,14 @@ function App() {
       {
         getEog(history, todaySeed) &&  // TODO show city sign
         <div className="congratulation">
-          <div className='big button enabled' onClick={handleShare}>Sdílej</div>
+          <Tippy
+            content={getResult()}
+            allowHTML={true}
+            placement='right'
+            visible={true}
+          >
+            <div className='big button enabled' onClick={handleShare}>Zkopíruj výsledek</div>
+          </Tippy>
           {
             shared &&
             <div className="notification">Výsledek zkopírován do schránky.</div>

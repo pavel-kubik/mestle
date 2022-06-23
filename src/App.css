@@ -20,6 +20,10 @@
   justify-content: space-between;
 }
 
+.header div {
+  align-self: center;
+}
+
 .body {
   position: relative;
   flex: 1 1 auto;
@@ -252,6 +256,10 @@
 .notification {
   font-size: small;
   color: darkred;
+}
+
+.tippy-content {
+  white-space: pre-line;
 }
 
 @media screen and (min-width: 550px) {

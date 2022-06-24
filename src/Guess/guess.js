@@ -85,6 +85,7 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
                disabled={!isLast || isEog}
                visible={true}
                maxWidth={tooltipWidth}
+               className="guess-tippy"
                >
           <div className={`guess district ${regionGuess}`}>
             {regionFilter(guessedCity.region)}
@@ -97,6 +98,7 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
                disabled={!isLast || isEog}
                visible={true}
                maxWidth={tooltipWidth}
+               className="guess-tippy"
                >
           <div
             className={`guess population ${populationGuess}`}>
@@ -111,6 +113,7 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
                disabled={!isLast || isEog}
                visible={true}
                maxWidth={tooltipWidth}
+               className="guess-tippy"
                >
           <div className={`guess area ${distanceGuess}`}>
             {Math.trunc(distanceDiff)} km
@@ -123,6 +126,7 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
                disabled={!isLast || isEog}
                visible={true}
                maxWidth={tooltipWidth}
+               className="guess-tippy"
                >
           <div className={`guess altitude ${altitudeGuess}`}>
             {guessedCity.altitude} m.n.m.
@@ -136,6 +140,7 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
                disabled={!isLast || isEog}
                visible={true}
                maxWidth={tooltipWidth}
+               className="guess-tippy"
                >
           <div
             className={`guess direction`}

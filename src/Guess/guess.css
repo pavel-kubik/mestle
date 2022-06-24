@@ -30,6 +30,10 @@ div.tippy-box {
   color: #800;
 }
 
+.guess-tippy {
+  width: 90px;
+}
+
 .filter-green {
   filter: invert(37%) sepia(63%) saturate(1938%) hue-rotate(93deg) brightness(98%) contrast(103%);
 }

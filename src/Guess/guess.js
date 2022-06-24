@@ -9,6 +9,8 @@ import 'tippy.js/dist/tippy.css'; // optional
 
 const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
 
+  const tooltipWidth = '18vw';
+
   const valueComparator = (number1, number2) => {
     if (number1 > number2) {
       return <div className="less-guess">{LESS_ARROW}</div>;
@@ -82,7 +84,7 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
                zIndex={9}
                disabled={!isLast || isEog}
                visible={true}
-               maxWidth="70px"
+               maxWidth={tooltipWidth}
                >
           <div className={`guess district ${regionGuess}`}>
             {regionFilter(guessedCity.region)}
@@ -94,7 +96,7 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
                zIndex={9}
                disabled={!isLast || isEog}
                visible={true}
-               maxWidth="70px"
+               maxWidth={tooltipWidth}
                >
           <div
             className={`guess population ${populationGuess}`}>
@@ -108,7 +110,7 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
                zIndex={9}
                disabled={!isLast || isEog}
                visible={true}
-               maxWidth="70px"
+               maxWidth={tooltipWidth}
                >
           <div className={`guess area ${distanceGuess}`}>
             {Math.trunc(distanceDiff)} km
@@ -120,7 +122,7 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
                zIndex={9}
                disabled={!isLast || isEog}
                visible={true}
-               maxWidth="70px"
+               maxWidth={tooltipWidth}
                >
           <div className={`guess altitude ${altitudeGuess}`}>
             {guessedCity.altitude} m.n.m.
@@ -133,7 +135,7 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
                zIndex={9}
                disabled={!isLast || isEog}
                visible={true}
-               maxWidth="70px"
+               maxWidth={tooltipWidth}
                >
           <div
             className={`guess direction`}

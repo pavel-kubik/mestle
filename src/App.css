@@ -79,8 +79,8 @@
 .guess {
   flex: 0 0 auto;
   border-radius: 50%;
-  width: 16vw;
-  height: 16vw;
+  width: 18vw;
+  height: 18vw;
   font-size: small;
   position: relative;
 
@@ -261,7 +261,7 @@
   white-space: pre-line;
 }
 
-@media screen and (min-width: 550px) {
+@media screen and (min-width: 500px) {
   .differences.title .guess {
     font-size: medium;
   }

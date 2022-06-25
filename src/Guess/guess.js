@@ -9,7 +9,7 @@ import 'tippy.js/dist/tippy.css'; // optional
 
 const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
 
-  const tooltipWidth = '18vw';
+  const tooltipWidth = '17vw';
 
   const valueComparator = (number1, number2) => {
     if (number1 > number2) {

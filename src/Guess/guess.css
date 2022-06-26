@@ -29,3 +29,19 @@ div.tippy-box {
 .tippy-box[data-theme~='red'] > .tippy-arrow {
   color: #800;
 }
+
+.guess-tippy {
+  width: 80px;
+}
+
+.filter-green {
+  filter: invert(37%) sepia(63%) saturate(1938%) hue-rotate(93deg) brightness(98%) contrast(103%);
+}
+
+.filter-orange {
+  filter: invert(76%) sepia(33%) saturate(6082%) hue-rotate(0deg) brightness(104%) contrast(105%);
+}
+
+.filter-red {
+  filter: invert(8%) sepia(96%) saturate(7360%) hue-rotate(7deg) brightness(83%) contrast(113%);
+}

@@ -1,15 +1,15 @@
 import './guess.css'
 
-import { altitudeComparator, countDirection, distanceComparator, getDistanceInKm, LESS_ARROW, MORE_ARROW, PEOPLES, populationComparator, regionComparator } from "../Util/util";
+import { altitudeComparator, countDirection, distanceComparator, getDistanceInKm, LESS_ARROW, MORE_ARROW, populationComparator, regionComparator } from "../Util/util";
 import compass from '../img/compass_background.svg';
-import compassArrowRed from '../img/compass_arrow_red.svg';
-import compassArrowOrange from '../img/compass_arrow_orange.svg';
-import compassArrowGreen from '../img/compass_arrow_green.svg';
+import compassArrow from '../img/compass_arrow.svg';
 import compassPin from '../img/compass_pin.svg';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
 
 const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
+
+  const tooltipWidth = '17vw';
 
   const valueComparator = (number1, number2) => {
     if (number1 > number2) {
@@ -84,7 +84,8 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
                zIndex={9}
                disabled={!isLast || isEog}
                visible={true}
-               maxWidth="70px"
+               maxWidth={tooltipWidth}
+               className="guess-tippy"
                >
           <div className={`guess district ${regionGuess}`}>
             {regionFilter(guessedCity.region)}
@@ -96,11 +97,12 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
                zIndex={9}
                disabled={!isLast || isEog}
                visible={true}
-               maxWidth="70px"
+               maxWidth={tooltipWidth}
+               className="guess-tippy"
                >
           <div
             className={`guess population ${populationGuess}`}>
-            {`${guessedCity.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} ${PEOPLES}`}
+            {`${guessedCity.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}`}
             {valueComparator(guessedCity.population, targetCity.population)}
           </div>
         </Tippy>
@@ -110,7 +112,8 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
                zIndex={9}
                disabled={!isLast || isEog}
                visible={true}
-               maxWidth="70px"
+               maxWidth={tooltipWidth}
+               className="guess-tippy"
                >
           <div className={`guess area ${distanceGuess}`}>
             {Math.trunc(distanceDiff)} km
@@ -122,7 +125,8 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
                zIndex={9}
                disabled={!isLast || isEog}
                visible={true}
-               maxWidth="70px"
+               maxWidth={tooltipWidth}
+               className="guess-tippy"
                >
           <div className={`guess altitude ${altitudeGuess}`}>
             {guessedCity.altitude} m.n.m.
@@ -135,7 +139,8 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
                zIndex={9}
                disabled={!isLast || isEog}
                visible={true}
-               maxWidth="70px"
+               maxWidth={tooltipWidth}
+               className="guess-tippy"
                >
           <div
             className={`guess direction`}
@@ -146,11 +151,8 @@ const Guess = ({idx, guessedCity, targetCity, isLast, isEog}) => {
             }}
           >
             <div
-              className={`guess direction compass ${directionGuess}`}
-              style={{ backgroundImage: `url(${directionGuess === 'X' ? compassPin :
-                  distanceGuess === 'red' ? compassArrowRed : 
-                  distanceGuess === 'orange' ? compassArrowOrange :
-                  compassArrowGreen})`,
+              className={`guess direction compass ${directionGuess} ${directionGuess !== 'X' ? 'filter-' + distanceGuess : ''}`}
+              style={{ backgroundImage: `url(${directionGuess === 'X' ? compassPin : compassArrow})`,
                 backgroundRepeat: 'no-repeat',
               }}
             >

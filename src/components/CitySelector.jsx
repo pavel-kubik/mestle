@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import styled from "styled-components";
+import useShortcut from "../hooks/useShortcut";
 
 const StyledSelect = styled.div`
   position: absolute;
@@ -22,6 +23,13 @@ const StyledOption = styled.div`
   font-weight: bold;
   padding: 5px;
   font-size: 16px;
+
+  ${({ selected }) => selected && "background-color: lightgray;"}
+
+  &:hover {
+    background-color: #f3f3f3;
+    cursor: pointer;
+  }
 `;
 
 const CitySelector = ({
@@ -32,33 +40,61 @@ const CitySelector = ({
 }) => {
   const [localSelected, setLocalSelected] = useState(options[0]?.name);
 
-  const handleChange = useCallback(
-    (event) => setLocalSelected(event.target.value),
-    []
-  );
-
-  const handleKeyUp = useCallback(
+  const handleClick = useCallback(
     (event) => {
-      const keyPressed = event.keyCode || event.which;
-      const isEnterKeyPressed = keyPressed === 13;
-      if (isEnterKeyPressed && localSelected) {
-        setSelectedOption(localSelected);
+      const cityToSelect =
+        event.target?.attributes?.getNamedItem("value")?.value;
+
+      if (cityToSelect) {
+        setLocalSelected(cityToSelect);
+        setSelectedOption(cityToSelect);
       }
     },
-    [localSelected, setSelectedOption]
+    [setSelectedOption]
   );
 
-  const handleClick = useCallback(() => {
-    if (localSelected) {
-      setSelectedOption(localSelected);
-    }
-  }, [localSelected, setSelectedOption]);
+  useShortcut(
+    "moveOptionUp",
+    useCallback(() => {
+      const index = options.findIndex(
+        (option) => option?.name === localSelected
+      );
+
+      if (index <= 0) {
+        return;
+      }
+
+      setLocalSelected(options[index - 1]?.name);
+    }, [options, localSelected])
+  );
+
+  useShortcut(
+    "moveOptionDown",
+    useCallback(() => {
+      const index = options.findIndex(
+        (option) => option?.name === localSelected
+      );
+
+      if (index >= options.length - 1) {
+        return;
+      }
+
+      setLocalSelected(options[index + 1]?.name);
+    }, [options, localSelected])
+  );
+
+  useShortcut(
+    "selectOption",
+    useCallback(() => {
+      if (localSelected) {
+        setSelectedOption(localSelected);
+      }
+    }, [localSelected, setSelectedOption])
+  );
 
   return (
     <StyledSelect
       name="cities"
-      onChange={handleChange}
-      onKeyUp={handleKeyUp}
       onClick={handleClick}
       onDoubleClick={handleClick}
     >

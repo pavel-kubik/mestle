@@ -21,7 +21,7 @@
   },
   "scripts": {
     "lint": "eslint  --fix src/**/*.js",
-    "format": "prettier src/**/*.js --write. --config ./.prettierrc",
+    "format": "prettier src/**/*.js --write --config ./.prettierrc",
     "predeploy": "cross-env GENERATE_SOURCEMAP=false react-scripts build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",

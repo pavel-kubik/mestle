@@ -240,6 +240,7 @@ function App() {
           >
             <input
               value={cityPart}
+              type="search"
               placeholder="Uhádni dnešní město"
               onChange={(event) => handleChangeCityPart(event.target.value)}
             />

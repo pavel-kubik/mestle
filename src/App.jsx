@@ -206,6 +206,10 @@ function App() {
           screenName={'MestleCz'}
         />
       </div>
+      <div className='requirements'>
+        <span>Dnešní hádané město má tento znak</span>
+        <img src={getRandCity(cities, todaySeed).signUrl} />
+      </div>
       <div className='differences title'>
         <div className='guess'>Kraj</div>
         <div className='guess'>Populace</div>
@@ -271,7 +275,7 @@ function App() {
           </div>
         </div>
       )}
-      {getEog(history, todaySeed) && ( // TODO show city sign
+      {getEog(history, todaySeed) && (
         <div className='congratulation'>
           <Tippy content={getResult()} allowHTML={true} placement='auto' visible={true}>
             <div className='big button enabled' onClick={handleShare}>

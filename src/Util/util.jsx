@@ -96,10 +96,6 @@ export const distanceComparator = (city1, city2) => {
   }
 };
 
-export const altitudeComparator = (city1, city2) => {
-  return numberComparator(city1.altitude, city2.altitude);
-};
-
 export const districtComparator = (city1, city2) => {
   return countDirection(city1, city2) === 'X' ? 'green' : 'blue';
 };

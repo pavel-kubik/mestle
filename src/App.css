@@ -1,6 +1,6 @@
 .app {
   height: calc(var(--vh, 1vh) * 100);
-  
+
   max-width: 800px;
   width: 95%;
   left: 0;
@@ -40,7 +40,7 @@
   background-size: contain;
   opacity: 0.15;
   width: 100%;
-  height: 100%;;
+  height: 100%;
 }
 
 .guess-box {
@@ -62,13 +62,19 @@
 .guess-city {
   text-align: left;
   font-weight: bold;
+  font-size: x-large;
+  color: darkgray;
+}
+
+.guessLine {
+  padding-top: 10px;
 }
 
 .differences {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
-  opacity: .99;
+  opacity: 0.99;
   max-width: 800px;
 }
 
@@ -128,7 +134,7 @@
 
 .guess.direction.compass {
   font-size: x-large;
-  color: #C00;
+  color: #c00;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -167,6 +173,11 @@
   transform: rotate(315deg);
 }
 
+.guess.sign img {
+  width: auto;
+  height: 90%;
+}
+
 .less-guess {
   position: absolute;
   width: auto;
@@ -184,7 +195,7 @@
 .city-list {
   position: absolute;
   border: 1px solid black;
-  bottom: 145px;  /* TODO make better */
+  bottom: 145px; /* TODO make better */
   width: 200px;
   background-color: white;
   left: 0;
@@ -261,15 +272,15 @@
   white-space: pre-line;
 }
 
-input[type="search"]::-webkit-search-cancel-button {
+input[type='search']::-webkit-search-cancel-button {
   /* Remove default */
   -webkit-appearance: none;
 
   /* Now your own custom styles */
-   height: 14px;
-   width: 14px;
-   display: block;
-   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAn0lEQVR42u3UMQrDMBBEUZ9WfQqDmm22EaTyjRMHAlM5K+Y7lb0wnUZPIKHlnutOa+25Z4D++MRBX98MD1V/trSppLKHqj9TTBWKcoUqffbUcbBBEhTjBOV4ja4l4OIAZThEOV6jHO8ARXD+gPPvKMABinGOrnu6gTNUawrcQKNCAQ7QeTxORzle3+sDfjJpPCqhJh7GixZq4rHcc9l5A9qZ+WeBhgEuAAAAAElFTkSuQmCC);
+  height: 14px;
+  width: 14px;
+  display: block;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAn0lEQVR42u3UMQrDMBBEUZ9WfQqDmm22EaTyjRMHAlM5K+Y7lb0wnUZPIKHlnutOa+25Z4D++MRBX98MD1V/trSppLKHqj9TTBWKcoUqffbUcbBBEhTjBOV4ja4l4OIAZThEOV6jHO8ARXD+gPPvKMABinGOrnu6gTNUawrcQKNCAQ7QeTxORzle3+sDfjJpPCqhJh7GixZq4rHcc9l5A9qZ+WeBhgEuAAAAAElFTkSuQmCC);
   /* setup all the background tweaks for our custom icon */
   background-repeat: no-repeat;
 

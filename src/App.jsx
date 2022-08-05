@@ -8,7 +8,6 @@ import preval from 'preval.macro';
 import cities from './Data/data.js';
 import Guess from './Guess/guess';
 import {
-  altitudeComparator,
   dateOfPublish,
   distanceComparator,
   districtComparator,
@@ -148,7 +147,7 @@ function App() {
           regionComparator(guess, targetCity),
           populationComparator(guess, targetCity),
           distanceComparator(guess, targetCity),
-          altitudeComparator(guess, targetCity),
+          guess == targetCity ? 'green' : 'red',
           districtComparator(guess, targetCity)
         ])
         .map((guess) =>
@@ -214,7 +213,7 @@ function App() {
         <div className='guess'>Kraj</div>
         <div className='guess'>Populace</div>
         <div className='guess'>Vzdálenost</div>
-        <div className='guess'>Nadmořská výška</div>
+        <div className='guess'>Znak</div>
         <div className='guess'>Poloha</div>
       </div>
       <div className='body'>

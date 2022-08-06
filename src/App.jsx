@@ -188,6 +188,17 @@ function App() {
     window.location.reload(true);
   };
 
+  // encode last part of url
+  const obfuscateUrl = (url) => {
+    const urlParts = url.split('/');
+    const lastPart = urlParts[urlParts.length - 1];
+    const lastPartEncoded = lastPart
+      .split('')
+      .map((c) => '%' + c.charCodeAt(0).toString(16))
+      .join('');
+    return url.replace(lastPart, lastPartEncoded);
+  };
+
   return (
     <div className='app'>
       <div className='header'>
@@ -207,7 +218,7 @@ function App() {
       </div>
       <div className='requirements'>
         <span>Dnešní hádané město má tento znak</span>
-        <img src={getRandCity(cities, todaySeed).signUrl} />
+        <img src={obfuscateUrl(getRandCity(cities, todaySeed).signUrl)} />
       </div>
       <div className='differences title'>
         <div className='guess'>Kraj</div>

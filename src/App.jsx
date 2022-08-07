@@ -188,7 +188,6 @@ function App() {
     window.location.reload(true);
   };
 
-  // encode last part of url
   const obfuscateUrl = (url) => {
     const prefix = 'https://upload.wikimedia.org/wikipedia/commons/thumb/';
     const url2ndPart = unescape(url.substring(prefix.length));

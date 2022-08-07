@@ -190,13 +190,26 @@ function App() {
 
   // encode last part of url
   const obfuscateUrl = (url) => {
-    const urlParts = url.split('/');
-    const lastPart = urlParts[urlParts.length - 1];
-    const lastPartEncoded = lastPart
-      .split('')
-      .map((c) => '%' + c.charCodeAt(0).toString(16))
-      .join('');
-    return url.replace(lastPart, lastPartEncoded);
+    const prefix = 'https://upload.wikimedia.org/wikipedia/commons/thumb/';
+    const url2ndPart = unescape(url.substring(prefix.length));
+    return (
+      prefix +
+      url2ndPart
+        .split('/')
+        .map((part) => {
+          return part
+            .split('')
+            .map((c) => {
+              if (c.charCodeAt(0).toString(16).length <= 2) {
+                return '%' + c.charCodeAt(0).toString(16).padStart(2, '0');
+              } else {
+                return escape(c);
+              }
+            })
+            .join('');
+        })
+        .join('/')
+    );
   };
 
   return (

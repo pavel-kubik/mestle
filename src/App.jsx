@@ -8,7 +8,6 @@ import preval from 'preval.macro';
 import cities from './Data/data.js';
 import Guess from './Guess/guess';
 import {
-  altitudeComparator,
   dateOfPublish,
   distanceComparator,
   districtComparator,
@@ -148,7 +147,7 @@ function App() {
           regionComparator(guess, targetCity),
           populationComparator(guess, targetCity),
           distanceComparator(guess, targetCity),
-          altitudeComparator(guess, targetCity),
+          guess == targetCity ? 'green' : 'red',
           districtComparator(guess, targetCity)
         ])
         .map((guess) =>
@@ -189,6 +188,30 @@ function App() {
     window.location.reload(true);
   };
 
+  // encode last part of url
+  const obfuscateUrl = (url) => {
+    const prefix = 'https://upload.wikimedia.org/wikipedia/commons/thumb/';
+    const url2ndPart = unescape(url.substring(prefix.length));
+    return (
+      prefix +
+      url2ndPart
+        .split('/')
+        .map((part) => {
+          return part
+            .split('')
+            .map((c) => {
+              if (c.charCodeAt(0).toString(16).length <= 2) {
+                return '%' + c.charCodeAt(0).toString(16).padStart(2, '0');
+              } else {
+                return escape(c);
+              }
+            })
+            .join('');
+        })
+        .join('/')
+    );
+  };
+
   return (
     <div className='app'>
       <div className='header'>
@@ -206,11 +229,15 @@ function App() {
           screenName={'MestleCz'}
         />
       </div>
+      <div className='requirements'>
+        <span>Dnešní hádané město má tento znak</span>
+        <img src={obfuscateUrl(getRandCity(cities, todaySeed).signUrl)} />
+      </div>
       <div className='differences title'>
         <div className='guess'>Kraj</div>
         <div className='guess'>Populace</div>
         <div className='guess'>Vzdálenost</div>
-        <div className='guess'>Nadmořská výška</div>
+        <div className='guess'>Znak</div>
         <div className='guess'>Poloha</div>
       </div>
       <div className='body'>
@@ -271,7 +298,7 @@ function App() {
           </div>
         </div>
       )}
-      {getEog(history, todaySeed) && ( // TODO show city sign
+      {getEog(history, todaySeed) && (
         <div className='congratulation'>
           <Tippy content={getResult()} allowHTML={true} placement='auto' visible={true}>
             <div className='big button enabled' onClick={handleShare}>

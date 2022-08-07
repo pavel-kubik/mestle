@@ -3,7 +3,6 @@ import './guess.css';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  altitudeComparator,
   countDirection,
   distanceComparator,
   getDistanceInKm,
@@ -61,17 +60,6 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
   const distanceGuess = distanceComparator(guessedCity, targetCity);
   const distanceDiff = getDistanceInKm(guessedCity, targetCity);
 
-  const altitudeGuess = altitudeComparator(guessedCity, targetCity);
-  const altitudeDiff = () => {
-    if (guessedCity.altitude < targetCity.altitude) {
-      return 'větší';
-    } else if (guessedCity.altitude > targetCity.altitude) {
-      return 'menší';
-    } else {
-      return 'stejnou';
-    }
-  };
-
   const directionGuess = countDirection(guessedCity, targetCity);
   const directionDiff = (directionGuess) => {
     switch (directionGuess) {
@@ -97,7 +85,7 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
   };
 
   return (
-    <div>
+    <div className='guessLine'>
       <div className='guess-city'>
         {idx + 1}. {guessedCity.name}
       </div>
@@ -147,21 +135,9 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
         >
           <div className={`guess area ${distanceGuess}`}>{Math.trunc(distanceDiff)} km</div>
         </Tippy>
-        <Tippy
-          placement='bottom'
-          content={`Hádané město má ${altitudeGuess !== 'red' ? 'o trochu' : ''} ${altitudeDiff()} nadmořskou výšku.`}
-          theme={altitudeGuess}
-          zIndex={9}
-          disabled={!isLast || isEog}
-          visible={true}
-          maxWidth={tooltipWidth}
-          className='guess-tippy'
-        >
-          <div className={`guess altitude ${altitudeGuess}`}>
-            {guessedCity.altitude} m.n.m.
-            {valueComparator(guessedCity.altitude, targetCity.altitude)}
-          </div>
-        </Tippy>
+        <div className={`guess sign`}>
+          <img src={guessedCity.signUrl} />
+        </div>
         <Tippy
           placement='bottom'
           content={`Hádané město je na ${directionDiff(directionGuess)}.`}

@@ -307,6 +307,10 @@ input[type='search']::-webkit-search-cancel-button {
   height: 100%;
 }
 
+.login-user {
+  height: 30px;
+}
+
 @media screen and (min-width: 500px) {
   .differences.title .guess {
     font-size: medium;

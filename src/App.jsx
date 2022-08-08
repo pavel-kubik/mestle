@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import './App.css';
 import background from './img/background.svg';
+import userNotLogged from './img/user_not_logged.svg';
 
 import preval from 'preval.macro';
 
@@ -214,7 +215,14 @@ function App() {
   return (
     <div className='app'>
       <div className='header'>
-        <div>Skóre: {getScore(history)}</div>
+        <img
+          className='login-user'
+          src={userNotLogged}
+          title={`Nepřihlášený uživatel.\nKlikni pro přihlášení nebo vytvoření účtu.\n\nSkóre: ${getScore(history)}`}
+          onClick={() => {
+            window.location.href = '/login';
+          }}
+        />
         <div onClick={switchToBeta}>
           Městle {isBeta() ? <i style={{ color: 'red' }}>beta </i> : ''}
           <div className='debug'>({new Date().toLocaleDateString('cz-CS')})</div>

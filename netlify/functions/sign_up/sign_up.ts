@@ -2,17 +2,32 @@ import { Handler } from '@netlify/functions';
 
 const { MongoClient } = require('mongodb');
 
-const mongoClient = new MongoClient(process.env.MONGODB_URI);
+let cachedDb = null;
 
-const clientPromise = mongoClient.connect();
+const connectToDatabase = async (uri) => {
+  // we can cache the access to our database to speed things up a bit
+  // (this is the only thing that is safe to cache here)
+  if (cachedDb) return cachedDb;
+
+  const client = await MongoClient.connect(uri, {
+    useUnifiedTopology: true
+  });
+
+  cachedDb = client.db(process.env.MONGODB_DATABASE);
+
+  return cachedDb;
+};
 
 export const handler: Handler = async (event, context) => {
   const { name, passwordHash } = event.queryStringParameters;
 
+  context.callbackWaitsForEmptyEventLoop = false;
+
   // TODO: Create user in database and return user object
   try {
-    const database = (await clientPromise).db(process.env.MONGODB_DATABASE);
-    //console.log('DB: ' + JSON.stringify(database));
+    console.log('Connect to: ' + process.env.MONGODB_URI);
+    console.log('Connect to: ' + process.env.MONGODB_DATABASE);
+    const database = await connectToDatabase(process.env.MONGODB_URI);
     const collection = database.collection('user');
     //console.log('Collection: ' + JSON.stringify(collection));
 

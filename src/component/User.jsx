@@ -43,7 +43,7 @@ const User = ({ history }) => {
         </div>
       </div>
       <div>
-        Přihlásit se k beta testování. Dostanete testovac funkce jako první!
+        Přihlaš se k beta testování. Dostaneš nové funkce jako první!
         <BetaSwitch />
       </div>
       <div className='login-sign-up-form'>

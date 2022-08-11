@@ -33,20 +33,22 @@ const App = () => {
           />
           <Link to='/'>
             <div>
-              Městle {isBeta() ? <i style={{ color: 'red' }}>beta </i> : ''}
+              Městle {isBeta() ? <i className='beta'>beta </i> : ''}
               <div className='debug'>({new Date().toLocaleDateString('cz-CS')})</div>
             </div>
           </Link>
           {/*TODO <Link to='/leader-board'>Leader Board</Link>*/}
           {/*TODO <Link to='/help'>How To Play</Link>*/}
-          <TwitterFollowButton
-            options={{
-              showScreenName: 'false',
-              showCount: 'false',
-              size: 'large'
-            }}
-            screenName={'MestleCz'}
-          />
+          <div className='twitter-wrapper'>
+            <TwitterFollowButton
+              options={{
+                showScreenName: 'false',
+                showCount: 'false',
+                size: 'large'
+              }}
+              screenName={'MestleCz'}
+            />
+          </div>
         </div>
         <Routes>
           <Route exact path='/' element={<GuessBoard history={history} setHistory={setHistory} />}></Route>

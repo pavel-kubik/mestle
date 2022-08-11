@@ -31,15 +31,14 @@ const App = () => {
               window.location.href = '/user';
             }}
           />
-          {/*<Link to='/'>GuessBoard</Link>*/}
           <Link to='/'>
             <div>
               Městle {isBeta() ? <i style={{ color: 'red' }}>beta </i> : ''}
               <div className='debug'>({new Date().toLocaleDateString('cz-CS')})</div>
             </div>
           </Link>
-          <Link to='/leader-board'>Leader Board</Link>
-          <Link to='/help'>How To Play</Link>
+          {/*TODO <Link to='/leader-board'>Leader Board</Link>*/}
+          {/*TODO <Link to='/help'>How To Play</Link>*/}
           <TwitterFollowButton
             options={{
               showScreenName: 'false',

@@ -1,0 +1,109 @@
+.user-info {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.user-info > div {
+  border-bottom: 1px solid black;
+  padding: 20px 0;
+}
+
+.login-sign-up-form {
+  width: 50%;
+}
+
+.tab-group {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px 0;
+  user-select: none;
+}
+
+.tab-group:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.tab-group li div {
+  display: block;
+  text-decoration: none;
+  padding: 15px;
+  background: silver;
+  color: #fff;
+  font-size: 20px;
+  float: left;
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+.tab-group li div:hover {
+  background: lightskyblue;
+  color: white;
+}
+
+.tab-group li div.active {
+  background: blue;
+  color: white;
+}
+
+.field-wrap {
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  user-select: none;
+}
+
+.field-wrap input {
+  width: 80%;
+}
+
+.daily-statistics {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 10px);
+  grid-template-rows: repeat(7, 10px);
+  grid-gap: 1px;
+  height: 78px;
+  grid-auto-flow: column;
+  background-color: black;
+  padding: 1px;
+  width: fit-content;
+}
+
+.daily-statistics div {
+  background-color: silver;
+}
+
+.daily-statistics div.empty {
+  background-color: white;
+}
+
+.daily-statistics div.solved1 {
+  background-color: #0f0;
+}
+
+.daily-statistics div.solved2 {
+  background-color: #0b0;
+}
+
+.daily-statistics div.solved3 {
+  background-color: #090;
+}
+
+.daily-statistics div.solved4 {
+  background-color: #060;
+}
+
+.daily-statistics div.solved5 {
+  background-color: #a60;
+}
+
+.daily-statistics div.solved6 {
+  background-color: #a00;
+}

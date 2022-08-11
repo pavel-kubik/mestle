@@ -11,7 +11,7 @@
 }
 
 .login-sign-up-form {
-  width: 50%;
+  width: 100%;
 }
 
 .tab-group {
@@ -106,4 +106,10 @@
 
 .daily-statistics div.solved6 {
   background-color: #a00;
+}
+
+@media screen and (min-width: 500px) {
+  .login-sign-up-form {
+    width: 50%;
+  }
 }

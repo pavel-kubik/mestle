@@ -46,57 +46,59 @@ const User = ({ history }) => {
         Přihlaš se k beta testování. Dostaneš nové funkce jako první!
         <BetaSwitch />
       </div>
-      <div className='login-sign-up-form'>
-        <ul className='tab-group'>
-          <li className='tab active'>
-            <div onClick={changeAuthMode} className={isSignIn() ? 'active' : ''}>
-              Přihlášení
+      <div className='auth'>
+        <div className='login-sign-up-form'>
+          <ul className='tab-group'>
+            <li className='tab active'>
+              <div onClick={changeAuthMode} className={isSignIn() ? 'active' : ''}>
+                Přihlášení
+              </div>
+            </li>
+            <li className='tab'>
+              <div onClick={changeAuthMode} className={isSignUp() ? 'active' : ''}>
+                Registrace
+              </div>
+            </li>
+          </ul>
+          {isSignIn() && (
+            <div className='auth-form'>
+              <form>
+                <div className='field-wrap'>
+                  <label>Jméno</label>
+                  <input type='text' autoComplete='off' />
+                </div>
+                <div className='field-wrap'>
+                  <label>Heslo</label>
+                  <input type='password' autoComplete='off' />
+                </div>
+                <div className='button' onClick={signIn}>
+                  Přihlásit
+                </div>
+              </form>
             </div>
-          </li>
-          <li className='tab'>
-            <div onClick={changeAuthMode} className={isSignUp() ? 'active' : ''}>
-              Registrace
+          )}
+          {isSignUp() && (
+            <div className='auth-form'>
+              <form>
+                <div className='field-wrap'>
+                  <label>Jméno</label>
+                  <input type='text' autoComplete='off' />
+                </div>
+                <div className='field-wrap'>
+                  <label>Email</label>
+                  <input type='text' autoComplete='off' />
+                </div>
+                <div className='field-wrap'>
+                  <label>Heslo</label>
+                  <input type='password' autoComplete='off' />
+                </div>
+                <div className='button' onClick={signUp}>
+                  Registrovat
+                </div>
+              </form>
             </div>
-          </li>
-        </ul>
-        {isSignIn() && (
-          <div className='auth-form'>
-            <form>
-              <div className='field-wrap'>
-                <label>Jméno</label>
-                <input type='text' autoComplete='off' />
-              </div>
-              <div className='field-wrap'>
-                <label>Heslo</label>
-                <input type='password' autoComplete='off' />
-              </div>
-              <div className='button' onClick={signIn}>
-                Přihlásit
-              </div>
-            </form>
-          </div>
-        )}
-        {isSignUp() && (
-          <div className='auth-form'>
-            <form>
-              <div className='field-wrap'>
-                <label>Jméno</label>
-                <input type='text' autoComplete='off' />
-              </div>
-              <div className='field-wrap'>
-                <label>Email</label>
-                <input type='text' autoComplete='off' />
-              </div>
-              <div className='field-wrap'>
-                <label>Heslo</label>
-                <input type='password' autoComplete='off' />
-              </div>
-              <div className='button' onClick={signUp}>
-                Registrovat
-              </div>
-            </form>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

@@ -24,9 +24,62 @@ const User = ({ history }) => {
     return authMode === 'signin';
   };
 
-  const signIn = () => {};
+  // https://linguinecode.com/post/how-to-get-form-data-on-submit-in-reactjs
+  const [formData, updateFormData] = useState({});
 
-  const signUp = () => {};
+  const handleChange = (e) => {
+    updateFormData({
+      ...formData,
+      [e.target.name]: e.target.value.trim()
+    });
+    console.log(formData);
+  };
+
+  const signIn = async () => {
+    console.log(formData);
+    const response = await fetch('/.netlify/functions/sign_in', {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: formData.username,
+        password: formData.password //TODO use bcrypt
+      })
+    });
+    if (response.status === 200) {
+      setAuthMode('logged');
+    } else {
+      const data = response.json();
+      console.log('Error: ' + data);
+    }
+  };
+
+  const signUp = async () => {
+    // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+    console.log(formData);
+    const response = await fetch('/.netlify/functions/sign_up', {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: formData.username,
+        email: formData.email,
+        password: formData.password //TODO use bcrypt
+      })
+    });
+    if (response.status === 200) {
+      setAuthMode('signin');
+    } else {
+      const data = response.json();
+      console.log('Error: ' + data);
+    }
+  };
 
   return (
     <div className='user-info'>
@@ -65,11 +118,11 @@ const User = ({ history }) => {
               <form>
                 <div className='field-wrap'>
                   <label>Jméno</label>
-                  <input type='text' autoComplete='off' />
+                  <input type='text' name='username' value={formData.username} autoComplete='off' onChange={handleChange} />
                 </div>
                 <div className='field-wrap'>
                   <label>Heslo</label>
-                  <input type='password' autoComplete='off' />
+                  <input type='password' name='password' value={formData.password} autoComplete='off' onChange={handleChange} />
                 </div>
                 <div className='button' onClick={signIn}>
                   Přihlásit
@@ -82,15 +135,15 @@ const User = ({ history }) => {
               <form>
                 <div className='field-wrap'>
                   <label>Jméno</label>
-                  <input type='text' autoComplete='off' />
+                  <input type='text' name='username' value={formData.username} autoComplete='off' onChange={handleChange} />
                 </div>
                 <div className='field-wrap'>
                   <label>Email</label>
-                  <input type='text' autoComplete='off' />
+                  <input type='text' name='email' autoComplete='off' onChange={handleChange} />
                 </div>
                 <div className='field-wrap'>
                   <label>Heslo</label>
-                  <input type='password' autoComplete='off' />
+                  <input type='password' name='password' value={formData.password} autoComplete='off' onChange={handleChange} />
                 </div>
                 <div className='button' onClick={signUp}>
                   Registrovat

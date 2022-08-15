@@ -19,24 +19,22 @@ const connectToDatabase = async (uri) => {
 };
 
 export const handler: Handler = async (event, context) => {
-  const { name, passwordHash } = event.queryStringParameters;
+  const { username, email, password } = JSON.parse(event.body);
 
   context.callbackWaitsForEmptyEventLoop = false;
 
   // TODO: Create user in database and return user object
   try {
-    console.log('Connect to: ' + process.env.MONGODB_URI);
-    console.log('Connect to: ' + process.env.MONGODB_DATABASE);
     const database = await connectToDatabase(process.env.MONGODB_URI);
     const collection = database.collection('user');
-    //console.log('Collection: ' + JSON.stringify(collection));
 
     // TODO store IP address and allow store only few new users from same IP per time frame
 
     collection.insertOne(
       {
-        name: name,
-        passwordHash: passwordHash
+        username: username,
+        email: email,
+        passwordHash: password
       },
       function (err, res) {
         if (err) throw err;
@@ -51,7 +49,7 @@ export const handler: Handler = async (event, context) => {
     return {
       statusCode: 200,
       body: JSON.stringify({
-        message: `Hello, ${name}!`
+        message: `Hello, ${username}!`
       })
     };
   } catch (error) {

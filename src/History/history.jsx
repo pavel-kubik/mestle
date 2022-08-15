@@ -1,5 +1,4 @@
 export const getScore = (history) => {
-  console.log(history);
   return Object.keys(history)
     .map((day) => history[day].eog)
     .filter((eog) => eog).length;

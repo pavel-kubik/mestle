@@ -1,8 +1,8 @@
 import { countDirection, neigbourRegion } from './util';
 
 test('test direction', () => {
-  expect(countDirection({latitude: -1, longtitude: 0}, {latitude: 1, longtitude: .3})).toBe('NW');
-})
+  expect(countDirection({ latitude: -1, longtitude: 0 }, { latitude: 1, longtitude: 0.3 })).toBe('NW');
+});
 
 test('test neigbour regions', () => {
   expect(neigbourRegion('Hl. m. Praha', 'Středočeský')).toBe(true);

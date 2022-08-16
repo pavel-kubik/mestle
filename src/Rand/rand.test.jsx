@@ -1,5 +1,6 @@
-import { exportedForTesting, getSeedFromDate } from "./rand";
-const { dateOfSwitchToRandomPreferSmallUnique, random, randomSimple, randomPreferSmall, randomPreferSmallUnique, MEMORY } = exportedForTesting;
+import { exportedForTesting, getSeedFromDate } from './rand';
+const { dateOfSwitchToRandomPreferSmallUnique, random, randomSimple, randomPreferSmall, randomPreferSmallUnique, MEMORY } =
+  exportedForTesting;
 
 test('test unique random number generator', () => {
   const SIZE = 100;
@@ -31,14 +32,14 @@ test('test unique random number generator memory', () => {
 test('test small number generator', () => {
   const size = 1000;
   const seeds = [...Array(size).keys()];
-  const rands = seeds.map(s => randomPreferSmall(s, size));
-  const smaller = rands.filter(x => x < size/2);
-  const bigger = rands.filter(x => x >= size/2);
-  expect(smaller.length > 2*bigger.length).toBe(true);
+  const rands = seeds.map((s) => randomPreferSmall(s, size));
+  const smaller = rands.filter((x) => x < size / 2);
+  const bigger = rands.filter((x) => x >= size / 2);
+  expect(smaller.length > 2 * bigger.length).toBe(true);
 });
 
 test('test date seed generator', () => {
-  expect(getSeedFromDate(new Date("1 Jan 1970 00:00:00 GMT"))).toBe(0);
-  expect(getSeedFromDate(new Date("1 Jan 1970 10:00:00 GMT"))).toBe(0);
-  expect(getSeedFromDate(new Date("1 Jan 1970 23:00:00 GMT"))).toBe(0);
+  expect(getSeedFromDate(new Date('1 Jan 1970 00:00:00 GMT'))).toBe(0);
+  expect(getSeedFromDate(new Date('1 Jan 1970 10:00:00 GMT'))).toBe(0);
+  expect(getSeedFromDate(new Date('1 Jan 1970 23:00:00 GMT'))).toBe(0);
 });

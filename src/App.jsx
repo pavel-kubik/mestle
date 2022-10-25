@@ -13,6 +13,7 @@ import LeaderBoard from './component/LeaderBoard';
 import HowToPlay from './component/HowToPlay';
 
 import userNotLogged from './img/user_not_logged.svg';
+import LanguageSwitch from './component/LanguageSwitch';
 
 const App = () => {
   // permanent
@@ -40,6 +41,7 @@ const App = () => {
           </Link>
           {/*TODO <Link to='/leader-board'>Leader Board</Link>*/}
           {/*TODO <Link to='/help'>How To Play</Link>*/}
+          <LanguageSwitch />
           <div className='twitter-wrapper'>
             <TwitterFollowButton
               options={{

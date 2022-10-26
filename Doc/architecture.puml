@@ -1,0 +1,7 @@
+@startuml
+[WWW @ Netlify] as Netlify
+[AWS lambda] as AWS
+[MongoDB Atlas] as Atlas
+Netlify <-> AWS
+AWS <-> Atlas
+@enduml

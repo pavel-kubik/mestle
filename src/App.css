@@ -12,6 +12,11 @@
   justify-content: space-between;
 }
 
+.header a {
+  color: #000;
+  text-decoration: none;
+}
+
 .header {
   font-size: larger;
   border-bottom: 1px solid black;
@@ -27,196 +32,23 @@
   align-self: center;
 }
 
-.body {
-  position: relative;
-  flex: 1 1 auto;
-  overflow-y: auto;
-  user-select: none;
+.beta {
+  color: red;
+  position: fixed;
+  padding-left: 5px;
 }
 
-.body-background {
-  position: absolute;
-  background-repeat: no-repeat;
-  background-size: contain;
-  opacity: 0.15;
-  width: 100%;
-  height: 100%;
+.twitter-wrapper {
+  width: 90px;
 }
 
-.guess-box {
-  border-top: 1px solid black;
-  background-color: white;
-  flex: 0 0 0;
-
-  position: relative;
-  padding: 10px 0;
-  text-align: center;
-  font-weight: bold;
-  z-index: 10;
-}
-
-.guess-box input {
-  font-size: x-large;
-}
-
-.guess-city {
-  text-align: left;
-  font-weight: bold;
-  font-size: x-large;
-  color: darkgray;
-}
-
-.guessLine {
-  padding-top: 10px;
-}
-
-.differences {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  opacity: 0.99;
-  max-width: 800px;
-}
-
-.differences.last {
-  padding-bottom: 100px;
-}
-
-.guess {
-  flex: 0 0 auto;
-  border-radius: 50%;
-  width: 18vw;
-  height: 18vw;
-  font-size: small;
-  position: relative;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.differences.title .guess {
-  font-size: small;
-  font-weight: bold;
-  margin: 0;
-  height: auto;
-}
-
-.guess.green {
-  background-color: #0a0;
-  border: 1px solid #080;
-  color: white;
-}
-
-.guess.orange {
-  background-color: #fa0;
-  border: 1px solid #a80;
-  color: white;
-}
-
-.guess.red {
-  background-color: #a00;
-  border: 1px solid #800;
-  color: white;
-}
-
-.guess.blue {
-  background-color: #00a;
-  border: 1px solid #008;
-  color: white;
-}
-
-.guess.direction {
-  position: relative;
-  background-size: contain;
-}
-
-.guess.direction.compass {
-  font-size: x-large;
-  color: #c00;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-}
-
-.guess.direction.compass.N {
-  transform: rotate(0deg);
-}
-
-.guess.direction.compass.NE {
-  transform: rotate(45deg);
-}
-
-.guess.direction.compass.E {
-  transform: rotate(90deg);
-}
-
-.guess.direction.compass.SE {
-  transform: rotate(135deg);
-}
-
-.guess.direction.compass.S {
-  transform: rotate(180deg);
-}
-
-.guess.direction.compass.SW {
-  transform: rotate(225deg);
-}
-
-.guess.direction.compass.W {
-  transform: rotate(270deg);
-}
-
-.guess.direction.compass.NW {
-  transform: rotate(315deg);
-}
-
-.guess.sign img {
-  width: auto;
-  height: 90%;
-}
-
-.less-guess {
-  position: absolute;
-  width: auto;
-  height: auto;
-  bottom: 0;
-}
-
-.more-guess {
-  position: absolute;
-  width: auto;
-  height: auto;
-  top: 0;
-}
-
-.city-list {
-  position: absolute;
-  border: 1px solid black;
-  bottom: 145px; /* TODO make better */
-  width: 200px;
-  background-color: white;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-.city-list > div {
-  padding: 5px;
+.login-user {
+  cursor: pointer;
 }
 
 .button {
   border-radius: 20px;
   cursor: pointer;
-}
-
-.big.button {
-  font-size: xx-large;
   border: 1px solid blue;
   background-color: #00a;
   color: white;
@@ -227,6 +59,16 @@
   margin-left: auto;
   margin-right: auto;
   width: 200px;
+  text-align: center;
+  user-select: none;
+}
+
+.button.left {
+  margin-left: 0;
+}
+
+.big.button {
+  font-size: xx-large;
 }
 
 .button.enabled {
@@ -239,37 +81,6 @@
   border: 1px solid grey;
   background-color: #aaa;
   cursor: default;
-}
-
-.congratulation {
-  font-size: x-large;
-  font-weight: bold;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  background-color: silver;
-  border-radius: 20px;
-  margin-bottom: 20px;
-  z-index: 10;
-}
-
-.debug {
-  color: silver;
-  font-size: xx-small;
-}
-
-.build-time {
-  z-index: 0;
-  text-align: right;
-}
-
-.notification {
-  font-size: small;
-  color: darkred;
-}
-
-.tippy-content {
-  white-space: pre-line;
 }
 
 input[type='search']::-webkit-search-cancel-button {
@@ -286,35 +97,4 @@ input[type='search']::-webkit-search-cancel-button {
 
   /* icon size */
   background-size: 14px;
-}
-
-.requirements {
-  height: 100px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 10px;
-  border-bottom: 1px solid black;
-}
-
-.requirements span {
-  padding: 0 20px;
-}
-
-.requirements img {
-  padding: 0 20px;
-  height: 100%;
-}
-
-@media screen and (min-width: 500px) {
-  .differences.title .guess {
-    font-size: medium;
-  }
-
-  .guess {
-    width: 90px;
-    height: 90px;
-    font-size: medium;
-  }
 }

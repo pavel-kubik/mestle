@@ -28,8 +28,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "lint": "eslint --fix src/**/*.js",
-    "format": "prettier src/**/*.js --write --config ./.prettierrc",
+    "lint": "eslint --fix src --ext .js,.jsx,.ts,.tsx",
+    "format": "prettier src/**/*.js* --write --config ./.prettierrc",
     "predeploy": "cross-env GENERATE_SOURCEMAP=false react-scripts build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",

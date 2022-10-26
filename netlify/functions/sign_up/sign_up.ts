@@ -1,6 +1,8 @@
 import { Handler } from '@netlify/functions';
 
 const { MongoClient } = require('mongodb');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 let cachedDb = null;
 
@@ -23,34 +25,38 @@ export const handler: Handler = async (event, context) => {
 
   context.callbackWaitsForEmptyEventLoop = false;
 
-  // TODO: Create user in database and return user object
   try {
     const database = await connectToDatabase(process.env.MONGODB_URI);
     const collection = database.collection('user');
 
     // TODO store IP address and allow store only few new users from same IP per time frame
 
-    collection.insertOne(
-      {
-        username: username,
-        email: email,
-        passwordHash: password
-      },
-      function (err, res) {
-        if (err) throw err;
-        console.log('1 document inserted: ' + JSON.stringify(res));
+    const encryptedPassword = await bcrypt.hash(password, 10);
 
-        collection.find({}).toArray(function (err, result) {
-          if (err) throw err;
-          console.log('Found: ' + JSON.stringify(result));
-        });
+    // TODO ensure email and username unique
+
+    const res = await collection.insertOne({
+      username: username,
+      email: email,
+      password: encryptedPassword
+    });
+    console.log('1 document inserted: ' + JSON.stringify(res));
+
+    const token = jwt.sign(
+      { user_id: res.insertedId, email }, //
+      process.env.TOKEN_KEY, //
+      {
+        expiresIn: '7d'
       }
     );
+    console.log(token);
+
     return {
       statusCode: 200,
-      body: JSON.stringify({
-        message: `Hello, ${username}!`
-      })
+      headers: {
+        'x-access-token': token
+      },
+      body: JSON.stringify(token)
     };
   } catch (error) {
     return { statusCode: 500, body: error.toString() };

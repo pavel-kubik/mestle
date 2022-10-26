@@ -85,15 +85,17 @@ const User = ({ history }) => {
     <div className='user-info'>
       <div className='statistics'>
         <div>Uhádnutých měst: {getUserScore()}</div>
-        <div className='daily-statistics'>
-          <div className='empty'></div>
-          <div className='solved1'></div>
-          <div className='solved2'></div>
-          <div className='solved3'></div>
-          <div className='solved4'></div>
-          <div className='solved5'></div>
-          <div className='solved6'></div>
-        </div>
+        {false && (
+          <div className='daily-statistics'>
+            <div className='empty'></div>
+            <div className='solved1'></div>
+            <div className='solved2'></div>
+            <div className='solved3'></div>
+            <div className='solved4'></div>
+            <div className='solved5'></div>
+            <div className='solved6'></div>
+          </div>
+        )}
       </div>
       <div>
         Přihlaš se k beta testování. Dostaneš nové funkce jako první!
@@ -116,41 +118,46 @@ const User = ({ history }) => {
           {isSignIn() && (
             <div className='auth-form'>
               <form>
-                <div className='field-wrap'>
-                  <label>Jméno</label>
-                  <input type='text' name='username' value={formData.username} autoComplete='off' onChange={handleChange} />
-                </div>
-                <div className='field-wrap'>
-                  <label>Heslo</label>
-                  <input type='password' name='password' value={formData.password} autoComplete='off' onChange={handleChange} />
-                </div>
-                <div className='button' onClick={signIn}>
-                  Přihlásit
-                </div>
+                <fieldset disabled='true'>
+                  <div className='field-wrap'>
+                    <label>Jméno</label>
+                    <input type='text' name='username' value={formData.username} autoComplete='off' onChange={handleChange} />
+                  </div>
+                  <div className='field-wrap'>
+                    <label>Heslo</label>
+                    <input type='password' name='password' value={formData.password} autoComplete='off' onChange={handleChange} />
+                  </div>
+                  <div className='button' onClick={signIn}>
+                    Přihlásit
+                  </div>
+                </fieldset>
               </form>
             </div>
           )}
           {isSignUp() && (
             <div className='auth-form'>
               <form>
-                <div className='field-wrap'>
-                  <label>Jméno</label>
-                  <input type='text' name='username' value={formData.username} autoComplete='off' onChange={handleChange} />
-                </div>
-                <div className='field-wrap'>
-                  <label>Email</label>
-                  <input type='text' name='email' autoComplete='off' onChange={handleChange} />
-                </div>
-                <div className='field-wrap'>
-                  <label>Heslo</label>
-                  <input type='password' name='password' value={formData.password} autoComplete='off' onChange={handleChange} />
-                </div>
-                <div className='button' onClick={signUp}>
-                  Registrovat
-                </div>
+                <fieldset disabled='true'>
+                  <div className='field-wrap'>
+                    <label>Jméno</label>
+                    <input type='text' name='username' value={formData.username} autoComplete='off' onChange={handleChange} />
+                  </div>
+                  <div className='field-wrap'>
+                    <label>Email</label>
+                    <input type='text' name='email' autoComplete='off' onChange={handleChange} />
+                  </div>
+                  <div className='field-wrap'>
+                    <label>Heslo</label>
+                    <input type='password' name='password' value={formData.password} autoComplete='off' onChange={handleChange} />
+                  </div>
+                  <div className='button' onClick={signUp}>
+                    Registrovat
+                  </div>
+                </fieldset>
               </form>
             </div>
           )}
+          <div style={{ color: 'red' }}>Na přihlašování se pracuje. Sledujte nás na sociálních sítích.</div>
         </div>
       </div>
     </div>

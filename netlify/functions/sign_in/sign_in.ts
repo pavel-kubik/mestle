@@ -1,6 +1,8 @@
 import { Handler } from '@netlify/functions';
 
 const { MongoClient } = require('mongodb');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 let cachedDb = null;
 
@@ -19,7 +21,7 @@ const connectToDatabase = async (uri) => {
 };
 
 export const handler: Handler = async (event, context) => {
-  const { username, password } = JSON.parse(event.body);
+  const { email, password } = JSON.parse(event.body);
 
   context.callbackWaitsForEmptyEventLoop = false;
 
@@ -27,21 +29,28 @@ export const handler: Handler = async (event, context) => {
     const database = await connectToDatabase(process.env.MONGODB_URI);
     const collection = database.collection('user');
 
-    console.log('Query: ' + username);
+    console.log('Query: ' + email);
 
-    const userData = await collection.findOne({ username: username });
+    const userData = await collection.findOne({ email: email });
 
     console.log('Found: ' + JSON.stringify(userData));
 
     if (userData) {
-      if (userData.passwordHash == password) {
-        //TODO generate token and return it
+      if (bcrypt.compare(password, userData.passwordHash)) {
+        const token = jwt.sign(
+          { user_id: userData._id, email }, //
+          process.env.TOKEN_KEY, //
+          {
+            expiresIn: '7d'
+          }
+        );
+        console.log(token);
 
         return {
           statusCode: 200,
-          body: JSON.stringify({
-            token: 'token'
-          })
+          headers: {
+            'x-access-token': token
+          }
         };
       } else {
         console.log('Password is incorrect');

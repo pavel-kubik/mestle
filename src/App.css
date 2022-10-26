@@ -60,6 +60,7 @@
   margin-right: auto;
   width: 200px;
   text-align: center;
+  user-select: none;
 }
 
 .button.left {

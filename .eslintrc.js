@@ -1,10 +1,10 @@
 module.exports = {
-  root: true, 
+  root: true,
   parserOptions: {
-    ecmaVersion: 2020, 
-    sourceType: 'module', 
+    ecmaVersion: 2020,
+    sourceType: 'module',
     ecmaFeatures: {
-      jsx: true 
+      jsx: true
     }
   },
   settings: {
@@ -14,8 +14,8 @@ module.exports = {
   },
   env: {
     jest: true,
-    browser: true, 
-    amd: true, 
+    browser: true,
+    amd: true,
     node: true,
     es6: true
   },
@@ -26,6 +26,7 @@ module.exports = {
   ],
   rules: {
     'no-unused-vars': ['error', { vars: 'all', args: 'after-used', ignoreRestSiblings: false }],
-    'prettier/prettier': ['error', {}, { usePrettierrc: true }] 
+    'prettier/prettier': ['error', {}, { usePrettierrc: true }],
+    'comma-dangle': ['error', 'never']
   }
-}
+};

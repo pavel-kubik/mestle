@@ -33,7 +33,8 @@ const App = () => {
           />
           <Link to='/'>
             <div>
-              Městle {isBeta() ? <i className='beta'>beta </i> : ''}
+              <span>Městle</span>
+              {isBeta() ? <span style={{ color: 'red', fontStyle: 'italic' }}> beta</span> : ''}
               <div className='debug'>({new Date().toLocaleDateString('cz-CS')})</div>
             </div>
           </Link>

@@ -32,12 +32,6 @@
   align-self: center;
 }
 
-.beta {
-  color: red;
-  position: fixed;
-  padding-left: 5px;
-}
-
 .twitter-wrapper {
   width: 90px;
 }

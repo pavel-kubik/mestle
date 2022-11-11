@@ -9,11 +9,12 @@ const LanguageSwitch = () => {
     if (language === LANGUAGES.cs) {
       setLanguage(LANGUAGES.en);
       setStorageLanguage(LANGUAGES.en);
-      return;
+    } else {
+      setLanguage(LANGUAGES.cs);
+      setStorageLanguage(LANGUAGES.cs);
     }
 
-    setLanguage(LANGUAGES.cs);
-    setStorageLanguage(LANGUAGES.cs);
+    window.location.reload();
   }, [language]);
 
   return (

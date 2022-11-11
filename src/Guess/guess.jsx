@@ -16,6 +16,7 @@ import compassArrow from '../img/compass_arrow.svg';
 import compassPin from '../img/compass_pin.svg';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
+import { t } from '../Util/translate';
 
 const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
   const tooltipWidth = '17vw';
@@ -49,11 +50,11 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
   const populationGuess = populationComparator(guessedCity, targetCity);
   const populationDiff = () => {
     if (guessedCity.population < targetCity.population) {
-      return 'více';
+      return t('components.guess.populationDiff.more');
     } else if (guessedCity.population > targetCity.population) {
-      return 'méně';
+      return t('components.guess.populationDiff.less');
     } else {
-      return 'stejně';
+      return t('components.guess.populationDiff.same');
     }
   };
 
@@ -64,23 +65,23 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
   const directionDiff = (directionGuess) => {
     switch (directionGuess) {
       case 'N':
-        return 'sever';
+        return t('components.guess.directionDiff.north');
       case 'NE':
-        return 'severo- východ';
+        return t('components.guess.directionDiff.northEast');
       case 'E':
-        return 'východ';
+        return t('components.guess.directionDiff.east');
       case 'SE':
-        return 'jihovýchod';
+        return t('components.guess.directionDiff.southEast');
       case 'S':
-        return 'jih';
+        return t('components.guess.directionDiff.south');
       case 'SW':
-        return 'jihozápad';
+        return t('components.guess.directionDiff.southWest');
       case 'W':
-        return 'západ';
+        return t('components.guess.directionDiff.west');
       case 'NW':
-        return 'severo- západ';
+        return t('components.guess.directionDiff.northWest');
       default:
-        return 'stejném místě';
+        return t('components.guess.directionDiff.same');
     }
   };
 
@@ -94,10 +95,10 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
           placement='bottom'
           content={
             regionGuess === 'green'
-              ? 'Hádané město je ve stejném kraji.'
+              ? t('components.guess.regionDiff.same')
               : regionGuess === 'orange'
-              ? 'Hádané město je v sousedním kraji.'
-              : 'Hádané město je v jiném kraji.'
+              ? t('components.guess.regionDiff.neighbour')
+              : t('components.guess.regionDiff.other')
           }
           theme={regionGuess}
           zIndex={9}
@@ -110,7 +111,10 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
         </Tippy>
         <Tippy
           placement='bottom'
-          content={`Hádané město má ${populationGuess !== 'red' ? 'o trochu' : ''} ${populationDiff()} obyvatel.`}
+          content={t('components.guess.populationDiff.title', {
+            prefix: populationGuess !== 'red' ? t('components.guess.populationDiff.prefix') : '',
+            diff: populationDiff()
+          })}
           theme={populationGuess}
           zIndex={9}
           disabled={!isLast || isEog}
@@ -125,7 +129,7 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
         </Tippy>
         <Tippy
           placement='bottom'
-          content={`Hádané město je ${distanceDiff}\u00A0km daleko.`}
+          content={t('components.guess.distanceDiff.title', { distanceDiff })}
           theme={distanceGuess}
           zIndex={9}
           disabled={!isLast || isEog}
@@ -140,7 +144,7 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
         </div>
         <Tippy
           placement='bottom'
-          content={`Hádané město je na ${directionDiff(directionGuess)}.`}
+          content={t('components.guess.directionDiff.title', { directionDiff: directionDiff(directionGuess) })}
           theme={directionGuess === 'X' ? 'green' : 'red'}
           zIndex={9}
           disabled={!isLast || isEog}

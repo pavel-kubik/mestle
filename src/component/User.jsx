@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { getScore } from '../History/history';
 import BetaSwitch from './BetaSwitch';
+import { TwitterFollowButton } from 'react-twitter-embed';
 
 import './User.css';
 import { t } from '../Util/translate';
@@ -159,6 +160,16 @@ const User = ({ history }) => {
             </div>
           )}
           <div style={{ color: 'red' }}>{t('components.user.login.futureFeature')}</div>
+          <div className='twitter-wrapper'>
+            <TwitterFollowButton
+              options={{
+                showScreenName: 'false',
+                showCount: 'false',
+                size: 'large'
+              }}
+              screenName={'MestleCz'}
+            />
+          </div>
         </div>
       </div>
     </div>

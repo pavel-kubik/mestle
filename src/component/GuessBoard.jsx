@@ -25,6 +25,7 @@ import Tippy from '@tippyjs/react';
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
 import useVH from 'react-viewport-height';
+import { t } from '../Util/translate';
 
 const Box = styled(animated.div)`
   background: orange;
@@ -137,7 +138,7 @@ function GuessBoard({ history, setHistory }) {
   const getResult = () => {
     const targetCity = getRandCity(cities, todaySeed);
     return (
-      `Městle den #${todaySeed - dateOfPublish}\n` +
+      t('components.guessBoard.todayDate', { date: todaySeed - dateOfPublish }) +
       getGuesses(history, todaySeed)
         .map((guess) => [
           regionComparator(guess, targetCity),
@@ -197,15 +198,15 @@ function GuessBoard({ history, setHistory }) {
   return (
     <>
       <div className='requirements'>
-        <span>Dnešní hádané město má tento znak</span>
+        <span>{t('components.guessBoard.todayCityBadgeTitle')}</span>
         <img src={obfuscateUrl(getRandCity(cities, todaySeed).signUrl)} />
       </div>
       <div className='differences title'>
-        <div className='guess'>Kraj</div>
-        <div className='guess'>Populace</div>
-        <div className='guess'>Vzdálenost</div>
-        <div className='guess'>Znak</div>
-        <div className='guess'>Poloha</div>
+        <div className='guess'>{t('components.guessBoard.differences.district')}</div>
+        <div className='guess'>{t('components.guessBoard.differences.population')}</div>
+        <div className='guess'>{t('components.guessBoard.differences.distance')}</div>
+        <div className='guess'>{t('components.guessBoard.differences.badge')}</div>
+        <div className='guess'>{t('components.guessBoard.differences.location')}</div>
       </div>
       <div className='body'>
         <div className='body-background' style={{ backgroundImage: `url(${background})` }}></div>
@@ -230,7 +231,7 @@ function GuessBoard({ history, setHistory }) {
           <Tippy
             render={(attrs) => (
               <Box style={props} {...attrs}>
-                Začni náhodným městem a pak zlepšuj odhad.
+                {t('components.guessBoard.guessInput.label')}
               </Box>
             )}
             placement='top'
@@ -245,7 +246,7 @@ function GuessBoard({ history, setHistory }) {
             <input
               value={cityPart}
               type='search'
-              placeholder='Uhádni dnešní město'
+              placeholder={t('components.guessBoard.guessInput.placeholder')}
               onChange={(event) => handleChangeCityPart(event.target.value)}
             />
           </Tippy>
@@ -261,7 +262,7 @@ function GuessBoard({ history, setHistory }) {
             </>
           )}
           <div className={`big button ${guessEnabled ? 'enabled' : 'disabled'}`} onClick={handleGuess}>
-            Hádej
+            {t('components.guessBoard.guessInput.submit')}
           </div>
         </div>
       )}
@@ -269,14 +270,14 @@ function GuessBoard({ history, setHistory }) {
         <div className='congratulation'>
           <Tippy content={getResult()} allowHTML={true} placement='auto' visible={true}>
             <div className='big button enabled' onClick={handleShare}>
-              Zkopíruj výsledek
+              {t('components.guessBoard.guessResult.copy')}
             </div>
           </Tippy>
-          {shared && <div className='notification'>Výsledek zkopírován do schránky.</div>}
-          <div>Gratulace! Další město můžeš hádat za {timeLeft}.</div>
+          {shared && <div className='notification'>{t('components.guessBoard.guessResult.copyDone')}</div>}
+          <div>{t('components.guessBoard.guessResult.title', { timeLeft })}</div>
         </div>
       )}
-      <div className='build-time debug'>Build {dateTimeStamp}</div>
+      <div className='build-time debug'>{t('app.buildNumber', { dateTimeStamp })}</div>
     </>
   );
 }

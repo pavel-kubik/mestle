@@ -4,6 +4,7 @@ import { getScore } from '../History/history';
 import BetaSwitch from './BetaSwitch';
 
 import './User.css';
+import { t } from '../Util/translate';
 
 const User = ({ history }) => {
   let [authMode, setAuthMode] = useState('signin');
@@ -84,7 +85,7 @@ const User = ({ history }) => {
   return (
     <div className='user-info'>
       <div className='statistics'>
-        <div>Uhádnutých měst: {getUserScore()}</div>
+        <div>{t('components.user.guessCities.title', { score: getUserScore() })}</div>
         {false && (
           <div className='daily-statistics'>
             <div className='empty'></div>
@@ -98,7 +99,7 @@ const User = ({ history }) => {
         )}
       </div>
       <div>
-        Přihlaš se k beta testování. Dostaneš nové funkce jako první!
+        {t('components.user.betaTesting.title')}
         <BetaSwitch />
       </div>
       <div className='auth'>
@@ -106,12 +107,12 @@ const User = ({ history }) => {
           <ul className='tab-group'>
             <li className='tab active'>
               <div onClick={changeAuthMode} className={isSignIn() ? 'active' : ''}>
-                Přihlášení
+                {t('components.user.login.title')}
               </div>
             </li>
             <li className='tab'>
               <div onClick={changeAuthMode} className={isSignUp() ? 'active' : ''}>
-                Registrace
+                {t('components.user.register.title')}
               </div>
             </li>
           </ul>
@@ -120,15 +121,15 @@ const User = ({ history }) => {
               <form>
                 <fieldset disabled='true'>
                   <div className='field-wrap'>
-                    <label>Jméno</label>
+                    <label>{t('components.user.login.username')}</label>
                     <input type='text' name='username' value={formData.username} autoComplete='off' onChange={handleChange} />
                   </div>
                   <div className='field-wrap'>
-                    <label>Heslo</label>
+                    <label>{t('components.user.login.password')}</label>
                     <input type='password' name='password' value={formData.password} autoComplete='off' onChange={handleChange} />
                   </div>
                   <div className='button' onClick={signIn}>
-                    Přihlásit
+                    {t('components.user.login.submit')}
                   </div>
                 </fieldset>
               </form>
@@ -139,25 +140,25 @@ const User = ({ history }) => {
               <form>
                 <fieldset disabled='true'>
                   <div className='field-wrap'>
-                    <label>Jméno</label>
+                    <label>{t('components.user.register.username')}</label>
                     <input type='text' name='username' value={formData.username} autoComplete='off' onChange={handleChange} />
                   </div>
                   <div className='field-wrap'>
-                    <label>Email</label>
+                    <label>{t('components.user.register.email')}</label>
                     <input type='text' name='email' autoComplete='off' onChange={handleChange} />
                   </div>
                   <div className='field-wrap'>
-                    <label>Heslo</label>
+                    <label>{t('components.user.register.password')}</label>
                     <input type='password' name='password' value={formData.password} autoComplete='off' onChange={handleChange} />
                   </div>
                   <div className='button' onClick={signUp}>
-                    Registrovat
+                    {t('components.user.register.submit')}
                   </div>
                 </fieldset>
               </form>
             </div>
           )}
-          <div style={{ color: 'red' }}>Na přihlašování se pracuje. Sledujte nás na sociálních sítích.</div>
+          <div style={{ color: 'red' }}>{t('components.user.login.futureFeature')}</div>
         </div>
       </div>
     </div>

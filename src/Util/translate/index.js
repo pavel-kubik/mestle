@@ -2,7 +2,7 @@ import cs from './cs.json';
 import en from './en.json';
 
 export const LANGUAGES = { en: 'en', cs: 'cs' };
-const DEFAULT_LANGUAGE = LANGUAGES.cs;
+const DEFAULT_LANGUAGE = LANGUAGES.en;
 const LANGUAGE_STORAGE_KEY = 'lang';
 
 export const getLanguage = () => {
@@ -27,11 +27,11 @@ export const setLanguage = (language) => {
 const getMessages = () => {
   const language = getLanguage();
 
-  if (language === LANGUAGES.en) {
-    return en;
+  if (language === LANGUAGES.cs) {
+    return cs;
   }
   // default language
-  return cs;
+  return en;
 };
 
 export const t = (key, replaceValues = {}) => {

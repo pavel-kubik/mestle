@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { TwitterFollowButton } from 'react-twitter-embed';
 
 import './App.css';
 
@@ -41,16 +40,6 @@ const App = () => {
 
           <div style={{ display: 'flex', gap: 16 }}>
             <LanguageSwitch />
-            <div className='twitter-wrapper'>
-              <TwitterFollowButton
-                options={{
-                  showScreenName: 'false',
-                  showCount: 'false',
-                  size: 'large'
-                }}
-                screenName={'MestleCz'}
-              />
-            </div>
           </div>
         </div>
         <Routes>

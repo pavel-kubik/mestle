@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { TwitterFollowButton } from 'react-twitter-embed';
 
 import './App.css';
 
@@ -13,49 +12,41 @@ import LeaderBoard from './component/LeaderBoard';
 import HowToPlay from './component/HowToPlay';
 
 import userNotLogged from './img/user_not_logged.svg';
+import LanguageSwitch from './component/LanguageSwitch';
+import { t } from './Util/translate';
 
 const App = () => {
   // permanent
   const [history, setHistory] = useStickyState({}, 'mestle_history');
+  const score = getScore(history);
 
   return (
     <Router>
       <div className='app'>
         <div className='header'>
           {/*<Link to='/login-sign-up'>Login / Sign Up</Link>*/}
-          <img
-            className='login-user'
-            src={userNotLogged}
-            title={`Nepřihlášený uživatel.\nKlikni pro přihlášení nebo vytvoření účtu.\n\nSkóre: ${getScore(history)}`}
-            onClick={() => {
-              window.location.href = '/user';
-            }}
-          />
+          <Link to='/user' title={t('app.loginButton.title', { score })}>
+            <img className='login-user' src={userNotLogged} />
+          </Link>
           <Link to='/'>
             <div>
               <span>Městle</span>
-              {isBeta() ? <span style={{ color: 'red', fontStyle: 'italic' }}> beta</span> : ''}
+              {isBeta() && <span style={{ color: 'red', fontStyle: 'italic' }}> beta</span>}
               <div className='debug'>({new Date().toLocaleDateString('cz-CS')})</div>
             </div>
           </Link>
           {/*TODO <Link to='/leader-board'>Leader Board</Link>*/}
           {/*TODO <Link to='/help'>How To Play</Link>*/}
-          <div className='twitter-wrapper'>
-            <TwitterFollowButton
-              options={{
-                showScreenName: 'false',
-                showCount: 'false',
-                size: 'large'
-              }}
-              screenName={'MestleCz'}
-            />
+
+          <div style={{ display: 'flex', gap: 16 }}>
+            <LanguageSwitch />
           </div>
         </div>
         <Routes>
-          <Route exact path='/' element={<GuessBoard history={history} setHistory={setHistory} />}></Route>
-          <Route exact path='/user' element={<User history={history} />}></Route>
-          <Route exact path='/leader-board' element={<LeaderBoard />}></Route>
-          <Route exact path='/help' element={<HowToPlay />}></Route>
+          <Route exact path='/' element={<GuessBoard history={history} setHistory={setHistory} />} />
+          <Route exact path='/user' element={<User history={history} />} />
+          <Route exact path='/leader-board' element={<LeaderBoard />} />
+          <Route exact path='/help' element={<HowToPlay />} />
         </Routes>
       </div>
     </Router>

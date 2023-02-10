@@ -22,19 +22,8 @@ import {
 import { calculateTimeLeft, getRandCity, getSeedFromDate } from '../Rand/rand';
 import { getEog, getGuesses, setGuesses } from '../History/history';
 import Tippy from '@tippyjs/react';
-import styled from 'styled-components';
-import { useSpring, animated } from 'react-spring';
 import useVH from 'react-viewport-height';
 import { t } from '../Util/translate';
-
-const Box = styled(animated.div)`
-  background: orange;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 4px;
-  max-width: 270px;
-  font-size: x-large;
-`;
 
 function GuessBoard({ history, setHistory }) {
   useVH();
@@ -51,28 +40,6 @@ function GuessBoard({ history, setHistory }) {
 
   // generated from current date and cities list
   const [todaySeed, setTodaySeed] = useState(null);
-
-  // animation start tippy
-  const config = { tension: 300, friction: 15 };
-  const initialStyles = { opacity: 0, transform: 'scale(0.5)' };
-  const [props, setSpring] = useSpring(() => initialStyles);
-  function onMount() {
-    setSpring({
-      delay: 3000,
-      opacity: 1,
-      transform: 'scale(1)',
-      onRest: () => {},
-      config
-    });
-  }
-
-  function onHide({ unmount }) {
-    setSpring({
-      ...initialStyles,
-      onRest: unmount,
-      config: { ...config, clamp: true }
-    });
-  }
 
   useEffect(() => {
     const todaySeed = getSeedFromDate(new Date());
@@ -201,15 +168,22 @@ function GuessBoard({ history, setHistory }) {
         <span>{t('components.guessBoard.todayCityBadgeTitle')}</span>
         <img src={obfuscateUrl(getRandCity(cities, todaySeed).signUrl)} />
       </div>
-      <div className='differences title'>
-        <div className='guess'>{t('components.guessBoard.differences.district')}</div>
-        <div className='guess'>{t('components.guessBoard.differences.population')}</div>
-        <div className='guess'>{t('components.guessBoard.differences.distance')}</div>
-        <div className='guess'>{t('components.guessBoard.differences.badge')}</div>
-        <div className='guess'>{t('components.guessBoard.differences.location')}</div>
-      </div>
+      {getGuesses(history, todaySeed).length > 0 && (
+        <div className='differences title'>
+          <div className='guess'>{t('components.guessBoard.differences.district')}</div>
+          <div className='guess'>{t('components.guessBoard.differences.population')}</div>
+          <div className='guess'>{t('components.guessBoard.differences.distance')}</div>
+          <div className='guess'>{t('components.guessBoard.differences.badge')}</div>
+          <div className='guess'>{t('components.guessBoard.differences.location')}</div>
+        </div>
+      )}
       <div className='body'>
         <div className='body-background' style={{ backgroundImage: `url(${background})` }}></div>
+        {getGuesses(history, todaySeed).length == 0 && (
+          <div className='no-guess-help'>
+            <div>{t('components.guessBoard.noGuesses')}</div>
+          </div>
+        )}
         {getGuesses(history, todaySeed).length > 0 && (
           <>
             {getGuesses(history, todaySeed).map((g, idx, array) => (
@@ -228,28 +202,12 @@ function GuessBoard({ history, setHistory }) {
       </div>
       {!getEog(history, todaySeed) && (
         <div className='guess-box'>
-          <Tippy
-            render={(attrs) => (
-              <Box style={props} {...attrs}>
-                {t('components.guessBoard.guessInput.label')}
-              </Box>
-            )}
-            placement='top'
-            theme='orange'
-            zIndex={11}
-            disabled={getGuesses(history, todaySeed).length > 0 || cityPart !== ''}
-            visible={true}
-            animation={true}
-            onMount={onMount}
-            onHide={onHide}
-          >
-            <input
-              value={cityPart}
-              type='search'
-              placeholder={t('components.guessBoard.guessInput.placeholder')}
-              onChange={(event) => handleChangeCityPart(event.target.value)}
-            />
-          </Tippy>
+          <input
+            value={cityPart}
+            type='search'
+            placeholder={t('components.guessBoard.guessInput.placeholder')}
+            onChange={(event) => handleChangeCityPart(event.target.value)}
+          />
           {filteredCities.length > 0 && (
             <>
               <div className='city-list'>

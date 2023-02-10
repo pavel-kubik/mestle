@@ -2,7 +2,7 @@ import cs from './cs.json';
 import en from './en.json';
 
 export const LANGUAGES = { en: 'en', cs: 'cs' };
-const DEFAULT_LANGUAGE = LANGUAGES.en;
+const DEFAULT_LANGUAGE = LANGUAGES.cs;
 const LANGUAGE_STORAGE_KEY = 'lang';
 
 export const getLanguage = () => {

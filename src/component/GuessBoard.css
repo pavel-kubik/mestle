@@ -14,6 +14,14 @@
   height: 100%;
 }
 
+.no-guess-help {
+  display: flex;
+  height: 90%;
+  text-align: center;
+  align-items: center;
+  padding: 10px;
+}
+
 .guess-box {
   border-top: 1px solid black;
   background-color: white;

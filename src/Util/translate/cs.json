@@ -35,7 +35,7 @@
   "components.guessBoard.guessResult.title": "Gratulace! Další město můžeš hádat za {{timeLeft}}.",
   "components.guessBoard.todayCityBadgeTitle": "Dnešní hádané město má tento znak",
   "components.guessBoard.todayDate": "Městle den {{date}}\n",
-  "components.guessBoard.noGuesses": "Vítejte ve hře Městle. Otestujte svoje znalosti zeměpisu. Zadej město, které může mít hádaný znak. Pokud znak neuhádnete na první pokus, zobrazí se nápověda.",
+  "components.guessBoard.noGuesses": "Vítej ve hře Městle. Otestuj svoje znalosti zeměpisu. Zadej město, které může mít hádaný znak. Pokud město neuhádneš na první pokus, zobrazí se nápověda.",
   "components.howToPlay.title": "Jak hrát Městle",
   "components.leaderBoard.title": "LeaderBoard",
   "components.user.betaTesting.title": "Přihlaš se k beta testování. Dostaneš nové funkce jako první!",

@@ -10,10 +10,17 @@ import GuessBoard from './component/GuessBoard';
 import User from './component/User';
 import LeaderBoard from './component/LeaderBoard';
 import HowToPlay from './component/HowToPlay';
-
 import userNotLogged from './img/user_not_logged.svg';
 import LanguageSwitch from './component/LanguageSwitch';
 import { t } from './Util/translate';
+
+import { hotjar } from 'react-hotjar';
+
+hotjar.initialize(3360376, 6);
+
+if (hotjar.initialized()) {
+  hotjar.identify('USER_ID', { userProperty: 'value' });
+}
 
 const App = () => {
   // permanent

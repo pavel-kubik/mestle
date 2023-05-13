@@ -43,7 +43,7 @@
   "components.user.login.password": "Password",
   "components.user.login.submit": "Log in",
   "components.user.login.title": "Log in",
-  "components.user.login.username": "User name",
+  "components.user.login.email": "Email",
   "components.user.login.futureFeature": "Log in feature is coming soon to Městle. Follow us on social networks.",
   "components.user.register.email": "Email",
   "components.user.register.password": "Password",

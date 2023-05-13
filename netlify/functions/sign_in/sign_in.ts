@@ -1,26 +1,14 @@
 import { Handler } from '@netlify/functions';
+import { connectToDatabase } from '../../util/dbUtil';
 
-const { MongoClient } = require('mongodb');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-let cachedDb = null;
-
-const connectToDatabase = async (uri) => {
-  // we can cache the access to our database to speed things up a bit
-  // (this is the only thing that is safe to cache here)
-  if (cachedDb) return cachedDb;
-
-  const client = await MongoClient.connect(uri, {
-    useUnifiedTopology: true
-  });
-
-  cachedDb = client.db(process.env.MONGODB_DATABASE);
-
-  return cachedDb;
-};
-
 export const handler: Handler = async (event, context) => {
+  if (event.httpMethod !== 'POST') {
+    return { statusCode: 404 };
+  }
+
   const { email, password } = JSON.parse(event.body);
 
   context.callbackWaitsForEmptyEventLoop = false;
@@ -35,8 +23,8 @@ export const handler: Handler = async (event, context) => {
 
     console.log('Found: ' + JSON.stringify(userData));
 
-    if (userData) {
-      if (bcrypt.compare(password, userData.passwordHash)) {
+    if (userData && userData.password) {
+      if (bcrypt.compare(password, userData.password)) {
         const token = jwt.sign(
           { user_id: userData._id, email }, //
           process.env.TOKEN_KEY, //
@@ -62,7 +50,6 @@ export const handler: Handler = async (event, context) => {
         };
       }
     } else {
-      console.log('User not found');
       return {
         statusCode: 401,
         body: JSON.stringify({

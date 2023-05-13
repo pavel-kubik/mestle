@@ -43,7 +43,7 @@
   "components.user.login.password": "Heslo",
   "components.user.login.submit": "Přihlásit",
   "components.user.login.title": "Přihlášení",
-  "components.user.login.username": "Jméno",
+  "components.user.login.email": "Email",
   "components.user.login.futureFeature": "Na přihlašování se pracuje. Sledujte nás na sociálních sítích.",
   "components.user.register.email": "Email",
   "components.user.register.password": "Heslo",

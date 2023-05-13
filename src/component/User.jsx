@@ -47,7 +47,7 @@ const User = ({ history }) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username: formData.username,
+        email: formData.email,
         password: formData.password //TODO use bcrypt
       })
     });
@@ -60,7 +60,6 @@ const User = ({ history }) => {
   };
 
   const signUp = async () => {
-    // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
     console.log(formData);
     const response = await fetch('/.netlify/functions/sign_up', {
       method: 'POST',
@@ -120,10 +119,10 @@ const User = ({ history }) => {
           {isSignIn() && (
             <div className='auth-form'>
               <form>
-                <fieldset disabled='true'>
+                <fieldset>
                   <div className='field-wrap'>
-                    <label>{t('components.user.login.username')}</label>
-                    <input type='text' name='username' value={formData.username} autoComplete='off' onChange={handleChange} />
+                    <label>{t('components.user.login.email')}</label>
+                    <input type='text' name='email' value={formData.email} autoComplete='off' onChange={handleChange} />
                   </div>
                   <div className='field-wrap'>
                     <label>{t('components.user.login.password')}</label>
@@ -139,7 +138,7 @@ const User = ({ history }) => {
           {isSignUp() && (
             <div className='auth-form'>
               <form>
-                <fieldset disabled='true'>
+                <fieldset>
                   <div className='field-wrap'>
                     <label>{t('components.user.register.username')}</label>
                     <input type='text' name='username' value={formData.username} autoComplete='off' onChange={handleChange} />
@@ -159,17 +158,18 @@ const User = ({ history }) => {
               </form>
             </div>
           )}
-          <div style={{ color: 'red' }}>{t('components.user.login.futureFeature')}</div>
-          <div className='twitter-wrapper'>
-            <TwitterFollowButton
-              options={{
-                showScreenName: 'false',
-                showCount: 'false',
-                size: 'large'
-              }}
-              screenName={'MestleCz'}
-            />
-          </div>
+        </div>
+      </div>
+      <div>
+        <div className='twitter-wrapper'>
+          <TwitterFollowButton
+            options={{
+              showScreenName: 'false',
+              showCount: 'false',
+              size: 'large'
+            }}
+            screenName={'MestleCz'}
+          />
         </div>
       </div>
     </div>

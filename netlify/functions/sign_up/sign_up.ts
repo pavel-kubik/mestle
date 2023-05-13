@@ -8,15 +8,18 @@ export const handler: Handler = async (event, context) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 404 };
   }
+
+  if (!event.body) {
+    return { statusCode: 400 };
+  }
+
   const { username, email, password } = JSON.parse(event.body);
 
   context.callbackWaitsForEmptyEventLoop = false;
 
   try {
-    console.log('Connecting to DB: ' + process.env.MONGODB_URI);
     const database = await connectToDatabase(process.env.MONGODB_URI);
     const collection = database.collection('user');
-    console.log('DB connected');
 
     // TODO store IP address and allow store only few new users from same IP per time frame
 
@@ -41,25 +44,26 @@ export const handler: Handler = async (event, context) => {
     }
 
     const encryptedPassword = await bcrypt.hash(password, 10);
-    const res = await collection.insertOne({
+    const userData = await collection.insertOne({
       username: username,
       email: email,
       password: encryptedPassword
     });
-    console.log('1 document inserted: ' + JSON.stringify(res));
 
-    const token = jwt.sign({ user_id: res.insertedId, email }, process.env.TOKEN_KEY, {
+    const token = jwt.sign({ user_id: userData.insertedId, email }, process.env.TOKEN_KEY, {
       expiresIn: '7d'
     });
-    console.log(token);
 
     return {
       statusCode: 200,
+      // TODO store jwt in http only session
       headers: {
         'x-access-token': token
       },
       body: JSON.stringify({
-        message: 'User created.'
+        id: userData._id,
+        username: userData.username,
+        token: token
       })
     };
   } catch (error) {

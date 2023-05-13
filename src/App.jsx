@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 import './App.css';
@@ -15,6 +15,7 @@ import LanguageSwitch from './component/LanguageSwitch';
 import { t } from './Util/translate';
 
 import { hotjar } from 'react-hotjar';
+import { getUserDataInLocalStorage } from './lib/auth';
 
 hotjar.initialize(3360376, 6);
 
@@ -26,6 +27,15 @@ const App = () => {
   // permanent
   const [history, setHistory] = useStickyState({}, 'mestle_history');
   const score = getScore(history);
+
+  const [loggedUser, setLoggedUser] = useState(null);
+
+  useEffect(() => {
+    const loggedInUser = getUserDataInLocalStorage();
+    if (loggedInUser !== null) {
+      setLoggedUser(loggedInUser);
+    }
+  }, []);
 
   return (
     <Router>
@@ -51,7 +61,7 @@ const App = () => {
         </div>
         <Routes>
           <Route exact path='/' element={<GuessBoard history={history} setHistory={setHistory} />} />
-          <Route exact path='/user' element={<User history={history} />} />
+          <Route exact path='/user' element={<User history={history} loggedUser={loggedUser} setLoggedUser={setLoggedUser} />} />
           <Route exact path='/leader-board' element={<LeaderBoard />} />
           <Route exact path='/help' element={<HowToPlay />} />
         </Routes>

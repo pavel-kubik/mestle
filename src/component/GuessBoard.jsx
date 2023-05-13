@@ -242,7 +242,7 @@ function GuessBoard({ history, setHistory }) {
 
 GuessBoard.propTypes = {
   history: PropTypes.object.isRequired,
-  setHistory: PropTypes.object.isRequired
+  setHistory: PropTypes.func.isRequired
 };
 
 export default GuessBoard;

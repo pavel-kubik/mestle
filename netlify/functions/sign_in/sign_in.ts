@@ -9,6 +9,10 @@ export const handler: Handler = async (event, context) => {
     return { statusCode: 404 };
   }
 
+  if (!event.body) {
+    return { statusCode: 400 };
+  }
+
   const { email, password } = JSON.parse(event.body);
 
   context.callbackWaitsForEmptyEventLoop = false;
@@ -17,14 +21,10 @@ export const handler: Handler = async (event, context) => {
     const database = await connectToDatabase(process.env.MONGODB_URI);
     const collection = database.collection('user');
 
-    console.log('Query: ' + email);
-
     const userData = await collection.findOne({ email: email });
 
-    console.log('Found: ' + JSON.stringify(userData));
-
     if (userData && userData.password) {
-      if (bcrypt.compare(password, userData.password)) {
+      if (await bcrypt.compare(password, userData.password)) {
         const token = jwt.sign(
           { user_id: userData._id, email }, //
           process.env.TOKEN_KEY, //
@@ -32,31 +32,27 @@ export const handler: Handler = async (event, context) => {
             expiresIn: '7d'
           }
         );
-        console.log(token);
 
         return {
           statusCode: 200,
           headers: {
             'x-access-token': token
-          }
-        };
-      } else {
-        console.log('Password is incorrect');
-        return {
-          statusCode: 401,
+            // TODO store jwt in http only session
+          },
           body: JSON.stringify({
-            message: `Password is incorrect`
+            id: userData._id,
+            username: userData.username,
+            token: token
           })
         };
       }
-    } else {
-      return {
-        statusCode: 401,
-        body: JSON.stringify({
-          message: `User not found`
-        })
-      };
     }
+    return {
+      statusCode: 401,
+      body: JSON.stringify({
+        message: 'Username or password is incorrect'
+      })
+    };
   } catch (error) {
     console.log(error);
     return { statusCode: 500, body: error.toString() };

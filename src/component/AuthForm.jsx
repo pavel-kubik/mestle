@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import bcrypt from 'bcryptjs-react';
 import './AuthForm.css';
 import { t } from '../Util/translate';
-import { clearUserDataInLocalStorage, storeUserDataInLocalStorage } from '../lib/auth';
+import { clearUserDataInLocalStorage, signIn, signUp } from '../lib/auth';
 
 const AuthForm = ({ loggedUser, setLoggedUser }) => {
   const [authMode, setAuthMode] = useState('signin');
@@ -32,82 +31,12 @@ const AuthForm = ({ loggedUser, setLoggedUser }) => {
     setLoginError(null);
   };
 
-  const signIn = async () => {
-    try {
-      const responseSalt = await fetch('/.netlify/functions/sign_in_salt', {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: formData.email
-        })
-      });
-      if (!responseSalt.ok) {
-        console.log('Error read salt: ' + JSON.stringify(responseSalt));
-        setLoginError("Can't login. Please check your email and password.");
-        return;
-      }
-      const { salt } = await responseSalt.json();
-      const saltedPassword = await bcrypt.hash(formData.password, salt);
-      const response = await fetch('/.netlify/functions/sign_in', {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: formData.email,
-          password: saltedPassword
-        })
-      });
-      if (response.status === 200) {
-        //const token = response.headers.get('x-access-token');
-        const userData = await response.json();
-        setLoggedUser(userData);
-        storeUserDataInLocalStorage(userData);
-      } else {
-        const data = response.json();
-        console.log('Error: ' + data);
-        setLoginError("Can't login. Please check your email and password.");
-      }
-    } catch (error) {
-      console.log('Login error: ' + error);
-      setLoginError("Can't login. Please check your email and password.");
-    }
+  const signInHandler = async () => {
+    return await signIn(formData.email, formData.password, setLoggedUser, setLoginError);
   };
 
-  const signUp = async () => {
-    console.log(formData);
-    const salt = await bcrypt.genSalt(10);
-    const saltedPassword = await bcrypt.hash(formData.password, salt);
-    const response = await fetch('/.netlify/functions/sign_up', {
-      method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: formData.username,
-        email: formData.email,
-        password: saltedPassword,
-        salt: salt
-      })
-    });
-    if (response.status === 200) {
-      //const token = response.headers.get('x-access-token');
-      const userData = await response.json();
-      setLoggedUser(userData);
-      storeUserDataInLocalStorage(userData);
-    } else {
-      const data = response.json();
-      console.log('SignUp error: ' + data);
-      setLoginError("Can't sign up now. Please try it later.");
-    }
+  const signUpHandler = async () => {
+    return await signUp(formData.username, formData.email, formData.password, setLoggedUser, setLoginError);
   };
 
   const signOut = async () => {
@@ -154,7 +83,7 @@ const AuthForm = ({ loggedUser, setLoggedUser }) => {
                       <input type='password' name='password' value={formData.password || ''} autoComplete='off' onChange={handleChange} />
                     </div>
                     {loginError && <div className='field-error'>{loginError}</div>}
-                    <div className='button' onClick={signIn}>
+                    <div className='button' onClick={signInHandler}>
                       {t('components.user.login.submit')}
                     </div>
                   </fieldset>
@@ -177,7 +106,7 @@ const AuthForm = ({ loggedUser, setLoggedUser }) => {
                       <label>{t('components.user.register.password')}</label>
                       <input type='password' name='password' value={formData.password || ''} autoComplete='off' onChange={handleChange} />
                     </div>
-                    <div className='button' onClick={signUp}>
+                    <div className='button' onClick={signUpHandler}>
                       {t('components.user.register.submit')}
                     </div>
                   </fieldset>

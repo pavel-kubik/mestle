@@ -83,6 +83,7 @@ const AuthForm = ({ loggedUser, setLoggedUser }) => {
 
   const signOut = async () => {
     setLoggedUser(null);
+    updateFormData({});
     clearUserDataInLocalStorage();
   };
 

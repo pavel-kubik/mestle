@@ -56,6 +56,11 @@ fieldset[disabled] .button {
   width: 80%;
 }
 
+.field-error {
+  color: red;
+  text-align: center;
+}
+
 @media screen and (min-width: 500px) {
   .login-sign-up-form {
     width: 50%;

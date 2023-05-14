@@ -13,7 +13,7 @@ export const handler: Handler = async (event, context) => {
     return { statusCode: 400 };
   }
 
-  const { username, email, password } = JSON.parse(event.body);
+  const { username, email, password, salt } = JSON.parse(event.body);
 
   context.callbackWaitsForEmptyEventLoop = false;
 
@@ -47,7 +47,8 @@ export const handler: Handler = async (event, context) => {
     const userData = await collection.insertOne({
       username: username,
       email: email,
-      password: encryptedPassword
+      password: encryptedPassword,
+      salt: salt
     });
 
     const token = jwt.sign({ user_id: userData.insertedId, email }, process.env.TOKEN_KEY, {
@@ -61,8 +62,8 @@ export const handler: Handler = async (event, context) => {
         'x-access-token': token
       },
       body: JSON.stringify({
-        id: userData._id,
-        username: userData.username,
+        id: userData.insertedId,
+        username: username,
         token: token
       })
     };

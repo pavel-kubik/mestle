@@ -11,6 +11,7 @@
     "@tippyjs/react": "^4.2.6",
     "@types/node": "^14.18.23",
     "bcryptjs": "^2.4.3",
+    "bcryptjs-react": "^2.4.6",
     "geolib": "^3.3.3",
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^4.8.1",

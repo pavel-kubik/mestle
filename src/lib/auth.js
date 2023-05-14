@@ -1,5 +1,5 @@
-export const storeUserDataInLocalStorage = (token) => {
-  localStorage.setItem('_user', JSON.stringify(token));
+export const storeUserDataInLocalStorage = (userData) => {
+  localStorage.setItem('_user', JSON.stringify(userData));
 };
 
 export const clearUserDataInLocalStorage = () => {

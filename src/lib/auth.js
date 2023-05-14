@@ -49,8 +49,8 @@ export const signIn = async (email, password, setLoggedUser, setLoginError) => {
       setLoggedUser(userData);
       storeUserDataInLocalStorage(userData);
     } else {
-      const data = response.json();
-      console.log('Error: ' + data);
+      const data = await response.json();
+      console.log('Error: ' + JSON.stringify(data));
       setLoginError("Can't login. Please check your email and password.");
     }
   } catch (error) {
@@ -82,8 +82,8 @@ export const signUp = async (username, email, password, setLoggedUser, setLoginE
     setLoggedUser(userData);
     storeUserDataInLocalStorage(userData);
   } else {
-    const data = response.json();
-    console.log('SignUp error: ' + data);
+    const data = await response.json();
+    console.log('SignUp error: ' + JSON.stringify(data));
     setLoginError("Can't sign up now. Please try it later.");
   }
 };

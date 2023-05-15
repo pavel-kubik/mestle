@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import './GuessBoard.css';
 import background from '../img/background.svg';
 
-import preval from 'preval.macro';
-
 import cities from '../Data/data.js';
 import Guess from '../Guess/guess';
 import {
@@ -14,6 +12,7 @@ import {
   districtComparator,
   GREEN_CIRCLE,
   normalize,
+  obfuscateUrl,
   ORANGE_CIRCLE,
   populationComparator,
   regionComparator,
@@ -27,8 +26,6 @@ import { t } from '../Util/translate';
 
 function GuessBoard({ history, setHistory }) {
   useVH();
-
-  const dateTimeStamp = preval`module.exports = new Date().toLocaleString();`;
 
   const bottom = useRef(null);
 
@@ -139,29 +136,6 @@ function GuessBoard({ history, setHistory }) {
     setShared(true);
   };
 
-  const obfuscateUrl = (url) => {
-    const prefix = 'https://upload.wikimedia.org/wikipedia/commons/thumb/';
-    const url2ndPart = unescape(url.substring(prefix.length));
-    return (
-      prefix +
-      url2ndPart
-        .split('/')
-        .map((part) => {
-          return part
-            .split('')
-            .map((c) => {
-              if (c.charCodeAt(0).toString(16).length <= 2) {
-                return '%' + c.charCodeAt(0).toString(16).padStart(2, '0');
-              } else {
-                return escape(c);
-              }
-            })
-            .join('');
-        })
-        .join('/')
-    );
-  };
-
   return (
     <>
       <div className='requirements'>
@@ -235,7 +209,6 @@ function GuessBoard({ history, setHistory }) {
           <div>{t('components.guessBoard.guessResult.title', { timeLeft })}</div>
         </div>
       )}
-      <div className='build-time debug'>{t('app.buildNumber', { dateTimeStamp })}</div>
     </>
   );
 }

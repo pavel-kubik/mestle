@@ -201,16 +201,6 @@
   z-index: 10;
 }
 
-.debug {
-  color: silver;
-  font-size: xx-small;
-}
-
-.build-time {
-  z-index: 0;
-  text-align: right;
-}
-
 .notification {
   font-size: small;
   color: darkred;

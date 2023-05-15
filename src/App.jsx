@@ -17,6 +17,8 @@ import { t } from './Util/translate';
 import { hotjar } from 'react-hotjar';
 import { getUserDataInLocalStorage } from './lib/auth';
 
+import preval from 'preval.macro';
+
 hotjar.initialize(3360376, 6);
 
 if (hotjar.initialized()) {
@@ -29,6 +31,8 @@ const App = () => {
   const score = getScore(history);
 
   const [loggedUser, setLoggedUser] = useState(null);
+
+  const dateTimeStamp = preval`module.exports = new Date().toLocaleString();`;
 
   useEffect(() => {
     const loggedInUser = getUserDataInLocalStorage();
@@ -65,6 +69,7 @@ const App = () => {
           <Route exact path='/leader-board' element={<LeaderBoard />} />
           <Route exact path='/help' element={<HowToPlay />} />
         </Routes>
+        <div className='build-time debug'>{t('app.buildNumber', { dateTimeStamp })}</div>
       </div>
     </Router>
   );

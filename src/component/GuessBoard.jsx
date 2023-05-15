@@ -24,7 +24,7 @@ import Tippy from '@tippyjs/react';
 import useVH from 'react-viewport-height';
 import { t } from '../Util/translate';
 
-function GuessBoard({ history, setHistory }) {
+function GuessBoard({ todaySeed, history, setHistory }) {
   useVH();
 
   const bottom = useRef(null);
@@ -34,15 +34,6 @@ function GuessBoard({ history, setHistory }) {
   const [guessEnabled, setGuessEnabled] = useState(false);
   const [shared, setShared] = useState(false);
   const [timeLeft, setTimeLeft] = useState('');
-
-  // generated from current date and cities list
-  const [todaySeed, setTodaySeed] = useState(null);
-
-  useEffect(() => {
-    const todaySeed = getSeedFromDate(new Date());
-    //console.log("Today seed " + todaySeed + " => " + getRandCity(cities, todaySeed).name);
-    setTodaySeed(todaySeed);
-  }, []);
 
   useEffect(() => {
     const guessedCity = cities.find((c) => normalize(c.name) === normalize(cityPart.trim()));
@@ -214,6 +205,7 @@ function GuessBoard({ history, setHistory }) {
 }
 
 GuessBoard.propTypes = {
+  todaySeed: PropTypes.number.isRequired,
   history: PropTypes.object.isRequired,
   setHistory: PropTypes.func.isRequired
 };

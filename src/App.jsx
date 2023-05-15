@@ -18,6 +18,7 @@ import { hotjar } from 'react-hotjar';
 import { getUserDataInLocalStorage } from './lib/auth';
 
 import preval from 'preval.macro';
+import { getSeedFromDate } from './Rand/rand';
 
 hotjar.initialize(3360376, 6);
 
@@ -40,6 +41,20 @@ const App = () => {
       setLoggedUser(loggedInUser);
     }
   }, []);
+
+  // generated from current date and cities list
+  const [todaySeed, setTodaySeed] = useState(null);
+
+  useEffect(() => {
+    const todaySeedValue = getSeedFromDate(new Date());
+    //console.log("Today seed " + todaySeed + " => " + getRandCity(cities, todaySeed).name);
+    setTodaySeed(todaySeedValue);
+  }, []);
+
+  if (!todaySeed) {
+    // skip first render if todaySeed is not set yet
+    return;
+  }
 
   return (
     <Router>
@@ -64,7 +79,7 @@ const App = () => {
           </div>
         </div>
         <Routes>
-          <Route exact path='/' element={<GuessBoard history={history} setHistory={setHistory} />} />
+          <Route exact path='/' element={<GuessBoard todaySeed={todaySeed} history={history} setHistory={setHistory} />} />
           <Route exact path='/user' element={<User history={history} loggedUser={loggedUser} setLoggedUser={setLoggedUser} />} />
           <Route exact path='/leader-board' element={<LeaderBoard />} />
           <Route exact path='/help' element={<HowToPlay />} />

@@ -56,6 +56,25 @@ const App = () => {
     return;
   }
 
+  const setTodayHistory = (todayHistory) => {
+    const allHistory = Object.assign({}, history);
+    allHistory[todaySeed] = todayHistory;
+    setHistory(allHistory);
+  };
+
+  const getTodayHistory = () => {
+    let out = { guesses: [], eog: false };
+    if (history && history[todaySeed]) {
+      out = history[todaySeed];
+    }
+    return out;
+  };
+
+  const addAttemptHandler = (attempt, eog) => {
+    const todayGuesses = getTodayHistory();
+    setTodayHistory({ guesses: [...todayGuesses.guesses, attempt], eog: eog });
+  };
+
   return (
     <Router>
       <div className='app'>
@@ -79,7 +98,11 @@ const App = () => {
           </div>
         </div>
         <Routes>
-          <Route exact path='/' element={<GuessBoard todaySeed={todaySeed} history={history} setHistory={setHistory} />} />
+          <Route
+            exact
+            path='/'
+            element={<GuessBoard todaySeed={todaySeed} todayHistory={getTodayHistory()} addAttemptHandler={addAttemptHandler} />}
+          />
           <Route exact path='/user' element={<User history={history} loggedUser={loggedUser} setLoggedUser={setLoggedUser} />} />
           <Route exact path='/leader-board' element={<LeaderBoard />} />
           <Route exact path='/help' element={<HowToPlay />} />

@@ -4,32 +4,9 @@ export const getScore = (history) => {
     .filter((eog) => eog).length;
 };
 
-const getCurrentData = (history, todaySeed) => {
-  return history[todaySeed];
-};
-
-export const getGuesses = (history, todaySeed) => {
-  const today = getCurrentData(history, todaySeed);
-  if (today && today.guesses) {
-    return today.guesses;
-  }
-  return [];
-};
-
-export const setGuesses = (history, guesses, eog, setHistory, todaySeed) => {
-  // TODO set state with function
-  const allHistory = Object.assign({}, history);
-  allHistory[todaySeed] = {
-    guesses: guesses,
-    eog: eog
-  };
-  setHistory(allHistory);
-};
-
-export const getEog = (history, todaySeed) => {
-  const today = getCurrentData(history, todaySeed);
-  if (today && today.eog) {
-    return today.eog;
+export const isEog = (todayHistory) => {
+  if (todayHistory && todayHistory.eog) {
+    return todayHistory.eog;
   }
   return false;
 };

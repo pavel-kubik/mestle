@@ -19,12 +19,12 @@ import {
   WHITE_CIRCLE
 } from '../Util/util';
 import { calculateTimeLeft, getRandCity, getSeedFromDate } from '../Rand/rand';
-import { getEog, getGuesses, setGuesses } from '../History/history';
+import { isEog } from '../History/history';
 import Tippy from '@tippyjs/react';
 import useVH from 'react-viewport-height';
 import { t } from '../Util/translate';
 
-function GuessBoard({ todaySeed, history, setHistory }) {
+function GuessBoard({ todaySeed, todayHistory, addAttemptHandler }) {
   useVH();
 
   const bottom = useRef(null);
@@ -35,24 +35,29 @@ function GuessBoard({ todaySeed, history, setHistory }) {
   const [shared, setShared] = useState(false);
   const [timeLeft, setTimeLeft] = useState('');
 
+  const getAttempts = (history) => {
+    //TODO rename guesses to attempts will need migration of local storage mestle_history
+    return history.guesses;
+  };
+
   useEffect(() => {
     const guessedCity = cities.find((c) => normalize(c.name) === normalize(cityPart.trim()));
-    if (guessedCity && !getGuesses(history, todaySeed).includes(guessedCity)) {
+    if (guessedCity && !getAttempts(todayHistory).includes(guessedCity)) {
       setGuessEnabled(true);
     } else {
       setGuessEnabled(false);
     }
-  }, [cityPart, history, todaySeed]);
+  }, [cityPart, todayHistory, todaySeed]);
 
   useEffect(() => {
-    if (getEog(history, todaySeed)) {
+    if (isEog(todayHistory)) {
       setTimeLeft(calculateTimeLeft(todaySeed));
       const timer = setInterval(() => {
         setTimeLeft(calculateTimeLeft(todaySeed));
       }, 1000);
       return () => clearInterval(timer);
     }
-  }, [history, todaySeed]);
+  }, [todayHistory, todaySeed]);
 
   const handleChangeCityPart = (cityPart) => {
     if (getSeedFromDate(new Date()) !== todaySeed) {
@@ -60,7 +65,7 @@ function GuessBoard({ todaySeed, history, setHistory }) {
     }
     setCityPart(cityPart);
     if (cityPart.length >= 2) {
-      const filteredCities = cities.filter((c) => !getGuesses(history, todaySeed).includes(c));
+      const filteredCities = cities.filter((c) => !getAttempts(todayHistory).includes(c));
       const matchedCities = new Set([
         ...filteredCities.filter((c) => normalize(c.name).startsWith(normalize(cityPart.trim()))),
         ...filteredCities.filter((c) => normalize(c.name).includes(normalize(cityPart.trim())))
@@ -76,11 +81,11 @@ function GuessBoard({ todaySeed, history, setHistory }) {
       window.location.reload();
     }
     const guessedCity = cities.find((c) => normalize(c.name) === normalize(cityPart.trim()));
-    if (guessedCity && !getGuesses(history, todaySeed).includes(guessedCity)) {
+    if (guessedCity && !getAttempts(todayHistory).includes(guessedCity)) {
       setCityPart('');
       setFilteredCities([]);
       const eog = guessedCity.name === getRandCity(cities, todaySeed).name;
-      setGuesses(history, [...getGuesses(history, todaySeed), guessedCity], eog, setHistory, todaySeed);
+      addAttemptHandler(guessedCity, eog);
     }
     setTimeout(() => bottom.current.scrollIntoView({ behavior: 'smooth' }), 100);
   };
@@ -94,7 +99,7 @@ function GuessBoard({ todaySeed, history, setHistory }) {
     const targetCity = getRandCity(cities, todaySeed);
     return (
       t('components.guessBoard.todayDate', { date: todaySeed - dateOfPublish }) +
-      getGuesses(history, todaySeed)
+      getAttempts(todayHistory)
         .map((guess) => [
           regionComparator(guess, targetCity),
           populationComparator(guess, targetCity),
@@ -133,7 +138,7 @@ function GuessBoard({ todaySeed, history, setHistory }) {
         <span>{t('components.guessBoard.todayCityBadgeTitle')}</span>
         <img src={obfuscateUrl(getRandCity(cities, todaySeed).signUrl)} />
       </div>
-      {getGuesses(history, todaySeed).length > 0 && (
+      {getAttempts(todayHistory).length > 0 && (
         <div className='differences title'>
           <div className='guess'>{t('components.guessBoard.differences.district')}</div>
           <div className='guess'>{t('components.guessBoard.differences.population')}</div>
@@ -144,28 +149,28 @@ function GuessBoard({ todaySeed, history, setHistory }) {
       )}
       <div className='body'>
         <div className='body-background' style={{ backgroundImage: `url(${background})` }}></div>
-        {getGuesses(history, todaySeed).length == 0 && (
+        {getAttempts(todayHistory).length == 0 && (
           <div className='no-guess-help'>
             <div>{t('components.guessBoard.noGuesses')}</div>
           </div>
         )}
-        {getGuesses(history, todaySeed).length > 0 && (
+        {getAttempts(todayHistory).length > 0 && (
           <>
-            {getGuesses(history, todaySeed).map((g, idx, array) => (
+            {getAttempts(todayHistory).map((g, idx, array) => (
               <Guess
                 key={idx}
                 idx={idx}
                 guessedCity={g}
                 targetCity={getRandCity(cities, todaySeed)}
                 isLast={idx === array.length - 1}
-                isEog={getEog(history, todaySeed)}
+                isEog={isEog(todayHistory)}
               />
             ))}
           </>
         )}
         <div ref={bottom}>&nbsp;</div>
       </div>
-      {!getEog(history, todaySeed) && (
+      {!isEog(todayHistory) && (
         <div className='guess-box'>
           <input
             value={cityPart}
@@ -189,7 +194,7 @@ function GuessBoard({ todaySeed, history, setHistory }) {
           </div>
         </div>
       )}
-      {getEog(history, todaySeed) && (
+      {isEog(todayHistory) && (
         <div className='congratulation'>
           <Tippy content={getResult()} allowHTML={true} placement='auto' visible={true}>
             <div className='big button enabled' onClick={handleShare}>
@@ -206,8 +211,8 @@ function GuessBoard({ todaySeed, history, setHistory }) {
 
 GuessBoard.propTypes = {
   todaySeed: PropTypes.number.isRequired,
-  history: PropTypes.object.isRequired,
-  setHistory: PropTypes.func.isRequired
+  todayHistory: PropTypes.object.isRequired,
+  addAttemptHandler: PropTypes.func.isRequired
 };
 
 export default GuessBoard;

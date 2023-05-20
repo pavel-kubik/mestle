@@ -190,6 +190,9 @@
 }
 
 .congratulation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-size: x-large;
   font-weight: bold;
   color: white;
@@ -231,6 +234,13 @@
 
 .login-user {
   height: 30px;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 @media screen and (min-width: 500px) {

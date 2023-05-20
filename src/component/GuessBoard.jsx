@@ -23,11 +23,14 @@ import { isEog } from '../History/history';
 import Tippy from '@tippyjs/react';
 import useVH from 'react-viewport-height';
 import { t } from '../Util/translate';
+import { useNavigate } from 'react-router-dom';
 
-function GuessBoard({ todaySeed, todayHistory, addAttemptHandler }) {
+function GuessBoard({ loggedUser, todaySeed, todayHistory, addAttemptHandler }) {
   useVH();
 
   const bottom = useRef(null);
+
+  const navigate = useNavigate();
 
   const [cityPart, setCityPart] = useState('');
   const [filteredCities, setFilteredCities] = useState([]);
@@ -189,8 +192,15 @@ function GuessBoard({ todaySeed, todayHistory, addAttemptHandler }) {
               </div>
             </>
           )}
-          <div className={`big button ${guessEnabled ? 'enabled' : 'disabled'}`} onClick={handleGuess}>
-            {t('components.guessBoard.guessInput.submit')}
+          <div className='button-group'>
+            {!loggedUser && (
+              <div className={'big button enabled'} onClick={() => navigate('/user')}>
+                Login
+              </div>
+            )}
+            <div className={`big button ${guessEnabled ? 'enabled' : 'disabled'}`} onClick={handleGuess}>
+              {t('components.guessBoard.guessInput.submit')}
+            </div>
           </div>
         </div>
       )}
@@ -210,6 +220,7 @@ function GuessBoard({ todaySeed, todayHistory, addAttemptHandler }) {
 }
 
 GuessBoard.propTypes = {
+  loggedUser: PropTypes.object,
   todaySeed: PropTypes.number.isRequired,
   todayHistory: PropTypes.object.isRequired,
   addAttemptHandler: PropTypes.func.isRequired

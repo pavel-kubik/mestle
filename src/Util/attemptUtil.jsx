@@ -1,4 +1,22 @@
-export const storeAttempt = async (jwt, todaySeed, attempt, eog) => {
+export const addAttempt = async (jwt, todaySeed, attempt, eog) => {
+  const result = await fetch('/.netlify/functions/attempts', {
+    method: 'PUT',
+    mode: 'cors',
+    cache: 'no-cache',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': jwt
+    },
+    body: JSON.stringify({
+      todaySeed: todaySeed,
+      attempt: attempt,
+      eog: eog
+    })
+  });
+  return result.ok;
+};
+
+export const storeAttempts = async (jwt, todaySeed, attempts, eog) => {
   const result = await fetch('/.netlify/functions/attempts', {
     method: 'POST',
     mode: 'cors',
@@ -9,7 +27,7 @@ export const storeAttempt = async (jwt, todaySeed, attempt, eog) => {
     },
     body: JSON.stringify({
       todaySeed: todaySeed,
-      attempt: attempt.name,
+      attempts: attempts,
       eog: eog
     })
   });

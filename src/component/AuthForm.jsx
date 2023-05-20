@@ -7,7 +7,7 @@ import './AuthForm.css';
 import { t } from '../Util/translate';
 import { clearUserDataInLocalStorage, signIn, signUp } from '../lib/auth';
 
-const AuthForm = ({ loggedUser, setLoggedUser }) => {
+const AuthForm = ({ loggedUser, setLoggedUser, postSignIn = null, postSignUp = null }) => {
   const [authMode, setAuthMode] = useState('signin');
   const [signInError, setSignInError] = useState(null);
   const [signUpError, setSignUpError] = useState(null);
@@ -25,11 +25,17 @@ const AuthForm = ({ loggedUser, setLoggedUser }) => {
   };
 
   const signInHandler = async (values) => {
-    return await signIn(values.email, values.password, setLoggedUser, setSignInError);
+    const userData = await signIn(values.email, values.password, setLoggedUser, setSignInError);
+    if (postSignIn) {
+      postSignIn(userData);
+    }
   };
 
   const signUpHandler = async (values) => {
-    return await signUp(values.username, values.email, values.password, setLoggedUser, setSignUpError);
+    const userData = await signUp(values.username, values.email, values.password, setLoggedUser, setSignUpError);
+    if (postSignUp) {
+      postSignUp(userData);
+    }
   };
 
   const signOut = async () => {
@@ -192,7 +198,9 @@ const AuthForm = ({ loggedUser, setLoggedUser }) => {
 
 AuthForm.propTypes = {
   loggedUser: PropTypes.object,
-  setLoggedUser: PropTypes.func.isRequired
+  setLoggedUser: PropTypes.func.isRequired,
+  postSignIn: PropTypes.func,
+  postSignUp: PropTypes.func
 };
 
 export default AuthForm;

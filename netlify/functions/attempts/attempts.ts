@@ -5,6 +5,8 @@ import { connectToDatabase } from '../../util/dbUtil';
 export const handler: Handler = async (event, context) => {
   if (event.httpMethod === 'GET') {
     return await getAttempt(event);
+  } else if (event.httpMethod === 'PUT') {
+    return await addAttempt(event);
   } else if (event.httpMethod === 'POST') {
     return await setAttempt(event);
   } else {
@@ -13,6 +15,32 @@ export const handler: Handler = async (event, context) => {
 };
 
 const setAttempt = async (event) => {
+  const response = await validateJWT(event, async (userData) => {
+    const { todaySeed, attempts, eog } = JSON.parse(event.body);
+
+    const database = await connectToDatabase(process.env.MONGODB_URI);
+    const collection = database.collection('history');
+    const eogKey = todaySeed + '.eog';
+    const attemptsKey = todaySeed + '.attempts';
+    await collection.updateOne(
+      { user_id: userData._id },
+      {
+        $set: {
+          user_id: userData._id, //
+          [eogKey]: eog,
+          [attemptsKey]: attempts
+        }
+      },
+      { upsert: true }
+    );
+    return {
+      code: 200
+    };
+  });
+  return response;
+};
+
+const addAttempt = async (event) => {
   const response = await validateJWT(event, async (userData) => {
     const { todaySeed, attempt, eog } = JSON.parse(event.body);
 

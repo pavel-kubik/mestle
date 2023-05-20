@@ -48,6 +48,7 @@ export const signIn = async (email, password, setLoggedUser, setLoginError) => {
       const userData = await response.json();
       setLoggedUser(userData);
       storeUserDataInLocalStorage(userData);
+      return userData;
     } else {
       const data = await response.json();
       console.log('Error: ' + JSON.stringify(data));
@@ -81,6 +82,7 @@ export const signUp = async (username, email, password, setLoggedUser, setLoginE
     const userData = await response.json();
     setLoggedUser(userData);
     storeUserDataInLocalStorage(userData);
+    return userData;
   } else {
     const data = await response.json();
     console.log('SignUp error: ' + JSON.stringify(data));

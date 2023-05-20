@@ -17,7 +17,7 @@ import { t } from './Util/translate';
 import { hotjar } from 'react-hotjar';
 import { getUserDataInLocalStorage } from './lib/auth';
 import { getSeedFromDate } from './Rand/rand';
-import { loadAttempts, storeAttempt } from './Util/attemptUtil';
+import { loadAttempts, addAttempt, storeAttempts } from './Util/attemptUtil';
 
 import preval from 'preval.macro';
 import { getCitiesMap } from './Util/citiesUtil';
@@ -53,22 +53,22 @@ const App = () => {
     setTodaySeed(todaySeedValue);
   }, []);
 
-  useEffect(() => {
-    if (loggedUser && todaySeed) {
-      const citiesMap = getCitiesMap();
-      const loadHistoryData = async (citiesMap) => {
-        const serverHistory = await loadAttempts(loggedUser.token, todaySeed);
-        const newHistory = {
-          [todaySeed]: {
-            guesses: serverHistory.attempts.map((city) => citiesMap[city]),
-            eog: serverHistory.eog
-          }
-        };
-        setHistory(newHistory);
-      };
-      loadHistoryData(citiesMap);
-    }
-  }, [loggedUser, todaySeed]);
+  // useEffect(() => {
+  //   if (loggedUser && todaySeed) {
+  //     const citiesMap = getCitiesMap();
+  //     const loadHistoryData = async (citiesMap) => {
+  //       const serverHistory = await loadAttempts(loggedUser.token, todaySeed);
+  //       const newHistory = {
+  //         [todaySeed]: {
+  //           guesses: serverHistory.attempts.map((city) => citiesMap[city]),
+  //           eog: serverHistory.eog
+  //         }
+  //       };
+  //       setHistory(newHistory);
+  //     };
+  //     loadHistoryData(citiesMap);
+  //   }
+  // }, [loggedUser, todaySeed]);
 
   if (!todaySeed) {
     // skip first render if todaySeed is not set yet
@@ -91,13 +91,35 @@ const App = () => {
 
   const addAttemptHandler = async (attempt, eog) => {
     if (loggedUser) {
-      const out = await storeAttempt(loggedUser.token, todaySeed, attempt, eog);
+      const out = await addAttempt(loggedUser.token, todaySeed, attempt.name, eog);
       if (!out) {
         return;
       }
     }
     const todayGuesses = getTodayHistory();
     setTodayHistory({ guesses: [...todayGuesses.guesses, attempt], eog: eog });
+  };
+
+  const syncAttempts = async (userData) => {
+    const jwt = userData.token;
+    const serverHistory = await loadAttempts(jwt, todaySeed);
+    const todayHistory = getTodayHistory();
+    const citiesMap = getCitiesMap();
+    const newGuesses = [...serverHistory.attempts];
+    todayHistory.guesses.forEach((guess) => {
+      if (!newGuesses.includes(guess.name)) {
+        newGuesses.push(guess.name);
+      }
+    });
+    const newEog = serverHistory.eog || todayHistory.eog;
+    const newHistory = {
+      [todaySeed]: {
+        guesses: [...newGuesses.map((city) => citiesMap[city])],
+        eog: newEog
+      }
+    };
+    setHistory(newHistory);
+    await storeAttempts(jwt, todaySeed, newGuesses, newEog);
   };
 
   return (
@@ -127,9 +149,27 @@ const App = () => {
           <Route
             exact
             path='/'
-            element={<GuessBoard todaySeed={todaySeed} todayHistory={getTodayHistory()} addAttemptHandler={addAttemptHandler} />}
+            element={
+              <GuessBoard
+                loggedUser={loggedUser}
+                todaySeed={todaySeed}
+                todayHistory={getTodayHistory()}
+                addAttemptHandler={addAttemptHandler}
+              />
+            }
           />
-          <Route exact path='/user' element={<User history={history} loggedUser={loggedUser} setLoggedUser={setLoggedUser} />} />
+          <Route
+            exact
+            path='/user'
+            element={
+              <User //
+                history={history}
+                loggedUser={loggedUser}
+                setLoggedUser={setLoggedUser}
+                syncAttempts={syncAttempts}
+              />
+            }
+          />
           <Route exact path='/leader-board' element={<LeaderBoard />} />
           <Route exact path='/help' element={<HowToPlay />} />
         </Routes>

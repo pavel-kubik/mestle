@@ -102,3 +102,12 @@ input[type='search']::-webkit-search-cancel-button {
   z-index: 0;
   text-align: right;
 }
+
+.user-icon {
+  border: 1px solid green;
+  background-color: #0a0;
+  border-radius: 50%;
+  width: 2rem;
+  line-height: 2rem;
+  font: bold;
+}

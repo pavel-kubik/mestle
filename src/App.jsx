@@ -16,9 +16,11 @@ import { t } from './Util/translate';
 
 import { hotjar } from 'react-hotjar';
 import { getUserDataInLocalStorage } from './lib/auth';
+import { getSeedFromDate } from './Rand/rand';
+import { loadAttempts, storeAttempt } from './Util/attemptUtil';
 
 import preval from 'preval.macro';
-import { getSeedFromDate } from './Rand/rand';
+import { getCitiesMap } from './Util/citiesUtil';
 
 hotjar.initialize(3360376, 6);
 
@@ -51,6 +53,23 @@ const App = () => {
     setTodaySeed(todaySeedValue);
   }, []);
 
+  useEffect(() => {
+    if (loggedUser && todaySeed) {
+      const citiesMap = getCitiesMap();
+      const loadHistoryData = async (citiesMap) => {
+        const serverHistory = await loadAttempts(loggedUser.token, todaySeed);
+        const newHistory = {
+          [todaySeed]: {
+            guesses: serverHistory.attempts.map((city) => citiesMap[city]),
+            eog: serverHistory.eog
+          }
+        };
+        setHistory(newHistory);
+      };
+      loadHistoryData(citiesMap);
+    }
+  }, [loggedUser, todaySeed]);
+
   if (!todaySeed) {
     // skip first render if todaySeed is not set yet
     return;
@@ -70,7 +89,13 @@ const App = () => {
     return out;
   };
 
-  const addAttemptHandler = (attempt, eog) => {
+  const addAttemptHandler = async (attempt, eog) => {
+    if (loggedUser) {
+      const out = await storeAttempt(loggedUser.token, todaySeed, attempt, eog);
+      if (!out) {
+        return;
+      }
+    }
     const todayGuesses = getTodayHistory();
     setTodayHistory({ guesses: [...todayGuesses.guesses, attempt], eog: eog });
   };
@@ -80,8 +105,9 @@ const App = () => {
       <div className='app'>
         <div className='header'>
           {/*<Link to='/login-sign-up'>Login / Sign Up</Link>*/}
-          <Link to='/user' title={t('app.loginButton.title', { score })}>
-            <img className='login-user' src={userNotLogged} />
+          <Link to='/user' title={loggedUser ? loggedUser.username : t('app.loginButton.title', { score })}>
+            {loggedUser && <div className='user-icon'>{loggedUser.username.substr(0, 1).toUpperCase()}</div>}
+            {!loggedUser && <img className='login-user' src={userNotLogged} />}
           </Link>
           <Link to='/'>
             <div>

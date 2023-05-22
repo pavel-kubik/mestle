@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs-react';
+import { t } from '../Util/translate';
 
 export const storeUserDataInLocalStorage = (userData) => {
   localStorage.setItem('_user', JSON.stringify(userData));
@@ -27,7 +28,7 @@ export const signIn = async (email, password, setLoggedUser, setLoginError) => {
     });
     if (!responseSalt.ok) {
       console.log('Error read salt: ' + JSON.stringify(responseSalt));
-      setLoginError("Can't login. Please check your email and password.");
+      setLoginError(t('lib.auth.signIn.cantLogin'));
       return;
     }
     const { salt } = await responseSalt.json();
@@ -52,11 +53,11 @@ export const signIn = async (email, password, setLoggedUser, setLoginError) => {
     } else {
       const data = await response.json();
       console.log('Error: ' + JSON.stringify(data));
-      setLoginError("Can't login. Please check your email and password.");
+      setLoginError(t('lib.auth.signIn.cantLogin'));
     }
   } catch (error) {
     console.log('Login error: ' + error);
-    setLoginError("Can't login. Please check your email and password.");
+    setLoginError(t('lib.auth.signIn.cantLogin'));
   }
 };
 
@@ -86,6 +87,6 @@ export const signUp = async (username, email, password, setLoggedUser, setLoginE
   } else {
     const data = await response.json();
     console.log('SignUp error: ' + JSON.stringify(data));
-    setLoginError("Can't sign up now. Please try it later.");
+    setLoginError(t('lib.auth.signUp.cantSignUp'));
   }
 };

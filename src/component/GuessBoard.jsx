@@ -195,7 +195,7 @@ function GuessBoard({ loggedUser, todaySeed, todayHistory, addAttemptHandler }) 
           <div className='button-group'>
             {!loggedUser && (
               <div className={'big button enabled'} onClick={() => navigate('/user')}>
-                Login
+                {t('global.login')}
               </div>
             )}
             <div className={`big button ${guessEnabled ? 'enabled' : 'disabled'}`} onClick={handleGuess}>

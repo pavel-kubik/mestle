@@ -33,10 +33,9 @@ const App = () => {
   const [history, setHistory] = useStickyState({}, 'mestle_history');
   const score = getScore(history);
 
-  const [loggedUser, setLoggedUser] = useState(null);
-
   const dateTimeStamp = preval`module.exports = new Date().toLocaleString();`;
 
+  const [loggedUser, setLoggedUser] = useState(null);
   useEffect(() => {
     const loggedInUser = getUserDataInLocalStorage();
     if (loggedInUser !== null) {
@@ -44,12 +43,9 @@ const App = () => {
     }
   }, []);
 
-  // generated from current date and cities list
   const [todaySeed, setTodaySeed] = useState(null);
-
   useEffect(() => {
     const todaySeedValue = getSeedFromDate(new Date());
-    //console.log("Today seed " + todaySeed + " => " + getRandCity(cities, todaySeed).name);
     setTodaySeed(todaySeedValue);
   }, []);
 

@@ -44,14 +44,14 @@ const AuthForm = ({ loggedUser, setLoggedUser, postSignIn = null, postSignUp = n
   };
 
   const validationSignIn = Yup.object().shape({
-    email: Yup.string().email().required('Required'),
-    password: Yup.string().required('Required')
+    email: Yup.string().email().required(t('components.authForm.required')),
+    password: Yup.string().required(t('components.authForm.required'))
   });
 
   const validationSignUp = Yup.object().shape({
-    username: Yup.string().required('Required'),
-    email: Yup.string().email().required('Required'),
-    password: Yup.string().required('Required')
+    username: Yup.string().required(t('components.authForm.required')),
+    email: Yup.string().email().required(t('components.authForm.required')),
+    password: Yup.string().required(t('components.authForm.required'))
   });
 
   const signInFormChanged = () => {

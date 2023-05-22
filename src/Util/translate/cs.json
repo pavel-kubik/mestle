@@ -1,6 +1,9 @@
 {
   "app.buildNumber": "Build {{dateTimeStamp}}",
   "app.loginButton.title": "Nepřihlášený uživatel.\nKlikni pro přihlášení nebo vytvoření účtu.\n\nSkóre: {{score}}",
+  "lib.auth.signIn.cantLogin": "Nelze se přihlásit. Zkontrolujte email a heslo.",
+  "lib.auth.signUp.cantSignUp": "Nelze se zaregistrovat. Prosím zkuste to později.",
+  "components.authForm.required": "Vyžadováno",
   "components.betaSwitch.button.no": "NE",
   "components.betaSwitch.button.yes": "ANO",
   "components.guess.directionDiff.east": "východ",
@@ -50,6 +53,7 @@
   "components.user.register.submit": "Registrovat",
   "components.user.register.title": "Registrace",
   "components.user.register.username": "Jméno",
+  "global.login": "Přihlásit",
   "languages.cs": "Česky",
   "languages.en": "English"
 }

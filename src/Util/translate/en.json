@@ -1,6 +1,9 @@
 {
   "app.buildNumber": "Build {{dateTimeStamp}}",
   "app.loginButton.title": "User not logged in.\nClick to log in or register your account.\n\nScore: {{score}}",
+  "lib.auth.signIn.cantLogin": "Can't login. Please check your email and password.",
+  "lib.auth.signUp.cantSignUp": "Can't sign up now. Please try it later.",
+  "components.authForm.required": "Required",
   "components.betaSwitch.button.no": "NO",
   "components.betaSwitch.button.yes": "YES",
   "components.guess.directionDiff.east": "east",
@@ -50,6 +53,7 @@
   "components.user.register.submit": "Register",
   "components.user.register.title": "Register",
   "components.user.register.username": "User name",
+  "global.login": "Login",
   "languages.cs": "Česky",
   "languages.en": "English"
 }

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 import './App.css';
 
-import { getScore } from './History/history';
+import { getScore, mergeHistory } from './History/history';
 import { useStickyState } from './Util/util';
 import { isBeta } from './Util/betaUtil';
 import GuessBoard from './component/GuessBoard';
@@ -53,23 +53,6 @@ const App = () => {
     setTodaySeed(todaySeedValue);
   }, []);
 
-  // useEffect(() => {
-  //   if (loggedUser && todaySeed) {
-  //     const citiesMap = getCitiesMap();
-  //     const loadHistoryData = async (citiesMap) => {
-  //       const serverHistory = await loadAttempts(loggedUser.token, todaySeed);
-  //       const newHistory = {
-  //         [todaySeed]: {
-  //           guesses: serverHistory.attempts.map((city) => citiesMap[city]),
-  //           eog: serverHistory.eog
-  //         }
-  //       };
-  //       setHistory(newHistory);
-  //     };
-  //     loadHistoryData(citiesMap);
-  //   }
-  // }, [loggedUser, todaySeed]);
-
   if (!todaySeed) {
     // skip first render if todaySeed is not set yet
     return;
@@ -104,29 +87,28 @@ const App = () => {
     const jwt = userData.token;
     const serverHistory = await loadAttempts(jwt, todaySeed);
     const todayHistory = getTodayHistory();
+    const mergedHistory = mergeHistory(
+      {
+        guesses: [...todayHistory.guesses.map((c) => c.name)]
+      },
+      {
+        guesses: [...serverHistory.attempts],
+        eog: serverHistory.eog
+      }
+    );
     const citiesMap = getCitiesMap();
-    const newGuesses = [...serverHistory.attempts];
-    todayHistory.guesses.forEach((guess) => {
-      if (!newGuesses.includes(guess.name)) {
-        newGuesses.push(guess.name);
-      }
-    });
-    const newEog = serverHistory.eog || todayHistory.eog;
     const newHistory = {
-      [todaySeed]: {
-        guesses: [...newGuesses.map((city) => citiesMap[city])],
-        eog: newEog
-      }
+      guesses: [...mergedHistory.guesses.map((city) => citiesMap[city])],
+      eog: mergedHistory.eog
     };
-    setHistory(newHistory);
-    await storeAttempts(jwt, todaySeed, newGuesses, newEog);
+    setTodayHistory(newHistory);
+    await storeAttempts(jwt, todaySeed, mergedHistory.guesses, mergedHistory.eog);
   };
 
   return (
     <Router>
       <div className='app'>
         <div className='header'>
-          {/*<Link to='/login-sign-up'>Login / Sign Up</Link>*/}
           <Link to='/user' title={loggedUser ? loggedUser.username : t('app.loginButton.title', { score })}>
             {loggedUser && <div className='user-icon'>{loggedUser.username.substr(0, 1).toUpperCase()}</div>}
             {!loggedUser && <img className='login-user' src={userNotLogged} />}
@@ -138,9 +120,6 @@ const App = () => {
               <div className='debug'>({new Date().toLocaleDateString('cz-CS')})</div>
             </div>
           </Link>
-          {/*TODO <Link to='/leader-board'>Leader Board</Link>*/}
-          {/*TODO <Link to='/help'>How To Play</Link>*/}
-
           <div style={{ display: 'flex', gap: 16 }}>
             <LanguageSwitch />
           </div>

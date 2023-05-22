@@ -26,7 +26,7 @@ import { t } from '../Util/translate';
 import { useNavigate } from 'react-router-dom';
 
 function GuessBoard({ loggedUser, todaySeed, todayHistory, addAttemptHandler }) {
-  useVH();
+  useVH(); // TODO move to App.jsx
 
   const bottom = useRef(null);
 

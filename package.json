@@ -23,6 +23,7 @@
     "react-hotjar": "^5.4.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
+    "react-spinners": "^0.13.8",
     "react-spring": "^9.4.5",
     "react-twitter-embed": "^4.0.4",
     "react-viewport-height": "^1.2.0",

@@ -34,6 +34,7 @@ export const handler: Handler = async (event, context) => {
       return {
         statusCode: 409,
         body: JSON.stringify({
+          errorCode: 'err.emailUsed',
           message: 'Email is already used.'
         })
       };
@@ -43,6 +44,7 @@ export const handler: Handler = async (event, context) => {
       return {
         statusCode: 409,
         body: JSON.stringify({
+          errorCode: 'err.usernameUsed',
           message: 'Username is already used.'
         })
       };

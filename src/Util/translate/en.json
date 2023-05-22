@@ -53,6 +53,8 @@
   "components.user.register.submit": "Register",
   "components.user.register.title": "Register",
   "components.user.register.username": "User name",
+  "err.emailUsed": "Email is already used.",
+  "err.usernameUsed": "Username is already used.",
   "global.login": "Login",
   "languages.cs": "Česky",
   "languages.en": "English"

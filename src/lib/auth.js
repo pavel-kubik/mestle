@@ -87,6 +87,10 @@ export const signUp = async (username, email, password, setLoggedUser, setLoginE
   } else {
     const data = await response.json();
     console.log('SignUp error: ' + JSON.stringify(data));
-    setLoginError(t('lib.auth.signUp.cantSignUp'));
+    if (data.errorCode) {
+      setLoginError(t(data.errorCode));
+    } else {
+      setLoginError(t('lib.auth.signUp.cantSignUp'));
+    }
   }
 };

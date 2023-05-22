@@ -21,6 +21,7 @@ import { loadAttempts, addAttempt, storeAttempts } from './Util/attemptUtil';
 
 import preval from 'preval.macro';
 import { getCitiesMap } from './Util/citiesUtil';
+import FadeLoader from 'react-spinners/FadeLoader';
 
 hotjar.initialize(3360376, 6);
 
@@ -29,6 +30,7 @@ if (hotjar.initialized()) {
 }
 
 const App = () => {
+  const [isLoading, setLoading] = useState(false);
   // permanent
   const [history, setHistory] = useStickyState({}, 'mestle_history');
   const score = getScore(history);
@@ -68,89 +70,111 @@ const App = () => {
     return out;
   };
 
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
   const addAttemptHandler = async (attempt, eog) => {
+    setLoading(true);
+    await delay(5000);
     if (loggedUser) {
       const out = await addAttempt(loggedUser.token, todaySeed, attempt.name, eog);
       if (!out) {
+        setLoading(false);
         return;
       }
     }
     const todayGuesses = getTodayHistory();
     setTodayHistory({ guesses: [...todayGuesses.guesses, attempt], eog: eog });
+    setLoading(false);
   };
 
   const syncAttempts = async (userData) => {
-    const jwt = userData.token;
-    const serverHistory = await loadAttempts(jwt, todaySeed);
-    const todayHistory = getTodayHistory();
-    const mergedHistory = mergeHistory(
-      {
-        guesses: [...todayHistory.guesses.map((c) => c.name)]
-      },
-      {
-        guesses: [...serverHistory.attempts],
-        eog: serverHistory.eog
+    try {
+      if (userData) {
+        const jwt = userData.token;
+        const serverHistory = await loadAttempts(jwt, todaySeed);
+        const todayHistory = getTodayHistory();
+        const mergedHistory = mergeHistory(
+          {
+            guesses: [...todayHistory.guesses.map((c) => c.name)]
+          },
+          {
+            guesses: [...serverHistory.attempts],
+            eog: serverHistory.eog
+          }
+        );
+        const citiesMap = getCitiesMap();
+        const newHistory = {
+          guesses: [...mergedHistory.guesses.map((city) => citiesMap[city])],
+          eog: mergedHistory.eog
+        };
+        setTodayHistory(newHistory);
+        await storeAttempts(jwt, todaySeed, mergedHistory.guesses, mergedHistory.eog);
       }
-    );
-    const citiesMap = getCitiesMap();
-    const newHistory = {
-      guesses: [...mergedHistory.guesses.map((city) => citiesMap[city])],
-      eog: mergedHistory.eog
-    };
-    setTodayHistory(newHistory);
-    await storeAttempts(jwt, todaySeed, mergedHistory.guesses, mergedHistory.eog);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const initBECall = () => {
+    setLoading(true);
   };
 
   return (
-    <Router>
-      <div className='app'>
-        <div className='header'>
-          <Link to='/user' title={loggedUser ? loggedUser.username : t('app.loginButton.title', { score })}>
-            {loggedUser && <div className='user-icon'>{loggedUser.username.substr(0, 1).toUpperCase()}</div>}
-            {!loggedUser && <img className='login-user' src={userNotLogged} />}
-          </Link>
-          <Link to='/'>
-            <div>
-              <span>Městle</span>
-              {isBeta() && <span style={{ color: 'red', fontStyle: 'italic' }}> beta</span>}
-              <div className='debug'>({new Date().toLocaleDateString('cz-CS')})</div>
-            </div>
-          </Link>
-          <div style={{ display: 'flex', gap: 16 }}>
-            <LanguageSwitch />
-          </div>
-        </div>
-        <Routes>
-          <Route
-            exact
-            path='/'
-            element={
-              <GuessBoard
-                loggedUser={loggedUser}
-                todaySeed={todaySeed}
-                todayHistory={getTodayHistory()}
-                addAttemptHandler={addAttemptHandler}
-              />
-            }
-          />
-          <Route
-            exact
-            path='/user'
-            element={
-              <User //
-                history={history}
-                loggedUser={loggedUser}
-                setLoggedUser={setLoggedUser}
-                syncAttempts={syncAttempts}
-              />
-            }
-          />
-          <Route exact path='/leader-board' element={<LeaderBoard />} />
-          <Route exact path='/help' element={<HowToPlay />} />
-        </Routes>
-        <div className='build-time debug'>{t('app.buildNumber', { dateTimeStamp })}</div>
+    <div className={isLoading ? 'loader loading' : 'loader hide'}>
+      <div className='spinner'>
+        <FadeLoader />
       </div>
-    </Router>
+      <Router>
+        <div className='app'>
+          <div className='header'>
+            <Link to='/user' title={loggedUser ? loggedUser.username : t('app.loginButton.title', { score })}>
+              {loggedUser && <div className='user-icon'>{loggedUser.username.substr(0, 1).toUpperCase()}</div>}
+              {!loggedUser && <img className='login-user' src={userNotLogged} />}
+            </Link>
+            <Link to='/'>
+              <div>
+                <span>Městle</span>
+                {isBeta() && <span style={{ color: 'red', fontStyle: 'italic' }}> beta</span>}
+                <div className='debug'>({new Date().toLocaleDateString('cz-CS')})</div>
+              </div>
+            </Link>
+            <div style={{ display: 'flex', gap: 16 }}>
+              <LanguageSwitch />
+            </div>
+          </div>
+          <Routes>
+            <Route
+              exact
+              path='/'
+              element={
+                <GuessBoard
+                  loggedUser={loggedUser}
+                  todaySeed={todaySeed}
+                  todayHistory={getTodayHistory()}
+                  addAttemptHandler={addAttemptHandler}
+                />
+              }
+            />
+            <Route
+              exact
+              path='/user'
+              element={
+                <User //
+                  history={history}
+                  loggedUser={loggedUser}
+                  setLoggedUser={setLoggedUser}
+                  initBECall={initBECall}
+                  syncAttempts={syncAttempts}
+                />
+              }
+            />
+            <Route exact path='/leader-board' element={<LeaderBoard />} />
+            <Route exact path='/help' element={<HowToPlay />} />
+          </Routes>
+          <div className='build-time debug'>{t('app.buildNumber', { dateTimeStamp })}</div>
+        </div>
+      </Router>
+    </div>
   );
 };
 

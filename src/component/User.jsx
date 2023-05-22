@@ -7,7 +7,7 @@ import './User.css';
 import { t } from '../Util/translate';
 import AuthForm from './AuthForm';
 
-const User = ({ history, loggedUser, setLoggedUser, syncAttempts }) => {
+const User = ({ history, loggedUser, setLoggedUser, initBECall, syncAttempts }) => {
   const getUserScore = () => {
     return getScore(history);
   };
@@ -17,6 +17,8 @@ const User = ({ history, loggedUser, setLoggedUser, syncAttempts }) => {
       <AuthForm //
         loggedUser={loggedUser}
         setLoggedUser={setLoggedUser}
+        preSignIn={initBECall}
+        preSignUp={initBECall}
         postSignIn={syncAttempts}
         postSignUp={syncAttempts}
       />
@@ -48,6 +50,7 @@ User.propTypes = {
   history: PropTypes.object.isRequired,
   loggedUser: PropTypes.object,
   setLoggedUser: PropTypes.func.isRequired,
+  initBECall: PropTypes.func.isRequired,
   syncAttempts: PropTypes.func.isRequired
 };
 

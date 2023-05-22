@@ -7,7 +7,7 @@ import './AuthForm.css';
 import { t } from '../Util/translate';
 import { clearUserDataInLocalStorage, signIn, signUp } from '../lib/auth';
 
-const AuthForm = ({ loggedUser, setLoggedUser, postSignIn = null, postSignUp = null }) => {
+const AuthForm = ({ loggedUser, setLoggedUser, preSignIn = null, preSignUp = null, postSignIn = null, postSignUp = null }) => {
   const [authMode, setAuthMode] = useState('signin');
   const [signInError, setSignInError] = useState(null);
   const [signUpError, setSignUpError] = useState(null);
@@ -25,6 +25,9 @@ const AuthForm = ({ loggedUser, setLoggedUser, postSignIn = null, postSignUp = n
   };
 
   const signInHandler = async (values) => {
+    if (preSignIn) {
+      preSignIn();
+    }
     const userData = await signIn(values.email, values.password, setLoggedUser, setSignInError);
     if (postSignIn) {
       postSignIn(userData);
@@ -32,6 +35,9 @@ const AuthForm = ({ loggedUser, setLoggedUser, postSignIn = null, postSignUp = n
   };
 
   const signUpHandler = async (values) => {
+    if (preSignUp) {
+      preSignUp();
+    }
     const userData = await signUp(values.username, values.email, values.password, setLoggedUser, setSignUpError);
     if (postSignUp) {
       postSignUp(userData);
@@ -199,6 +205,8 @@ const AuthForm = ({ loggedUser, setLoggedUser, postSignIn = null, postSignUp = n
 AuthForm.propTypes = {
   loggedUser: PropTypes.object,
   setLoggedUser: PropTypes.func.isRequired,
+  preSignIn: PropTypes.func,
+  preSignUp: PropTypes.func,
   postSignIn: PropTypes.func,
   postSignUp: PropTypes.func
 };

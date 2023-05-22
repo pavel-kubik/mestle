@@ -4,6 +4,7 @@
   "lib.auth.signIn.cantLogin": "Can't login. Please check your email and password.",
   "lib.auth.signUp.cantSignUp": "Can't sign up now. Please try it later.",
   "components.authForm.required": "Required",
+  "components.authForm.welcome": "Welcome {{username}}!",
   "components.betaSwitch.button.no": "NO",
   "components.betaSwitch.button.yes": "YES",
   "components.guess.directionDiff.east": "east",
@@ -56,6 +57,7 @@
   "err.emailUsed": "Email is already used.",
   "err.usernameUsed": "Username is already used.",
   "global.login": "Login",
+  "global.signOut": "Logout",
   "languages.cs": "Česky",
   "languages.en": "English"
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Formik } from 'formik';
@@ -73,9 +73,9 @@ const AuthForm = ({ loggedUser, setLoggedUser, preSignIn = null, preSignUp = nul
       <div className='login-sign-up-form'>
         {loggedUser && (
           <>
-            <div>Welcome {loggedUser.username}!</div>
+            <div>{t('components.authForm.welcome', { username: loggedUser.username })}</div>
             <div className='button' onClick={signOut}>
-              Sign out
+              {t('global.signOut')}
             </div>
           </>
         )}

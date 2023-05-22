@@ -4,6 +4,7 @@
   "lib.auth.signIn.cantLogin": "Nelze se přihlásit. Zkontrolujte email a heslo.",
   "lib.auth.signUp.cantSignUp": "Nelze se zaregistrovat. Prosím zkuste to později.",
   "components.authForm.required": "Vyžadováno",
+  "components.authForm.welcome": "Přihlášený uživatel {{username}}. Vítej!",
   "components.betaSwitch.button.no": "NE",
   "components.betaSwitch.button.yes": "ANO",
   "components.guess.directionDiff.east": "východ",
@@ -56,6 +57,7 @@
   "err.emailUsed": "Email už je zaregistrovaný.",
   "err.usernameUsed": "Jméno už je zaregistrované.",
   "global.login": "Přihlásit",
+  "global.signOut": "Odhlásit",
   "languages.cs": "Česky",
   "languages.en": "English"
 }

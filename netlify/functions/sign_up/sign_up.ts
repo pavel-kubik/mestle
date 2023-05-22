@@ -13,6 +13,11 @@ export const handler: Handler = async (event, context) => {
     return { statusCode: 400 };
   }
 
+  if (!process.env.TOKEN_KEY) {
+    console.log('MISCONFIGURATION - Missing TOKEN KEY');
+    return { statusCode: 500, body: 'Missing TOKEN KEY' };
+  }
+
   const { username, email, password, salt } = JSON.parse(event.body);
 
   context.callbackWaitsForEmptyEventLoop = false;

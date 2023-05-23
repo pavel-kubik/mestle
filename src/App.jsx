@@ -70,11 +70,8 @@ const App = () => {
     return out;
   };
 
-  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-
   const addAttemptHandler = async (attempt, eog) => {
     setLoading(true);
-    await delay(5000);
     if (loggedUser) {
       const out = await addAttempt(loggedUser.token, todaySeed, attempt.name, eog);
       if (!out) {

@@ -51,11 +51,6 @@ const App = () => {
     setTodaySeed(todaySeedValue);
   }, []);
 
-  if (!todaySeed) {
-    // skip first render if todaySeed is not set yet
-    return;
-  }
-
   const setTodayHistory = (todayHistory) => {
     const allHistory = Object.assign({}, history);
     allHistory[todaySeed] = todayHistory;
@@ -112,9 +107,23 @@ const App = () => {
     }
   };
 
+  useEffect(() => {
+    const loadBE = async () => {
+      await syncAttempts(loggedUser);
+    };
+    if (loggedUser && todaySeed) {
+      loadBE();
+    }
+  }, [loggedUser, todaySeed]);
+
   const initBECall = () => {
     setLoading(true);
   };
+
+  if (!todaySeed) {
+    // skip first render if todaySeed is not set yet
+    return;
+  }
 
   return (
     <div className={isLoading ? 'loader loading' : 'loader hide'}>

@@ -29,6 +29,7 @@ const AuthForm = ({ loggedUser, setLoggedUser, preSignIn = null, preSignUp = nul
       preSignIn();
     }
     const userData = await signIn(values.email, values.password, setLoggedUser, setSignInError);
+    values.password = '';
     if (postSignIn) {
       postSignIn(userData);
     }
@@ -39,6 +40,7 @@ const AuthForm = ({ loggedUser, setLoggedUser, preSignIn = null, preSignUp = nul
       preSignUp();
     }
     const userData = await signUp(values.username, values.email, values.password, setLoggedUser, setSignUpError);
+    values.password = '';
     if (postSignUp) {
       postSignUp(userData);
     }

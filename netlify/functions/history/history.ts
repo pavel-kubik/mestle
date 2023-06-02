@@ -1,5 +1,5 @@
 import { Handler } from '@netlify/functions';
-import { validateJWT } from '../../util/auth';
+import { validateJWT } from 'jwt-auth-mongodb-be';
 import { connectToDatabase } from '../../util/dbUtil';
 
 export const handler: Handler = async (event, context) => {

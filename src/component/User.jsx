@@ -6,8 +6,9 @@ import BetaSwitch from './BetaSwitch';
 import './User.css';
 import { t } from '../Util/translate';
 /* eslint-disable */
-import { AuthForm } from 'jwt-auth-mongodb-fe';
-import 'jwt-auth-mongodb-fe/src/fe/component/AuthForm.css';
+import AuthForm from 'jwt-auth-mongodb/dist/fe/component/AuthForm';
+//import { AuthForm } from 'jwt-auth-mongodb'; // not works
+import 'jwt-auth-mongodb/src/fe/component/AuthForm.css';
 
 /* eslint-disable */
 const User = ({ history, loggedUser, setLoggedUser, initBECall, syncAttempts }) => {

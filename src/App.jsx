@@ -87,7 +87,8 @@ const App = () => {
         const todayHistory = getTodayHistory();
         const mergedHistory = mergeHistory(
           {
-            guesses: [...todayHistory.guesses.map((c) => c.name)]
+            guesses: [...todayHistory.guesses.map((c) => c.name)],
+            eog: todayHistory.eog
           },
           {
             guesses: [...serverHistory.attempts],

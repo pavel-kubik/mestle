@@ -190,6 +190,9 @@
 }
 
 .congratulation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-size: x-large;
   font-weight: bold;
   color: white;
@@ -199,16 +202,6 @@
   border-radius: 20px;
   margin-bottom: 20px;
   z-index: 10;
-}
-
-.debug {
-  color: silver;
-  font-size: xx-small;
-}
-
-.build-time {
-  z-index: 0;
-  text-align: right;
 }
 
 .notification {
@@ -241,6 +234,13 @@
 
 .login-user {
   height: 30px;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 @media screen and (min-width: 500px) {

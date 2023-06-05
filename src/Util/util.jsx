@@ -152,6 +152,29 @@ export const normalize = (a) => {
     .replace(/[\u0300-\u036f]/g, '');
 };
 
+export const obfuscateUrl = (url) => {
+  const prefix = 'https://upload.wikimedia.org/wikipedia/commons/thumb/';
+  const url2ndPart = unescape(url.substring(prefix.length));
+  return (
+    prefix +
+    url2ndPart
+      .split('/')
+      .map((part) => {
+        return part
+          .split('')
+          .map((c) => {
+            if (c.charCodeAt(0).toString(16).length <= 2) {
+              return '%' + c.charCodeAt(0).toString(16).padStart(2, '0');
+            } else {
+              return escape(c);
+            }
+          })
+          .join('');
+      })
+      .join('/')
+  );
+};
+
 export const ARROW_UP = '\u2191';
 export const ARROW_DOWN = '\u2193';
 export const GREEN_CIRCLE = '\uD83D\uDFE2';

@@ -13,12 +13,7 @@ export const handler: Handler = async (event, context) => {
     return { statusCode: 400 };
   }
 
-  if (!process.env.TOKEN_KEY) {
-    console.log('MISCONFIGURATION - Missing TOKEN KEY');
-    return { statusCode: 500, body: 'Missing TOKEN KEY' };
-  }
-
-  const { email, password } = JSON.parse(event.body);
+  const { email } = JSON.parse(event.body);
 
   context.callbackWaitsForEmptyEventLoop = false;
 
@@ -28,29 +23,13 @@ export const handler: Handler = async (event, context) => {
 
     const userData = await collection.findOne({ email: email });
 
-    if (userData && userData.password) {
-      if (await bcrypt.compare(password, userData.password)) {
-        const token = jwt.sign(
-          { user_id: userData._id, email }, //
-          process.env.TOKEN_KEY, //
-          {
-            expiresIn: '7d'
-          }
-        );
-
-        return {
-          statusCode: 200,
-          headers: {
-            'x-access-token': token
-            // TODO store jwt in http only session
-          },
-          body: JSON.stringify({
-            id: userData._id,
-            username: userData.username,
-            token: token
-          })
-        };
-      }
+    if (userData) {
+      return {
+        statusCode: 200,
+        body: JSON.stringify({
+          salt: userData.salt
+        })
+      };
     }
     return {
       statusCode: 401,

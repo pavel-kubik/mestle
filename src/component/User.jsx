@@ -5,8 +5,12 @@ import BetaSwitch from './BetaSwitch';
 
 import './User.css';
 import { t } from '../Util/translate';
-import AuthForm from './AuthForm';
+/* eslint-disable */
+import AuthForm from 'jwt-auth-mongodb/dist/fe/component/AuthForm';
+//import { AuthForm } from 'jwt-auth-mongodb'; // not works
+import 'jwt-auth-mongodb/src/fe/component/AuthForm.css';
 
+/* eslint-disable */
 const User = ({ history, loggedUser, setLoggedUser, initBECall, syncAttempts }) => {
   const getUserScore = () => {
     return getScore(history);
@@ -21,6 +25,7 @@ const User = ({ history, loggedUser, setLoggedUser, initBECall, syncAttempts }) 
         preSignUp={initBECall}
         postSignIn={syncAttempts}
         postSignUp={syncAttempts}
+        t={t}
       />
       {loggedUser && ( //
         <div className='statistics'>

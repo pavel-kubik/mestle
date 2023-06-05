@@ -1,15 +1,13 @@
-import { MongoClient } from 'mongodb';
+import { Db, MongoClient } from 'mongodb';
 
-let cachedDb = null;
+let cachedDb: Db | null = null;
 
 export const connectToDatabase = async (uri) => {
   // we can cache the access to our database to speed things up a bit
   // (this is the only thing that is safe to cache here)
   if (cachedDb) return cachedDb;
 
-  const client = await MongoClient.connect(uri, {
-    useUnifiedTopology: true
-  });
+  const client = await MongoClient.connect(uri);
 
   cachedDb = client.db(process.env.MONGODB_DATABASE);
 

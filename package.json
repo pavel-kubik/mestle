@@ -14,7 +14,7 @@
     "bcryptjs-react": "^2.4.6",
     "geolib": "^3.3.3",
     "jsonwebtoken": "^9.0.0",
-    "jwt-auth-mongodb": "file:../jwt-auth-mongodb/jwt-auth-mongodb-1.0.6.tgz",
+    "jwt-auth-mongodb": "^1.0.6",
     "mongodb": "^5.5.0",
     "preval.macro": "^5.0.0",
     "prop-types": "^15.8.1",

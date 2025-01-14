@@ -49,7 +49,7 @@
   "components.user.login.submit": "Přihlásit",
   "components.user.login.title": "Přihlášení",
   "components.user.login.email": "Email",
-  "components.user.login.futureFeature": "Na přihlašování se pracuje. Sledujte nás na sociálních sítích.",
+  "components.user.login.futureFeature": "Na přihlašování se pracuje.",
   "components.user.register.email": "Email",
   "components.user.register.password": "Heslo",
   "components.user.register.submit": "Registrovat",

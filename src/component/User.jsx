@@ -18,15 +18,17 @@ const User = ({ history, loggedUser, setLoggedUser, initBECall, syncAttempts }) 
 
   return (
     <div className='user-info'>
-      <AuthForm //
-        loggedUser={loggedUser}
-        setLoggedUser={setLoggedUser}
-        preSignIn={initBECall}
-        preSignUp={initBECall}
-        postSignIn={syncAttempts}
-        postSignUp={syncAttempts}
-        t={t}
-      />
+      {false && (
+        <AuthForm //
+          loggedUser={loggedUser}
+          setLoggedUser={setLoggedUser}
+          preSignIn={initBECall}
+          preSignUp={initBECall}
+          postSignIn={syncAttempts}
+          postSignUp={syncAttempts}
+          t={t}
+        />
+      )}
       {loggedUser && ( //
         <div className='statistics'>
           <div>{t('components.user.guessCities.title', { score: getUserScore() })}</div>
@@ -47,6 +49,7 @@ const User = ({ history, loggedUser, setLoggedUser, initBECall, syncAttempts }) 
         {t('components.user.betaTesting.title')}
         <BetaSwitch />
       </div>
+      <div style={{ color: 'red' }}>{t('components.user.login.futureFeature')}</div>
     </div>
   );
 };

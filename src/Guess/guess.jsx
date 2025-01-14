@@ -140,7 +140,8 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
           <div className={`guess area ${distanceGuess}`}>{Math.trunc(distanceDiff)} km</div>
         </Tippy>
         <div className={`guess sign`}>
-          <img src={guessedCity.signUrl} />
+          {/* TODO directory to constant; move images to src and import them */}
+          <img src={'/img/sign/' + guessedCity.hashFilename} />
         </div>
         <Tippy
           placement='bottom'

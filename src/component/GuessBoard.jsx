@@ -12,7 +12,6 @@ import {
   districtComparator,
   GREEN_CIRCLE,
   normalize,
-  obfuscateUrl,
   ORANGE_CIRCLE,
   populationComparator,
   regionComparator,
@@ -139,7 +138,8 @@ function GuessBoard({ loggedUser, todaySeed, todayHistory, addAttemptHandler }) 
     <>
       <div className='requirements'>
         <span>{t('components.guessBoard.todayCityBadgeTitle')}</span>
-        <img src={obfuscateUrl(getRandCity(cities, todaySeed).signUrl)} />
+        {/* TODO directory to constant; move images to src and import them */}
+        <img src={'/img/sign/' + getRandCity(cities, todaySeed).hashFilename} />
       </div>
       {getAttempts(todayHistory).length > 0 && (
         <div className='differences title'>

@@ -3,6 +3,7 @@
   "app.loginButton.title": "Nepřihlášený uživatel.\nKlikni pro přihlášení nebo vytvoření účtu.\n\nSkóre: {{score}}",
   "lib.auth.signIn.cantLogin": "Nelze se přihlásit. Zkontrolujte email a heslo.",
   "lib.auth.signUp.cantSignUp": "Nelze se zaregistrovat. Prosím zkuste to později.",
+  "components.authForm.emailInvalid": "Email musí být validní.",
   "components.authForm.required": "Vyžadováno",
   "components.authForm.welcome": "Přihlášený uživatel {{username}}. Vítej!",
   "components.betaSwitch.button.no": "NE",

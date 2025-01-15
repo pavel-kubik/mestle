@@ -12,7 +12,6 @@ import {
   districtComparator,
   GREEN_CIRCLE,
   normalize,
-  obfuscateUrl,
   ORANGE_CIRCLE,
   populationComparator,
   regionComparator,

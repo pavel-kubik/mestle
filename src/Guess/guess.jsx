@@ -85,6 +85,10 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
     }
   };
 
+  const getSign = (guessedCity) => {
+    return guessedCity.hashFilename != undefined ? '/img/sign/' + guessedCity.hashFilename : guessedCity.signUrl;
+  };
+
   return (
     <div className='guessLine'>
       <div className='guess-city'>
@@ -141,7 +145,7 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
         </Tippy>
         <div className={`guess sign`}>
           {/* TODO directory to constant; move images to src and import them */}
-          <img src={'/img/sign/' + guessedCity.hashFilename} />
+          <img src={getSign(guessedCity)} />
         </div>
         <Tippy
           placement='bottom'

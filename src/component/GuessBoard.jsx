@@ -139,7 +139,13 @@ function GuessBoard({ loggedUser, todaySeed, todayHistory, addAttemptHandler }) 
       <div className='requirements'>
         <span>{t('components.guessBoard.todayCityBadgeTitle')}</span>
         {/* TODO directory to constant; move images to src and import them */}
-        <img src={'/img/sign/' + getRandCity(cities, todaySeed).hashFilename} />
+        <img
+          src={
+            getRandCity(cities, todaySeed).hashFilename
+              ? '/img/sign/' + getRandCity(cities, todaySeed).hashFilename
+              : obfuscateUrl(getRandCity(cities, todaySeed).signUrl)
+          }
+        />
       </div>
       {getAttempts(todayHistory).length > 0 && (
         <div className='differences title'>

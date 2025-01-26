@@ -11,12 +11,13 @@ import {
   populationComparator,
   regionComparator
 } from '../Util/util';
-import compass from '../img/compass_background.svg';
+import compassCS from '../img/new_compass_cs.svg';
+import compassEN from '../img/new_compass_en.svg';
 import compassArrow from '../img/compass_arrow.svg';
 import compassPin from '../img/compass_pin.svg';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
-import { t } from '../Util/translate';
+import { getLanguage, LANGUAGES, t } from '../Util/translate';
 
 const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
   const tooltipWidth = '17vw';
@@ -160,7 +161,7 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
           <div
             className={`guess direction`}
             style={{
-              backgroundImage: `url(${compass})`,
+              backgroundImage: `url(${getLanguage() === LANGUAGES.cs ? compassCS : compassEN})`,
               backgroundRepeat: 'no-repeat',
               overflow: 'hidden'
             }}

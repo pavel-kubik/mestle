@@ -29,9 +29,11 @@ const User = ({ history, loggedUser, setLoggedUser, initBECall, syncAttempts }) 
           t={t}
         />
       )}
+      <div className='statistics'>
+        <div>{t('components.user.guessCities.title', { score: getUserScore() })}</div>
+      </div>
       {loggedUser && ( //
-        <div className='statistics'>
-          <div>{t('components.user.guessCities.title', { score: getUserScore() })}</div>
+        <>
           {false && (
             <div className='daily-statistics'>
               <div className='empty'></div>
@@ -43,7 +45,7 @@ const User = ({ history, loggedUser, setLoggedUser, initBECall, syncAttempts }) 
               <div className='solved6'></div>
             </div>
           )}
-        </div>
+        </>
       )}
       <div>
         {t('components.user.betaTesting.title')}

@@ -23,8 +23,9 @@ import Tippy from '@tippyjs/react';
 import useVH from 'react-viewport-height';
 import { t } from '../Util/translate';
 import { useNavigate } from 'react-router-dom';
+import { DateTime } from 'luxon';
 
-function GuessBoard({ loggedUser, todaySeed, todayHistory, addAttemptHandler }) {
+function GuessBoard({ loggedUser, todaySeed, todayHistory, addAttemptHandler, zone }) {
   useVH(); // TODO move to App.jsx
 
   const bottom = useRef(null);
@@ -53,16 +54,16 @@ function GuessBoard({ loggedUser, todaySeed, todayHistory, addAttemptHandler }) 
 
   useEffect(() => {
     if (isEog(todayHistory)) {
-      setTimeLeft(calculateTimeLeft(todaySeed));
+      setTimeLeft(calculateTimeLeft(todaySeed, zone));
       const timer = setInterval(() => {
-        setTimeLeft(calculateTimeLeft(todaySeed));
+        setTimeLeft(calculateTimeLeft(todaySeed, zone));
       }, 1000);
       return () => clearInterval(timer);
     }
   }, [todayHistory, todaySeed]);
 
   const handleChangeCityPart = (cityPart) => {
-    if (getSeedFromDate(new Date()) !== todaySeed) {
+    if (getSeedFromDate(DateTime.now().setZone(zone)) !== todaySeed) {
       window.location.reload();
     }
     setCityPart(cityPart);
@@ -79,7 +80,7 @@ function GuessBoard({ loggedUser, todaySeed, todayHistory, addAttemptHandler }) 
   };
 
   const handleGuess = () => {
-    if (getSeedFromDate(new Date()) !== todaySeed) {
+    if (getSeedFromDate(DateTime.now().setZone(zone)) !== todaySeed) {
       window.location.reload();
     }
     const guessedCity = cities.find((c) => normalize(c.name) === normalize(cityPart.trim()));
@@ -223,7 +224,8 @@ GuessBoard.propTypes = {
   loggedUser: PropTypes.object,
   todaySeed: PropTypes.number.isRequired,
   todayHistory: PropTypes.object.isRequired,
-  addAttemptHandler: PropTypes.func.isRequired
+  addAttemptHandler: PropTypes.func.isRequired,
+  zone: PropTypes.string.isRequired
 };
 
 export default GuessBoard;

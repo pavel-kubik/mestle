@@ -19,6 +19,8 @@ import { getUserDataInLocalStorage } from './lib/auth';
 import { getSeedFromDate } from './Rand/rand';
 import { loadAttempts, addAttempt, storeAttempts } from './Util/attemptUtil';
 
+import { DateTime } from 'luxon';
+
 import preval from 'preval.macro';
 import { getCitiesMap } from './Util/citiesUtil';
 import FadeLoader from 'react-spinners/FadeLoader';
@@ -45,9 +47,11 @@ const App = () => {
     }
   }, []);
 
+  const zone = 'Europe/Prague';
+
   const [todaySeed, setTodaySeed] = useState(null);
   useEffect(() => {
-    const todaySeedValue = getSeedFromDate(new Date());
+    const todaySeedValue = getSeedFromDate(DateTime.now().setZone(zone));
     setTodaySeed(todaySeedValue);
   }, []);
 
@@ -142,7 +146,7 @@ const App = () => {
               <div>
                 <span>Městle</span>
                 {isBeta() && <span style={{ color: 'red', fontStyle: 'italic' }}> beta</span>}
-                <div className='debug'>({new Date().toLocaleDateString('cz-CS')})</div>
+                <div className='debug'>({DateTime.now().setZone(zone).toLocaleString()})</div>
               </div>
             </Link>
             <div style={{ display: 'flex', gap: 16 }}>
@@ -159,6 +163,7 @@ const App = () => {
                   todaySeed={todaySeed}
                   todayHistory={getTodayHistory()}
                   addAttemptHandler={addAttemptHandler}
+                  zone={zone}
                 />
               }
             />

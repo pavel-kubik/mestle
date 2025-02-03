@@ -1,4 +1,5 @@
 import { dateOfPublish } from '../Util/util';
+import { DateTime } from 'luxon';
 
 export const dateOfSwitchToRandomPreferSmallUnique = 19135;
 const MEMORY = 21;
@@ -62,10 +63,11 @@ export const getSeedFromDate = (time) => {
   return dayNumber;
 };
 
-export const calculateTimeLeft = (todaySeed) => {
-  const now = new Date();
-  const tomorrow = (todaySeed + 1) * 1000 * 24 * 60 * 60;
-  let diffSec = Math.floor((tomorrow - now) / 1000);
+export const calculateTimeLeft = (todaySeed, zone) => {
+  const timezoneOffsetInMinutes = DateTime.now().setZone(zone).offset;
+  const nowUTC = new Date();
+  const tomorrowAtTimezoneInUTC = (todaySeed + 1) * 1000 * 24 * 60 * 60 - timezoneOffsetInMinutes * 60 * 1000;
+  let diffSec = Math.floor((tomorrowAtTimezoneInUTC - nowUTC) / 1000);
   // refresh on next day
   if (diffSec < 0) {
     window.location.reload();

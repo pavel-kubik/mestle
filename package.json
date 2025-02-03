@@ -15,6 +15,7 @@
     "geolib": "^3.3.3",
     "jsonwebtoken": "^9.0.0",
     "jwt-auth-mongodb": "^1.0.7",
+    "luxon": "^3.5.0",
     "mongodb": "^5.5.0",
     "preval.macro": "^5.0.0",
     "prop-types": "^15.8.1",

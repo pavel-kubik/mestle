@@ -39,7 +39,17 @@ test('test small number generator', () => {
 });
 
 test('test date seed generator', () => {
-  expect(getSeedFromDate(new Date('1 Jan 1970 00:00:00 GMT'))).toBe(0);
-  expect(getSeedFromDate(new Date('1 Jan 1970 10:00:00 GMT'))).toBe(0);
-  expect(getSeedFromDate(new Date('1 Jan 1970 23:00:00 GMT'))).toBe(0);
+  expect(getSeedFromDate(new Date('1 Jan 1970 00:00:00 GMT'), 'UTC')).toBe(0);
+  expect(getSeedFromDate(new Date('1 Jan 1970 10:00:00 GMT'), 'UTC')).toBe(0);
+  expect(getSeedFromDate(new Date('1 Jan 1970 23:00:00 GMT'), 'UTC')).toBe(0);
+});
+
+test('test date seed generator in Prague', () => {
+  expect(getSeedFromDate(new Date('1 Jan 1970 22:59:59 GMT'), 'Europe/Prague')).toBe(0);
+  expect(getSeedFromDate(new Date('1 Jan 1970 23:00:00 GMT'), 'Europe/Prague')).toBe(1);
+  expect(getSeedFromDate(new Date('2 Jan 1970 00:00:00 GMT'), 'Europe/Prague')).toBe(1);
+  expect(getSeedFromDate(new Date('2 Jan 1970 00:59:59 GMT'), 'Europe/Prague')).toBe(1);
+  expect(getSeedFromDate(new Date('2 Jan 1970 10:00:00 GMT'), 'Europe/Prague')).toBe(1);
+  expect(getSeedFromDate(new Date('2 Jan 1970 22:59:59 GMT'), 'Europe/Prague')).toBe(1);
+  expect(getSeedFromDate(new Date('2 Jan 1970 23:00:00 GMT'), 'Europe/Prague')).toBe(2);
 });

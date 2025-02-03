@@ -51,8 +51,9 @@ const App = () => {
 
   const [todaySeed, setTodaySeed] = useState(null);
   useEffect(() => {
-    const todaySeedValue = getSeedFromDate(DateTime.now().setZone(zone));
+    const todaySeedValue = getSeedFromDate(new Date(), zone);
     setTodaySeed(todaySeedValue);
+    console.log('Today seed:', todaySeedValue);
   }, []);
 
   const setTodayHistory = (todayHistory) => {

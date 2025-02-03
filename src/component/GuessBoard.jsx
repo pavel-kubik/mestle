@@ -23,7 +23,6 @@ import Tippy from '@tippyjs/react';
 import useVH from 'react-viewport-height';
 import { t } from '../Util/translate';
 import { useNavigate } from 'react-router-dom';
-import { DateTime } from 'luxon';
 
 function GuessBoard({ loggedUser, todaySeed, todayHistory, addAttemptHandler, zone }) {
   useVH(); // TODO move to App.jsx
@@ -63,8 +62,9 @@ function GuessBoard({ loggedUser, todaySeed, todayHistory, addAttemptHandler, zo
   }, [todayHistory, todaySeed]);
 
   const handleChangeCityPart = (cityPart) => {
-    if (getSeedFromDate(DateTime.now().setZone(zone)) !== todaySeed) {
-      window.location.reload();
+    if (getSeedFromDate(new Date(), zone) !== todaySeed) {
+      console.log('Outdated seed on city part, reloading...');
+      setTimeout(() => window.location.reload(), 1000); // TODO remove delay
     }
     setCityPart(cityPart);
     if (cityPart.length >= 2) {
@@ -80,8 +80,9 @@ function GuessBoard({ loggedUser, todaySeed, todayHistory, addAttemptHandler, zo
   };
 
   const handleGuess = () => {
-    if (getSeedFromDate(DateTime.now().setZone(zone)) !== todaySeed) {
-      window.location.reload();
+    if (getSeedFromDate(new Date(), zone) !== todaySeed) {
+      console.log('Outdated seed on guess, reloading...');
+      setTimeout(() => window.location.reload(), 1000); // TODO remove delay
     }
     const guessedCity = cities.find((c) => normalize(c.name) === normalize(cityPart.trim()));
     if (guessedCity && !getAttempts(todayHistory).includes(guessedCity)) {

@@ -64,13 +64,12 @@ export const getSeedFromDate = (time, zone) => {
   return dayNumber;
 };
 
-export const calculateTimeLeft = (todaySeed, zone) => {
+export const calculateTimeLeft = (todaySeed, nowUTC, zone) => {
   const timezoneOffsetInMinutes = DateTime.now().setZone(zone).offset;
-  const nowUTC = new Date();
   const tomorrowAtTimezoneInUTC = (todaySeed + 1) * 1000 * 24 * 60 * 60 - timezoneOffsetInMinutes * 60 * 1000; // TODO validate :)
   let diffSec = Math.floor((tomorrowAtTimezoneInUTC - nowUTC) / 1000);
   // refresh on next day
-  if (diffSec < 0) {
+  if (diffSec <= 0) {
     console.log('Reloading...');
     setTimeout(() => window.location.reload(), 1000); // TODO remove delay
   }

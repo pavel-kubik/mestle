@@ -53,9 +53,9 @@ function GuessBoard({ loggedUser, todaySeed, todayHistory, addAttemptHandler, zo
 
   useEffect(() => {
     if (isEog(todayHistory)) {
-      setTimeLeft(calculateTimeLeft(todaySeed, zone));
+      setTimeLeft(calculateTimeLeft(todaySeed, new Date(), zone));
       const timer = setInterval(() => {
-        setTimeLeft(calculateTimeLeft(todaySeed, zone));
+        setTimeLeft(calculateTimeLeft(todaySeed, new Date(), zone));
       }, 1000);
       return () => clearInterval(timer);
     }

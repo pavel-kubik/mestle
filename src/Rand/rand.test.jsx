@@ -1,4 +1,4 @@
-import { exportedForTesting, getSeedFromDate } from './rand';
+import { exportedForTesting, getSeedFromDate, calculateTimeLeft } from './rand';
 const { dateOfSwitchToRandomPreferSmallUnique, random, randomSimple, randomPreferSmall, randomPreferSmallUnique, MEMORY } =
   exportedForTesting;
 
@@ -39,7 +39,29 @@ test('test small number generator', () => {
 });
 
 test('test date seed generator', () => {
-  expect(getSeedFromDate(new Date('1 Jan 1970 00:00:00 GMT'))).toBe(0);
-  expect(getSeedFromDate(new Date('1 Jan 1970 10:00:00 GMT'))).toBe(0);
-  expect(getSeedFromDate(new Date('1 Jan 1970 23:00:00 GMT'))).toBe(0);
+  expect(getSeedFromDate(new Date('1 Jan 1970 00:00:00 GMT'), 'UTC')).toBe(0);
+  expect(getSeedFromDate(new Date('1 Jan 1970 10:00:00 GMT'), 'UTC')).toBe(0);
+  expect(getSeedFromDate(new Date('1 Jan 1970 23:00:00 GMT'), 'UTC')).toBe(0);
+});
+
+test('test date seed generator in Prague', () => {
+  expect(getSeedFromDate(new Date('1 Jan 1970 22:59:59 GMT'), 'Europe/Prague')).toBe(0);
+  expect(getSeedFromDate(new Date('1 Jan 1970 23:00:00 GMT'), 'Europe/Prague')).toBe(1);
+  expect(getSeedFromDate(new Date('2 Jan 1970 00:00:00 GMT'), 'Europe/Prague')).toBe(1);
+  expect(getSeedFromDate(new Date('2 Jan 1970 00:59:59 GMT'), 'Europe/Prague')).toBe(1);
+  expect(getSeedFromDate(new Date('2 Jan 1970 10:00:00 GMT'), 'Europe/Prague')).toBe(1);
+  expect(getSeedFromDate(new Date('2 Jan 1970 22:59:59 GMT'), 'Europe/Prague')).toBe(1);
+  expect(getSeedFromDate(new Date('2 Jan 1970 23:00:00 GMT'), 'Europe/Prague')).toBe(2);
+});
+
+test('test calculateTimeLeft function', () => {
+  const todaySeed = 19135;
+  const nowUTC = new Date('2023-10-01T12:00:00Z').getTime();
+  const zone = 'UTC';
+  const result = calculateTimeLeft(todaySeed, nowUTC, zone);
+  expect(result).toBe('12:00:00'); // Expected time left until next day in UTC
+
+  const nowUTC2 = new Date('2023-10-01T23:59:59Z').getTime();
+  const result2 = calculateTimeLeft(todaySeed, nowUTC2, zone);
+  expect(result2).toBe('00:00:01'); // Expected time left until next day in UTC
 });

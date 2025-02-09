@@ -1,4 +1,5 @@
 import { dateOfPublish } from '../Util/util';
+import { DateTime } from 'luxon';
 
 export const dateOfSwitchToRandomPreferSmallUnique = 19135;
 const MEMORY = 21;
@@ -57,18 +58,20 @@ const randomPreferSmallUnique = (seed, max) => {
   return number;
 };
 
-export const getSeedFromDate = (time) => {
-  const dayNumber = Math.floor(time / 1000 / 24 / 60 / 60);
+export const getSeedFromDate = (time, zone) => {
+  const timezoneOffsetInMinutes = DateTime.now().setZone(zone).offset;
+  const dayNumber = Math.floor((time.getTime() + timezoneOffsetInMinutes * 60 * 1000) / 1000 / 24 / 60 / 60);
   return dayNumber;
 };
 
-export const calculateTimeLeft = (todaySeed) => {
-  const now = new Date();
-  const tomorrow = (todaySeed + 1) * 1000 * 24 * 60 * 60;
-  let diffSec = Math.floor((tomorrow - now) / 1000);
+export const calculateTimeLeft = (todaySeed, nowUTC, zone) => {
+  const timezoneOffsetInMinutes = DateTime.now().setZone(zone).offset;
+  const tomorrowAtTimezoneInUTC = (todaySeed + 1) * 1000 * 24 * 60 * 60 - timezoneOffsetInMinutes * 60 * 1000; // TODO validate :)
+  let diffSec = Math.floor((tomorrowAtTimezoneInUTC - nowUTC) / 1000);
   // refresh on next day
-  if (diffSec < 0) {
-    window.location.reload();
+  if (diffSec <= 0) {
+    console.log('Reloading...');
+    setTimeout(() => window.location.reload(), 1000); // TODO remove delay
   }
   const hoursLeft = Math.floor(diffSec / 3600);
   diffSec -= hoursLeft * 3600;

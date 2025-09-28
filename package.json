@@ -3,6 +3,7 @@
   "version": "0.1.2",
   "homepage": "https://mestle.cz",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@netlify/functions": "^1.0.0",
     "@tippyjs/react": "^4.2.6",
@@ -30,7 +31,7 @@
     "predeploy": "cross-env GENERATE_SOURCEMAP=false react-scripts build",
     "deploy": "gh-pages -d build",
     "start": "vite",
-    "build": "cross-env REACT_APP_BUILD_TIMESTAMP=\"$(date)\" vite build && echo '/* /index.html 200' | cat >build/_redirects",
+    "build": "cross-env REACT_APP_BUILD_TIMESTAMP=\"$(date)\" vite build && echo /* /index.html 200 >build/_redirects",
     "test": "vitest",
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",

@@ -19,7 +19,7 @@ export const countDirection = (city1, city2) => {
       return 'S';
     }
   } else if (latLongRatio < 1 / ratio) {
-    // simlpe direction - EW
+    // simple direction - EW
     if (longitudeDiff > 0) {
       return 'E';
     } else {
@@ -43,8 +43,8 @@ export const countDirection = (city1, city2) => {
   }
 };
 
-export const neigbourRegion = (region1, region2) => {
-  const neigbours = {
+export const neighboringRegion = (region1, region2) => {
+  const neighbors = {
     'Hl. m. Praha': ['Středočeský'],
     Středočeský: ['Hl. m. Praha', 'Ústecký', 'Liberecký', 'Královéhradecký', 'Pardubický', 'Vysočina', 'Jihočeský', 'Plzeňský'],
     Jihočeský: ['Plzeňský', 'Středočeský', 'Vysočina', 'Jihomoravský'],
@@ -60,17 +60,17 @@ export const neigbourRegion = (region1, region2) => {
     Moravskoslezský: ['Olomoucký', 'Zlínský'],
     Zlínský: ['Jihomoravský', 'Olomoucký', 'Moravskoslezský']
   };
-  if (!neigbours[region1]) {
+  if (!neighbors[region1]) {
     console.warn('Region ' + region1 + ' not found.');
   }
-  return neigbours[region1] && neigbours[region1].includes(region2);
+  return neighbors[region1] && neighbors[region1].includes(region2);
 };
 
 export const regionComparator = (city1, city2) => {
   // TODO return orange for neigbour regions
   if (city1.region === city2.region) {
     return 'green';
-  } else if (neigbourRegion(city1.region, city2.region)) {
+  } else if (neighboringRegion(city1.region, city2.region)) {
     return 'orange';
   } else {
     return 'red';

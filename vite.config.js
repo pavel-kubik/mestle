@@ -111,8 +111,8 @@ function buildPathPlugin() {
                             manualChunks: {
                                 vendor: ['react', 'react-dom'],
                                 router: ['react-router-dom'],
-                                ui: ['@tippyjs/react', 'react-spinners', 'react-spring'],
-                                utils: ['geolib', 'luxon', 'yup']
+                                ui: ['@tippyjs/react', 'react-spinners'],
+                                utils: ['geolib', 'luxon']
                             }
                         }
                     },

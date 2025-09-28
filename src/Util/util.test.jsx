@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { countDirection, neigbourRegion, regionComparator, numberComparator, normalize, obfuscateUrl } from './util';
+import { countDirection, neighboringRegion, regionComparator, numberComparator, normalize, obfuscateUrl } from './util';
 
 describe('util.jsx - Geographic and Game Logic Functions', () => {
   describe('countDirection', () => {
@@ -33,20 +33,20 @@ describe('util.jsx - Geographic and Game Logic Functions', () => {
     });
   });
 
-  describe('neigbourRegion', () => {
+  describe('neighboringRegion', () => {
     it('should identify Prague and Central Bohemia as neighbors', () => {
-      expect(neigbourRegion('Hl. m. Praha', 'Středočeský')).toBe(true);
-      expect(neigbourRegion('Středočeský', 'Hl. m. Praha')).toBe(true);
+      expect(neighboringRegion('Hl. m. Praha', 'Středočeský')).toBe(true);
+      expect(neighboringRegion('Středočeský', 'Hl. m. Praha')).toBe(true);
     });
 
     it('should identify non-neighboring regions', () => {
-      expect(neigbourRegion('Středočeský', 'Moravskoslezský')).toBe(false);
-      expect(neigbourRegion('Karlovarský', 'Jihomoravský')).toBe(false);
+      expect(neighboringRegion('Středočeský', 'Moravskoslezský')).toBe(false);
+      expect(neighboringRegion('Karlovarský', 'Jihomoravský')).toBe(false);
     });
 
     it('should handle invalid regions gracefully', () => {
-      expect(neigbourRegion('InvalidRegion', 'Středočeský')).toBe(undefined);
-      expect(neigbourRegion('Středočeský', 'InvalidRegion')).toBe(false);
+      expect(neighboringRegion('InvalidRegion', 'Středočeský')).toBe(undefined);
+      expect(neighboringRegion('Středočeský', 'InvalidRegion')).toBe(false);
     });
   });
 

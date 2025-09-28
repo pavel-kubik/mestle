@@ -158,18 +158,21 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
           maxWidth={tooltipWidth}
           className='guess-tippy'
         >
-          <div
-            className={`guess direction`}
-            style={{
-              backgroundImage: `url(${getLanguage() === LANGUAGES.cs ? compassCS : compassEN})`,
-              backgroundRepeat: 'no-repeat',
-              overflow: 'hidden'
-            }}
-          >
-            <div
+          <div className={`guess direction`} style={{ position: 'relative', overflow: 'hidden' }}>
+            {/* Compass base background */}
+            <img
+              src={getLanguage() === LANGUAGES.cs ? compassCS : compassEN}
+              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+              alt="compass base"
+            />
+
+            {/* Arrow or Pin overlay */}
+            <img
+              src={directionGuess === 'X' ? compassPin : compassArrow}
               className={`guess direction compass ${directionGuess} ${directionGuess !== 'X' ? 'filter-' + distanceGuess : ''}`}
-              style={{ backgroundImage: `url(${directionGuess === 'X' ? compassPin : compassArrow})`, backgroundRepeat: 'no-repeat' }}
-            ></div>
+              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+              alt="compass direction"
+            />
           </div>
         </Tippy>
       </div>

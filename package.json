@@ -9,7 +9,7 @@
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
     "@tippyjs/react": "^4.2.6",
-    "@types/node": "^14.18.23",
+    "@types/node": "^20.19.0",
     "bcryptjs": "^2.4.3",
     "bcryptjs-react": "^2.4.6",
     "geolib": "^3.3.3",
@@ -17,7 +17,6 @@
     "jwt-auth-mongodb": "^1.0.7",
     "luxon": "^3.5.0",
     "mongodb": "^5.5.0",
-    "preval.macro": "^5.0.0",
     "prop-types": "^15.8.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
@@ -38,10 +37,11 @@
     "format": "prettier src/**/*.js* --write --config ./.prettierrc",
     "predeploy": "cross-env GENERATE_SOURCEMAP=false react-scripts build",
     "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build && echo '/* /index.html 200' | cat >build/_redirects",
+    "start": "vite",
+    "build": "cross-env REACT_APP_BUILD_TIMESTAMP=\"$(date)\" vite build && echo '/* /index.html 200' | cat >build/_redirects",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "vite"
   },
   "eslintConfig": {
     "extends": [
@@ -87,6 +87,11 @@
     "husky": "^8.0.1",
     "jest-watch-typeahead": "^0.6.5",
     "lint-staged": "^13.0.3",
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "@svgr/core": "^8.1.0",
+    "@svgr/plugin-jsx": "^8.1.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "unplugin-macros": "^0.13.1",
+    "vite": "^6.0.0"
   }
 }

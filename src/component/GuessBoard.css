@@ -108,7 +108,6 @@
 
 .guess.direction {
   position: relative;
-  background-size: contain;
 }
 
 .guess.direction.compass {

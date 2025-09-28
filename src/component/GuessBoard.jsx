@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import './GuessBoard.css';
@@ -6,134 +6,29 @@ import background from '../img/background.svg';
 
 import cities from '../Data/data.js';
 import Guess from '../Guess/guess';
-import {
-  dateOfPublish,
-  distanceComparator,
-  districtComparator,
-  GREEN_CIRCLE,
-  normalize,
-  ORANGE_CIRCLE,
-  populationComparator,
-  regionComparator,
-  WHITE_CIRCLE
-} from '../Util/util';
-import { calculateTimeLeft, getRandCity, getSeedFromDate } from '../Rand/rand';
+import CitySearchInput from './CitySearchInput';
+import GameResult from './GameResult';
+import { getRandCity } from '../Rand/rand';
 import { isEog } from '../History/history';
-import Tippy from '@tippyjs/react';
 import useVH from 'react-viewport-height';
 import { t } from '../Util/translate';
-import { useNavigate } from 'react-router-dom';
+import { useGameState } from '../hooks/useGameState';
+import { useSeedValidation } from '../hooks/useSeedValidation';
 
-function GuessBoard({ loggedUser, todaySeed, todayHistory, addAttemptHandler, zone }) {
+function GuessBoard({ todaySeed, todayHistory, addAttemptHandler, zone }) {
   useVH(); // TODO move to App.jsx
 
   const bottom = useRef(null);
 
-  const navigate = useNavigate();
+  const { cityPart, setCityPart, guessEnabled, timeLeft, getAttempts } = useGameState(todayHistory, todaySeed, zone);
+  const { validateSeed } = useSeedValidation(todaySeed, zone);
 
-  const [cityPart, setCityPart] = useState('');
-  const [filteredCities, setFilteredCities] = useState([]);
-  const [guessEnabled, setGuessEnabled] = useState(false);
-  const [shared, setShared] = useState(false);
-  const [timeLeft, setTimeLeft] = useState('');
+  const handleGuess = (guessedCity) => {
+    if (!validateSeed('guess')) return;
 
-  const getAttempts = (history) => {
-    //TODO rename guesses to attempts will need migration of local storage mestle_history
-    return history.guesses;
-  };
-
-  useEffect(() => {
-    const guessedCity = cities.find((c) => normalize(c.name) === normalize(cityPart.trim()));
-    if (guessedCity && !getAttempts(todayHistory).includes(guessedCity)) {
-      setGuessEnabled(true);
-    } else {
-      setGuessEnabled(false);
-    }
-  }, [cityPart, todayHistory, todaySeed]);
-
-  useEffect(() => {
-    if (isEog(todayHistory)) {
-      setTimeLeft(calculateTimeLeft(todaySeed, new Date(), zone));
-      const timer = setInterval(() => {
-        setTimeLeft(calculateTimeLeft(todaySeed, new Date(), zone));
-      }, 1000);
-      return () => clearInterval(timer);
-    }
-  }, [todayHistory, todaySeed]);
-
-  const handleChangeCityPart = (cityPart) => {
-    if (getSeedFromDate(new Date(), zone) !== todaySeed) {
-      console.log('Outdated seed on city part, reloading...');
-      setTimeout(() => window.location.reload(), 1000); // TODO remove delay
-    }
-    setCityPart(cityPart);
-    if (cityPart.length >= 2) {
-      const filteredCities = cities.filter((c) => !getAttempts(todayHistory).includes(c));
-      const matchedCities = new Set([
-        ...filteredCities.filter((c) => normalize(c.name).startsWith(normalize(cityPart.trim()))),
-        ...filteredCities.filter((c) => normalize(c.name).includes(normalize(cityPart.trim())))
-      ]);
-      setFilteredCities([...matchedCities]);
-    } else {
-      setFilteredCities([]);
-    }
-  };
-
-  const handleGuess = () => {
-    if (getSeedFromDate(new Date(), zone) !== todaySeed) {
-      console.log('Outdated seed on guess, reloading...');
-      setTimeout(() => window.location.reload(), 1000); // TODO remove delay
-    }
-    const guessedCity = cities.find((c) => normalize(c.name) === normalize(cityPart.trim()));
-    if (guessedCity && !getAttempts(todayHistory).includes(guessedCity)) {
-      setCityPart('');
-      setFilteredCities([]);
-      const eog = guessedCity.name === getRandCity(cities, todaySeed).name;
-      addAttemptHandler(guessedCity, eog);
-    }
+    const eog = guessedCity.name === getRandCity(cities, todaySeed).name;
+    addAttemptHandler(guessedCity, eog);
     setTimeout(() => bottom.current.scrollIntoView({ behavior: 'smooth' }), 100);
-  };
-
-  const handleSelectCity = (cityName) => {
-    setCityPart(cityName);
-    setFilteredCities([]);
-  };
-
-  const getResult = () => {
-    const targetCity = getRandCity(cities, todaySeed);
-    return (
-      t('components.guessBoard.todayDate', { date: todaySeed - dateOfPublish }) +
-      getAttempts(todayHistory)
-        .map((guess) => [
-          regionComparator(guess, targetCity),
-          populationComparator(guess, targetCity),
-          distanceComparator(guess, targetCity),
-          guess == targetCity ? 'green' : 'red',
-          districtComparator(guess, targetCity)
-        ])
-        .map((guess) =>
-          guess
-            .map((item) => {
-              switch (item) {
-                case 'green':
-                  return GREEN_CIRCLE;
-                case 'orange':
-                  return ORANGE_CIRCLE;
-                default:
-                  return WHITE_CIRCLE;
-              }
-            })
-            .reduce((out, i) => (out += i + ' '), '')
-        )
-        .reduce((out, line) => (out += line + '\n'), '') +
-      'https://mestle.cz\n\n#mestle'
-    );
-  };
-
-  const handleShare = () => {
-    const shareResults = getResult();
-    navigator.clipboard.writeText(shareResults);
-    setShared(true);
   };
 
   return (
@@ -176,53 +71,27 @@ function GuessBoard({ loggedUser, todaySeed, todayHistory, addAttemptHandler, zo
         <div ref={bottom}>&nbsp;</div>
       </div>
       {!isEog(todayHistory) && (
-        <div className='guess-box'>
-          <input
-            value={cityPart}
-            type='search'
-            placeholder={t('components.guessBoard.guessInput.placeholder')}
-            onChange={(event) => handleChangeCityPart(event.target.value)}
-          />
-          {filteredCities.length > 0 && (
-            <>
-              <div className='city-list'>
-                {filteredCities.map((c) => (
-                  <div key={c.name} onClick={() => handleSelectCity(c.name)}>
-                    {c.name}
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
-          <div className='button-group'>
-            {false && !loggedUser && (
-              <div className={'big button enabled'} onClick={() => navigate('/user')}>
-                {t('global.login')}
-              </div>
-            )}
-            <div className={`big button ${guessEnabled ? 'enabled' : 'disabled'}`} onClick={handleGuess}>
-              {t('components.guessBoard.guessInput.submit')}
-            </div>
-          </div>
-        </div>
+        <CitySearchInput
+          cityPart={cityPart}
+          setCityPart={setCityPart}
+          guessEnabled={guessEnabled}
+          onGuess={handleGuess}
+          excludedCities={getAttempts(todayHistory)}
+        />
       )}
       {isEog(todayHistory) && (
-        <div className='congratulation'>
-          <Tippy content={getResult()} allowHTML={true} placement='auto' visible={true}>
-            <div className='big button enabled' onClick={handleShare}>
-              {t('components.guessBoard.guessResult.copy')}
-            </div>
-          </Tippy>
-          {shared && <div className='notification'>{t('components.guessBoard.guessResult.copyDone')}</div>}
-          <div>{t('components.guessBoard.guessResult.title', { timeLeft })}</div>
-        </div>
+        <GameResult
+          attempts={getAttempts(todayHistory)}
+          targetCity={getRandCity(cities, todaySeed)}
+          todaySeed={todaySeed}
+          timeLeft={timeLeft}
+        />
       )}
     </>
   );
 }
 
 GuessBoard.propTypes = {
-  loggedUser: PropTypes.object,
   todaySeed: PropTypes.number.isRequired,
   todayHistory: PropTypes.object.isRequired,
   addAttemptHandler: PropTypes.func.isRequired,

@@ -21,7 +21,6 @@ import { loadAttempts, addAttempt, storeAttempts } from './Util/attemptUtil';
 
 import { DateTime } from 'luxon';
 
-import preval from 'preval.macro';
 import { getCitiesMap } from './Util/citiesUtil';
 import FadeLoader from 'react-spinners/FadeLoader';
 
@@ -31,13 +30,17 @@ if (hotjar.initialized()) {
   hotjar.identify('USER_ID', { userProperty: 'value' });
 }
 
+// Build timestamp is now generated at build time using unplugin-macros
+// Import the macro with type annotation
+import { buildTime } from './macros.js';
+
+const dateTimeStamp = buildTime();
+
 const App = () => {
   const [isLoading, setLoading] = useState(false);
   // permanent
   const [history, setHistory] = useStickyState({}, 'mestle_history');
   const score = getScore(history);
-
-  const dateTimeStamp = preval`module.exports = new Date().toLocaleString();`;
 
   const [loggedUser, setLoggedUser] = useState(null);
   useEffect(() => {

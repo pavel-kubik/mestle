@@ -16,6 +16,10 @@ For this you will need local mongo db storage. So run following command to have 
 
 `docker run -d -p 27017:27017 --name mongo mongo:latest`
 
+Run test coverage with command
+
+`npm run test:coverage`
+
 ### Formatter
 
 Formatter and lint check are run in pre commit hook. You can run it manually with following commands.

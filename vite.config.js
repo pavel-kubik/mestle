@@ -24,12 +24,23 @@ export default defineConfig(({ mode }) => {
 function setEnv(mode) {
     Object.assign(process.env, loadEnv(mode, ".", ["REACT_APP_", "NODE_ENV", "PUBLIC_URL"]));
     process.env.NODE_ENV ||= mode;
-    const { homepage } = JSON.parse(readFileSync("package.json", "utf-8"));
-    process.env.PUBLIC_URL ||= homepage
-        ? `${homepage.startsWith("http") || homepage.startsWith("/")
-            ? homepage
-            : `/${homepage}`}`.replace(/\/$/, "")
-        : "";
+
+    // Only set PUBLIC_URL from homepage for main production builds
+    if (!process.env.PUBLIC_URL) {
+        const { homepage } = JSON.parse(readFileSync("package.json", "utf-8"));
+
+        // For Netlify preview/branch deployments, don't set PUBLIC_URL from homepage
+        if (process.env.NETLIFY && process.env.NETLIFY_BRANCH !== 'main') {
+            process.env.PUBLIC_URL = "";
+        } else {
+            // For main production builds, use homepage
+            process.env.PUBLIC_URL = homepage
+                ? `${homepage.startsWith("http") || homepage.startsWith("/")
+                    ? homepage
+                    : `/${homepage}`}`.replace(/\/$/, "")
+                : "";
+        }
+    }
 }
 // Expose `process.env` environment variables to your client code
 // Migration guide: Follow the guide below to replace process.env with import.meta.env in your app, you may also need to rename your environment variable to a name that begins with VITE_ instead of REACT_APP_
@@ -129,9 +140,29 @@ function basePlugin() {
         name: "base-plugin",
         config(_, { mode }) {
             const { PUBLIC_URL } = loadEnv(mode, ".", ["PUBLIC_URL"]);
-            return {
-                base: PUBLIC_URL || "",
-            };
+
+            // If PUBLIC_URL is explicitly set, use it
+            if (PUBLIC_URL) {
+                return { base: PUBLIC_URL };
+            }
+
+            // For Netlify deployments (preview, branch, etc.), use relative paths
+            if (process.env.NETLIFY && process.env.NETLIFY_BRANCH !== 'main') {
+                return { base: "./" };
+            }
+
+            // For local development, use relative paths
+            if (mode === 'development') {
+                return { base: "./" };
+            }
+
+            // For production builds that aren't main branch Netlify, use relative paths
+            if (mode === 'production' && process.env.NETLIFY_BRANCH && process.env.NETLIFY_BRANCH !== 'main') {
+                return { base: "./" };
+            }
+
+            // For main production build, use empty base to leverage homepage from setEnv
+            return { base: "" };
         },
     };
 }

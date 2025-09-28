@@ -1,7 +1,8 @@
 <svg width="90" height="90" xmlns="http://www.w3.org/2000/svg">
-  <g>
-   <title>Layer 1</title>
-   <path transform="rotate(90 45 38.5195)" stroke="null" fill="#000" d="m15.09561,38.51949l19.59253,-12.45477l-4.12474,8.71834l44.341,0l0,7.47286l-44.341,0l4.12474,8.71834" id="svg_1"/>
-  </g>
- 
- </svg>
+	<g>
+		<title>
+			Layer 1
+		</title>
+		<path transform="rotate(90 45 38.5195)" stroke="null" fill="#000" d="m15.09561,38.51949l19.59253,-12.45477l-4.12474,8.71834l44.341,0l0,7.47286l-44.341,0l4.12474,8.71834" id="svg_1" />
+	</g>
+</svg>

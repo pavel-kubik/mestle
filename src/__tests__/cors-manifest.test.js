@@ -4,8 +4,10 @@
  * from https://mestle.cz/manifest.json instead of the local development server
  */
 
+import { describe, it, expect, beforeEach, vi } from 'vitest';
+
 // Mock fetch to simulate CORS error
-global.fetch = jest.fn();
+global.fetch = vi.fn();
 
 describe('CORS manifest.json error', () => {
   beforeEach(() => {

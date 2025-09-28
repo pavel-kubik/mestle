@@ -1,11 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import {
-  storeUserDataInLocalStorage,
-  clearUserDataInLocalStorage,
-  getUserDataInLocalStorage,
-  signIn,
-  signUp
-} from './auth';
+import { storeUserDataInLocalStorage, clearUserDataInLocalStorage, getUserDataInLocalStorage, signIn, signUp } from './auth';
 
 // Mock bcryptjs-react
 vi.mock('bcryptjs-react', () => ({
@@ -41,10 +35,7 @@ describe('auth.js - Authentication Functions', () => {
     it('should store user data in localStorage', () => {
       storeUserDataInLocalStorage(mockUserData);
 
-      expect(localStorage.setItem).toHaveBeenCalledWith(
-        '_user',
-        JSON.stringify(mockUserData)
-      );
+      expect(localStorage.setItem).toHaveBeenCalledWith('_user', JSON.stringify(mockUserData));
     });
 
     it('should retrieve user data from localStorage', () => {
@@ -300,7 +291,7 @@ describe('auth.js - Authentication Functions', () => {
       const sensitiveUserData = {
         username: 'testuser',
         email: 'test@example.com',
-        token: 'sensitive-jwt-token',
+        token: 'sensitive-jwt-token'
         // Should not include plain passwords
       };
 

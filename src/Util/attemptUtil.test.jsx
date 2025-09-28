@@ -1,9 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import {
-  addAttempt,
-  storeAttempts,
-  loadAttempts
-} from './attemptUtil';
+import { addAttempt, storeAttempts, loadAttempts } from './attemptUtil';
 
 // Mock global fetch
 global.fetch = vi.fn();
@@ -59,9 +55,7 @@ describe('attemptUtil.jsx - API Utility Functions', () => {
       fetch.mockRejectedValueOnce(new Error('Network error'));
 
       // Function doesn't handle errors, so it should throw
-      await expect(addAttempt(mockJwt, mockTodaySeed, mockAttempt, false))
-        .rejects
-        .toThrow('Network error');
+      await expect(addAttempt(mockJwt, mockTodaySeed, mockAttempt, false)).rejects.toThrow('Network error');
     });
 
     it('should send correct headers and authentication', async () => {
@@ -125,7 +119,9 @@ describe('attemptUtil.jsx - API Utility Functions', () => {
     });
 
     it('should handle large attempts arrays', async () => {
-      const largeAttempts = Array(20).fill().map((_, i) => `City${i}`);
+      const largeAttempts = Array(20)
+        .fill()
+        .map((_, i) => `City${i}`);
       fetch.mockResolvedValueOnce({ ok: true });
 
       const result = await storeAttempts(mockJwt, mockTodaySeed, largeAttempts, false);
@@ -156,18 +152,15 @@ describe('attemptUtil.jsx - API Utility Functions', () => {
 
       const result = await loadAttempts(mockJwt, mockTodaySeed);
 
-      expect(fetch).toHaveBeenCalledWith(
-        `/.netlify/functions/attempts/?seed=${mockTodaySeed}`,
-        {
-          method: 'GET',
-          mode: 'cors',
-          cache: 'no-cache',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-access-token': mockJwt
-          }
+      expect(fetch).toHaveBeenCalledWith(`/.netlify/functions/attempts/?seed=${mockTodaySeed}`, {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-cache',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': mockJwt
         }
-      );
+      });
 
       expect(result).toEqual(mockHistoryData);
     });
@@ -221,10 +214,7 @@ describe('attemptUtil.jsx - API Utility Functions', () => {
 
       await loadAttempts(mockJwt, customSeed);
 
-      expect(fetch).toHaveBeenCalledWith(
-        `/.netlify/functions/attempts/?seed=${customSeed}`,
-        expect.any(Object)
-      );
+      expect(fetch).toHaveBeenCalledWith(`/.netlify/functions/attempts/?seed=${customSeed}`, expect.any(Object));
     });
   });
 
@@ -244,9 +234,7 @@ describe('attemptUtil.jsx - API Utility Functions', () => {
     it('should handle network timeout scenarios', async () => {
       fetch.mockRejectedValueOnce(new Error('Request timeout'));
 
-      await expect(addAttempt(mockJwt, mockTodaySeed, mockAttempt, false))
-        .rejects
-        .toThrow('Request timeout');
+      await expect(addAttempt(mockJwt, mockTodaySeed, mockAttempt, false)).rejects.toThrow('Request timeout');
     });
 
     it('should maintain consistent API contract', () => {
@@ -258,9 +246,10 @@ describe('attemptUtil.jsx - API Utility Functions', () => {
 
     it('should use consistent HTTP methods', async () => {
       fetch
-        .mockResolvedValueOnce({ ok: true })                    // addAttempt
-        .mockResolvedValueOnce({ ok: true })                    // storeAttempts
-        .mockResolvedValueOnce({                                // loadAttempts
+        .mockResolvedValueOnce({ ok: true }) // addAttempt
+        .mockResolvedValueOnce({ ok: true }) // storeAttempts
+        .mockResolvedValueOnce({
+          // loadAttempts
           status: 200,
           json: vi.fn().mockResolvedValue({
             history: JSON.stringify({ attempts: [], eog: false })
@@ -272,18 +261,19 @@ describe('attemptUtil.jsx - API Utility Functions', () => {
       await loadAttempts(mockJwt, mockTodaySeed);
 
       const fetchCalls = fetch.mock.calls;
-      expect(fetchCalls[0][1].method).toBe('PUT');    // addAttempt
-      expect(fetchCalls[1][1].method).toBe('POST');   // storeAttempts
-      expect(fetchCalls[2][1].method).toBe('GET');    // loadAttempts
+      expect(fetchCalls[0][1].method).toBe('PUT'); // addAttempt
+      expect(fetchCalls[1][1].method).toBe('POST'); // storeAttempts
+      expect(fetchCalls[2][1].method).toBe('GET'); // loadAttempts
     });
   });
 
   describe('security and data validation', () => {
     it('should include authentication headers in all requests', async () => {
       fetch
-        .mockResolvedValueOnce({ ok: true })                    // addAttempt
-        .mockResolvedValueOnce({ ok: true })                    // storeAttempts
-        .mockResolvedValueOnce({                                // loadAttempts
+        .mockResolvedValueOnce({ ok: true }) // addAttempt
+        .mockResolvedValueOnce({ ok: true }) // storeAttempts
+        .mockResolvedValueOnce({
+          // loadAttempts
           status: 200,
           json: vi.fn().mockResolvedValue({
             history: JSON.stringify({ attempts: [], eog: false })

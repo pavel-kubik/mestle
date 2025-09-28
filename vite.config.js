@@ -106,6 +106,17 @@ function buildPathPlugin() {
             return {
                 build: {
                     outDir: BUILD_PATH || "build",
+                    rollupOptions: {
+                        output: {
+                            manualChunks: {
+                                vendor: ['react', 'react-dom'],
+                                router: ['react-router-dom'],
+                                ui: ['@tippyjs/react', 'react-spinners', 'react-spring'],
+                                utils: ['geolib', 'luxon', 'yup']
+                            }
+                        }
+                    },
+                    chunkSizeWarningLimit: 600
                 },
             };
         },

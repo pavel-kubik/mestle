@@ -4,7 +4,7 @@
  * from https://mestle.cz/manifest.json instead of the local development server
  */
 
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, expect, beforeEach, vi } from 'vitest';
 
 // Mock fetch to simulate CORS error
 global.fetch = vi.fn();
@@ -18,7 +18,7 @@ describe('CORS manifest.json error', () => {
     // Mock the CORS error that occurs when trying to fetch from production URL
     const corsError = new Error('Failed to fetch');
     corsError.name = 'TypeError';
-    corsError.message = "Failed to fetch";
+    corsError.message = 'Failed to fetch';
 
     fetch.mockRejectedValue(corsError);
 

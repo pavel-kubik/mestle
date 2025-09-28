@@ -1,15 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import {
-  countDirection,
-  neigbourRegion,
-  regionComparator,
-  populationComparator,
-  distanceComparator,
-  numberComparator,
-  normalize,
-  obfuscateUrl,
-  getDistanceInKm
-} from './util';
+import { countDirection, neigbourRegion, regionComparator, numberComparator, normalize, obfuscateUrl } from './util';
 
 describe('util.jsx - Geographic and Game Logic Functions', () => {
   describe('countDirection', () => {

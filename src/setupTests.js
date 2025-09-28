@@ -5,6 +5,7 @@
 
 // Import jest-dom for both Jest and Vitest compatibility
 import '@testing-library/jest-dom';
+import { vi } from 'vitest';
 
 // Vitest-specific setup
 if (typeof global !== 'undefined') {
@@ -17,11 +18,11 @@ const localStorageMock = {
   getItem: vi.fn(),
   setItem: vi.fn(),
   removeItem: vi.fn(),
-  clear: vi.fn(),
+  clear: vi.fn()
 };
 
 Object.defineProperty(window, 'localStorage', {
-  value: localStorageMock,
+  value: localStorageMock
 });
 
 // Mock window.location for testing
@@ -36,21 +37,21 @@ Object.defineProperty(window, 'location', {
     pathname: '/',
     search: '',
     hash: '',
-    reload: vi.fn(),
+    reload: vi.fn()
   },
-  writable: true,
+  writable: true
 });
 
 // Mock IntersectionObserver for Tippy.js components
 global.IntersectionObserver = vi.fn().mockImplementation(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
-  disconnect: vi.fn(),
+  disconnect: vi.fn()
 }));
 
 // Mock ResizeObserver
 global.ResizeObserver = vi.fn().mockImplementation(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
-  disconnect: vi.fn(),
+  disconnect: vi.fn()
 }));

@@ -133,10 +133,10 @@ describe('history.jsx - Game History Management', () => {
   describe('getScore', () => {
     it('should calculate score correctly from history', () => {
       const history = {
-        '19001': { guesses: ['Praha'], eog: true },
-        '19002': { guesses: ['Brno', 'Ostrava'], eog: false },
-        '19003': { guesses: ['Plzen'], eog: true },
-        '19004': { guesses: ['Liberec'], eog: true }
+        19001: { guesses: ['Praha'], eog: true },
+        19002: { guesses: ['Brno', 'Ostrava'], eog: false },
+        19003: { guesses: ['Plzen'], eog: true },
+        19004: { guesses: ['Liberec'], eog: true }
       };
       expect(getScore(history)).toBe(3);
     });
@@ -147,8 +147,8 @@ describe('history.jsx - Game History Management', () => {
 
     it('should return 0 when no games are completed', () => {
       const history = {
-        '19001': { guesses: ['Praha'], eog: false },
-        '19002': { guesses: ['Brno', 'Ostrava'], eog: false }
+        19001: { guesses: ['Praha'], eog: false },
+        19002: { guesses: ['Brno', 'Ostrava'], eog: false }
       };
       expect(getScore(history)).toBe(0);
     });

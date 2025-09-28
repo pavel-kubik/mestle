@@ -163,7 +163,7 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
             <img
               src={getLanguage() === LANGUAGES.cs ? compassCS : compassEN}
               style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-              alt="compass base"
+              alt='compass base'
             />
 
             {/* Arrow or Pin overlay */}
@@ -171,7 +171,7 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
               src={directionGuess === 'X' ? compassPin : compassArrow}
               className={`guess direction compass ${directionGuess} ${directionGuess !== 'X' ? 'filter-' + distanceGuess : ''}`}
               style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-              alt="compass direction"
+              alt='compass direction'
             />
           </div>
         </Tippy>

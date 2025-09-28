@@ -32,7 +32,7 @@ if (hotjar.initialized()) {
 
 // Build timestamp is now generated at build time using unplugin-macros
 // Import the macro with type annotation
-import { buildTime } from './macros.js' with { type: 'macro' };
+import { buildTime } from './macros.js';
 
 const dateTimeStamp = buildTime();
 

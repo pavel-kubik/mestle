@@ -4,7 +4,3 @@
 export function buildTime() {
   return new Date().toLocaleString();
 }
-
-export function getBuildTimestamp() {
-  return Date.now();
-}

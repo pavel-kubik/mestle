@@ -60,6 +60,9 @@ vi.mock('./macros.js', () => ({
   buildTime: () => '2025-09-29 12:00:00'
 }));
 
+// eslint-disable-next-line no-unused-vars
+import App from './App';
+
 describe('App Routing and Beta Integration Tests', () => {
   beforeEach(() => {
     vi.clearAllMocks();

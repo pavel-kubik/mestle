@@ -28,9 +28,8 @@
   "scripts": {
     "lint": "eslint --fix src --ext .js,.jsx,.ts,.tsx",
     "format": "prettier src/**/*.js* --write --config ./.prettierrc",
-    "predeploy": "cross-env GENERATE_SOURCEMAP=false react-scripts build",
-    "deploy": "gh-pages -d build",
     "start": "vite",
+    "prebuild": "vitest run",
     "build": "vite build && echo /* /index.html 200 >build/_redirects",
     "test": "vitest",
     "test:watch": "vitest --watch",

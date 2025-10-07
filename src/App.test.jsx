@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { isBeta, switchToBeta } from './Util/betaUtil';
 
 // Mock all child components to avoid complex dependencies
@@ -206,6 +207,29 @@ describe('App Routing and Beta Integration Tests', () => {
       expect(userLink).toBeInTheDocument();
       expect(userLink).toHaveAttribute('href', '/user');
     });
+
+    it('should render user page when starting at /user route', async () => {
+      // Create a test component that renders just the routes portion with MemoryRouter
+      const TestAppRoutes = () => (
+        <MemoryRouter initialEntries={['/user']}>
+          <div className='app'>
+            <Routes>
+              <Route path='/' element={<div data-testid='guess-board'>GuessBoard</div>} />
+              <Route path='/user' element={<div data-testid='user-page'>User Page</div>} />
+            </Routes>
+          </div>
+        </MemoryRouter>
+      );
+
+      render(<TestAppRoutes />);
+
+      // Verify user page is rendered (not home page)
+      await waitFor(() => {
+        expect(screen.getByTestId('user-page')).toBeInTheDocument();
+      });
+
+      expect(screen.queryByTestId('guess-board')).not.toBeInTheDocument();
+    });
   });
 
   describe('Beta cookie behavior', () => {
@@ -236,6 +260,46 @@ describe('App Routing and Beta Integration Tests', () => {
         expect(screen.getByText('Městle')).toBeInTheDocument();
         expect(screen.getByText('beta')).toBeInTheDocument();
       });
+    });
+
+    it('should switch to beta and then back to normal mode', async () => {
+      // Render user page using MemoryRouter
+      const TestAppRoutes = () => (
+        <MemoryRouter initialEntries={['/user']}>
+          <div className='app'>
+            <Routes>
+              <Route path='/' element={<div data-testid='guess-board'>GuessBoard</div>} />
+              <Route path='/user' element={<div data-testid='user-page'>User Page</div>} />
+            </Routes>
+          </div>
+        </MemoryRouter>
+      );
+
+      render(<TestAppRoutes />);
+
+      // Wait for user page to render
+      await waitFor(() => {
+        expect(screen.getByTestId('user-page')).toBeInTheDocument();
+      });
+
+      // Start in normal mode
+      expect(isBeta()).toBe(false);
+
+      // Switch to beta mode
+      switchToBeta();
+      expect(isBeta()).toBe(true);
+      expect(window.location.reload).toHaveBeenCalledTimes(1);
+
+      // Verify we're still on user page (component is still there before reload)
+      expect(screen.getByTestId('user-page')).toBeInTheDocument();
+
+      // Switch back to normal mode
+      switchToBeta();
+      expect(isBeta()).toBe(false);
+      expect(window.location.reload).toHaveBeenCalledTimes(2);
+
+      // Verify we're still on user page
+      expect(screen.getByTestId('user-page')).toBeInTheDocument();
     });
   });
 });

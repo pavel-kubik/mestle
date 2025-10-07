@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import cities from '../Data/data.js';
+import cities from '../Data/cities_cz.js';
 import { normalize } from '../Util/util';
 import { calculateTimeLeft } from '../Rand/rand';
 import { isEog } from '../History/history';

@@ -5,7 +5,7 @@ import './App.css';
 
 import { getScore, mergeHistory } from './History/history';
 import { useStickyState } from './Util/util';
-import { isBeta } from './Util/betaUtil';
+import { isBeta, initBetaFromUrl } from './Util/betaUtil';
 import GuessBoard from './component/GuessBoard';
 import User from './component/User';
 import LeaderBoard from './component/LeaderBoard';
@@ -41,6 +41,11 @@ const App = () => {
   // permanent
   const [history, setHistory] = useStickyState({}, 'mestle_history');
   const score = getScore(history);
+
+  // Initialize beta mode from URL parameter if present
+  useEffect(() => {
+    initBetaFromUrl();
+  }, []);
 
   const [loggedUser, setLoggedUser] = useState(null);
   useEffect(() => {

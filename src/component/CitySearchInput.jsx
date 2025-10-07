@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import cities from '../Data/data.js';
+import cities from '../Data/cities_cz.js';
 import { normalize } from '../Util/util';
 import { t } from '../Util/translate';
 

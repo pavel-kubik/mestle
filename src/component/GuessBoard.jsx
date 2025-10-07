@@ -4,10 +4,7 @@ import PropTypes from 'prop-types';
 import './GuessBoard.css';
 import background from '../img/background.svg';
 
-import cities from '../Data/data.js';
-import Guess from '../Guess/guess';
-import CitySearchInput from './CitySearchInput';
-import GameResult from './GameResult';
+import cities from '../Data/cities_cz.js';
 import { getRandCity } from '../Rand/rand';
 import { isEog } from '../History/history';
 import useVH from 'react-viewport-height';

@@ -1,4 +1,4 @@
-import cities from '../Data/data.js';
+import cities from '../Data/cities_cz.js';
 
 let citiesMap = null;
 

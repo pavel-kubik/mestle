@@ -210,6 +210,7 @@ describe('App Routing and Beta Integration Tests', () => {
 
     it('should render user page when starting at /user route', async () => {
       // Create a test component that renders just the routes portion with MemoryRouter
+      // eslint-disable-next-line no-unused-vars
       const TestAppRoutes = () => (
         <MemoryRouter initialEntries={['/user']}>
           <div className='app'>
@@ -264,6 +265,7 @@ describe('App Routing and Beta Integration Tests', () => {
 
     it('should switch to beta and then back to normal mode', async () => {
       // Render user page using MemoryRouter
+      // eslint-disable-next-line no-unused-vars
       const TestAppRoutes = () => (
         <MemoryRouter initialEntries={['/user']}>
           <div className='app'>

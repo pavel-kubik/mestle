@@ -87,7 +87,7 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
   };
 
   const getSign = (guessedCity) => {
-    return guessedCity.hashFilename != undefined ? '/img/sign/' + guessedCity.hashFilename : guessedCity.signUrl;
+    return guessedCity.hashFilename != undefined ? '/img/sign_cz/' + guessedCity.hashFilename : guessedCity.signUrl;
   };
 
   return (
@@ -102,8 +102,8 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
             regionGuess === 'green'
               ? t('components.guess.regionDiff.same')
               : regionGuess === 'orange'
-              ? t('components.guess.regionDiff.neighbour')
-              : t('components.guess.regionDiff.other')
+                ? t('components.guess.regionDiff.neighbour')
+                : t('components.guess.regionDiff.other')
           }
           theme={regionGuess}
           zIndex={9}

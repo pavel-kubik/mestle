@@ -36,7 +36,7 @@ function GuessBoard({ todaySeed, todayHistory, addAttemptHandler, zone }) {
       <div className='requirements'>
         <span>{t('components.guessBoard.todayCityBadgeTitle')}</span>
         {/* TODO directory to constant; move images to src and import them */}
-        <img src={'/img/sign/' + getRandCity(cities, todaySeed).hashFilename} />
+        <img src={'/img/sign_cz/' + getRandCity(cities, todaySeed).hashFilename} />
       </div>
       {getAttempts(todayHistory).length > 0 && (
         <div className='differences title'>

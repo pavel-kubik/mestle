@@ -139,25 +139,22 @@ function basePlugin() {
     return {
         name: "base-plugin",
         config(_, { mode }) {
-            const { PUBLIC_URL } = loadEnv(mode, ".", ["PUBLIC_URL"]);
-
-            // If PUBLIC_URL is explicitly set, use it
-            if (PUBLIC_URL) {
-                return { base: PUBLIC_URL };
+            // For Netlify deployments (preview, branch, etc.), use relative paths
+            // Check this FIRST before checking PUBLIC_URL
+            if (process.env.NETLIFY && process.env.NETLIFY_BRANCH && process.env.NETLIFY_BRANCH !== 'main') {
+                console.log(`Netlify preview/branch build detected (${process.env.NETLIFY_BRANCH}), using relative paths`);
+                return { base: "./" };
             }
 
-            // For Netlify deployments (preview, branch, etc.), use relative paths
-            if (process.env.NETLIFY && process.env.NETLIFY_BRANCH !== 'main') {
-                return { base: "./" };
+            const { PUBLIC_URL } = loadEnv(mode, ".", ["PUBLIC_URL"]);
+
+            // If PUBLIC_URL is explicitly set and not empty, use it
+            if (PUBLIC_URL && PUBLIC_URL !== "") {
+                return { base: PUBLIC_URL };
             }
 
             // For local development, use relative paths
             if (mode === 'development') {
-                return { base: "./" };
-            }
-
-            // For production builds that aren't main branch Netlify, use relative paths
-            if (mode === 'production' && process.env.NETLIFY_BRANCH && process.env.NETLIFY_BRANCH !== 'main') {
                 return { base: "./" };
             }
 

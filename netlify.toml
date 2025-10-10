@@ -6,6 +6,17 @@
   NODE_VERSION = "18"
   NPM_VERSION = "9"
 
+# Context-specific builds for deploy previews and branch deploys
+# These will automatically use relative paths via vite.config.js
+[context.deploy-preview]
+  command = "npm run build"
+
+[context.branch-deploy]
+  command = "npm run build"
+
+[context.develop]
+  command = "npm run build"
+
 # Enable edge functions and functions
 [functions]
   directory = "netlify/functions"

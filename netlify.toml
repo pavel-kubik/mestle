@@ -24,8 +24,8 @@
 # SPA routing - serve index.html for HTML page requests only
 # force = false means: only redirect if the file doesn't exist
 # This prevents redirecting static assets (JS, CSS, images) to index.html
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = false
+# [[redirects]]
+#   from = "/*"
+#   to = "/index.html"
+#   status = 200
+#   force = false

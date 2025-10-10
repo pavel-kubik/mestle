@@ -1,3 +1,7 @@
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_VERSION = "9"
+
 # Enable edge functions and functions
 [functions]
   directory = "netlify/functions"

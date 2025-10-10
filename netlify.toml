@@ -10,4 +10,8 @@
 [functions]
   directory = "netlify/functions"
 
-# Redirects are handled by the build process creating _redirects file
+# SPA routing - serve index.html for all routes
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

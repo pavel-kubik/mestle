@@ -46,6 +46,7 @@
   "components.user.betaTesting.title": "Přihlaš se k beta testování. Dostaneš nové funkce jako první!",
   "components.user.country.title": "Vyber zemi:",
   "components.user.guessCities.title": "Uhádnutých měst: {{score}}",
+  "components.user.totalGuessCities.title": "Celkem uhádnutých měst ze všech zemí: {{totalScore}}",
   "components.countrySwitch.button.czech": "Česká města",
   "components.countrySwitch.button.german": "Německá města",
   "components.user.login.password": "Heslo",

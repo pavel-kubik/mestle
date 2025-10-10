@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getScore } from '../History/history';
+import { getScore, getTotalScore } from '../History/history';
 import BetaSwitch from './BetaSwitch';
 import CountrySwitch from './CountrySwitch';
 
@@ -32,6 +32,7 @@ const User = ({ history, loggedUser, setLoggedUser, initBECall, syncAttempts }) 
       )}
       <div className='statistics'>
         <div>{t('components.user.guessCities.title', { score: getUserScore() })}</div>
+        <div>{t('components.user.totalGuessCities.title', { totalScore: getTotalScore() })}</div>
       </div>
       {loggedUser && ( //
         <>

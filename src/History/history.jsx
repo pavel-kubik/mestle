@@ -4,6 +4,25 @@ export const getScore = (history) => {
     .filter((eog) => eog).length;
 };
 
+export const getTotalScore = () => {
+  const historyKeys = ['mestle_history', 'mestle_history_cz', 'mestle_history_de'];
+  let totalScore = 0;
+
+  historyKeys.forEach((key) => {
+    const historyData = window.localStorage.getItem(key);
+    if (historyData) {
+      try {
+        const history = JSON.parse(historyData);
+        totalScore += getScore(history);
+      } catch (e) {
+        console.warn(`Failed to parse history for key ${key}:`, e);
+      }
+    }
+  });
+
+  return totalScore;
+};
+
 export const isEog = (todayHistory) => {
   if (todayHistory && todayHistory.eog) {
     return todayHistory.eog;

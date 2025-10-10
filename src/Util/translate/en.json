@@ -46,6 +46,7 @@
   "components.user.betaTesting.title": "Join the beta testing to get new features of Městle first!",
   "components.user.country.title": "Select country:",
   "components.user.guessCities.title": "Guessed cities: {{score}}",
+  "components.user.totalGuessCities.title": "Total guessed cities from all countries: {{totalScore}}",
   "components.countrySwitch.button.czech": "Czech cities",
   "components.countrySwitch.button.german": "German cities",
   "components.user.login.password": "Password",

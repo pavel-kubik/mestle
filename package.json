@@ -30,7 +30,7 @@
     "format": "prettier src/**/*.js* --write --config ./.prettierrc",
     "start": "vite",
     "prebuild": "vitest run",
-    "build": "vite build",
+    "build": "vite build && echo /* /index.html 200 >build/_redirects",
     "test": "vitest",
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",

@@ -1,12 +1,22 @@
 import cs from './cs.json';
 import en from './en.json';
 import de from './de.json';
+import { getLanguageFromPath } from '../urlUtil';
 
 export const LANGUAGES = { en: 'en', cs: 'cs', de: 'de' };
 const DEFAULT_LANGUAGE = LANGUAGES.cs;
 const LANGUAGE_STORAGE_KEY = 'lang';
 
 export const getLanguage = () => {
+  // First try to get language from URL path
+  if (typeof window !== 'undefined' && window.location) {
+    const languageFromUrl = getLanguageFromPath(window.location.pathname);
+    if (languageFromUrl && Object.values(LANGUAGES).includes(languageFromUrl)) {
+      return languageFromUrl;
+    }
+  }
+
+  // Fallback to localStorage for backward compatibility
   const language = localStorage.getItem(LANGUAGE_STORAGE_KEY);
 
   if (!language) {

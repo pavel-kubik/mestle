@@ -1,3 +1,5 @@
+import { getCountryFromQuery } from './urlUtil';
+
 export const COUNTRIES = {
   CZECH: 'cz',
   GERMAN: 'de'
@@ -6,6 +8,15 @@ export const COUNTRIES = {
 const COUNTRY_STORAGE_KEY = 'mestle_country';
 
 export const getCountry = () => {
+  // First try to get country from URL query parameter
+  if (typeof window !== 'undefined' && window.location) {
+    const countryFromUrl = getCountryFromQuery(window.location.search);
+    if (countryFromUrl && Object.values(COUNTRIES).includes(countryFromUrl)) {
+      return countryFromUrl;
+    }
+  }
+
+  // Fallback to localStorage for backward compatibility
   const storedCountry = window.localStorage.getItem(COUNTRY_STORAGE_KEY);
   return storedCountry || COUNTRIES.CZECH; // Default to Czech for existing users
 };

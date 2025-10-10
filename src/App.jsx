@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
 
 import './App.css';
 
@@ -23,6 +23,8 @@ import { DateTime } from 'luxon';
 
 import { getCitiesMap } from './Util/citiesUtil';
 import { getCountry } from './Util/countryUtil';
+import { buildUrlPath } from './Util/urlUtil';
+import { getLanguage } from './Util/translate';
 import FadeLoader from 'react-spinners/FadeLoader';
 
 hotjar.initialize(3360376, 6);
@@ -36,6 +38,22 @@ if (hotjar.initialized()) {
 import { buildTime } from './macros.js' with { type: 'macro' };
 
 const dateTimeStamp = buildTime();
+
+// Component to handle language-aware links
+const LanguageLink = ({ to, children, ...props }) => {
+  const lang = getLanguage();
+  const country = getCountry();
+  const fullPath = buildUrlPath(lang, to, country);
+  return <Link to={fullPath} {...props}>{children}</Link>;
+};
+
+// Component to redirect from root to language-prefixed path
+const RootRedirect = () => {
+  const lang = getLanguage();
+  const country = getCountry();
+  const fullPath = buildUrlPath(lang, '/', country);
+  return <Navigate to={fullPath} replace />;
+};
 
 const App = () => {
   const [isLoading, setLoading] = useState(false);
@@ -150,25 +168,29 @@ const App = () => {
       <Router>
         <div className='app'>
           <div className='header'>
-            <Link to='/user' title={loggedUser ? loggedUser.username : t('app.loginButton.title', { score })}>
+            <LanguageLink to='/user' title={loggedUser ? loggedUser.username : t('app.loginButton.title', { score })}>
               {loggedUser && <div className='user-icon'>{loggedUser.username.substr(0, 1).toUpperCase()}</div>}
               {!loggedUser && <img className='login-user' src={userNotLogged} />}
-            </Link>
-            <Link to='/'>
+            </LanguageLink>
+            <LanguageLink to='/'>
               <div>
                 <span>Městle</span>
                 {isBeta() && <span style={{ color: 'red', fontStyle: 'italic' }}> beta</span>}
                 <div className='debug'>({DateTime.now().setZone(zone).toLocaleString()})</div>
               </div>
-            </Link>
+            </LanguageLink>
             <div style={{ display: 'flex', gap: 16 }}>
               <LanguageSwitch />
             </div>
           </div>
           <Routes>
+            {/* Redirect root to language-prefixed path */}
+            <Route path='/' element={<RootRedirect />} />
+
+            {/* Language-prefixed routes */}
             <Route
               exact
-              path='/'
+              path='/:lang/'
               element={
                 <GuessBoard
                   loggedUser={loggedUser}
@@ -181,7 +203,7 @@ const App = () => {
             />
             <Route
               exact
-              path='/user'
+              path='/:lang/user'
               element={
                 <User //
                   history={history}
@@ -192,8 +214,8 @@ const App = () => {
                 />
               }
             />
-            <Route exact path='/leader-board' element={<LeaderBoard />} />
-            <Route exact path='/help' element={<HowToPlay />} />
+            <Route exact path='/:lang/leader-board' element={<LeaderBoard />} />
+            <Route exact path='/:lang/help' element={<HowToPlay />} />
           </Routes>
           <div className='build-time debug'>{t('app.buildNumber', { dateTimeStamp })}</div>
         </div>

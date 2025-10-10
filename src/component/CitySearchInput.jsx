@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import cities from '../Data/cities_cz.js';
+import { getCitiesArray } from '../Util/citiesUtil';
 import { normalize } from '../Util/util';
 import { t } from '../Util/translate';
+import { getCountry } from '../Util/countryUtil';
 
 function CitySearchInput({ cityPart, setCityPart, guessEnabled, onGuess, excludedCities = [] }) {
   const [filteredCities, setFilteredCities] = useState([]);
+  const cities = getCitiesArray(getCountry());
 
   useEffect(() => {
     if (cityPart.length >= 2) {

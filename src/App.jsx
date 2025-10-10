@@ -22,6 +22,7 @@ import { loadAttempts, addAttempt, storeAttempts } from './Util/attemptUtil';
 import { DateTime } from 'luxon';
 
 import { getCitiesMap } from './Util/citiesUtil';
+import { getCountry } from './Util/countryUtil';
 import FadeLoader from 'react-spinners/FadeLoader';
 
 hotjar.initialize(3360376, 6);
@@ -38,8 +39,10 @@ const dateTimeStamp = buildTime();
 
 const App = () => {
   const [isLoading, setLoading] = useState(false);
-  // permanent
-  const [history, setHistory] = useStickyState({}, 'mestle_history');
+  // permanent - country-specific history
+  const currentCountry = getCountry();
+  const historyKey = `mestle_history_${currentCountry}`;
+  const [history, setHistory] = useStickyState({}, historyKey);
   const score = getScore(history);
 
   // Initialize beta mode from URL parameter if present

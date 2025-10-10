@@ -45,6 +45,7 @@ export const countDirection = (city1, city2) => {
 
 export const neighboringRegion = (region1, region2) => {
   const neighbors = {
+    // Czech regions
     'Hl. m. Praha': ['Středočeský'],
     Středočeský: ['Hl. m. Praha', 'Ústecký', 'Liberecký', 'Královéhradecký', 'Pardubický', 'Vysočina', 'Jihočeský', 'Plzeňský'],
     Jihočeský: ['Plzeňský', 'Středočeský', 'Vysočina', 'Jihomoravský'],
@@ -58,7 +59,34 @@ export const neighboringRegion = (region1, region2) => {
     Jihomoravský: ['Jihočeský', 'Vysočina', 'Pardubický', 'Olomoucký', 'Zlínský'],
     Olomoucký: ['Pardubický', 'Jihomoravský', 'Moravskoslezský', 'Zlínský'],
     Moravskoslezský: ['Olomoucký', 'Zlínský'],
-    Zlínský: ['Jihomoravský', 'Olomoucký', 'Moravskoslezský']
+    Zlínský: ['Jihomoravský', 'Olomoucký', 'Moravskoslezský'],
+    // German states
+    'Baden-Württemberg': ['Bayern', 'Hessen', 'Rheinland-Pfalz'],
+    Bayern: ['Baden-Württemberg', 'Hessen', 'Thüringen', 'Sachsen'],
+    Berlin: ['Brandenburg'],
+    Brandenburg: ['Berlin', 'Mecklenburg-Vorpommern', 'Sachsen', 'Sachsen-Anhalt', 'Niedersachsen'],
+    Bremen: ['Niedersachsen'],
+    Hamburg: ['Schleswig-Holstein', 'Niedersachsen'],
+    Hessen: ['Nordrhein-Westfalen', 'Rheinland-Pfalz', 'Baden-Württemberg', 'Bayern', 'Thüringen', 'Niedersachsen'],
+    'Mecklenburg-Vorpommern': ['Schleswig-Holstein', 'Niedersachsen', 'Brandenburg'],
+    Niedersachsen: [
+      'Schleswig-Holstein',
+      'Hamburg',
+      'Bremen',
+      'Mecklenburg-Vorpommern',
+      'Brandenburg',
+      'Sachsen-Anhalt',
+      'Thüringen',
+      'Hessen',
+      'Nordrhein-Westfalen'
+    ],
+    'Nordrhein-Westfalen': ['Niedersachsen', 'Hessen', 'Rheinland-Pfalz'],
+    'Rheinland-Pfalz': ['Nordrhein-Westfalen', 'Hessen', 'Baden-Württemberg', 'Saarland'],
+    Saarland: ['Rheinland-Pfalz'],
+    Sachsen: ['Brandenburg', 'Sachsen-Anhalt', 'Thüringen', 'Bayern'],
+    'Sachsen-Anhalt': ['Niedersachsen', 'Brandenburg', 'Sachsen', 'Thüringen'],
+    'Schleswig-Holstein': ['Hamburg', 'Niedersachsen', 'Mecklenburg-Vorpommern'],
+    Thüringen: ['Niedersachsen', 'Sachsen-Anhalt', 'Sachsen', 'Bayern', 'Hessen']
   };
   if (!neighbors[region1]) {
     console.warn('Region ' + region1 + ' not found.');

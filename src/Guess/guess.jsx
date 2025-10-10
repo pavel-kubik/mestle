@@ -18,6 +18,7 @@ import compassPin from '../img/compass_pin.svg';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
 import { getLanguage, LANGUAGES, t } from '../Util/translate';
+import { getCountry } from '../Util/countryUtil';
 
 const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
   const tooltipWidth = '17vw';
@@ -87,7 +88,8 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
   };
 
   const getSign = (guessedCity) => {
-    return guessedCity.hashFilename != undefined ? '/img/sign_cz/' + guessedCity.hashFilename : guessedCity.signUrl;
+    const currentCountry = getCountry();
+    return guessedCity.hashFilename != undefined ? `/img/sign_${currentCountry}/` + guessedCity.hashFilename : guessedCity.signUrl;
   };
 
   return (

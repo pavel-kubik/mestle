@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './GuessBoard.css';
 import background from '../img/background.svg';
 
-import cities from '../Data/cities_cz.js';
+import { getCitiesArray } from '../Util/citiesUtil';
 import Guess from '../Guess/guess';
 import CitySearchInput from './CitySearchInput';
 import GameResult from './GameResult';
@@ -14,11 +14,14 @@ import useVH from 'react-viewport-height';
 import { t } from '../Util/translate';
 import { useGameState } from '../hooks/useGameState';
 import { useSeedValidation } from '../hooks/useSeedValidation';
+import { getCountry } from '../Util/countryUtil';
 
 function GuessBoard({ todaySeed, todayHistory, addAttemptHandler, zone }) {
   useVH(); // TODO move to App.jsx
 
   const bottom = useRef(null);
+  const currentCountry = getCountry();
+  const cities = getCitiesArray(currentCountry);
 
   const { cityPart, setCityPart, guessEnabled, timeLeft, getAttempts } = useGameState(todayHistory, todaySeed, zone);
   const { validateSeed } = useSeedValidation(todaySeed, zone);
@@ -36,7 +39,7 @@ function GuessBoard({ todaySeed, todayHistory, addAttemptHandler, zone }) {
       <div className='requirements'>
         <span>{t('components.guessBoard.todayCityBadgeTitle')}</span>
         {/* TODO directory to constant; move images to src and import them */}
-        <img src={'/img/sign_cz/' + getRandCity(cities, todaySeed).hashFilename} />
+        <img src={`/img/sign_${currentCountry}/` + getRandCity(cities, todaySeed).hashFilename} />
       </div>
       {getAttempts(todayHistory).length > 0 && (
         <div className='differences title'>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import cities from '../Data/cities_cz.js';
+import { getCitiesArray } from '../Util/citiesUtil';
+import { getCountry } from '../Util/countryUtil';
 import { normalize } from '../Util/util';
 import { calculateTimeLeft } from '../Rand/rand';
 import { isEog } from '../History/history';
@@ -8,6 +9,7 @@ export const useGameState = (todayHistory, todaySeed, zone) => {
   const [cityPart, setCityPart] = useState('');
   const [guessEnabled, setGuessEnabled] = useState(false);
   const [timeLeft, setTimeLeft] = useState('');
+  const cities = getCitiesArray(getCountry());
 
   const getAttempts = (history) => {
     return history.guesses;
@@ -21,7 +23,7 @@ export const useGameState = (todayHistory, todaySeed, zone) => {
     } else {
       setGuessEnabled(false);
     }
-  }, [cityPart, todayHistory, todaySeed]);
+  }, [cityPart, todayHistory, todaySeed, cities]);
 
   // Update countdown timer when game ends
   useEffect(() => {

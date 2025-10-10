@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getScore } from '../History/history';
 import BetaSwitch from './BetaSwitch';
+import CountrySwitch from './CountrySwitch';
 
 import './User.css';
 import { t } from '../Util/translate';
@@ -47,6 +48,10 @@ const User = ({ history, loggedUser, setLoggedUser, initBECall, syncAttempts }) 
           )}
         </>
       )}
+      <div>
+        {t('components.user.country.title')}
+        <CountrySwitch />
+      </div>
       <div>
         {t('components.user.betaTesting.title')}
         <BetaSwitch />

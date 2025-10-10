@@ -63,5 +63,6 @@
   "global.login": "Login",
   "global.signOut": "Logout",
   "languages.cs": "Česky",
-  "languages.en": "English"
+  "languages.en": "English",
+  "languages.de": "Deutsch"
 }

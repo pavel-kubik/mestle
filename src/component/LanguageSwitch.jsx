@@ -6,14 +6,17 @@ const LanguageSwitch = () => {
   const [language, setLanguage] = useState(getLanguage());
 
   const toggleLanguage = useCallback(() => {
+    let newLanguage;
     if (language === LANGUAGES.cs) {
-      setLanguage(LANGUAGES.en);
-      setStorageLanguage(LANGUAGES.en);
+      newLanguage = LANGUAGES.en;
+    } else if (language === LANGUAGES.en) {
+      newLanguage = LANGUAGES.de;
     } else {
-      setLanguage(LANGUAGES.cs);
-      setStorageLanguage(LANGUAGES.cs);
+      newLanguage = LANGUAGES.cs;
     }
 
+    setLanguage(newLanguage);
+    setStorageLanguage(newLanguage);
     window.location.reload();
   }, [language]);
 

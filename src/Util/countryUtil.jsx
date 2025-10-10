@@ -1,4 +1,4 @@
-import { getCountryFromQuery } from './urlUtil';
+import { getCountryFromPath } from './urlUtil';
 
 export const COUNTRIES = {
   CZECH: 'cz',
@@ -8,9 +8,9 @@ export const COUNTRIES = {
 const COUNTRY_STORAGE_KEY = 'mestle_country';
 
 export const getCountry = () => {
-  // First try to get country from URL query parameter
+  // First try to get country from URL path
   if (typeof window !== 'undefined' && window.location) {
-    const countryFromUrl = getCountryFromQuery(window.location.search);
+    const countryFromUrl = getCountryFromPath(window.location.pathname);
     if (countryFromUrl && Object.values(COUNTRIES).includes(countryFromUrl)) {
       return countryFromUrl;
     }

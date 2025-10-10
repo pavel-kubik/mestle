@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import { getLanguage, setLanguage as setStorageLanguage, LANGUAGES, t } from '../Util/translate';
 import { getCountry } from '../Util/countryUtil';
-import { buildUrlPath, removeLanguagePrefix } from '../Util/urlUtil';
+import { buildUrlPath, removeCountryAndLanguagePrefix } from '../Util/urlUtil';
 
 const LanguageSwitch = () => {
   const [language, setLanguage] = useState(getLanguage());
@@ -23,12 +23,12 @@ const LanguageSwitch = () => {
     setLanguage(newLanguage);
     setStorageLanguage(newLanguage);
 
-    // Get current path without language prefix and current country
-    const pathWithoutLang = removeLanguagePrefix(location.pathname);
+    // Get current path without country/language prefix and current country
+    const pathWithoutPrefix = removeCountryAndLanguagePrefix(location.pathname);
     const country = getCountry();
 
-    // Build new URL with new language and current country
-    const newPath = buildUrlPath(newLanguage, pathWithoutLang, country);
+    // Build new URL with current country and new language
+    const newPath = buildUrlPath(country, newLanguage, pathWithoutPrefix);
 
     // Navigate to the new path
     navigate(newPath);

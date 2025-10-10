@@ -39,19 +39,19 @@ import { buildTime } from './macros.js' with { type: 'macro' };
 
 const dateTimeStamp = buildTime();
 
-// Component to handle language-aware links
+// Component to handle country and language-aware links
 const LanguageLink = ({ to, children, ...props }) => {
   const lang = getLanguage();
   const country = getCountry();
-  const fullPath = buildUrlPath(lang, to, country);
+  const fullPath = buildUrlPath(country, lang, to);
   return <Link to={fullPath} {...props}>{children}</Link>;
 };
 
-// Component to redirect from root to language-prefixed path
+// Component to redirect from root to country/language-prefixed path
 const RootRedirect = () => {
   const lang = getLanguage();
   const country = getCountry();
-  const fullPath = buildUrlPath(lang, '/', country);
+  const fullPath = buildUrlPath(country, lang, '/');
   return <Navigate to={fullPath} replace />;
 };
 
@@ -184,13 +184,13 @@ const App = () => {
             </div>
           </div>
           <Routes>
-            {/* Redirect root to language-prefixed path */}
+            {/* Redirect root to country/language-prefixed path */}
             <Route path='/' element={<RootRedirect />} />
 
-            {/* Language-prefixed routes */}
+            {/* Country and language-prefixed routes */}
             <Route
               exact
-              path='/:lang/'
+              path='/:country/:lang/'
               element={
                 <GuessBoard
                   loggedUser={loggedUser}
@@ -203,7 +203,7 @@ const App = () => {
             />
             <Route
               exact
-              path='/:lang/user'
+              path='/:country/:lang/user'
               element={
                 <User //
                   history={history}
@@ -214,8 +214,11 @@ const App = () => {
                 />
               }
             />
-            <Route exact path='/:lang/leader-board' element={<LeaderBoard />} />
-            <Route exact path='/:lang/help' element={<HowToPlay />} />
+            <Route exact path='/:country/:lang/leader-board' element={<LeaderBoard />} />
+            <Route exact path='/:country/:lang/help' element={<HowToPlay />} />
+
+            {/* Catch-all: redirect any other paths to root */}
+            <Route path='*' element={<RootRedirect />} />
           </Routes>
           <div className='build-time debug'>{t('app.buildNumber', { dateTimeStamp })}</div>
         </div>

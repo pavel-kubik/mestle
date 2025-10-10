@@ -1,81 +1,103 @@
 // URL utility functions for language and country handling
 
-export const COUNTRY_QUERY_MAP = {
+// Internal country codes to URL country names mapping
+export const COUNTRY_CODE_TO_URL = {
   cz: 'czechia',
   de: 'germany'
 };
 
-export const QUERY_TO_COUNTRY_MAP = {
+// URL country names to internal country codes mapping
+export const URL_TO_COUNTRY_CODE = {
   czechia: 'cz',
   germany: 'de'
 };
 
+// Supported country names for URL path validation
+export const VALID_URL_COUNTRIES = ['czechia', 'germany'];
+
+// Supported languages for URL path validation
+export const VALID_LANGUAGES = ['cs', 'de', 'en'];
+
 /**
- * Convert internal country code to URL query parameter value
+ * Convert internal country code to URL country name
  * @param {string} countryCode - Internal country code (cz, de)
- * @returns {string} URL query parameter value (czechia, germany)
+ * @returns {string} URL country name (czechia, germany)
  */
-export const countryToQuery = (countryCode) => {
-  return COUNTRY_QUERY_MAP[countryCode] || COUNTRY_QUERY_MAP.cz;
+export const countryCodeToUrl = (countryCode) => {
+  return COUNTRY_CODE_TO_URL[countryCode] || 'czechia';
 };
 
 /**
- * Convert URL query parameter value to internal country code
- * @param {string} queryValue - URL query parameter value (czechia, germany)
+ * Convert URL country name to internal country code
+ * @param {string} urlCountry - URL country name (czechia, germany)
  * @returns {string} Internal country code (cz, de)
  */
-export const queryToCountry = (queryValue) => {
-  return QUERY_TO_COUNTRY_MAP[queryValue] || 'cz';
+export const urlToCountryCode = (urlCountry) => {
+  return URL_TO_COUNTRY_CODE[urlCountry] || 'cz';
 };
 
 /**
- * Build a URL path with language and optional query parameters
- * @param {string} languageCode - Language code (cs, de, en)
- * @param {string} path - Path without language prefix
+ * Build a URL path with country and language in the path
  * @param {string} countryCode - Internal country code (cz, de)
- * @returns {string} Full URL path with language and query params
+ * @param {string} languageCode - Language code (cs, de, en)
+ * @param {string} path - Path without country/language prefix
+ * @returns {string} Full URL path like /czechia/cs/user
  */
-export const buildUrlPath = (languageCode, path = '', countryCode = null) => {
-  const cleanPath = path.startsWith('/') ? path : `/${path}`;
-  let url = `/${languageCode}${cleanPath}`;
+export const buildUrlPath = (countryCode, languageCode, path = '') => {
+  // Convert country code to URL-friendly name
+  const urlCountry = countryCodeToUrl(countryCode);
 
-  if (countryCode) {
-    const countryQuery = countryToQuery(countryCode);
-    url += `?country=${countryQuery}`;
+  // Validate language
+  if (!VALID_LANGUAGES.includes(languageCode)) {
+    console.warn(`Invalid language code: ${languageCode}, defaulting to 'cs'`);
+    languageCode = 'cs';
   }
 
-  return url;
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  return `/${urlCountry}/${languageCode}${cleanPath}`;
+};
+
+/**
+ * Parse country from URL pathname
+ * @param {string} pathname - URL pathname like /czechia/cs/user
+ * @returns {string|null} Internal country code (cz, de) or null if not found
+ */
+export const getCountryFromPath = (pathname) => {
+  const match = pathname.match(/^\/([a-z]+)\//);
+  if (match && VALID_URL_COUNTRIES.includes(match[1])) {
+    return urlToCountryCode(match[1]);
+  }
+  return null;
 };
 
 /**
  * Parse language from URL pathname
- * @param {string} pathname - URL pathname
- * @returns {string} Language code (cs, de, en)
+ * @param {string} pathname - URL pathname like /czechia/cs/user
+ * @returns {string|null} Language code (cs, de, en) or null if not found
  */
 export const getLanguageFromPath = (pathname) => {
-  const match = pathname.match(/^\/([a-z]{2})(\/|$)/);
-  if (match && ['cs', 'de', 'en'].includes(match[1])) {
+  const match = pathname.match(/^\/[a-z]+\/([a-z]{2})(\/|$)/);
+  if (match && VALID_LANGUAGES.includes(match[1])) {
     return match[1];
   }
-  return 'cs'; // default
+  return null;
 };
 
 /**
- * Parse country from URL search params
- * @param {string} search - URL search string
- * @returns {string} Country code (cz, de)
+ * Remove country and language prefix from path
+ * @param {string} pathname - URL pathname like /czechia/cs/user
+ * @returns {string} Path without country/language prefix like /user
  */
-export const getCountryFromQuery = (search) => {
-  const params = new URLSearchParams(search);
-  const countryParam = params.get('country');
-  return countryParam ? queryToCountry(countryParam) : null;
+export const removeCountryAndLanguagePrefix = (pathname) => {
+  return pathname.replace(/^\/[a-z]+\/[a-z]{2}(\/|$)/, '/');
 };
 
 /**
- * Remove language prefix from path
+ * @deprecated Use removeCountryAndLanguagePrefix instead
+ * Remove language prefix from path (kept for backward compatibility)
  * @param {string} pathname - URL pathname with language prefix
  * @returns {string} Path without language prefix
  */
 export const removeLanguagePrefix = (pathname) => {
-  return pathname.replace(/^\/[a-z]{2}(\/|$)/, '/');
+  return removeCountryAndLanguagePrefix(pathname);
 };

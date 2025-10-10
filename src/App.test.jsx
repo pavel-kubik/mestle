@@ -74,18 +74,18 @@ describe('App Routing and Beta Integration Tests', () => {
     });
 
     // Mock window.location with full properties needed for BrowserRouter
-    // Default to Czech language path
+    // Default to Czech country and language path
     delete window.location;
     window.location = {
       reload: vi.fn(),
-      href: 'http://localhost:3000/cs/',
+      href: 'http://localhost:3000/cz/cs/',
       origin: 'http://localhost:3000',
       protocol: 'http:',
       host: 'localhost:3000',
       hostname: 'localhost',
       port: '3000',
-      pathname: '/cs/',
-      search: '?country=czechia',
+      pathname: '/cz/cs/',
+      search: '',
       hash: ''
     };
 
@@ -206,22 +206,22 @@ describe('App Routing and Beta Integration Tests', () => {
         expect(screen.getByTestId('guess-board')).toBeInTheDocument();
       });
 
-      // Find and verify the user link exists with correct href (language-prefixed)
+      // Find and verify the user link exists with correct href (country and language-prefixed)
       const links = screen.getAllByRole('link');
       const userLink = links.find((link) => link.getAttribute('href')?.includes('/user'));
       expect(userLink).toBeInTheDocument();
-      expect(userLink.getAttribute('href')).toMatch(/\/cs\/user\?country=czechia/);
+      expect(userLink.getAttribute('href')).toMatch(/\/cz\/cs\/user/);
     });
 
     it('should render user page when starting at /user route', async () => {
       // Create a test component that renders just the routes portion with MemoryRouter
       // eslint-disable-next-line no-unused-vars
       const TestAppRoutes = () => (
-        <MemoryRouter initialEntries={['/cs/user']}>
+        <MemoryRouter initialEntries={['/cz/cs/user']}>
           <div className='app'>
             <Routes>
-              <Route path='/:lang/' element={<div data-testid='guess-board'>GuessBoard</div>} />
-              <Route path='/:lang/user' element={<div data-testid='user-page'>User Page</div>} />
+              <Route path='/:country/:lang/' element={<div data-testid='guess-board'>GuessBoard</div>} />
+              <Route path='/:country/:lang/user' element={<div data-testid='user-page'>User Page</div>} />
             </Routes>
           </div>
         </MemoryRouter>
@@ -272,11 +272,11 @@ describe('App Routing and Beta Integration Tests', () => {
       // Render user page using MemoryRouter
       // eslint-disable-next-line no-unused-vars
       const TestAppRoutes = () => (
-        <MemoryRouter initialEntries={['/cs/user']}>
+        <MemoryRouter initialEntries={['/cz/cs/user']}>
           <div className='app'>
             <Routes>
-              <Route path='/:lang/' element={<div data-testid='guess-board'>GuessBoard</div>} />
-              <Route path='/:lang/user' element={<div data-testid='user-page'>User Page</div>} />
+              <Route path='/:country/:lang/' element={<div data-testid='guess-board'>GuessBoard</div>} />
+              <Route path='/:country/:lang/user' element={<div data-testid='user-page'>User Page</div>} />
             </Routes>
           </div>
         </MemoryRouter>

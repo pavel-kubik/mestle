@@ -210,7 +210,7 @@ describe('App Routing and Beta Integration Tests', () => {
       const links = screen.getAllByRole('link');
       const userLink = links.find((link) => link.getAttribute('href')?.includes('/user'));
       expect(userLink).toBeInTheDocument();
-      expect(userLink.getAttribute('href')).toMatch(/\/cz\/cs\/user/);
+      expect(userLink.getAttribute('href')).toMatch(/\/czechia\/cs\/user/);
     });
 
     it('should render user page when starting at /user route', async () => {

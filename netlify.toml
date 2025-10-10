@@ -6,6 +6,13 @@
   NODE_VERSION = "18"
   NPM_VERSION = "9"
 
+# Local development server configuration
+[dev]
+  command = "npm run dev"
+  targetPort = 3000
+  port = 8888
+  autoLaunch = true
+
 # Context-specific builds for deploy previews and branch deploys
 # These will automatically use relative paths via vite.config.js
 [context.deploy-preview]
@@ -24,8 +31,8 @@
 # SPA routing - serve index.html for HTML page requests only
 # force = false means: only redirect if the file doesn't exist
 # This prevents redirecting static assets (JS, CSS, images) to index.html
-# [[redirects]]
-#   from = "/*"
-#   to = "/index.html"
-#   status = 200
-#   force = false
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false

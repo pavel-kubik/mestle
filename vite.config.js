@@ -25,20 +25,23 @@ function setEnv(mode) {
     Object.assign(process.env, loadEnv(mode, ".", ["REACT_APP_", "NODE_ENV", "PUBLIC_URL"]));
     process.env.NODE_ENV ||= mode;
 
-    // Only set PUBLIC_URL from homepage for main production builds
+    // Strategy: Only use homepage URL for main branch production builds on Netlify
+    // All other cases use relative paths (empty PUBLIC_URL)
     if (!process.env.PUBLIC_URL) {
         const { homepage } = JSON.parse(readFileSync("package.json", "utf-8"));
 
-        // For Netlify preview/branch deployments, don't set PUBLIC_URL from homepage
-        if (process.env.NETLIFY && process.env.NETLIFY_BRANCH !== 'main') {
-            process.env.PUBLIC_URL = "";
-        } else {
-            // For main production builds, use homepage
+        // Only use homepage for main branch production builds on Netlify
+        if (process.env.NETLIFY && process.env.NETLIFY_BRANCH === 'main' && homepage) {
+            console.log('[SetEnv] Netlify main branch: using homepage URL for PUBLIC_URL');
             process.env.PUBLIC_URL = homepage
                 ? `${homepage.startsWith("http") || homepage.startsWith("/")
                     ? homepage
                     : `/${homepage}`}`.replace(/\/$/, "")
                 : "";
+        } else {
+            // For all other cases (local builds, preview builds, dev), use relative paths
+            console.log('[SetEnv] Using relative paths (empty PUBLIC_URL)');
+            process.env.PUBLIC_URL = "";
         }
     }
 }
@@ -139,27 +142,32 @@ function basePlugin() {
     return {
         name: "base-plugin",
         config(_, { mode }) {
-            // For Netlify deployments (preview, branch, etc.), use relative paths
-            // Check this FIRST before checking PUBLIC_URL
+            // Strategy: Use relative paths by default, only use absolute URLs for main production
+
+            // 1. For Netlify preview/branch deployments, use relative paths
             if (process.env.NETLIFY && process.env.NETLIFY_BRANCH && process.env.NETLIFY_BRANCH !== 'main') {
-                console.log(`Netlify preview/branch build detected (${process.env.NETLIFY_BRANCH}), using relative paths`);
+                console.log(`[Vite Config] Netlify preview/branch build (${process.env.NETLIFY_BRANCH}): using relative paths`);
                 return { base: "./" };
             }
 
+            // 2. For local development, always use relative paths
+            if (mode === 'development') {
+                console.log('[Vite Config] Development mode: using relative paths');
+                return { base: "./" };
+            }
+
+            // 3. For production builds (main branch on Netlify or local production builds)
             const { PUBLIC_URL } = loadEnv(mode, ".", ["PUBLIC_URL"]);
 
-            // If PUBLIC_URL is explicitly set and not empty, use it
-            if (PUBLIC_URL && PUBLIC_URL !== "") {
+            // Only use absolute URL if we're on main branch AND have PUBLIC_URL set
+            if (process.env.NETLIFY && process.env.NETLIFY_BRANCH === 'main' && PUBLIC_URL) {
+                console.log('[Vite Config] Netlify main branch production build: using homepage URL');
                 return { base: PUBLIC_URL };
             }
 
-            // For local development, use relative paths
-            if (mode === 'development') {
-                return { base: "./" };
-            }
-
-            // For main production build, use empty base to leverage homepage from setEnv
-            return { base: "" };
+            // 4. Default: use relative paths (safest option for all other cases)
+            console.log('[Vite Config] Default: using relative paths');
+            return { base: "./" };
         },
     };
 }
@@ -222,9 +230,11 @@ function htmlPlugin(mode) {
             order: "pre",
             handler(html) {
                 return html.replace(/%(.*?)%/g, (match, p1) => {
-                    // For development, use empty string for PUBLIC_URL to avoid CORS issues
-                    if (p1 === 'PUBLIC_URL' && mode === 'development') {
-                        return '';
+                    // For development and when PUBLIC_URL is not set, use empty string
+                    if (p1 === 'PUBLIC_URL') {
+                        // In dev mode or when PUBLIC_URL is empty, return empty string
+                        const publicUrl = env[p1] || process.env.PUBLIC_URL || '';
+                        return publicUrl;
                     }
                     return env[p1] ?? match;
                 });

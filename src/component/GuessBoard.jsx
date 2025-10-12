@@ -9,15 +9,12 @@ import CitySearchInput from './CitySearchInput';
 import GameResult from './GameResult';
 import { getRandCity } from '../Rand/rand';
 import { isEog } from '../History/history';
-import useVH from 'react-viewport-height';
 import { t } from '../Util/translate';
 import { useGameState } from '../hooks/useGameState';
 import { useSeedValidation } from '../hooks/useSeedValidation';
 import { getCountry } from '../Util/countryUtil';
 
 function GuessBoard({ todaySeed, todayHistory, addAttemptHandler, zone }) {
-  useVH(); // TODO move to App.jsx
-
   const bottom = useRef(null);
   const currentCountry = getCountry();
   const cities = getCitiesArray(currentCountry);

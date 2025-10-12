@@ -1,13 +1,3 @@
-[build]
-  command = "npm run build"
-  publish = "build"
-
-[build.environment]
-  NODE_VERSION = "18"
-  NPM_VERSION = "9"
-
 # Enable edge functions and functions
 [functions]
   directory = "netlify/functions"
-
-# Redirects are handled by the build process creating _redirects file

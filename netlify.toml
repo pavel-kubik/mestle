@@ -9,3 +9,9 @@
 # Enable edge functions and functions
 [functions]
   directory = "netlify/functions"
+
+# SPA redirect rule - redirect all requests to index.html for client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

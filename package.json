@@ -6,6 +6,7 @@
   "type": "module",
   "dependencies": {
     "@netlify/functions": "^1.0.0",
+    "@netlify/vite-plugin": "^2.7.0",
     "@tippyjs/react": "^4.2.6",
     "@types/node": "^20.19.0",
     "bcryptjs": "^2.4.3",

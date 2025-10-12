@@ -31,6 +31,10 @@ Formatter and lint check are run in pre commit hook. You can run it manually wit
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/9e3e535e-ae8e-482e-afb4-9b416e0881aa/deploy-status)](https://app.netlify.com/sites/lustrous-puffpuff-c8e9da/deploys)
 
+### Netlify and Vite
+
+https://docs.netlify.com/build/frameworks/framework-setup-guides/vite/
+
 ### Issues
 
 Netlify can crash and keep port open in background during local development of netlify functions. It prevents to start server again.

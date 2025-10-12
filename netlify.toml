@@ -1,6 +1,11 @@
 [build]
   command = "npm run build"
   publish = "build"
+
+[build.environment]
+  NODE_VERSION = "22"
+  NPM_VERSION = "11"
+
 # Enable edge functions and functions
 [functions]
   directory = "netlify/functions"

@@ -20,8 +20,9 @@ export default defineConfig(({ mode }) => {
       importPrefixPlugin(),
       htmlPlugin(mode),
       svgrPlugin(),
-      netlify(),
-      closePlugin()
+      // Only load netlify plugin in development mode for local platform emulation
+      // It's not needed for production builds and can cause build hanging issues
+      ...(mode === 'development' ? [netlify()] : [])
     ]
   };
 });
@@ -233,29 +234,6 @@ function htmlPlugin(mode) {
           return env[p1] ?? match;
         });
       }
-    }
-  };
-}
-// TODO: try to comment it out from plugins to see if build finish itself
-function closePlugin() {
-  return {
-    name: 'ClosePlugin', // required, will show up in warnings and errors
-
-    // use this to catch errors when building
-    buildEnd(error) {
-      if (error) {
-        console.error('Error bundling');
-        console.error(error);
-        process.exit(1);
-      } else {
-        console.log('Build ended');
-      }
-    },
-
-    // use this to catch the end of a build without errors
-    closeBundle(id) {
-      console.log('Bundle closed');
-      process.exit(0);
     }
   };
 }

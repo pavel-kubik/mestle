@@ -20,9 +20,8 @@ export default defineConfig(({ mode }) => {
       importPrefixPlugin(),
       htmlPlugin(mode),
       svgrPlugin(),
-      // Only load netlify plugin in development mode for local platform emulation
-      // It's not needed for production builds and can cause build hanging issues
-      ...(mode === 'development' ? [netlify()] : [])
+      netlify(),
+      closePlugin()
     ]
   };
 });
@@ -234,6 +233,25 @@ function htmlPlugin(mode) {
           return env[p1] ?? match;
         });
       }
+    }
+  };
+}
+// Force build process to exit after completion
+// This is needed because the netlify plugin may keep background processes alive
+// that prevent the build from exiting cleanly
+function closePlugin() {
+  return {
+    name: 'close-plugin',
+    apply: 'build', // Only apply during build command, not dev server
+    buildEnd(error) {
+      if (error) {
+        console.error('Build error:', error);
+        process.exit(1);
+      }
+    },
+    closeBundle() {
+      console.log('Build completed successfully, exiting...');
+      process.exit(0);
     }
   };
 }

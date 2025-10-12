@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { getScore } from '../History/history';
 import BetaSwitch from './BetaSwitch';
 import CountrySwitch from './CountrySwitch';
@@ -59,14 +58,6 @@ const User = ({ history, loggedUser, setLoggedUser, initBECall, syncAttempts }) 
       <div style={{ color: 'red' }}>{t('components.user.login.futureFeature')}</div>
     </div>
   );
-};
-
-User.propTypes = {
-  history: PropTypes.object.isRequired,
-  loggedUser: PropTypes.object,
-  setLoggedUser: PropTypes.func.isRequired,
-  initBECall: PropTypes.func.isRequired,
-  syncAttempts: PropTypes.func.isRequired
 };
 
 export default User;

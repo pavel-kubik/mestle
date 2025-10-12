@@ -1,7 +1,6 @@
 import './guess.css';
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   countDirection,
   distanceComparator,
@@ -180,14 +179,6 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
       </div>
     </div>
   );
-};
-
-Guess.propTypes = {
-  idx: PropTypes.number.isRequired,
-  guessedCity: PropTypes.object.isRequired,
-  targetCity: PropTypes.object.isRequired,
-  isLast: PropTypes.bool.isRequired,
-  isEog: PropTypes.bool.isRequired
 };
 
 export default Guess;

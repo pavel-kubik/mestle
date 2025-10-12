@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
 
 import './GuessBoard.css';
 import background from '../img/background.svg';
@@ -93,12 +92,5 @@ function GuessBoard({ todaySeed, todayHistory, addAttemptHandler, zone }) {
     </>
   );
 }
-
-GuessBoard.propTypes = {
-  todaySeed: PropTypes.number.isRequired,
-  todayHistory: PropTypes.object.isRequired,
-  addAttemptHandler: PropTypes.func.isRequired,
-  zone: PropTypes.string.isRequired
-};
 
 export default GuessBoard;

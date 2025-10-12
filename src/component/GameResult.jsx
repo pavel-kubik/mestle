@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import Tippy from '@tippyjs/react';
 import { t } from '../Util/translate';
 import {
@@ -64,12 +63,5 @@ function GameResult({ attempts, targetCity, todaySeed, timeLeft }) {
     </div>
   );
 }
-
-GameResult.propTypes = {
-  attempts: PropTypes.array.isRequired,
-  targetCity: PropTypes.object.isRequired,
-  todaySeed: PropTypes.number.isRequired,
-  timeLeft: PropTypes.string.isRequired
-};
 
 export default GameResult;

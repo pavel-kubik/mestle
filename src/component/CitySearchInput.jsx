@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { getCitiesArray } from '../Util/citiesUtil';
 import { normalize } from '../Util/util';
 import { t } from '../Util/translate';
@@ -65,13 +64,5 @@ function CitySearchInput({ cityPart, setCityPart, guessEnabled, onGuess, exclude
     </div>
   );
 }
-
-CitySearchInput.propTypes = {
-  cityPart: PropTypes.string.isRequired,
-  setCityPart: PropTypes.func.isRequired,
-  guessEnabled: PropTypes.bool.isRequired,
-  onGuess: PropTypes.func.isRequired,
-  excludedCities: PropTypes.array
-};
 
 export default CitySearchInput;

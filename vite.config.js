@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => {
       importPrefixPlugin(),
       htmlPlugin(mode),
       svgrPlugin(),
-      netlify(),
+      // netlify(), // TODO
       closePlugin()
     ]
   };

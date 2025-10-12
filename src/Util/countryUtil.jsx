@@ -25,17 +25,6 @@ export const switchCountry = () => {
   window.location.reload(true);
 };
 
-export const getCountryName = (country) => {
-  switch (country) {
-    case COUNTRIES.CZECH:
-      return 'Czech Republic';
-    case COUNTRIES.GERMAN:
-      return 'Germany';
-    default:
-      return 'Unknown';
-  }
-};
-
 export const getCountryFlag = (country) => {
   switch (country) {
     case COUNTRIES.CZECH:

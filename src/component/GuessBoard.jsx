@@ -33,8 +33,7 @@ function GuessBoard({ todaySeed, todayHistory, addAttemptHandler, zone }) {
   return (
     <>
       <div className='requirements'>
-        <span>{t('components.guessBoard.todayCityBadgeTitle')}</span>
-        {/* TODO directory to constant; move images to src and import them */}
+        <span>{t('components.guessBoard.todayCityBadgeTitle', { country: t(`countries.${getCountry()}`) })}</span>
         <img src={`/img/sign_${currentCountry}/` + getRandCity(cities, todaySeed).hashFilename} />
       </div>
       {getAttempts(todayHistory).length > 0 && (

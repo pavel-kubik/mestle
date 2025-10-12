@@ -1,6 +1,7 @@
 TODO
 
 - [ ] Update readme and describe how to run tests.
+- [ ] Try to add language and country to url again.
 - [ ] Fix npm i warnings:
       PS D:\Prog\mestle\mestle> npm i
       npm warn ERESOLVE overriding peer dependency

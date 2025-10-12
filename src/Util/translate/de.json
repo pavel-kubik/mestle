@@ -38,7 +38,7 @@
   "components.guessBoard.guessResult.copy": "Ergebnisse kopieren",
   "components.guessBoard.guessResult.copyDone": "Ergebnisse in die Zwischenablage kopiert.",
   "components.guessBoard.guessResult.title": "Glückwunsch! Eine weitere Stadt wird in {{timeLeft}} verfügbar sein.",
-  "components.guessBoard.todayCityBadgeTitle": "Die heutige gesuchte Stadt hat dieses Wappen",
+  "components.guessBoard.todayCityBadgeTitle": "Die heutige gesuchte Stadt in {{country}} hat dieses Wappen",
   "components.guessBoard.todayDate": "Městle Tag {{date}}\n",
   "components.guessBoard.noGuesses": "Willkommen bei Městle. Testen Sie Ihre Geographiekenntnisse. Geben Sie eine Stadt ein, die das gesuchte Wappen haben könnte. Wenn Sie die Stadt nicht beim ersten Versuch erraten, wird ein Hinweis angezeigt.",
   "components.howToPlay.title": "Wie man Městle spielt",
@@ -64,5 +64,7 @@
   "global.signOut": "Abmelden",
   "languages.cs": "Česky",
   "languages.en": "English",
-  "languages.de": "Deutsch"
+  "languages.de": "Deutsch",
+  "countries.cz": "Tschechien",
+  "countries.de": "Deutschland"
 }

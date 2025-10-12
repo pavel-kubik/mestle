@@ -113,6 +113,9 @@ export default defineConfig({
     // Test file patterns
     include: ['src/**/*.{test,spec}.{js,jsx,ts,tsx}', 'src/**/__tests__/**/*.{js,jsx,ts,tsx}'],
 
+    // Explicitly exclude node_modules to prevent running third-party tests
+    exclude: ['node_modules/**', 'build/**', 'coverage/**', 'dist/**'],
+
     // Coverage configuration
     coverage: {
       provider: 'v8', // Modern V8 coverage (faster than c8)

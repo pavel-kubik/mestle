@@ -8,6 +8,7 @@ import Macros from 'unplugin-macros/vite';
 export default defineConfig(({ mode }) => {
   setEnv(mode);
   return {
+    appType: 'spa', // Explicitly set SPA mode for proper history fallback
     plugins: [
       react(),
       Macros(),
@@ -161,7 +162,7 @@ function basePlugin() {
       }
 
       // For main production build, use empty base to leverage homepage from setEnv
-      return { base: '' };
+      return { base: '/' };
     }
   };
 }

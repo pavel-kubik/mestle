@@ -48,6 +48,29 @@ vi.mock('./History/history', () => ({
   mergeHistory: vi.fn((a) => a)
 }));
 
+vi.mock('./Util/countryUtil', () => ({
+  getCountry: vi.fn(() => 'cz'),
+  setCountry: vi.fn(),
+  COUNTRIES: { CZECH: 'cz', GERMAN: 'de' },
+  getCountryFlag: vi.fn((country) => (country === 'cz' ? '🇨🇿' : '🇩🇪'))
+}));
+
+vi.mock('./Util/translate', () => ({
+  getLanguage: vi.fn(() => 'cs'),
+  setLanguage: vi.fn(),
+  LANGUAGES: { cs: 'cs', de: 'de', en: 'en' },
+  t: vi.fn((key, params) => {
+    // Simple translation mock
+    if (key === 'app.loginButton.title') {
+      return `Nepřihlášený uživatel.\nKlikni pro přihlášení nebo vytvoření účtu.\n\nSkóre: ${params?.score || 0}`;
+    }
+    if (key === 'app.buildNumber') {
+      return `Build ${params?.dateTimeStamp || ''}`;
+    }
+    return key;
+  })
+}));
+
 vi.mock('react-hotjar', () => ({
   hotjar: {
     initialize: vi.fn(),
@@ -74,16 +97,17 @@ describe('App Routing and Beta Integration Tests', () => {
     });
 
     // Mock window.location with full properties needed for BrowserRouter
+    // Start at /cs/czechia/ to match the new routing structure
     delete window.location;
     window.location = {
       reload: vi.fn(),
-      href: 'http://localhost:3000/',
+      href: 'http://localhost:3000/cs/czechia/',
       origin: 'http://localhost:3000',
       protocol: 'http:',
       host: 'localhost:3000',
       hostname: 'localhost',
       port: '3000',
-      pathname: '/',
+      pathname: '/cs/czechia/',
       search: '',
       hash: ''
     };
@@ -201,11 +225,11 @@ describe('App Routing and Beta Integration Tests', () => {
         expect(screen.getByTestId('guess-board')).toBeInTheDocument();
       });
 
-      // Find and verify the user link exists with correct href
+      // Find and verify the user link exists with correct href (new format with language/country)
       const links = screen.getAllByRole('link');
-      const userLink = links.find((link) => link.getAttribute('href') === '/user');
+      const userLink = links.find((link) => link.getAttribute('href') === '/cs/czechia/user');
       expect(userLink).toBeInTheDocument();
-      expect(userLink).toHaveAttribute('href', '/user');
+      expect(userLink).toHaveAttribute('href', '/cs/czechia/user');
     });
 
     it('should render user page when starting at /user route', async () => {

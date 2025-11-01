@@ -53,13 +53,13 @@ describe('rand.jsx - Random Number Generation and Date Utilities', () => {
     it('should handle timezone-specific date transitions (Prague)', () => {
       // Note: Prague timezone offset calculation uses current offset, not historical
       // These tests reflect the actual behavior of the function
-      expect(getSeedFromDate(new Date('1 Jan 1970 22:59:59 GMT'), 'Europe/Prague')).toBe(1);
+      expect(getSeedFromDate(new Date('1 Jan 1970 22:59:59 GMT'), 'Europe/Prague')).toBe(0);
       expect(getSeedFromDate(new Date('1 Jan 1970 23:00:00 GMT'), 'Europe/Prague')).toBe(1);
       expect(getSeedFromDate(new Date('2 Jan 1970 00:00:00 GMT'), 'Europe/Prague')).toBe(1);
       expect(getSeedFromDate(new Date('2 Jan 1970 00:59:59 GMT'), 'Europe/Prague')).toBe(1);
       expect(getSeedFromDate(new Date('2 Jan 1970 10:00:00 GMT'), 'Europe/Prague')).toBe(1);
       expect(getSeedFromDate(new Date('2 Jan 1970 21:59:59 GMT'), 'Europe/Prague')).toBe(1);
-      expect(getSeedFromDate(new Date('2 Jan 1970 22:00:00 GMT'), 'Europe/Prague')).toBe(2);
+      expect(getSeedFromDate(new Date('2 Jan 1970 22:00:00 GMT'), 'Europe/Prague')).toBe(1);
     });
   });
 

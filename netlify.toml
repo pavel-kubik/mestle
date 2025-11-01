@@ -11,10 +11,9 @@
   directory = "netlify/functions"
 
 # SPA redirect rule - redirect all requests to index.html for client-side routing
-# Excludes files with extensions to prevent serving HTML for static assets (JS, CSS, images, etc.)
+# force = false ensures static assets are served directly, not redirected to index.html
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
   force = false
-  conditions = {path = "!/*.{js,css,svg,png,jpg,jpeg,gif,ico,woff,woff2,ttf,eot,json,xml,txt}"}

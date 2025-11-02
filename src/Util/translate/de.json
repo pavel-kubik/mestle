@@ -46,6 +46,7 @@
   "components.user.betaTesting.title": "Nehmen Sie am Beta-Test teil, um neue Funktionen von Městle als Erster zu erhalten!",
   "components.user.country.title": "Land auswählen:",
   "components.user.guessCities.title": "Erratene Städte: {{score}}",
+  "components.user.totalGuessCities.title": "Erratene Städte: {{total}} (🇨🇿 {{cz}}, 🇩🇪 {{de}})",
   "components.countrySwitch.button.czech": "Tschechische Städte",
   "components.countrySwitch.button.german": "Deutsche Städte",
   "components.user.login.password": "Passwort",

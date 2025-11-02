@@ -11,6 +11,31 @@ export const isEog = (todayHistory) => {
   return false;
 };
 
+export const getTotalScore = () => {
+  const historyKeys = ['mestle_history', 'mestle_history_cz', 'mestle_history_de'];
+
+  return historyKeys.reduce((total, key) => {
+    const historyData = window.localStorage.getItem(key);
+    const history = historyData ? JSON.parse(historyData) : {};
+    return total + getScore(history);
+  }, 0);
+};
+
+export const getScoresByCountry = () => {
+  const getCountryScore = (key) => {
+    const historyData = window.localStorage.getItem(key);
+    const history = historyData ? JSON.parse(historyData) : {};
+    return getScore(history);
+  };
+
+  return {
+    cz: getCountryScore('mestle_history_cz'),
+    de: getCountryScore('mestle_history_de'),
+    legacy: getCountryScore('mestle_history'),
+    total: getTotalScore()
+  };
+};
+
 /**
  * Merge two guess Object { guesses: string[], eog: boolean} and return merged object.
  * Duplicity in guesses will be removed.

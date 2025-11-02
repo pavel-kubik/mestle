@@ -1,5 +1,4 @@
-import React from 'react';
-import { getScore } from '../History/history';
+import { getScoresByCountry } from '../History/history';
 import BetaSwitch from './BetaSwitch';
 import CountrySwitch from './CountrySwitch';
 
@@ -12,9 +11,7 @@ import 'jwt-auth-mongodb/src/fe/component/AuthForm.css';
 
 /* eslint-disable */
 const User = ({ history, loggedUser, setLoggedUser, initBECall, syncAttempts }) => {
-  const getUserScore = () => {
-    return getScore(history);
-  };
+  const scores = getScoresByCountry();
 
   return (
     <div className='user-info'>
@@ -30,7 +27,13 @@ const User = ({ history, loggedUser, setLoggedUser, initBECall, syncAttempts }) 
         />
       )}
       <div className='statistics'>
-        <div>{t('components.user.guessCities.title', { score: getUserScore() })}</div>
+        <div>
+          {t('components.user.totalGuessCities.title', {
+            total: scores.total,
+            cz: scores.cz,
+            de: scores.de
+          })}
+        </div>
       </div>
       {loggedUser && ( //
         <>

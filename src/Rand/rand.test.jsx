@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { exportedForTesting, getSeedFromDate, calculateTimeLeft, getRandCity } from './rand';
 
-const { dateOfSwitchToRandomPreferSmallUnique, random, randomSimple, randomPreferSmall, randomPreferSmallUnique, MEMORY } =
+const { dateOfSwitchToRandomPreferSmallUnique, random, randomSimple, randomPreferSmallSquaring, randomPreferSmallUnique, MEMORY } =
   exportedForTesting;
 
 describe('rand.jsx - Random Number Generation and Date Utilities', () => {
@@ -36,7 +36,7 @@ describe('rand.jsx - Random Number Generation and Date Utilities', () => {
     it('should prefer smaller numbers in distribution', () => {
       const size = 1000;
       const seeds = [...Array(size).keys()];
-      const rands = seeds.map((s) => randomPreferSmall(s, size));
+      const rands = seeds.map((s) => randomPreferSmallSextic(s, size));
       const smaller = rands.filter((x) => x < size / 2);
       const bigger = rands.filter((x) => x >= size / 2);
       expect(smaller.length > 2 * bigger.length).toBe(true);

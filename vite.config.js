@@ -29,19 +29,10 @@ function setEnv(mode) {
   Object.assign(process.env, loadEnv(mode, '.', ['REACT_APP_', 'NODE_ENV', 'PUBLIC_URL']));
   process.env.NODE_ENV ||= mode;
 
-  // Only set PUBLIC_URL from homepage for main production builds
+  // Don't set PUBLIC_URL from homepage to avoid CORS issues
+  // All builds now use root-relative paths (/) instead of full URLs
   if (!process.env.PUBLIC_URL) {
-    const { homepage } = JSON.parse(readFileSync('package.json', 'utf-8'));
-
-    // For Netlify preview/branch deployments, don't set PUBLIC_URL from homepage
-    if (process.env.NETLIFY && process.env.NETLIFY_BRANCH !== 'main') {
-      process.env.PUBLIC_URL = '';
-    } else {
-      // For main production builds, use homepage
-      process.env.PUBLIC_URL = homepage
-        ? `${homepage.startsWith('http') || homepage.startsWith('/') ? homepage : `/${homepage}`}`.replace(/\/$/, '')
-        : '';
-    }
+    process.env.PUBLIC_URL = '';
   }
 }
 // Expose `process.env` environment variables to your client code
@@ -147,22 +138,9 @@ function basePlugin() {
         return { base: PUBLIC_URL };
       }
 
-      // For Netlify deployments (preview, branch, etc.), use relative paths
-      if (process.env.NETLIFY && process.env.NETLIFY_BRANCH !== 'main') {
-        return { base: './' };
-      }
-
-      // For local development, use relative paths
-      if (mode === 'development') {
-        return { base: './' };
-      }
-
-      // For production builds that aren't main branch Netlify, use relative paths
-      if (mode === 'production' && process.env.NETLIFY_BRANCH && process.env.NETLIFY_BRANCH !== 'main') {
-        return { base: './' };
-      }
-
-      // For main production build, use empty base to leverage homepage from setEnv
+      // For all builds (development, production, Netlify), use root-relative paths
+      // This prevents CORS issues and works correctly with Netlify redirects
+      // Assets will be loaded as /assets/file.js instead of https://mestle.cz/assets/file.js
       return { base: '/' };
     }
   };

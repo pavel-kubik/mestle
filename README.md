@@ -8,13 +8,39 @@ If you need just start UI without other dependencies, you can start local develo
 
 `npm start`
 
-You can also start netlify locally with command
+### Running Netlify Locally
+
+You can start netlify in development mode with:
 
 `netlify dev`
 
-For this you will need local mongo db storage. So run following command to have mongo db from docker
+For this you will need local mongo db storage. Run following command to have mongo db from docker:
 
 `docker run -d -p 27017:27017 --name mongo mongo:latest`
+
+### Testing Production Build Locally
+
+To test the production build with Netlify redirect rules locally:
+
+1. Build the project:
+   ```bash
+   npm run build
+   ```
+
+2. Serve the production build with Netlify:
+   ```bash
+   npx netlify serve
+   ```
+
+   This will:
+   - Build the project (if not already built)
+   - Bundle Netlify functions
+   - Apply redirect rules from `netlify.toml`
+   - Start a local server at `http://localhost:8888`
+
+3. Test the deployment preview behavior without deploying to Netlify
+
+### Testing
 
 Run test coverage with command
 

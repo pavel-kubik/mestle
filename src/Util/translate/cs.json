@@ -38,13 +38,17 @@
   "components.guessBoard.guessResult.copy": "Zkopíruj výsledek",
   "components.guessBoard.guessResult.copyDone": "Výsledek zkopírován do schránky.",
   "components.guessBoard.guessResult.title": "Gratulace! Další město můžeš hádat za {{timeLeft}}.",
-  "components.guessBoard.todayCityBadgeTitle": "Dnešní hádané město má tento znak",
+  "components.guessBoard.todayCityBadgeTitle": "Dnešní hádané město v {{country}} má tento znak",
   "components.guessBoard.todayDate": "Městle den {{date}}\n",
   "components.guessBoard.noGuesses": "Vítej ve hře Městle. Otestuj svoje znalosti zeměpisu. Zadej město, které může mít hádaný znak. Pokud město neuhádneš na první pokus, zobrazí se nápověda.",
   "components.howToPlay.title": "Jak hrát Městle",
   "components.leaderBoard.title": "LeaderBoard",
   "components.user.betaTesting.title": "Přihlaš se k beta testování. Dostaneš nové funkce jako první!",
+  "components.user.country.title": "Vyber zemi:",
   "components.user.guessCities.title": "Uhádnutých měst: {{score}}",
+  "components.user.totalGuessCities.title": "Uhádnutých měst: {{total}} (🇨🇿 {{cz}}, 🇩🇪 {{de}})",
+  "components.countrySwitch.button.czech": "Česká města",
+  "components.countrySwitch.button.german": "Německá města",
   "components.user.login.password": "Heslo",
   "components.user.login.submit": "Přihlásit",
   "components.user.login.title": "Přihlášení",
@@ -60,5 +64,8 @@
   "global.login": "Přihlásit",
   "global.signOut": "Odhlásit",
   "languages.cs": "Česky",
-  "languages.en": "English"
+  "languages.en": "English",
+  "languages.de": "Deutsch",
+  "countries.cz": "Česku",
+  "countries.de": "Německu"
 }

@@ -1,7 +1,8 @@
 import { dateOfPublish } from '../Util/util';
 import { DateTime } from 'luxon';
 
-export const dateOfSwitchToRandomPreferSmallUnique = 19135;
+const dateOfSwitchToRandomPreferSmallUnique = 19135;
+const dateOfSwitchToCubic = 19769; // November 3, 2025
 const MEMORY = 21;
 
 const random = (seed, max) => {
@@ -18,10 +19,22 @@ const randomSimple = (seed, max) => {
   return Math.floor(value * max);
 };
 
-const randomPreferSmall = (seed, max) => {
+const randomPreferSmallSquaring = (seed, max) => {
   const x = Math.sin(seed) * 10000;
   const value = x - Math.floor(x);
   return Math.floor(value * value * max);
+};
+
+const randomPreferSmallCubic = (seed, max) => {
+  const x = Math.sin(seed) * 10000;
+  const value = x - Math.floor(x);
+  return Math.floor(value * value * value * max);
+};
+
+const randomPreferSmallSextic = (seed, max) => {
+  const x = Math.sin(seed) * 10000;
+  const value = x - Math.floor(x);
+  return Math.floor(value * value * value * value * value * value * max);
 };
 
 //TODO delete after 14-6-2022
@@ -49,10 +62,11 @@ const randomPreferSmallUnique = (seed, max) => {
   }
   let history = generateOldRandomNumbersFromPreviousGenerator(seed, max);
   history = new Set([...history, ...generateHistory(seed, max)]);
-  let number = randomPreferSmall(seed, max);
+  const randomFunc = seed < dateOfSwitchToCubic ? randomPreferSmallSquaring : randomPreferSmallCubic;
+  let number = randomFunc(seed, max);
   let collision = 0;
   while (history.has(number)) {
-    number = randomPreferSmall(-seed - collision++, max);
+    number = randomFunc(-seed - collision++, max);
   }
   cache[seed] = number;
   return number;
@@ -89,10 +103,13 @@ export const getRandCity = (cities, seed) => {
 export const exportedForTesting = {
   random,
   randomSimple,
-  randomPreferSmall,
+  randomPreferSmallSquaring,
+  randomPreferSmallCubic,
+  randomPreferSmallSextic,
   generateOldRandomNumbersFromPreviousGenerator,
   generateHistory,
   randomPreferSmallUnique,
   dateOfSwitchToRandomPreferSmallUnique,
+  dateOfSwitchToCubic,
   MEMORY
 };

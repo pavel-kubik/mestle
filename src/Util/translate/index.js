@@ -1,7 +1,8 @@
 import cs from './cs.json';
 import en from './en.json';
+import de from './de.json';
 
-export const LANGUAGES = { en: 'en', cs: 'cs' };
+export const LANGUAGES = { en: 'en', cs: 'cs', de: 'de' };
 const DEFAULT_LANGUAGE = LANGUAGES.cs;
 const LANGUAGE_STORAGE_KEY = 'lang';
 
@@ -29,6 +30,9 @@ const getMessages = () => {
 
   if (language === LANGUAGES.cs) {
     return cs;
+  }
+  if (language === LANGUAGES.de) {
+    return de;
   }
   // default language
   return en;

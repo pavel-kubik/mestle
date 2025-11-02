@@ -38,13 +38,17 @@
   "components.guessBoard.guessResult.copy": "Copy the results",
   "components.guessBoard.guessResult.copyDone": "Results copied to the clipboard.",
   "components.guessBoard.guessResult.title": "Congratulations! Another city will be available in {{timeLeft}}.",
-  "components.guessBoard.todayCityBadgeTitle": "Today guessed city has this badge",
+  "components.guessBoard.todayCityBadgeTitle": "Today's guessed city in {{country}} has this badge",
   "components.guessBoard.todayDate": "Městle day {{date}}\n",
   "components.guessBoard.noGuesses": "Welcome in Městle. Test your knowledge of geography. Enter a city that may have a guessed sign. If you don't guess the city on the first try, a hint will be displayed.",
   "components.howToPlay.title": "How to play Městle",
   "components.leaderBoard.title": "Leader Board",
   "components.user.betaTesting.title": "Join the beta testing to get new features of Městle first!",
+  "components.user.country.title": "Select country:",
   "components.user.guessCities.title": "Guessed cities: {{score}}",
+  "components.user.totalGuessCities.title": "Guessed cities: {{total}} (🇨🇿 {{cz}}, 🇩🇪 {{de}})",
+  "components.countrySwitch.button.czech": "Czech cities",
+  "components.countrySwitch.button.german": "German cities",
   "components.user.login.password": "Password",
   "components.user.login.submit": "Log in",
   "components.user.login.title": "Log in",
@@ -60,5 +64,8 @@
   "global.login": "Login",
   "global.signOut": "Logout",
   "languages.cs": "Česky",
-  "languages.en": "English"
+  "languages.en": "English",
+  "languages.de": "Deutsch",
+  "countries.cz": "Czech Republic",
+  "countries.de": "Germany"
 }

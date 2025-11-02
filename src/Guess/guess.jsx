@@ -1,7 +1,6 @@
 import './guess.css';
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   countDirection,
   distanceComparator,
@@ -18,6 +17,7 @@ import compassPin from '../img/compass_pin.svg';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
 import { getLanguage, LANGUAGES, t } from '../Util/translate';
+import { getCountry } from '../Util/countryUtil';
 
 const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
   const tooltipWidth = '17vw';
@@ -87,7 +87,8 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
   };
 
   const getSign = (guessedCity) => {
-    return guessedCity.hashFilename != undefined ? '/img/sign/' + guessedCity.hashFilename : guessedCity.signUrl;
+    const currentCountry = getCountry();
+    return guessedCity.hashFilename != undefined ? `/img/sign_${currentCountry}/` + guessedCity.hashFilename : guessedCity.signUrl;
   };
 
   return (
@@ -102,8 +103,8 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
             regionGuess === 'green'
               ? t('components.guess.regionDiff.same')
               : regionGuess === 'orange'
-              ? t('components.guess.regionDiff.neighbour')
-              : t('components.guess.regionDiff.other')
+                ? t('components.guess.regionDiff.neighbour')
+                : t('components.guess.regionDiff.other')
           }
           theme={regionGuess}
           zIndex={9}
@@ -158,31 +159,26 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
           maxWidth={tooltipWidth}
           className='guess-tippy'
         >
-          <div
-            className={`guess direction`}
-            style={{
-              backgroundImage: `url(${getLanguage() === LANGUAGES.cs ? compassCS : compassEN})`,
-              backgroundRepeat: 'no-repeat',
-              overflow: 'hidden'
-            }}
-          >
-            <div
+          <div className={`guess direction`} style={{ position: 'relative', overflow: 'hidden' }}>
+            {/* Compass base background */}
+            <img
+              src={getLanguage() === LANGUAGES.cs ? compassCS : compassEN}
+              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+              alt='compass base'
+            />
+
+            {/* Arrow or Pin overlay */}
+            <img
+              src={directionGuess === 'X' ? compassPin : compassArrow}
               className={`guess direction compass ${directionGuess} ${directionGuess !== 'X' ? 'filter-' + distanceGuess : ''}`}
-              style={{ backgroundImage: `url(${directionGuess === 'X' ? compassPin : compassArrow})`, backgroundRepeat: 'no-repeat' }}
-            ></div>
+              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+              alt='compass direction'
+            />
           </div>
         </Tippy>
       </div>
     </div>
   );
-};
-
-Guess.propTypes = {
-  idx: PropTypes.number.isRequired,
-  guessedCity: PropTypes.object.isRequired,
-  targetCity: PropTypes.object.isRequired,
-  isLast: PropTypes.bool.isRequired,
-  isEog: PropTypes.bool.isRequired
 };
 
 export default Guess;

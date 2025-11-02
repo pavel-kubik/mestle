@@ -1,0 +1,235 @@
+import { resolve } from 'node:path';
+import { readFileSync } from 'node:fs';
+import { defineConfig, loadEnv, createFilter, transformWithEsbuild } from 'vite';
+import netlify from '@netlify/vite-plugin';
+import react from '@vitejs/plugin-react';
+import Macros from 'unplugin-macros/vite';
+// https://vitejs.dev/config/
+export default defineConfig(({ mode }) => {
+  setEnv(mode);
+  return {
+    appType: 'spa', // Explicitly set SPA mode for proper history fallback
+    plugins: [
+      react(),
+      Macros(),
+      envPlugin(),
+      devServerPlugin(),
+      sourcemapPlugin(),
+      buildPathPlugin(),
+      basePlugin(),
+      importPrefixPlugin(),
+      htmlPlugin(mode),
+      svgrPlugin(),
+      // netlify(), // TODO
+      closePlugin()
+    ]
+  };
+});
+function setEnv(mode) {
+  Object.assign(process.env, loadEnv(mode, '.', ['REACT_APP_', 'NODE_ENV', 'PUBLIC_URL']));
+  process.env.NODE_ENV ||= mode;
+
+  // Don't set PUBLIC_URL from homepage to avoid CORS issues
+  // All builds now use root-relative paths (/) instead of full URLs
+  if (!process.env.PUBLIC_URL) {
+    process.env.PUBLIC_URL = '';
+  }
+}
+// Expose `process.env` environment variables to your client code
+// Migration guide: Follow the guide below to replace process.env with import.meta.env in your app, you may also need to rename your environment variable to a name that begins with VITE_ instead of REACT_APP_
+// https://vitejs.dev/guide/env-and-mode.html#env-variables
+function envPlugin() {
+  return {
+    name: 'env-plugin',
+    config(_, { mode }) {
+      const env = loadEnv(mode, '.', ['REACT_APP_', 'NODE_ENV', 'PUBLIC_URL']);
+      return {
+        define: Object.fromEntries(Object.entries(env).map(([key, value]) => [`process.env.${key}`, JSON.stringify(value)]))
+      };
+    }
+  };
+}
+// Setup HOST, SSL, PORT
+// Migration guide: Follow the guides below
+// https://vitejs.dev/config/server-options.html#server-host
+// https://vitejs.dev/config/server-options.html#server-https
+// https://vitejs.dev/config/server-options.html#server-port
+function devServerPlugin() {
+  return {
+    name: 'dev-server-plugin',
+    config(_, { mode }) {
+      const { HOST, PORT, HTTPS, SSL_CRT_FILE, SSL_KEY_FILE } = loadEnv(mode, '.', [
+        'HOST',
+        'PORT',
+        'HTTPS',
+        'SSL_CRT_FILE',
+        'SSL_KEY_FILE'
+      ]);
+      const https = HTTPS === 'true';
+      return {
+        server: {
+          host: HOST || '0.0.0.0',
+          port: parseInt(PORT || '3000', 10),
+          open: true,
+          ...(https &&
+            SSL_CRT_FILE &&
+            SSL_KEY_FILE && {
+              https: {
+                cert: readFileSync(resolve(SSL_CRT_FILE)),
+                key: readFileSync(resolve(SSL_KEY_FILE))
+              }
+            })
+        }
+      };
+    }
+  };
+}
+// Migration guide: Follow the guide below
+// https://vitejs.dev/config/build-options.html#build-sourcemap
+function sourcemapPlugin() {
+  return {
+    name: 'sourcemap-plugin',
+    config(_, { mode }) {
+      const { GENERATE_SOURCEMAP } = loadEnv(mode, '.', ['GENERATE_SOURCEMAP']);
+      return {
+        build: {
+          sourcemap: GENERATE_SOURCEMAP === 'true'
+        }
+      };
+    }
+  };
+}
+// Migration guide: Follow the guide below
+// https://vitejs.dev/config/build-options.html#build-outdir
+function buildPathPlugin() {
+  return {
+    name: 'build-path-plugin',
+    config(_, { mode }) {
+      const { BUILD_PATH } = loadEnv(mode, '.', ['BUILD_PATH']);
+      return {
+        build: {
+          outDir: BUILD_PATH || 'build',
+          rollupOptions: {
+            output: {
+              manualChunks: {
+                vendor: ['react', 'react-dom'],
+                router: ['react-router-dom'],
+                ui: ['@tippyjs/react', 'react-spinners'],
+                utils: ['geolib', 'luxon']
+              }
+            }
+          },
+          chunkSizeWarningLimit: 600
+        }
+      };
+    }
+  };
+}
+// Migration guide: Follow the guide below and remove homepage field in package.json
+// https://vitejs.dev/config/shared-options.html#base
+function basePlugin() {
+  return {
+    name: 'base-plugin',
+    config(_, { mode }) {
+      const { PUBLIC_URL } = loadEnv(mode, '.', ['PUBLIC_URL']);
+
+      // If PUBLIC_URL is explicitly set, use it
+      if (PUBLIC_URL) {
+        return { base: PUBLIC_URL };
+      }
+
+      // For all builds (development, production, Netlify), use root-relative paths
+      // This prevents CORS issues and works correctly with Netlify redirects
+      // Assets will be loaded as /assets/file.js instead of https://mestle.cz/assets/file.js
+      return { base: '/' };
+    }
+  };
+}
+// To resolve modules from node_modules, you can prefix paths with ~
+// https://create-react-app.dev/docs/adding-a-sass-stylesheet
+// Migration guide: Follow the guide below
+// https://vitejs.dev/config/shared-options.html#resolve-alias
+function importPrefixPlugin() {
+  return {
+    name: 'import-prefix-plugin',
+    config() {
+      return {
+        resolve: {
+          alias: [{ find: /^~([^/])/, replacement: '$1' }]
+        }
+      };
+    }
+  };
+}
+// In Create React App, SVGs can be imported directly as React components. This is achieved by svgr libraries.
+// https://create-react-app.dev/docs/adding-images-fonts-and-files/#adding-svgs
+function svgrPlugin() {
+  const filter = createFilter('**/*.svg');
+  const postfixRE = /[?#].*$/s;
+  return {
+    name: 'svgr-plugin',
+    async transform(code, id) {
+      if (filter(id)) {
+        const { transform } = await import('@svgr/core');
+        const { default: jsx } = await import('@svgr/plugin-jsx');
+        const filePath = id.replace(postfixRE, '');
+        const svgCode = readFileSync(filePath, 'utf8');
+        const componentCode = await transform(svgCode, undefined, {
+          filePath,
+          caller: {
+            previousExport: code,
+            defaultPlugins: [jsx]
+          }
+        });
+        const res = await transformWithEsbuild(componentCode, id, {
+          loader: 'jsx'
+        });
+        return {
+          code: res.code,
+          map: null
+        };
+      }
+    }
+  };
+}
+// Replace %ENV_VARIABLES% in index.html
+// https://vitejs.dev/guide/api-plugin.html#transformindexhtml
+// Migration guide: Follow the guide below, you may need to rename your environment variable to a name that begins with VITE_ instead of REACT_APP_
+// https://vitejs.dev/guide/env-and-mode.html#html-env-replacement
+function htmlPlugin(mode) {
+  const env = loadEnv(mode, '.', ['REACT_APP_', 'NODE_ENV', 'PUBLIC_URL']);
+  return {
+    name: 'html-plugin',
+    transformIndexHtml: {
+      order: 'pre',
+      handler(html) {
+        return html.replace(/%(.*?)%/g, (match, p1) => {
+          // For development, use empty string for PUBLIC_URL to avoid CORS issues
+          if (p1 === 'PUBLIC_URL' && mode === 'development') {
+            return '';
+          }
+          return env[p1] ?? match;
+        });
+      }
+    }
+  };
+}
+// Force build process to exit after completion
+// This is needed because the netlify plugin may keep background processes alive
+// that prevent the build from exiting cleanly
+function closePlugin() {
+  return {
+    name: 'close-plugin',
+    apply: 'build', // Only apply during build command, not dev server
+    buildEnd(error) {
+      if (error) {
+        console.error('Build error:', error);
+        process.exit(1);
+      }
+    },
+    closeBundle() {
+      console.log('Build completed successfully, exiting...');
+      process.exit(0);
+    }
+  };
+}

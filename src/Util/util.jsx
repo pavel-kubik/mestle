@@ -19,7 +19,7 @@ export const countDirection = (city1, city2) => {
       return 'S';
     }
   } else if (latLongRatio < 1 / ratio) {
-    // simlpe direction - EW
+    // simple direction - EW
     if (longitudeDiff > 0) {
       return 'E';
     } else {
@@ -43,8 +43,9 @@ export const countDirection = (city1, city2) => {
   }
 };
 
-export const neigbourRegion = (region1, region2) => {
-  const neigbours = {
+export const neighboringRegion = (region1, region2) => {
+  const neighbors = {
+    // Czech regions
     'Hl. m. Praha': ['Středočeský'],
     Středočeský: ['Hl. m. Praha', 'Ústecký', 'Liberecký', 'Královéhradecký', 'Pardubický', 'Vysočina', 'Jihočeský', 'Plzeňský'],
     Jihočeský: ['Plzeňský', 'Středočeský', 'Vysočina', 'Jihomoravský'],
@@ -58,19 +59,46 @@ export const neigbourRegion = (region1, region2) => {
     Jihomoravský: ['Jihočeský', 'Vysočina', 'Pardubický', 'Olomoucký', 'Zlínský'],
     Olomoucký: ['Pardubický', 'Jihomoravský', 'Moravskoslezský', 'Zlínský'],
     Moravskoslezský: ['Olomoucký', 'Zlínský'],
-    Zlínský: ['Jihomoravský', 'Olomoucký', 'Moravskoslezský']
+    Zlínský: ['Jihomoravský', 'Olomoucký', 'Moravskoslezský'],
+    // German states
+    'Baden-Württemberg': ['Bayern', 'Hessen', 'Rheinland-Pfalz'],
+    Bayern: ['Baden-Württemberg', 'Hessen', 'Thüringen', 'Sachsen'],
+    Berlin: ['Brandenburg'],
+    Brandenburg: ['Berlin', 'Mecklenburg-Vorpommern', 'Sachsen', 'Sachsen-Anhalt', 'Niedersachsen'],
+    Bremen: ['Niedersachsen'],
+    Hamburg: ['Schleswig-Holstein', 'Niedersachsen'],
+    Hessen: ['Nordrhein-Westfalen', 'Rheinland-Pfalz', 'Baden-Württemberg', 'Bayern', 'Thüringen', 'Niedersachsen'],
+    'Mecklenburg-Vorpommern': ['Schleswig-Holstein', 'Niedersachsen', 'Brandenburg'],
+    Niedersachsen: [
+      'Schleswig-Holstein',
+      'Hamburg',
+      'Bremen',
+      'Mecklenburg-Vorpommern',
+      'Brandenburg',
+      'Sachsen-Anhalt',
+      'Thüringen',
+      'Hessen',
+      'Nordrhein-Westfalen'
+    ],
+    'Nordrhein-Westfalen': ['Niedersachsen', 'Hessen', 'Rheinland-Pfalz'],
+    'Rheinland-Pfalz': ['Nordrhein-Westfalen', 'Hessen', 'Baden-Württemberg', 'Saarland'],
+    Saarland: ['Rheinland-Pfalz'],
+    Sachsen: ['Brandenburg', 'Sachsen-Anhalt', 'Thüringen', 'Bayern'],
+    'Sachsen-Anhalt': ['Niedersachsen', 'Brandenburg', 'Sachsen', 'Thüringen'],
+    'Schleswig-Holstein': ['Hamburg', 'Niedersachsen', 'Mecklenburg-Vorpommern'],
+    Thüringen: ['Niedersachsen', 'Sachsen-Anhalt', 'Sachsen', 'Bayern', 'Hessen']
   };
-  if (!neigbours[region1]) {
+  if (!neighbors[region1]) {
     console.warn('Region ' + region1 + ' not found.');
   }
-  return neigbours[region1] && neigbours[region1].includes(region2);
+  return neighbors[region1] && neighbors[region1].includes(region2);
 };
 
 export const regionComparator = (city1, city2) => {
   // TODO return orange for neigbour regions
   if (city1.region === city2.region) {
     return 'green';
-  } else if (neigbourRegion(city1.region, city2.region)) {
+  } else if (neighboringRegion(city1.region, city2.region)) {
     return 'orange';
   } else {
     return 'red';

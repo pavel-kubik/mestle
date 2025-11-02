@@ -1,5 +1,7 @@
 .app {
-  height: calc(var(--vh, 1vh) * 100);
+  /* Modern viewport height units with fallback for older browsers */
+  height: 100vh; /* Fallback for older browsers */
+  height: 100dvh; /* Dynamic viewport height for modern browsers */
 
   max-width: 800px;
   width: 95%;

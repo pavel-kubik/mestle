@@ -1,7 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { getScore } from '../History/history';
+import { getScoresByCountry } from '../History/history';
 import BetaSwitch from './BetaSwitch';
+import CountrySwitch from './CountrySwitch';
 
 import './User.css';
 import { t } from '../Util/translate';
@@ -12,9 +11,7 @@ import 'jwt-auth-mongodb/src/fe/component/AuthForm.css';
 
 /* eslint-disable */
 const User = ({ history, loggedUser, setLoggedUser, initBECall, syncAttempts }) => {
-  const getUserScore = () => {
-    return getScore(history);
-  };
+  const scores = getScoresByCountry();
 
   return (
     <div className='user-info'>
@@ -30,7 +27,13 @@ const User = ({ history, loggedUser, setLoggedUser, initBECall, syncAttempts }) 
         />
       )}
       <div className='statistics'>
-        <div>{t('components.user.guessCities.title', { score: getUserScore() })}</div>
+        <div>
+          {t('components.user.totalGuessCities.title', {
+            total: scores.total,
+            cz: scores.cz,
+            de: scores.de
+          })}
+        </div>
       </div>
       {loggedUser && ( //
         <>
@@ -48,20 +51,16 @@ const User = ({ history, loggedUser, setLoggedUser, initBECall, syncAttempts }) 
         </>
       )}
       <div>
+        {t('components.user.country.title')}
+        <CountrySwitch />
+      </div>
+      <div>
         {t('components.user.betaTesting.title')}
         <BetaSwitch />
       </div>
       <div style={{ color: 'red' }}>{t('components.user.login.futureFeature')}</div>
     </div>
   );
-};
-
-User.propTypes = {
-  history: PropTypes.object.isRequired,
-  loggedUser: PropTypes.object,
-  setLoggedUser: PropTypes.func.isRequired,
-  initBECall: PropTypes.func.isRequired,
-  syncAttempts: PropTypes.func.isRequired
 };
 
 export default User;

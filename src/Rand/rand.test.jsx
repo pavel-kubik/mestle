@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { exportedForTesting, getSeedFromDate, calculateTimeLeft, getRandCity } from './rand';
 
-const { dateOfSwitchToRandomPreferSmallUnique, random, randomSimple, randomPreferSmallSquaring, randomPreferSmallUnique, MEMORY } =
+const { dateOfSwitchToRandomPreferSmallUnique, random, randomSimple, randomPreferSmallSextic, randomPreferSmallUnique, MEMORY } =
   exportedForTesting;
 
 describe('rand.jsx - Random Number Generation and Date Utilities', () => {

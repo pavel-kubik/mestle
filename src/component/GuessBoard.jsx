@@ -1,7 +1,8 @@
 import React, { useRef } from 'react';
 
 import './GuessBoard.css';
-import background from '../img/background.svg';
+import backgroundCz from '../img/map-cz.svg';
+import backgroundDe from '../img/map-de.svg';
 
 import { getCitiesArray } from '../Util/citiesUtil';
 import Guess from '../Guess/guess';
@@ -18,6 +19,7 @@ function GuessBoard({ todaySeed, todayHistory, addAttemptHandler, zone }) {
   const bottom = useRef(null);
   const currentCountry = getCountry();
   const cities = getCitiesArray(currentCountry);
+  const background = currentCountry === 'cz' ? backgroundCz : backgroundDe;
 
   const { cityPart, setCityPart, guessEnabled, timeLeft, getAttempts } = useGameState(todayHistory, todaySeed, zone);
   const { validateSeed } = useSeedValidation(todaySeed, zone);

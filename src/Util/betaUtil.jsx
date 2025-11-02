@@ -4,9 +4,9 @@ export const isBeta = () => {
 
 export const switchToBeta = () => {
   if (isBeta()) {
-    document.cookie = 'nf_ab=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    document.cookie = 'nf_ab=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
   } else {
-    document.cookie = `nf_ab=develop;max-age=31536000`;
+    document.cookie = `nf_ab=develop;max-age=31536000;path=/`;
   }
   window.location.reload(true);
 };
@@ -21,7 +21,7 @@ export const initBetaFromUrl = () => {
 
   if (nfAbParam === 'develop' && !isBeta()) {
     // Set the beta cookie
-    document.cookie = `nf_ab=develop;max-age=31536000`;
+    document.cookie = `nf_ab=develop;max-age=31536000;path=/`;
 
     // Remove the URL parameter and reload
     urlParams.delete('nf_ab');
@@ -32,7 +32,7 @@ export const initBetaFromUrl = () => {
     window.location.reload(true);
   } else if (nfAbParam !== null && nfAbParam !== 'develop' && isBeta()) {
     // Remove beta cookie if different parameter is set
-    document.cookie = 'nf_ab=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    document.cookie = 'nf_ab=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
 
     // Remove the URL parameter and reload
     urlParams.delete('nf_ab');

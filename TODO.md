@@ -1,7 +1,11 @@
 TODO
 
+- [ ] Improve rand function
+- [ ] Add link to the map next to last city
 - [ ] Separate beta indexed db storage from prod run (same like different country)
+- [ ] Show cities history
 - [ ] Update readme and describe how to run tests.
+  - [ ] make command for finite and infinite testing run
 - [ ] Add login
 - [ ] Make teacher mode
 

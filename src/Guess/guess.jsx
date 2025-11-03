@@ -91,10 +91,42 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
     return guessedCity.hashFilename != undefined ? `/img/sign_${currentCountry}/` + guessedCity.hashFilename : guessedCity.signUrl;
   };
 
+  const isMobile = () => {
+    return false;
+    //TODO tune return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  };
+
+  const getMapUrl = (city) => {
+    if (isMobile()) {
+      return `geo:${city.latitude},${city.longitude}`;
+    } else {
+      return `https://mapy.com/fnc/v1/showmap?center=${city.longitude},${city.latitude}&zoom=11&marker=true`;
+    }
+  };
+
   return (
     <div className='guessLine'>
       <div className='guess-city'>
         {idx + 1}. {guessedCity.name}
+        {isLast && (
+          <a
+            href={getMapUrl(guessedCity)}
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{
+              marginLeft: '8px',
+              textDecoration: 'none',
+              cursor: 'pointer',
+              userSelect: 'auto',
+              position: 'relative',
+              zIndex: 100,
+              display: 'inline-block',
+              fontSize: '1.2em'
+            }}
+          >
+            🗺️
+          </a>
+        )}
       </div>
       <div className={`differences ${isLast ? 'last' : ''}`}>
         <Tippy

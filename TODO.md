@@ -1,7 +1,11 @@
 TODO
 
+- [ ] Improve rand function
+- [ ] Map help - tune zoom based on distance
 - [ ] Separate beta indexed db storage from prod run (same like different country)
+- [ ] Show cities history
 - [ ] Update readme and describe how to run tests.
+  - [ ] make command for finite and infinite testing run
 - [ ] Add login
 - [ ] Make teacher mode
 
@@ -12,3 +16,4 @@ DONE
 - [x] Add test to netlify pipeline. Pre-build step.
 - [x] Add Germany cities and German language
 - [x] Add language and country to again.
+- [x] Add link to the map next to last city

@@ -1,6 +1,8 @@
 import { getScoresByCountry } from '../History/history';
 import BetaSwitch from './BetaSwitch';
 import CountrySwitch from './CountrySwitch';
+import { Link } from 'react-router-dom';
+import { getLanguage } from '../Util/translate';
 
 import './User.css';
 import { t } from '../Util/translate';
@@ -12,6 +14,7 @@ import 'jwt-auth-mongodb/src/fe/component/AuthForm.css';
 /* eslint-disable */
 const User = ({ history, loggedUser, setLoggedUser, initBECall, syncAttempts }) => {
   const scores = getScoresByCountry();
+  const lang = getLanguage();
 
   return (
     <div className='user-info'>
@@ -53,6 +56,17 @@ const User = ({ history, loggedUser, setLoggedUser, initBECall, syncAttempts }) 
       <div>
         {t('components.user.country.title')}
         <CountrySwitch />
+      </div>
+      <div className='country-links'>
+        <h3>{t('components.user.exploreCities.title')}</h3>
+        <div className='country-links-list'>
+          <Link to={`/${lang}/czechia/cities`} className='country-link'>
+            🇨🇿 {t('country.cz.name')}
+          </Link>
+          <Link to={`/${lang}/germany/cities`} className='country-link'>
+            🇩🇪 {t('country.de.name')}
+          </Link>
+        </div>
       </div>
       <div>
         {t('components.user.betaTesting.title')}

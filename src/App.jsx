@@ -339,7 +339,7 @@ const AppContent = ({
           }
         />
         <Route
-          path='/:lang/:country/:city'
+          path='/:lang/:country/city/:city'
           element={
             <RouteWrapper>
               <CityPage />

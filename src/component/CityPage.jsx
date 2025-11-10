@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getCitiesArray } from '../Util/citiesUtil';
 import { getCountryFromUrl } from '../Util/urlUtil';
@@ -11,6 +11,18 @@ import './CityPage.css';
  */
 const CityPage = () => {
   const { lang, country, city: citySlug } = useParams();
+
+  // Validate slug format (only lowercase letters, numbers, hyphens, and underscores)
+  if (!citySlug || !/^[a-z0-9_-]+$/.test(citySlug)) {
+    return (
+      <div className='city-page-error'>
+        <h2>{t('cityPage.invalidUrl')}</h2>
+        <Link to={`/${lang}/${country}/cities`} className='back-link'>
+          {t('cityPage.backToCountry')}
+        </Link>
+      </div>
+    );
+  }
 
   // Get the internal country code from the URL
   const countryCode = getCountryFromUrl(country);
@@ -29,7 +41,7 @@ const CityPage = () => {
     return (
       <div className='city-page-error'>
         <h2>{t('cityPage.notFound')}</h2>
-        <Link to={`/${lang}/${country}`} className='back-link'>
+        <Link to={`/${lang}/${country}/cities`} className='back-link'>
           {t('cityPage.backToCountry')}
         </Link>
       </div>
@@ -43,9 +55,29 @@ const CityPage = () => {
     return <div className='city-page-error'>City data not found</div>;
   }
 
+  // SEO: Set page title and meta description
+  useEffect(() => {
+    const countryName = t(`country.${countryCode}.name`);
+    document.title = `${cityData.name}, ${countryName} | Městle`;
+
+    // Set meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute(
+        'content',
+        t('cityPage.seoDescription', {
+          city: cityData.name,
+          population: cityData.population.toLocaleString(),
+          region: cityData.region,
+          country: countryName
+        })
+      );
+    }
+  }, [cityData, countryCode]);
+
   return (
     <div className='city-page'>
-      <Link to={`/${lang}/${country}`} className='back-link'>
+      <Link to={`/${lang}/${country}/cities`} className='back-link'>
         ← {t('cityPage.backToCountry')}
       </Link>
 

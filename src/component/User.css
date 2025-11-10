@@ -78,14 +78,16 @@ fieldset {
 .country-link {
   display: inline-block;
   padding: 10px 20px;
-  background: #4caf50;
+  background: #00a;
   color: white;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 20px;
+  border: 1px solid blue;
   font-size: 0.95em;
   transition: background-color 0.2s ease;
+  cursor: pointer;
 }
 
 .country-link:hover {
-  background: #388e3c;
+  background: blue;
 }

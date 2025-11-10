@@ -17,14 +17,14 @@
 .back-link {
   display: inline-block;
   margin-bottom: 20px;
-  color: #4caf50;
+  color: #00a;
   text-decoration: none;
   font-size: 1rem;
   transition: color 0.3s ease;
 }
 
 .back-link:hover {
-  color: #388e3c;
+  color: blue;
   text-decoration: underline;
 }
 
@@ -87,7 +87,7 @@
 
 .wikipedia-link {
   display: inline-block;
-  background-color: #4caf50;
+  background-color: #00a;
   color: white;
   padding: 12px 30px;
   border-radius: 6px;
@@ -95,10 +95,11 @@
   font-size: 1.1rem;
   font-weight: 600;
   transition: background-color 0.3s ease;
+  border: 1px solid blue;
 }
 
 .wikipedia-link:hover {
-  background-color: #388e3c;
+  background-color: blue;
 }
 
 /* Responsive design */

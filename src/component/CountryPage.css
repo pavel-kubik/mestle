@@ -37,7 +37,7 @@
 }
 
 .cities-table thead {
-  background: #4caf50;
+  background: #00a;
   color: white;
 }
 
@@ -93,16 +93,17 @@
 .city-detail-link {
   display: inline-block;
   padding: 6px 16px;
-  background: #4caf50;
+  background: #00a;
   color: white;
   text-decoration: none;
   border-radius: 4px;
+  border: 1px solid blue;
   font-size: 0.9em;
   transition: background-color 0.2s ease;
 }
 
 .city-detail-link:hover {
-  background: #388e3c;
+  background: blue;
 }
 
 /* Mobile responsiveness */

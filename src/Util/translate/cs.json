@@ -67,5 +67,18 @@
   "languages.en": "English",
   "languages.de": "Deutsch",
   "countries.cz": "Česku",
-  "countries.de": "Německu"
+  "countries.de": "Německu",
+  "country.cz.name": "Česká republika",
+  "country.de.name": "Německo",
+  "countryPage.description": "Prozkoumejte všechna města v této zemi. Kliknutím na město zobrazíte podrobné informace.",
+  "countryPage.population": "Počet obyvatel",
+  "countryPage.region": "Kraj",
+  "cityPage.notFound": "Město nenalezeno",
+  "cityPage.backToCountry": "Zpět na stránku země",
+  "cityPage.population": "Počet obyvatel",
+  "cityPage.area": "Rozloha",
+  "cityPage.altitude": "Nadmořská výška",
+  "cityPage.region": "Kraj",
+  "cityPage.coordinates": "Souřadnice",
+  "cityPage.readMore": "Přečíst více na Wikipedii"
 }

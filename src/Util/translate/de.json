@@ -67,5 +67,18 @@
   "languages.en": "English",
   "languages.de": "Deutsch",
   "countries.cz": "Tschechien",
-  "countries.de": "Deutschland"
+  "countries.de": "Deutschland",
+  "country.cz.name": "Tschechien",
+  "country.de.name": "Deutschland",
+  "countryPage.description": "Erkunden Sie alle Städte in diesem Land. Klicken Sie auf eine Stadt, um detaillierte Informationen zu sehen.",
+  "countryPage.population": "Bevölkerung",
+  "countryPage.region": "Region",
+  "cityPage.notFound": "Stadt nicht gefunden",
+  "cityPage.backToCountry": "Zurück zur Länderseite",
+  "cityPage.population": "Bevölkerung",
+  "cityPage.area": "Fläche",
+  "cityPage.altitude": "Höhe",
+  "cityPage.region": "Region",
+  "cityPage.coordinates": "Koordinaten",
+  "cityPage.readMore": "Mehr auf Wikipedia lesen"
 }

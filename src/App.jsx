@@ -10,6 +10,8 @@ import GuessBoard from './component/GuessBoard';
 import User from './component/User';
 import LeaderBoard from './component/LeaderBoard';
 import HowToPlay from './component/HowToPlay';
+import CountryPage from './component/CountryPage';
+import CityPage from './component/CityPage';
 import userNotLogged from './img/user_not_logged.svg';
 import LanguageSwitch from './component/LanguageSwitch';
 import { t, getLanguage, setLanguage } from './Util/translate';
@@ -325,6 +327,22 @@ const AppContent = ({
           element={
             <RouteWrapper>
               <HowToPlay />
+            </RouteWrapper>
+          }
+        />
+        <Route
+          path='/:lang/:country/cities'
+          element={
+            <RouteWrapper>
+              <CountryPage />
+            </RouteWrapper>
+          }
+        />
+        <Route
+          path='/:lang/:country/:city'
+          element={
+            <RouteWrapper>
+              <CityPage />
             </RouteWrapper>
           }
         />

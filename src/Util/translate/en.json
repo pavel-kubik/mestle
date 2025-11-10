@@ -67,5 +67,18 @@
   "languages.en": "English",
   "languages.de": "Deutsch",
   "countries.cz": "Czech Republic",
-  "countries.de": "Germany"
+  "countries.de": "Germany",
+  "country.cz.name": "Czech Republic",
+  "country.de.name": "Germany",
+  "countryPage.description": "Explore all cities in this country. Click on any city to see detailed information.",
+  "countryPage.population": "Population",
+  "countryPage.region": "Region",
+  "cityPage.notFound": "City not found",
+  "cityPage.backToCountry": "Back to country page",
+  "cityPage.population": "Population",
+  "cityPage.area": "Area",
+  "cityPage.altitude": "Altitude",
+  "cityPage.region": "Region",
+  "cityPage.coordinates": "Coordinates",
+  "cityPage.readMore": "Read more on Wikipedia"
 }

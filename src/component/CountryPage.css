@@ -1,6 +1,7 @@
 .country-page {
   padding: 20px;
-  max-width: 1200px;
+  max-width: 800px;
+  width: 95%;
   margin: 0 auto;
 }
 

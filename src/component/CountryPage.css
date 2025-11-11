@@ -112,16 +112,6 @@
   width: 150px;
 }
 
-.city-link {
-  text-align: center;
-  width: 50px;
-}
-
-.city-detail-icon {
-  font-size: 1.5em;
-  user-select: none;
-}
-
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .country-page {
@@ -140,13 +130,5 @@
 
   .city-population {
     width: 100px;
-  }
-
-  .city-link {
-    width: 40px;
-  }
-
-  .city-detail-icon {
-    font-size: 1.3em;
   }
 }

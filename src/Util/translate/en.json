@@ -72,7 +72,7 @@
   "country.cz.name": "Czech Republic",
   "country.de.name": "Germany",
   "countryPage.tableDescription": "Browse all cities in this country. Click on any row to learn more about each city.",
-  "countryPage.backToHome": "Back to home",
+  "countryPage.back": "Back",
   "countryPage.seoTitle": "All Cities",
   "countryPage.seoDescription": "Explore all cities in {{country}}. View detailed information about population, area, and location for each city.",
   "countryPage.table.order": "Order",

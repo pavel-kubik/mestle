@@ -38,7 +38,7 @@ vi.mock('../Util/translate', () => ({
       'country.cz.name': 'Czech Republic',
       'country.de.name': 'Germany',
       'countryPage.tableDescription': 'Browse all cities in this country. Click on any row to learn more about each city.',
-      'countryPage.backToHome': 'Back to home',
+      'countryPage.back': 'Back',
       'countryPage.table.order': 'Order',
       'countryPage.table.name': 'City Name',
       'countryPage.table.population': 'Population',
@@ -118,18 +118,6 @@ describe('CountryPage', () => {
     expect(cityRows[2]).toHaveTextContent('Ostrava');
   });
 
-  it('should render eye icon for each city', () => {
-    render(
-      <MemoryRouter initialEntries={['/cs/czechia/cities']}>
-        <Routes>
-          <Route path='/:lang/:country/cities' element={<CountryPage />} />
-        </Routes>
-      </MemoryRouter>
-    );
-
-    const eyeIcons = screen.getAllByText('👁');
-    expect(eyeIcons).toHaveLength(3);
-  });
 
   it('should have clickable rows with proper accessibility attributes', () => {
     render(
@@ -186,7 +174,7 @@ describe('CountryPage', () => {
       </MemoryRouter>
     );
 
-    const backButton = screen.getByText(/Back to home/);
+    const backButton = screen.getByText(/Back/);
     expect(backButton).toBeInTheDocument();
     expect(backButton.tagName).toBe('BUTTON');
   });

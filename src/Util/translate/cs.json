@@ -72,7 +72,7 @@
   "country.cz.name": "Česká republika",
   "country.de.name": "Německo",
   "countryPage.tableDescription": "Procházejte všechna města v této zemi. Klikněte na jakýkoliv řádek pro více informací o každém městě.",
-  "countryPage.backToHome": "Zpět na domovskou stránku",
+  "countryPage.back": "Zpět",
   "countryPage.seoTitle": "Všechna města",
   "countryPage.seoDescription": "Prozkoumejte všechna města v {{country}}. Zobrazit podrobné informace o počtu obyvatel, rozloze a poloze každého města.",
   "countryPage.table.order": "Pořadí",

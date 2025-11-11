@@ -43,8 +43,8 @@ const CountryPage = () => {
   return (
     <div className='country-page'>
       <div className='country-page-back'>
-        <button onClick={() => navigate(`/${lang}`)} className='back-button'>
-          ← {t('countryPage.backToHome')}
+        <button onClick={() => navigate(-1)} className='back-button'>
+          ← {t('countryPage.back')}
         </button>
       </div>
 
@@ -60,7 +60,6 @@ const CountryPage = () => {
             <tr>
               <th>{t('countryPage.table.name')}</th>
               <th>{t('countryPage.table.population')}</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -88,11 +87,6 @@ const CountryPage = () => {
                 >
                   <td className='city-name'>{city.name}</td>
                   <td className='city-population'>{city.population.toLocaleString()}</td>
-                  <td className='city-link'>
-                    <span className='city-detail-icon' aria-hidden='true'>
-                      👁
-                    </span>
-                  </td>
                 </tr>
               );
             })}

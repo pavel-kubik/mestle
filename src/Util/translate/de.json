@@ -72,7 +72,7 @@
   "country.cz.name": "Tschechien",
   "country.de.name": "Deutschland",
   "countryPage.tableDescription": "Durchsuchen Sie alle Städte in diesem Land. Klicken Sie auf eine beliebige Zeile, um mehr über jede Stadt zu erfahren.",
-  "countryPage.backToHome": "Zurück zur Startseite",
+  "countryPage.back": "Zurück",
   "countryPage.seoTitle": "Alle Städte",
   "countryPage.seoDescription": "Erkunden Sie alle Städte in {{country}}. Sehen Sie detaillierte Informationen über Bevölkerung, Fläche und Lage jeder Stadt.",
   "countryPage.table.order": "Rang",

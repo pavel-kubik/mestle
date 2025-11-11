@@ -53,10 +53,9 @@ const CountryPage = () => {
         <table className='cities-table'>
           <thead>
             <tr>
-              <th>{t('countryPage.table.order')}</th>
               <th>{t('countryPage.table.name')}</th>
               <th>{t('countryPage.table.population')}</th>
-              <th>{t('countryPage.table.link')}</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -65,14 +64,11 @@ const CountryPage = () => {
               const cityUrl = `/${lang}/${country}/city/${citySlug}`;
 
               return (
-                <tr key={city.name}>
-                  <td className='city-order'>{city.order}</td>
+                <tr key={city.name} className='city-row' onClick={() => window.location.href = cityUrl}>
                   <td className='city-name'>{city.name}</td>
                   <td className='city-population'>{city.population.toLocaleString()}</td>
                   <td className='city-link'>
-                    <Link to={cityUrl} className='city-detail-link'>
-                      {t('countryPage.table.viewDetails')}
-                    </Link>
+                    <span className='city-detail-icon'>👁</span>
                   </td>
                 </tr>
               );

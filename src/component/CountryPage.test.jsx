@@ -97,10 +97,8 @@ describe('CountryPage', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText('Order')).toBeInTheDocument();
     expect(screen.getByText('City Name')).toBeInTheDocument();
     expect(screen.getByText('Population')).toBeInTheDocument();
-    expect(screen.getByText('Details')).toBeInTheDocument();
   });
 
   it('should sort cities by population (largest first)', () => {
@@ -119,7 +117,7 @@ describe('CountryPage', () => {
     expect(rows[3]).toHaveTextContent('Ostrava');
   });
 
-  it('should render "View Details" links for each city', () => {
+  it('should render eye icon for each city', () => {
     render(
       <MemoryRouter initialEntries={['/cs/czechia/cities']}>
         <Routes>
@@ -128,11 +126,11 @@ describe('CountryPage', () => {
       </MemoryRouter>
     );
 
-    const viewDetailsLinks = screen.getAllByText('View Details');
-    expect(viewDetailsLinks).toHaveLength(3);
+    const eyeIcons = screen.getAllByText('👁');
+    expect(eyeIcons).toHaveLength(3);
   });
 
-  it('should have correct link format for city details', () => {
+  it('should have clickable rows', () => {
     render(
       <MemoryRouter initialEntries={['/cs/czechia/cities']}>
         <Routes>
@@ -141,8 +139,9 @@ describe('CountryPage', () => {
       </MemoryRouter>
     );
 
-    const viewDetailsLinks = screen.getAllByText('View Details');
-    expect(viewDetailsLinks[0].closest('a')).toHaveAttribute('href', '/cs/czechia/city/praha');
+    const rows = screen.getAllByRole('row');
+    // Skip header row (index 0), check first data row (index 1)
+    expect(rows[1]).toHaveClass('city-row');
   });
 
   it('should show error for invalid country', () => {

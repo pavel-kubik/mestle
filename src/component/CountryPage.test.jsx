@@ -40,14 +40,20 @@ vi.mock('../Util/translate', () => ({
       'country.de.name': 'Germany',
       'countryPage.tableDescription': 'Browse all cities in this country. Click on any row to learn more about each city.',
       'countryPage.back': 'Back',
-      'countryPage.table.order': 'Order',
       'countryPage.table.name': 'City Name',
       'countryPage.table.population': 'Population',
-      'countryPage.table.link': 'Details',
-      'countryPage.table.viewDetails': 'View Details',
       'countryPage.table.viewCityDetails': `View details for ${params?.city}`,
       'countryPage.seoTitle': 'All Cities',
-      'countryPage.seoDescription': `Explore all cities in ${params?.country}`
+      'countryPage.seoDescription': `Explore all cities in ${params?.country}`,
+      'general.yes': 'Yes',
+      'general.no': 'No',
+      'geo.city': 'City',
+      'geo.country': 'Country',
+      'geo.region': 'Region',
+      'geo.population': 'Population',
+      'geo.area': 'Area',
+      'geo.altitude': 'Altitude',
+      'geo.coordinates': 'Coordinates'
     };
     return translations[key] || key;
   })

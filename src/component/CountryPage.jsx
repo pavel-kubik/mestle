@@ -28,14 +28,16 @@ const CountryPage = () => {
   // Sort cities by population (largest first)
   const sortedCities = [...cities].sort((a, b) => b.population - a.population);
 
-  // Create memoized handlers for row interaction
-  const handleRowClick = useCallback((cityUrl) => () => {
+  // Create single memoized handlers that use data attributes
+  const handleRowClick = useCallback((e) => {
+    const cityUrl = e.currentTarget.dataset.url;
     navigate(cityUrl);
   }, [navigate]);
 
-  const handleKeyDown = useCallback((cityUrl) => (e) => {
+  const handleKeyDown = useCallback((e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
+      const cityUrl = e.currentTarget.dataset.url;
       navigate(cityUrl);
     }
   }, [navigate]);
@@ -83,8 +85,9 @@ const CountryPage = () => {
                 <tr
                   key={city.name}
                   className='city-row'
-                  onClick={handleRowClick(cityUrl)}
-                  onKeyDown={handleKeyDown(cityUrl)}
+                  data-url={cityUrl}
+                  onClick={handleRowClick}
+                  onKeyDown={handleKeyDown}
                   tabIndex={0}
                   role='button'
                   aria-label={t('countryPage.table.viewCityDetails', { city: city.name })}

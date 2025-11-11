@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import CountryPage from './CountryPage';
 
@@ -37,14 +38,19 @@ vi.mock('../Util/translate', () => ({
     const translations = {
       'country.cz.name': 'Czech Republic',
       'country.de.name': 'Germany',
-      'countryPage.tableDescription': 'Browse all cities in this country',
-      'countryPage.table.order': 'Order',
+      'countryPage.tableDescription': 'Browse all cities in this country. Click on any row to learn more about each city.',
+      'countryPage.back': 'Back',
       'countryPage.table.name': 'City Name',
-      'countryPage.table.population': 'Population',
-      'countryPage.table.link': 'Details',
-      'countryPage.table.viewDetails': 'View Details',
+      'countryPage.table.viewCityDetails': `View details for ${params?.city}`,
       'countryPage.seoTitle': 'All Cities',
-      'countryPage.seoDescription': `Explore all cities in ${params?.country}`
+      'countryPage.seoDescription': `Explore all cities in ${params?.country}`,
+      'geo.city': 'City',
+      'geo.country': 'Country',
+      'geo.region': 'Region',
+      'geo.population': 'Population',
+      'geo.area': 'Area',
+      'geo.altitude': 'Altitude',
+      'geo.coordinates': 'Coordinates'
     };
     return translations[key] || key;
   })
@@ -97,10 +103,8 @@ describe('CountryPage', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText('Order')).toBeInTheDocument();
     expect(screen.getByText('City Name')).toBeInTheDocument();
     expect(screen.getByText('Population')).toBeInTheDocument();
-    expect(screen.getByText('Details')).toBeInTheDocument();
   });
 
   it('should sort cities by population (largest first)', () => {
@@ -112,14 +116,15 @@ describe('CountryPage', () => {
       </MemoryRouter>
     );
 
-    const rows = screen.getAllByRole('row');
-    // First row is header, second row should be Praha (largest population)
-    expect(rows[1]).toHaveTextContent('Praha');
-    expect(rows[2]).toHaveTextContent('Brno');
-    expect(rows[3]).toHaveTextContent('Ostrava');
+    const cityRows = screen.getAllByRole('button').filter(button => button.tagName === 'TR');
+    // Check the cities are in order of population (largest first)
+    expect(cityRows[0]).toHaveTextContent('Praha');
+    expect(cityRows[1]).toHaveTextContent('Brno');
+    expect(cityRows[2]).toHaveTextContent('Ostrava');
   });
 
-  it('should render "View Details" links for each city', () => {
+
+  it('should have clickable rows with proper accessibility attributes', () => {
     render(
       <MemoryRouter initialEntries={['/cs/czechia/cities']}>
         <Routes>
@@ -128,21 +133,15 @@ describe('CountryPage', () => {
       </MemoryRouter>
     );
 
-    const viewDetailsLinks = screen.getAllByText('View Details');
-    expect(viewDetailsLinks).toHaveLength(3);
-  });
+    const buttons = screen.getAllByRole('button');
+    // Filter out the back button to get only the city rows
+    const cityRows = buttons.filter(button => button.tagName === 'TR');
 
-  it('should have correct link format for city details', () => {
-    render(
-      <MemoryRouter initialEntries={['/cs/czechia/cities']}>
-        <Routes>
-          <Route path='/:lang/:country/cities' element={<CountryPage />} />
-        </Routes>
-      </MemoryRouter>
-    );
-
-    const viewDetailsLinks = screen.getAllByText('View Details');
-    expect(viewDetailsLinks[0].closest('a')).toHaveAttribute('href', '/cs/czechia/city/praha');
+    // Check that city rows have the proper attributes
+    expect(cityRows.length).toBe(3); // Praha, Brno, Ostrava
+    expect(cityRows[0]).toHaveClass('city-row');
+    expect(cityRows[0]).toHaveAttribute('tabIndex', '0');
+    expect(cityRows[0]).toHaveAttribute('aria-label');
   });
 
   it('should show error for invalid country', () => {
@@ -169,5 +168,90 @@ describe('CountryPage', () => {
     // Check that numbers are formatted with commas
     expect(screen.getByText('1,324,000')).toBeInTheDocument();
     expect(screen.getByText('380,000')).toBeInTheDocument();
+  });
+
+  it('should render back button', () => {
+    render(
+      <MemoryRouter initialEntries={['/cs/czechia/cities']}>
+        <Routes>
+          <Route path='/:lang/:country/cities' element={<CountryPage />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    const backButton = screen.getByText(/Back/);
+    expect(backButton).toBeInTheDocument();
+    expect(backButton.tagName).toBe('BUTTON');
+  });
+
+  it('should navigate to city detail page when row is clicked', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <MemoryRouter initialEntries={['/cs/czechia/cities']}>
+        <Routes>
+          <Route path='/:lang/:country/cities' element={<CountryPage />} />
+          <Route path='/:lang/:country/city/:city' element={<div>City Detail Page</div>} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    // Get the first city row (Praha)
+    const cityRows = screen.getAllByRole('button').filter(button => button.tagName === 'TR');
+    const prahaRow = cityRows[0];
+
+    // Click on the row
+    await user.click(prahaRow);
+
+    // Verify navigation occurred
+    expect(screen.getByText('City Detail Page')).toBeInTheDocument();
+  });
+
+  it('should navigate when Enter key is pressed on row', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <MemoryRouter initialEntries={['/cs/czechia/cities']}>
+        <Routes>
+          <Route path='/:lang/:country/cities' element={<CountryPage />} />
+          <Route path='/:lang/:country/city/:city' element={<div>City Detail Page</div>} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    // Get the first city row (Praha)
+    const cityRows = screen.getAllByRole('button').filter(button => button.tagName === 'TR');
+    const prahaRow = cityRows[0];
+
+    // Focus on the row and press Enter
+    prahaRow.focus();
+    await user.keyboard('{Enter}');
+
+    // Verify navigation occurred
+    expect(screen.getByText('City Detail Page')).toBeInTheDocument();
+  });
+
+  it('should navigate when Space key is pressed on row', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <MemoryRouter initialEntries={['/cs/czechia/cities']}>
+        <Routes>
+          <Route path='/:lang/:country/cities' element={<CountryPage />} />
+          <Route path='/:lang/:country/city/:city' element={<div>City Detail Page</div>} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    // Get the first city row (Praha)
+    const cityRows = screen.getAllByRole('button').filter(button => button.tagName === 'TR');
+    const prahaRow = cityRows[0];
+
+    // Focus on the row and press Space
+    prahaRow.focus();
+    await user.keyboard(' ');
+
+    // Verify navigation occurred
+    expect(screen.getByText('City Detail Page')).toBeInTheDocument();
   });
 });

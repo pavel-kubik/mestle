@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useEffect, useCallback } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getCitiesArray } from '../Util/citiesUtil';
 import { getCountryFromUrl } from '../Util/urlUtil';
 import { slugify } from '../Util/slugUtil';
@@ -13,6 +13,7 @@ import './CountryPage.css';
  */
 const CountryPage = () => {
   const { lang, country } = useParams();
+  const navigate = useNavigate();
 
   // Get the internal country code from the URL
   const countryCode = getCountryFromUrl(country);
@@ -24,10 +25,22 @@ const CountryPage = () => {
   // Get all cities for this country
   const cities = getCitiesArray(countryCode);
 
-  // Sort cities by population (largest first) and add order numbers
-  const sortedCities = [...cities]
-    .sort((a, b) => b.population - a.population)
-    .map((city, index) => ({ ...city, order: index + 1 }));
+  // Sort cities by population (largest first)
+  const sortedCities = [...cities].sort((a, b) => b.population - a.population);
+
+  // Create single memoized handlers that use data attributes
+  const handleRowClick = useCallback((e) => {
+    const cityUrl = e.currentTarget.dataset.url;
+    navigate(cityUrl);
+  }, [navigate]);
+
+  const handleKeyDown = useCallback((e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      const cityUrl = e.currentTarget.dataset.url;
+      navigate(cityUrl);
+    }
+  }, [navigate]);
 
   // SEO: Set page title and meta description
   useEffect(() => {
@@ -43,6 +56,12 @@ const CountryPage = () => {
 
   return (
     <div className='country-page'>
+      <div className='country-page-back'>
+        <button onClick={() => navigate(`/${lang}/${country}/user`)} className='back-button'>
+          ← {t('countryPage.back')}
+        </button>
+      </div>
+
       <h1 className='country-page-title'>
         {getCountryFlag(countryCode)} {t(`country.${countryCode}.name`)}
       </h1>
@@ -53,10 +72,8 @@ const CountryPage = () => {
         <table className='cities-table'>
           <thead>
             <tr>
-              <th>{t('countryPage.table.order')}</th>
               <th>{t('countryPage.table.name')}</th>
-              <th>{t('countryPage.table.population')}</th>
-              <th>{t('countryPage.table.link')}</th>
+              <th>{t('geo.population')}</th>
             </tr>
           </thead>
           <tbody>
@@ -65,15 +82,18 @@ const CountryPage = () => {
               const cityUrl = `/${lang}/${country}/city/${citySlug}`;
 
               return (
-                <tr key={city.name}>
-                  <td className='city-order'>{city.order}</td>
+                <tr
+                  key={city.name}
+                  className='city-row'
+                  data-url={cityUrl}
+                  onClick={handleRowClick}
+                  onKeyDown={handleKeyDown}
+                  tabIndex={0}
+                  role='button'
+                  aria-label={t('countryPage.table.viewCityDetails', { city: city.name })}
+                >
                   <td className='city-name'>{city.name}</td>
                   <td className='city-population'>{city.population.toLocaleString()}</td>
-                  <td className='city-link'>
-                    <Link to={cityUrl} className='city-detail-link'>
-                      {t('countryPage.table.viewDetails')}
-                    </Link>
-                  </td>
                 </tr>
               );
             })}

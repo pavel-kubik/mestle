@@ -73,7 +73,7 @@ const CountryPage = () => {
           <thead>
             <tr>
               <th>{t('countryPage.table.name')}</th>
-              <th>{t('countryPage.table.population')}</th>
+              <th>{t('geo.population')}</th>
             </tr>
           </thead>
           <tbody>

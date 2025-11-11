@@ -90,29 +90,29 @@ const CityPage = () => {
 
       <div className='city-details-grid'>
         <div className='city-detail-card'>
-          <h3>{t('cityPage.population')}</h3>
+          <h3>{t('geo.population')}</h3>
           <p className='city-detail-value'>{cityData.population.toLocaleString()}</p>
         </div>
 
         <div className='city-detail-card'>
-          <h3>{t('cityPage.area')}</h3>
+          <h3>{t('geo.area')}</h3>
           <p className='city-detail-value'>
             {cityData.area.toLocaleString()} km<sup>2</sup>
           </p>
         </div>
 
         <div className='city-detail-card'>
-          <h3>{t('cityPage.altitude')}</h3>
+          <h3>{t('geo.altitude')}</h3>
           <p className='city-detail-value'>{cityData.altitude} m</p>
         </div>
 
         <div className='city-detail-card'>
-          <h3>{t('cityPage.region')}</h3>
+          <h3>{t('geo.region')}</h3>
           <p className='city-detail-value'>{cityData.region}</p>
         </div>
 
         <div className='city-detail-card'>
-          <h3>{t('cityPage.coordinates')}</h3>
+          <h3>{t('geo.coordinates')}</h3>
           <p className='city-detail-value'>
             {cityData.latitude.toFixed(4)}°N, {cityData.longitude.toFixed(4)}°E
           </p>

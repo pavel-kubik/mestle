@@ -76,10 +76,7 @@
   "countryPage.seoTitle": "Všechna města",
   "countryPage.seoDescription": "Prozkoumejte všechna města v {{country}}. Zobrazit podrobné informace o počtu obyvatel, rozloze a poloze každého města.",
   "countryPage.table.name": "Název města",
-  "countryPage.table.population": "Počet obyvatel",
   "countryPage.table.viewCityDetails": "Zobrazit detail pro {{city}}",
-  "general.yes": "Ano",
-  "general.no": "Ne",
   "geo.city": "Město",
   "geo.country": "Země",
   "geo.region": "Kraj",
@@ -91,10 +88,5 @@
   "cityPage.invalidUrl": "Neplatná URL města",
   "cityPage.backToCountry": "Zpět na seznam měst",
   "cityPage.seoDescription": "{{city}} je město v {{region}}, {{country}} s počtem obyvatel {{population}}. Objevte podrobné informace o tomto městě.",
-  "cityPage.population": "Počet obyvatel",
-  "cityPage.area": "Rozloha",
-  "cityPage.altitude": "Nadmořská výška",
-  "cityPage.region": "Kraj",
-  "cityPage.coordinates": "Souřadnice",
   "cityPage.readMore": "Přečíst více na Wikipedii"
 }

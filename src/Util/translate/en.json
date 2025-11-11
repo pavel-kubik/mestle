@@ -76,10 +76,7 @@
   "countryPage.seoTitle": "All Cities",
   "countryPage.seoDescription": "Explore all cities in {{country}}. View detailed information about population, area, and location for each city.",
   "countryPage.table.name": "City Name",
-  "countryPage.table.population": "Population",
   "countryPage.table.viewCityDetails": "View details for {{city}}",
-  "general.yes": "Yes",
-  "general.no": "No",
   "geo.city": "City",
   "geo.country": "Country",
   "geo.region": "Region",
@@ -91,10 +88,5 @@
   "cityPage.invalidUrl": "Invalid city URL",
   "cityPage.backToCountry": "Back to cities list",
   "cityPage.seoDescription": "{{city}} is a city in {{region}}, {{country}} with a population of {{population}}. Discover detailed information about this city.",
-  "cityPage.population": "Population",
-  "cityPage.area": "Area",
-  "cityPage.altitude": "Altitude",
-  "cityPage.region": "Region",
-  "cityPage.coordinates": "Coordinates",
   "cityPage.readMore": "Read more on Wikipedia"
 }

@@ -76,10 +76,7 @@
   "countryPage.seoTitle": "Alle Städte",
   "countryPage.seoDescription": "Erkunden Sie alle Städte in {{country}}. Sehen Sie detaillierte Informationen über Bevölkerung, Fläche und Lage jeder Stadt.",
   "countryPage.table.name": "Stadtname",
-  "countryPage.table.population": "Bevölkerung",
   "countryPage.table.viewCityDetails": "Details für {{city}} anzeigen",
-  "general.yes": "Ja",
-  "general.no": "Nein",
   "geo.city": "Stadt",
   "geo.country": "Land",
   "geo.region": "Region",
@@ -91,10 +88,5 @@
   "cityPage.invalidUrl": "Ungültige Stadt-URL",
   "cityPage.backToCountry": "Zurück zur Städteliste",
   "cityPage.seoDescription": "{{city}} ist eine Stadt in {{region}}, {{country}} mit {{population}} Einwohnern. Entdecken Sie detaillierte Informationen über diese Stadt.",
-  "cityPage.population": "Bevölkerung",
-  "cityPage.area": "Fläche",
-  "cityPage.altitude": "Höhe",
-  "cityPage.region": "Region",
-  "cityPage.coordinates": "Koordinaten",
   "cityPage.readMore": "Mehr auf Wikipedia lesen"
 }

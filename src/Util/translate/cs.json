@@ -80,6 +80,7 @@
   "countryPage.table.population": "Počet obyvatel",
   "countryPage.table.link": "Detail",
   "countryPage.table.viewDetails": "Zobrazit detail",
+  "countryPage.table.viewCityDetails": "Zobrazit detail pro {{city}}",
   "cityPage.notFound": "Město nenalezeno",
   "cityPage.invalidUrl": "Neplatná URL města",
   "cityPage.backToCountry": "Zpět na seznam měst",

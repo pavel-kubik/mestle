@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getCitiesArray } from '../Util/citiesUtil';
 import { getCountryFromUrl } from '../Util/urlUtil';
@@ -27,6 +27,18 @@ const CountryPage = () => {
 
   // Sort cities by population (largest first)
   const sortedCities = [...cities].sort((a, b) => b.population - a.population);
+
+  // Create memoized handlers for row interaction
+  const handleRowClick = useCallback((cityUrl) => () => {
+    navigate(cityUrl);
+  }, [navigate]);
+
+  const handleKeyDown = useCallback((cityUrl) => (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      navigate(cityUrl);
+    }
+  }, [navigate]);
 
   // SEO: Set page title and meta description
   useEffect(() => {
@@ -67,23 +79,15 @@ const CountryPage = () => {
               const citySlug = slugify(city.name);
               const cityUrl = `/${lang}/${country}/city/${citySlug}`;
 
-              const handleRowClick = () => navigate(cityUrl);
-              const handleKeyDown = (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  navigate(cityUrl);
-                }
-              };
-
               return (
                 <tr
                   key={city.name}
                   className='city-row'
-                  onClick={handleRowClick}
-                  onKeyDown={handleKeyDown}
+                  onClick={handleRowClick(cityUrl)}
+                  onKeyDown={handleKeyDown(cityUrl)}
                   tabIndex={0}
                   role='button'
-                  aria-label={`View details for ${city.name}`}
+                  aria-label={t('countryPage.table.viewCityDetails', { city: city.name })}
                 >
                   <td className='city-name'>{city.name}</td>
                   <td className='city-population'>{city.population.toLocaleString()}</td>

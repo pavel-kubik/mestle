@@ -80,6 +80,7 @@
   "countryPage.table.population": "Population",
   "countryPage.table.link": "Details",
   "countryPage.table.viewDetails": "View Details",
+  "countryPage.table.viewCityDetails": "View details for {{city}}",
   "cityPage.notFound": "City not found",
   "cityPage.invalidUrl": "Invalid city URL",
   "cityPage.backToCountry": "Back to cities list",

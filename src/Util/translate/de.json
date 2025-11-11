@@ -80,6 +80,7 @@
   "countryPage.table.population": "Bevölkerung",
   "countryPage.table.link": "Details",
   "countryPage.table.viewDetails": "Details anzeigen",
+  "countryPage.table.viewCityDetails": "Details für {{city}} anzeigen",
   "cityPage.notFound": "Stadt nicht gefunden",
   "cityPage.invalidUrl": "Ungültige Stadt-URL",
   "cityPage.backToCountry": "Zurück zur Städteliste",

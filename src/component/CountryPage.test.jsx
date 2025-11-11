@@ -37,7 +37,8 @@ vi.mock('../Util/translate', () => ({
     const translations = {
       'country.cz.name': 'Czech Republic',
       'country.de.name': 'Germany',
-      'countryPage.tableDescription': 'Browse all cities in this country',
+      'countryPage.tableDescription': 'Browse all cities in this country. Click on any row to learn more about each city.',
+      'countryPage.backToHome': 'Back to home',
       'countryPage.table.order': 'Order',
       'countryPage.table.name': 'City Name',
       'countryPage.table.population': 'Population',
@@ -110,11 +111,11 @@ describe('CountryPage', () => {
       </MemoryRouter>
     );
 
-    const rows = screen.getAllByRole('row');
-    // First row is header, second row should be Praha (largest population)
-    expect(rows[1]).toHaveTextContent('Praha');
-    expect(rows[2]).toHaveTextContent('Brno');
-    expect(rows[3]).toHaveTextContent('Ostrava');
+    const cityRows = screen.getAllByRole('button').filter(button => button.tagName === 'TR');
+    // Check the cities are in order of population (largest first)
+    expect(cityRows[0]).toHaveTextContent('Praha');
+    expect(cityRows[1]).toHaveTextContent('Brno');
+    expect(cityRows[2]).toHaveTextContent('Ostrava');
   });
 
   it('should render eye icon for each city', () => {
@@ -130,7 +131,7 @@ describe('CountryPage', () => {
     expect(eyeIcons).toHaveLength(3);
   });
 
-  it('should have clickable rows', () => {
+  it('should have clickable rows with proper accessibility attributes', () => {
     render(
       <MemoryRouter initialEntries={['/cs/czechia/cities']}>
         <Routes>
@@ -139,9 +140,15 @@ describe('CountryPage', () => {
       </MemoryRouter>
     );
 
-    const rows = screen.getAllByRole('row');
-    // Skip header row (index 0), check first data row (index 1)
-    expect(rows[1]).toHaveClass('city-row');
+    const buttons = screen.getAllByRole('button');
+    // Filter out the back button to get only the city rows
+    const cityRows = buttons.filter(button => button.tagName === 'TR');
+
+    // Check that city rows have the proper attributes
+    expect(cityRows.length).toBe(3); // Praha, Brno, Ostrava
+    expect(cityRows[0]).toHaveClass('city-row');
+    expect(cityRows[0]).toHaveAttribute('tabIndex', '0');
+    expect(cityRows[0]).toHaveAttribute('aria-label');
   });
 
   it('should show error for invalid country', () => {
@@ -168,5 +175,19 @@ describe('CountryPage', () => {
     // Check that numbers are formatted with commas
     expect(screen.getByText('1,324,000')).toBeInTheDocument();
     expect(screen.getByText('380,000')).toBeInTheDocument();
+  });
+
+  it('should render back button', () => {
+    render(
+      <MemoryRouter initialEntries={['/cs/czechia/cities']}>
+        <Routes>
+          <Route path='/:lang/:country/cities' element={<CountryPage />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    const backButton = screen.getByText(/Back to home/);
+    expect(backButton).toBeInTheDocument();
+    expect(backButton.tagName).toBe('BUTTON');
   });
 });

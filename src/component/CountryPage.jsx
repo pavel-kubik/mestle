@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getCitiesArray } from '../Util/citiesUtil';
 import { getCountryFromUrl } from '../Util/urlUtil';
 import { slugify } from '../Util/slugUtil';
@@ -13,6 +13,7 @@ import './CountryPage.css';
  */
 const CountryPage = () => {
   const { lang, country } = useParams();
+  const navigate = useNavigate();
 
   // Get the internal country code from the URL
   const countryCode = getCountryFromUrl(country);
@@ -24,10 +25,8 @@ const CountryPage = () => {
   // Get all cities for this country
   const cities = getCitiesArray(countryCode);
 
-  // Sort cities by population (largest first) and add order numbers
-  const sortedCities = [...cities]
-    .sort((a, b) => b.population - a.population)
-    .map((city, index) => ({ ...city, order: index + 1 }));
+  // Sort cities by population (largest first)
+  const sortedCities = [...cities].sort((a, b) => b.population - a.population);
 
   // SEO: Set page title and meta description
   useEffect(() => {
@@ -43,6 +42,12 @@ const CountryPage = () => {
 
   return (
     <div className='country-page'>
+      <div className='country-page-back'>
+        <button onClick={() => navigate(`/${lang}`)} className='back-button'>
+          ← {t('countryPage.backToHome')}
+        </button>
+      </div>
+
       <h1 className='country-page-title'>
         {getCountryFlag(countryCode)} {t(`country.${countryCode}.name`)}
       </h1>
@@ -63,12 +68,30 @@ const CountryPage = () => {
               const citySlug = slugify(city.name);
               const cityUrl = `/${lang}/${country}/city/${citySlug}`;
 
+              const handleRowClick = () => navigate(cityUrl);
+              const handleKeyDown = (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  navigate(cityUrl);
+                }
+              };
+
               return (
-                <tr key={city.name} className='city-row' onClick={() => window.location.href = cityUrl}>
+                <tr
+                  key={city.name}
+                  className='city-row'
+                  onClick={handleRowClick}
+                  onKeyDown={handleKeyDown}
+                  tabIndex={0}
+                  role='button'
+                  aria-label={`View details for ${city.name}`}
+                >
                   <td className='city-name'>{city.name}</td>
                   <td className='city-population'>{city.population.toLocaleString()}</td>
                   <td className='city-link'>
-                    <span className='city-detail-icon'>👁</span>
+                    <span className='city-detail-icon' aria-hidden='true'>
+                      👁
+                    </span>
                   </td>
                 </tr>
               );

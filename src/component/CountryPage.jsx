@@ -57,7 +57,7 @@ const CountryPage = () => {
   return (
     <div className='country-page'>
       <div className='country-page-back'>
-        <button onClick={() => navigate(-1)} className='back-button'>
+        <button onClick={() => navigate(`/${lang}/${country}/user`)} className='back-button'>
           ← {t('countryPage.back')}
         </button>
       </div>

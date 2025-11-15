@@ -11,7 +11,7 @@ import {
   populationComparator,
   regionComparator
 } from '../Util/util';
-import { isPreciseArrow } from '../Util/preciseArrowUtil';
+import { usePreciseArrow } from '../Util/preciseArrowUtil';
 import compassCS from '../img/new_compass_cs.svg';
 import compassEN from '../img/new_compass_en.svg';
 import compassArrow from '../img/compass_arrow.svg';
@@ -64,7 +64,7 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
   const distanceGuess = distanceComparator(guessedCity, targetCity);
   const distanceDiff = getDistanceInKm(guessedCity, targetCity);
 
-  const usePreciseArrow = isPreciseArrow();
+  const isPreciseArrowEnabled = usePreciseArrow();
   const directionGuess = countDirection(guessedCity, targetCity);
   const azimuthAngle = calculateAzimuth(guessedCity, targetCity);
 
@@ -189,7 +189,7 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
         <Tippy
           placement='bottom'
           content={
-            usePreciseArrow && azimuthAngle !== null
+            isPreciseArrowEnabled && azimuthAngle !== null
               ? t('components.guess.directionDiff.titlePrecise', { azimuth: azimuthAngle })
               : t('components.guess.directionDiff.title', { directionDiff: directionDiff(directionGuess) })
           }
@@ -212,12 +212,12 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
             <img
               src={directionGuess === 'X' ? compassPin : compassArrow}
               className={
-                usePreciseArrow
+                isPreciseArrowEnabled
                   ? `guess direction compass ${directionGuess !== 'X' ? 'filter-' + distanceGuess : ''}`
                   : `guess direction compass ${directionGuess} ${directionGuess !== 'X' ? 'filter-' + distanceGuess : ''}`
               }
               style={
-                usePreciseArrow && azimuthAngle !== null
+                isPreciseArrowEnabled && azimuthAngle !== null
                   ? {
                       position: 'absolute',
                       top: 0,

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getDistance } from 'geolib';
+import { getDistance, getGreatCircleBearing } from 'geolib';
 
 export const countDirection = (city1, city2) => {
   const ratio = 3;
@@ -47,27 +47,23 @@ export const countDirection = (city1, city2) => {
  * Calculate precise azimuth (bearing) from city1 to city2
  * Returns angle in degrees (0-360), where 0° is North, 90° is East, etc.
  * Returns null if cities are at the same location
+ *
+ * Uses geolib's getGreatCircleBearing for accurate geographic bearing calculation
+ * which accounts for Earth's spherical geometry
  */
 export const calculateAzimuth = (city1, city2) => {
-  const latitudeDiff = city2.latitude - city1.latitude;
-  const longitudeDiff = city2.longitude - city1.longitude;
-
-  if (latitudeDiff === 0 && longitudeDiff === 0) {
+  if (city1.latitude === city2.latitude && city1.longitude === city2.longitude) {
     return null;
   }
 
-  // Calculate bearing using atan2
-  // atan2 gives angle from East (0°), counterclockwise
-  // We need to convert to bearing from North (0°), clockwise
-  const angleRad = Math.atan2(longitudeDiff, latitudeDiff);
-  let azimuthDeg = (angleRad * 180) / Math.PI;
+  // Use geolib for accurate bearing calculation
+  // getGreatCircleBearing returns bearing in degrees (0-360)
+  const bearing = getGreatCircleBearing(
+    { latitude: city1.latitude, longitude: city1.longitude },
+    { latitude: city2.latitude, longitude: city2.longitude }
+  );
 
-  // Normalize to 0-360 range
-  if (azimuthDeg < 0) {
-    azimuthDeg += 360;
-  }
-
-  return Math.round(azimuthDeg);
+  return Math.round(bearing);
 };
 
 export const neighboringRegion = (region1, region2) => {

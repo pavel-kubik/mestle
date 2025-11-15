@@ -2,6 +2,12 @@ export const isBeta = () => {
   return document.cookie.split(';').some((item) => item.trim().startsWith('nf_ab=develop'));
 };
 
+/**
+ * Switch between production and beta (develop) versions
+ * Page reload is required because beta mode switches between different code deployments
+ * on Netlify (production vs develop branch). This is different from feature flags which
+ * only affect UI state and don't require reloading.
+ */
 export const switchToBeta = () => {
   if (isBeta()) {
     document.cookie = 'nf_ab=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';

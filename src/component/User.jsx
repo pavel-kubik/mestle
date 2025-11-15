@@ -1,6 +1,7 @@
 import { getScoresByCountry } from '../History/history';
 import BetaSwitch from './BetaSwitch';
 import CountrySwitch from './CountrySwitch';
+import PreciseArrowSwitch from './PreciseArrowSwitch';
 import { Link } from 'react-router-dom';
 import { getLanguage } from '../Util/translate';
 
@@ -71,6 +72,10 @@ const User = ({ history, loggedUser, setLoggedUser, initBECall, syncAttempts }) 
       <div>
         {t('components.user.betaTesting.title')}
         <BetaSwitch />
+      </div>
+      <div>
+        {t('components.user.preciseArrow.title')}
+        <PreciseArrowSwitch />
       </div>
       <div style={{ color: 'red' }}>{t('components.user.login.futureFeature')}</div>
     </div>

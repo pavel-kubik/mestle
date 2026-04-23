@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useSyncExternalStore } from 'react';
 
 /**
  * Utility functions for precise arrow direction feature flag
@@ -8,8 +8,6 @@ import { useState, useEffect } from 'react';
  */
 
 const PRECISE_ARROW_KEY = 'preciseArrow';
-
-// Event name for custom events when precise arrow setting changes
 const PRECISE_ARROW_CHANGE_EVENT = 'preciseArrowChange';
 
 /**
@@ -17,8 +15,7 @@ const PRECISE_ARROW_CHANGE_EVENT = 'preciseArrowChange';
  * @returns {boolean} true if precise arrow is enabled
  */
 export const isPreciseArrow = () => {
-  const value = window.localStorage.getItem(PRECISE_ARROW_KEY);
-  return value === 'true';
+  return window.localStorage.getItem(PRECISE_ARROW_KEY) === 'true';
 };
 
 /**
@@ -27,31 +24,19 @@ export const isPreciseArrow = () => {
  * Dispatches a custom event to notify all components using usePreciseArrow hook
  */
 export const togglePreciseArrow = () => {
-  const currentValue = isPreciseArrow();
-  const newValue = !currentValue;
+  const newValue = !isPreciseArrow();
   window.localStorage.setItem(PRECISE_ARROW_KEY, newValue.toString());
-  // Dispatch custom event to notify all listeners
-  window.dispatchEvent(new CustomEvent(PRECISE_ARROW_CHANGE_EVENT, { detail: newValue }));
+  window.dispatchEvent(new CustomEvent(PRECISE_ARROW_CHANGE_EVENT));
+};
+
+const subscribe = (callback) => {
+  window.addEventListener(PRECISE_ARROW_CHANGE_EVENT, callback);
+  return () => window.removeEventListener(PRECISE_ARROW_CHANGE_EVENT, callback);
 };
 
 /**
  * React hook to use precise arrow state with automatic updates
- * This hook listens to changes and triggers re-renders when the setting changes
+ * Uses useSyncExternalStore to sync with localStorage-backed state
  * @returns {boolean} true if precise arrow is enabled
  */
-export const usePreciseArrow = () => {
-  const [isEnabled, setIsEnabled] = useState(isPreciseArrow());
-
-  useEffect(() => {
-    const handleChange = (event) => {
-      setIsEnabled(event.detail);
-    };
-
-    window.addEventListener(PRECISE_ARROW_CHANGE_EVENT, handleChange);
-    return () => {
-      window.removeEventListener(PRECISE_ARROW_CHANGE_EVENT, handleChange);
-    };
-  }, []);
-
-  return isEnabled;
-};
+export const usePreciseArrow = () => useSyncExternalStore(subscribe, isPreciseArrow);

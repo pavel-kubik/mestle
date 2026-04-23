@@ -3,6 +3,7 @@ import './guess.css';
 import React from 'react';
 import {
   countDirection,
+  calculateAzimuth,
   distanceComparator,
   getDistanceInKm,
   LESS_ARROW,
@@ -10,6 +11,7 @@ import {
   populationComparator,
   regionComparator
 } from '../Util/util';
+import { usePreciseArrow } from '../Util/preciseArrowUtil';
 import compassCS from '../img/new_compass_cs.svg';
 import compassEN from '../img/new_compass_en.svg';
 import compassArrow from '../img/compass_arrow.svg';
@@ -62,7 +64,10 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
   const distanceGuess = distanceComparator(guessedCity, targetCity);
   const distanceDiff = getDistanceInKm(guessedCity, targetCity);
 
+  const isPreciseArrowEnabled = usePreciseArrow();
   const directionGuess = countDirection(guessedCity, targetCity);
+  const azimuthAngle = calculateAzimuth(guessedCity, targetCity);
+
   const directionDiff = (directionGuess) => {
     switch (directionGuess) {
       case 'N':
@@ -183,7 +188,11 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
         </div>
         <Tippy
           placement='bottom'
-          content={t('components.guess.directionDiff.title', { directionDiff: directionDiff(directionGuess) })}
+          content={
+            isPreciseArrowEnabled && azimuthAngle !== null
+              ? t('components.guess.directionDiff.titlePrecise', { azimuth: azimuthAngle })
+              : t('components.guess.directionDiff.title', { directionDiff: directionDiff(directionGuess) })
+          }
           theme={directionGuess === 'X' ? 'green' : 'red'}
           zIndex={9}
           disabled={!isLast || isEog}
@@ -202,8 +211,23 @@ const Guess = ({ idx, guessedCity, targetCity, isLast, isEog }) => {
             {/* Arrow or Pin overlay */}
             <img
               src={directionGuess === 'X' ? compassPin : compassArrow}
-              className={`guess direction compass ${directionGuess} ${directionGuess !== 'X' ? 'filter-' + distanceGuess : ''}`}
-              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+              className={
+                isPreciseArrowEnabled
+                  ? `guess direction compass ${directionGuess !== 'X' ? 'filter-' + distanceGuess : ''}`
+                  : `guess direction compass ${directionGuess} ${directionGuess !== 'X' ? 'filter-' + distanceGuess : ''}`
+              }
+              style={
+                isPreciseArrowEnabled && azimuthAngle !== null
+                  ? {
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      transform: `rotate(${azimuthAngle}deg)`
+                    }
+                  : { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }
+              }
               alt='compass direction'
             />
           </div>

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Mestle Wireframes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Fraunces:wght@600;700;900&family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;700&display=swap" />
+<style>
+  html, body { margin: 0; padding: 0; background: #f0eee9; font-family: 'Inter', system-ui, sans-serif; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="ios-frame.jsx"></script>
+<script type="text/babel" src="wireframes/shared.jsx"></script>
+<script type="text/babel" src="wireframes/variant-a.jsx"></script>
+<script type="text/babel" src="wireframes/variant-a-explore.jsx"></script>
+<script type="text/babel" src="wireframes/variant-b.jsx"></script>
+<script type="text/babel" src="wireframes/variant-c.jsx"></script>
+<script type="text/babel" src="wireframes/variant-d.jsx"></script>
+
+<script type="text/babel">
+/* Tweaks: language toggle (CZ / EN). */
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "language": "EN"
+}/*EDITMODE-END*/;
+
+function TweaksPanel({ visible, lang, setLang }) {
+  if (!visible) return null;
+  return (
+    <div style={{
+      position: 'fixed', bottom: 20, right: 20, zIndex: 200,
+      background: '#1a1814', color: '#faf7f1',
+      border: '1.5px solid #000', borderRadius: 10,
+      padding: '12px 14px', boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
+      fontFamily: '"Inter", system-ui, sans-serif', fontSize: 13, width: 200,
+    }}>
+      <div style={{ fontFamily: '"Fraunces", serif', fontWeight: 700, fontSize: 15, marginBottom: 8 }}>Tweaks</div>
+      <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 10, opacity: 0.6, textTransform: 'uppercase', marginBottom: 4 }}>Language</div>
+      <div style={{ display: 'flex', gap: 6 }}>
+        {['EN', 'CZ'].map(l => (
+          <button key={l} onClick={() => setLang(l)} style={{
+            flex: 1, padding: '6px 10px', borderRadius: 6, cursor: 'pointer',
+            border: '1px solid #555',
+            background: lang === l ? '#faf7f1' : 'transparent',
+            color: lang === l ? '#1a1814' : '#faf7f1',
+            fontFamily: 'inherit', fontSize: 12, fontWeight: 600,
+          }}>{l}</button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Phone({ children }) {
+  // Mobile-scale iOS frame. Keep it simple: no nav title bar (each variant renders its own header).
+  return <IOSDevice width={360} height={720} />;
+}
+
+// A simpler phone bezel that just renders children — the IOSDevice has its own nav;
+// for wireframes we want our own header, so use a plain rounded-rect phone shell.
+function PhoneShell({ children }) {
+  return (
+    <div style={{
+      width: 360, height: 720, borderRadius: 40, overflow: 'hidden',
+      position: 'relative', background: '#faf7f1',
+      boxShadow: '0 30px 60px rgba(0,0,0,0.15), 0 0 0 8px #1a1814, 0 0 0 10px rgba(0,0,0,0.1)',
+    }}>
+      {/* notch */}
+      <div style={{
+        position: 'absolute', top: 10, left: '50%', transform: 'translateX(-50%)',
+        width: 110, height: 28, borderRadius: 20, background: '#1a1814', zIndex: 50,
+      }} />
+      {/* status bar */}
+      <div style={{
+        position: 'absolute', top: 0, left: 0, right: 0, height: 44, zIndex: 10,
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '0 24px', fontFamily: '-apple-system, system-ui', fontSize: 14, fontWeight: 600,
+      }}>
+        <span>9:41</span>
+      </div>
+      <div style={{ position: 'absolute', top: 44, bottom: 0, left: 0, right: 0, display: 'flex', flexDirection: 'column' }}>
+        {children}
+      </div>
+      <RoughDefs />
+    </div>
+  );
+}
+
+function App() {
+  const [lang, setLang] = React.useState(TWEAK_DEFAULTS.language);
+  const [tweakOn, setTweakOn] = React.useState(false);
+
+  React.useEffect(() => {
+    const onMsg = (e) => {
+      if (!e.data || typeof e.data !== 'object') return;
+      if (e.data.type === '__activate_edit_mode') setTweakOn(true);
+      if (e.data.type === '__deactivate_edit_mode') setTweakOn(false);
+    };
+    window.addEventListener('message', onMsg);
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
+
+  const updateLang = (l) => {
+    setLang(l);
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { language: l } }, '*');
+  };
+
+  const wrap = (node) => <PhoneShell>{node}</PhoneShell>;
+
+  return (
+    <>
+      <RoughDefs />
+      <DesignCanvas>
+        <DCSection id="A" title="A · Map-first" subtitle="Hero map with pinned guesses · traffic-light feedback">
+          <DCArtboard id="A-empty" label="Empty" width={360} height={720}>{wrap(<EmptyA lang={lang} />)}</DCArtboard>
+          <DCArtboard id="A-mid" label="Mid-game (original)" width={360} height={720}>{wrap(<VariantA lang={lang} scope="mid" />)}</DCArtboard>
+          <DCArtboard id="A-win" label="Win + share" width={360} height={720}>{wrap(<VariantA lang={lang} scope="win" />)}</DCArtboard>
+          <DCArtboard id="A-how" label="How to play" width={360} height={720}>{wrap(<HowToPlay lang={lang} />)}</DCArtboard>
+        </DCSection>
+
+        <DCSection id="A2-focus" title="A2 · Collapse (focused)" subtitle="Pop ▲/▼ arrows · landing = inline How-to-play">
+          <DCArtboard id="A2-landing" label="Landing (with how-to)" width={360} height={720}>{wrap(<VariantA_CollapseLanding lang={lang} />)}</DCArtboard>
+          <DCArtboard id="A2-mid2" label="Mid-game" width={360} height={720}>{wrap(<VariantA_Collapse lang={lang} scope="mid" />)}</DCArtboard>
+          <DCArtboard id="A2-win2" label="Win + share" width={360} height={720}>{wrap(<VariantA_Collapse lang={lang} scope="win" />)}</DCArtboard>
+        </DCSection>
+
+        <DCSection id="A-explore" title="A · Other map controls (for comparison)" subtitle="Slider + drag handle">
+          <DCArtboard id="A1-mid" label="A1 · Slider · Mid" width={360} height={720}>{wrap(<VariantA_Slider lang={lang} scope="mid" />)}</DCArtboard>
+          <DCArtboard id="A3-mid" label="A3 · Drag handle · Mid" width={360} height={720}>{wrap(<VariantA_Drag lang={lang} scope="mid" />)}</DCArtboard>
+        </DCSection>
+
+        <DCSection id="B" title="B · Guess cards" subtitle="Card per guess · heat-gradient feedback (blue → red)">
+          <DCArtboard id="B-mid" label="Mid-game" width={360} height={720}>{wrap(<VariantB lang={lang} scope="mid" />)}</DCArtboard>
+          <DCArtboard id="B-win" label="Win + share" width={360} height={720}>{wrap(<VariantB lang={lang} scope="win" />)}</DCArtboard>
+        </DCSection>
+
+        <DCSection id="C" title="C · Timeline postcard" subtitle="Vertical timeline · arrows + numeric deltas · editorial feel">
+          <DCArtboard id="C-mid" label="Mid-game" width={360} height={720}>{wrap(<VariantC lang={lang} scope="mid" />)}</DCArtboard>
+          <DCArtboard id="C-win" label="Win + share" width={360} height={720}>{wrap(<VariantC lang={lang} scope="win" />)}</DCArtboard>
+        </DCSection>
+
+        <DCSection id="D" title="D · Progress bars" subtitle="Mini-map strip · bars filling toward correct">
+          <DCArtboard id="D-mid" label="Mid-game" width={360} height={720}>{wrap(<VariantD lang={lang} scope="mid" />)}</DCArtboard>
+          <DCArtboard id="D-win" label="Win + share" width={360} height={720}>{wrap(<VariantD lang={lang} scope="win" />)}</DCArtboard>
+        </DCSection>
+      </DesignCanvas>
+      <TweaksPanel visible={tweakOn} lang={lang} setLang={updateLang} />
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

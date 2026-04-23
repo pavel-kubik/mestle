@@ -6,7 +6,13 @@
       "Bash(npm run build:*)",
       "Bash(npm install)",
       "Bash(npm install:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "WebFetch(domain:api.anthropic.com)",
+      "Read(//private/tmp/**)",
+      "Bash(tar xf:*)",
+      "Read(//tmp/**)",
+      "Bash(tar tf:*)",
+      "Bash(npx vite:*)"
     ],
     "deny": [],
     "ask": []
